@@ -37,8 +37,8 @@ export const settings = {
   },
 
   edit({ attributes, className, setAttributes }) {
-    const onSelectImage = ({ alt, url }) => {
-      setAttributes({ src: url, alt })
+    const onSelectImage = (media) => {
+      setAttributes({ src: media.url, alt: media && media.alt })
     }
 
     return (
@@ -55,7 +55,7 @@ export const settings = {
           <Toolbar>
             <MediaUpload
               allowedTypes={['image']}
-              onSelect={media => onSelectImage(media)} render={({ open }) => (
+              onSelect={(...args) => onSelectImage(...args)} render={({ open }) => (
               <IconButton className="components-toolbar__control" label={__('Edit image')} icon="edit" onClick={open}/>
             )}
             />
