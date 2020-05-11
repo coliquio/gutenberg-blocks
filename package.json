@@ -1,0 +1,47 @@
+{
+  "name": "coliquio-image",
+  "version": "1.0.0",
+  "description": "A simple image block that persists all image attributes",
+  "main": "build/index.js",
+  "gutenbergCloud": {
+    "js": "build/index.js",
+    "css": "build/style.css",
+    "screenshot": "screenshot.png",
+    "name": "Coliquio Image"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production webpack",
+    "start": "npm run build && BLOCK_DIR=$PWD npm --prefix node_modules/@frontkom/g-editor start",
+    "deploy": "npm run build && npm publish --access public"
+  },
+  "keywords": [
+    "gutenberg",
+    "gutenberg-cloud"
+  ],
+  "peerDependencies": {
+    "react": "^16.8.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "@frontkom/g-editor": "^1.4.1",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.4.2",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.18.3",
+    "extract-text-webpack-plugin": "4.0.0-beta.0",
+    "node-sass": "^4.13.1",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^8.0.2",
+    "url-loader": "^3.0.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "files": [
+    "build/",
+    "screenshot.png"
+  ],
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
+}
