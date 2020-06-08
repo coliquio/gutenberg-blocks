@@ -1,23 +1,12 @@
 {
-  "name": "coliquio-image",
+  "name": "coliquio-blocks",
   "version": "1.0.0",
-  "description": "A simple image block that persists all image attributes",
+  "description": "Custom coliquio blocks",
   "main": "build/index.js",
-  "gutenbergCloud": {
-    "js": "build/index.js",
-    "css": "build/style.css",
-    "screenshot": "screenshot.png",
-    "name": "Coliquio Image"
-  },
   "scripts": {
     "build": "NODE_ENV=production webpack",
-    "start": "npm run build && BLOCK_DIR=$PWD npm --prefix node_modules/@frontkom/g-editor start",
-    "deploy": "npm run build && npm publish --access public"
+    "start": "npm run build && BLOCK_DIR=$PWD npm --prefix node_modules/@frontkom/g-editor start"
   },
-  "keywords": [
-    "gutenberg",
-    "gutenberg-cloud"
-  ],
   "peerDependencies": {
     "react": "^16.8.0"
   },
@@ -39,10 +28,6 @@
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
   },
-  "files": [
-    "build/",
-    "screenshot.png"
-  ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   }
