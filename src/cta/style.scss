@@ -1,0 +1,28 @@
+.wp-block-coliquio-cta {
+
+  background-color: #65b32e;
+  color: #fff;
+  display: inline-block;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid #65b32e;
+  border-radius: 4px;
+  font-weight: 400;
+  padding: .5rem 1rem;
+  outline: 0;
+  margin-bottom: .25rem;
+  text-decoration: none;
+  font-size: 1.125rem;
+
+  &[contenteditable] {
+    cursor: text;
+  }
+
+  &:active,
+  &:hover {
+    border: 1px solid #666;
+  }
+
+}

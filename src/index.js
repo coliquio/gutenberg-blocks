@@ -1,5 +1,6 @@
 import { blocks, data, i18n } from 'wp'
 import * as imageBlock from './image'
+import * as ctaBlock from './cta'
 
 const { registerBlockType } = blocks
 const { dispatch, select } = data
@@ -9,7 +10,7 @@ const { __ } = i18n
 // Category name and slug
 const category = {
   slug: 'coliquio', // needs to match the css class of the block container: ".wp-block-coliquio-[block-name]"
-  title: __('Coliquio Blocks'),
+  title: __('coliquio Blocks'),
 }
 
 // Register the new category and blocks
@@ -18,6 +19,7 @@ export function registerBlocks() {
   dispatch('core/blocks').setCategories([category, ...currentCategories])
 
   registerBlockType(`${category.slug}/${imageBlock.name}`, { category: category.slug, ...imageBlock.settings })
+  registerBlockType(`${category.slug}/${ctaBlock.name}`, { category: category.slug, ...ctaBlock.settings })
 }
 
 registerBlocks()
