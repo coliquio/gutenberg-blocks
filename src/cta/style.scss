@@ -1,4 +1,7 @@
 .wp-block-coliquio-cta {
+  &[contenteditable] {
+    cursor: text;
+  }
 
   background-color: #65b32e;
   color: #fff;
@@ -16,13 +19,20 @@
   text-decoration: none;
   font-size: 1.125rem;
 
-  &[contenteditable] {
-    cursor: text;
-  }
-
   &:active,
   &:hover {
     border: 1px solid #666;
   }
 
+  &--link {
+    color: #65b32e;
+    background: none;
+    border: none;
+
+    &:active,
+    &:hover {
+      border: none;
+      color: darken(#65b32e, 10%);
+    }
+  }
 }

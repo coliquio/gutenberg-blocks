@@ -5,10 +5,18 @@ import './style.scss'
 const { Fragment } = element
 const { __ } = i18n
 
-const { PanelBody, TextControl, ToggleControl } = components
+const { PanelBody, TextControl, ToggleControl, RadioControl } = components
 const { RichText, InspectorControls } = editor
 
 export const name = 'cta'
+
+function renderClassName(defaultClassName, attributes) {
+  let className = defaultClassName
+  if (attributes.style != 'button') {
+    className = `${className} ${className}--${attributes.style}`
+  }
+  return className
+}
 
 export const settings = {
   title: __('Call To Action Button'),
@@ -26,11 +34,13 @@ export const settings = {
     },
     targetNewWindow: {
       type: 'boolean',
+    },
+    style: {
+      type: 'string',
     }
   },
 
   edit({ attributes, className, setAttributes }) {
-
     return (
         <Fragment>
 
@@ -41,16 +51,25 @@ export const settings = {
                   value={ attributes.url || '/my-path'}
                   onChange={ (val) => setAttributes({ url: val }) }
               />
-            <ToggleControl
-                label={__('Open hyperlink in new tab?')}
-                onChange={() => setAttributes({ targetNewWindow: !attributes.targetNewWindow })}
-                checked={attributes.targetNewWindow}
-            />
+              <RadioControl
+                label="Display Style"
+                selected={ attributes.style || 'button' }
+                options={ [
+                  { label: 'Button', value: 'button' },
+                  { label: 'Link', value: 'link' },
+                ] }
+                onChange={(option) => setAttributes({ style: option })}
+              />
+              <ToggleControl
+                  label={__('Open hyperlink in new tab?')}
+                  onChange={() => setAttributes({ targetNewWindow: !attributes.targetNewWindow })}
+                  checked={attributes.targetNewWindow}
+              />
             </PanelBody>
           </InspectorControls>
 
           <RichText
-              className={className}
+              className={renderClassName(className, attributes)}
               tagName="a"
               value={attributes.text}
               placeholder={__('Button Text')}
@@ -67,7 +86,7 @@ export const settings = {
     return (
         <RichText.Content
             tagName="a"
-            className={className}
+            className={renderClassName(className, attributes)}
             href={attributes.url}
             value={attributes.text}
             target={attributes.targetNewWindow ? '_blank' : '_self'}
