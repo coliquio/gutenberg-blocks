@@ -1,16 +1,18 @@
+@import "../common/colors.css";
+
 .wp-block-coliquio-cta {
   &[contenteditable] {
     cursor: text;
   }
 
-  background-color: #65b32e;
-  color: #fff;
+  background-color: var(--green-base);
+  color: var(--white-base);
   display: inline-block;
   white-space: nowrap;
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  border: 1px solid #65b32e;
+  border: 1px solid var(--green-base);
   border-radius: 4px;
   font-weight: 400;
   padding: .5rem 1rem;
@@ -21,18 +23,21 @@
 
   &:active,
   &:hover {
-    border: 1px solid #666;
+    border: 1px solid var(--black-lighten-20);
+    background-color: var(--green-darken-10);
+    color: var(--white-base);
+    text-decoration: none;
   }
 
   &--link {
-    color: #65b32e;
+    color: var(--green-base);
     background: none;
     border: none;
 
     &:active,
     &:hover {
       border: none;
-      color: darken(#65b32e, 10%);
+      color: var(--green-darken-10);
     }
   }
 }
