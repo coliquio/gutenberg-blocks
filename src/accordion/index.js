@@ -6,17 +6,17 @@ import { components, editor, element, i18n } from 'wp'
 /**
  * Internal dependencies
  */
-import Accordion from './accordion.js'
 import './style.scss'
 
 
 const { Fragment } = element
 const { __ } = i18n
 
-const { PanelBody, RangeControl, ToggleControl } = components
-const { BlockControls, RichText, AlignmentToolbar, InnerBlocks, InspectorControls } = editor
+const { RichText, InnerBlocks } = editor
 
 export const name = 'accordion'
+
+const ALLOWED_BLOCKS = [ 'coliquio/accordion-item' ];
 
 export const settings = {
   title: __('Accordion'),
@@ -26,92 +26,28 @@ export const settings = {
   icon: 'cover-image',
 
   attributes: {
-    src: {
-      type: 'string',
-    },
-    alt: {
-      type: 'string',
-    },
-    caption: {
-      type: 'string',
-    },
     accordionTitle: {
       type: 'string',
     },
-    accordionText: {
-      type: 'string',
-    },
-    accordionOpen: {
-      type: 'boolean',
-		  default: false,
-    }
   },
 
   edit({ attributes, className, setAttributes }) {
     return (
       <Fragment>
-        <BlockControls key="controls">
-          <AlignmentToolbar
-            value={ attributes.accordionAlignment }
-            onChange={ ( value ) =>
-              setAttributes( {
-                accordionAlignment: value,
-              } )
-            }
+        <RichText
+          tagName="p"
+          placeholder={ __( 'Accordion Title' ) }
+          value={ attributes.accordionTitle }
+          className=""
+          onChange={ ( value ) =>
+            setAttributes( { accordionTitle: value } )
+          }
+        />
+        <div className="ab-accordion-text">
+          <InnerBlocks
+            allowedBlocks={ ALLOWED_BLOCKS }
           />
-        </BlockControls>
-        
-        <InspectorControls key="inspector">
-          <PanelBody>
-            <RangeControl
-              label={ __( 'Title Font Size', 'atomic-blocks' ) }
-              value={ attributes.accordionFontSize }
-              onChange={ ( value ) =>
-                setAttributes( {
-                  accordionFontSize: value,
-                } )
-              }
-              min={ 14 }
-              max={ 24 }
-              step={ 1 }
-            />
-            <ToggleControl
-              label={ __( 'Open by default', 'atomic-blocks' ) }
-              checked={ attributes.accordionOpen }
-              onChange={ () =>
-                setAttributes( {
-                  accordionOpen: ! attributes
-                    .accordionOpen,
-                } )
-              }
-            />
-          </PanelBody>
-        </InspectorControls>
-
-         {/* Show the button markup in the editor */}
-        <Accordion>
-          <RichText
-            tagName="p"
-            placeholder={ __( 'Accordion Title' ) }
-            value={ attributes.accordionTitle }
-            className=""
-            onChange={ ( value ) =>
-              setAttributes( { accordionTitle: value } )
-            }
-          />
-
-          <div className="ab-accordion-text">
-            <RichText
-              tagName="p"
-              placeholder={ __( 'Accordion Text' ) }
-              value={ attributes.accordionText }
-              className=""
-              onChange={ ( value ) =>
-                setAttributes( { accordionText: value } )
-              }
-            />
-          </div>
-        </Accordion>
+        </div>
       </Fragment>
     )
   },
@@ -119,15 +55,13 @@ export const settings = {
   save({ attributes, className }) {
     return (
       <details open={ attributes.accordionOpen }>
-        <summary class="123">
+        <summary>
           <RichText.Content
             value={ attributes.accordionTitle }
           />
         </summary>
-        <div class="456">
-          <RichText.Content
-            value={ attributes.accordionText }
-          />
+        <div>
+          <InnerBlocks.Content />
         </div>
       </details>
     )
