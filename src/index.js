@@ -1,7 +1,7 @@
 import { blocks, data, i18n } from 'wp'
 import * as imageBlock from './image'
 import * as ctaBlock from './cta'
-import * as imageSlideshow from './image_slideshow'
+import * as imageSlideshow from './image_gallery'
 
 const { registerBlockType } = blocks
 const { dispatch, select } = data

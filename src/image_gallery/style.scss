@@ -1,0 +1,77 @@
+@import "../common/colors.css";
+
+.wp-block-coliquio-coliquio-image-gallery {
+
+  .openGallery {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1.2rem;
+  }
+
+
+  .container {
+    background-color: var(--black-base);
+    padding: 15px;
+    text-align: center;
+
+    .amount {
+      color: var(--black-lighten-40);
+      margin-top: 0;
+    }
+
+    figure {
+      margin: 0;
+      padding: 0 0 25px 0;
+
+      img {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+      }
+
+      figcaption {
+        margin: 0;
+        .count {
+          color: var(--black-lighten-40);
+          font-size: 1.4rem;
+        }
+        .desc {
+          color: var(--white-base);
+          margin: 0;
+          font-size: 1rem;
+
+          a {
+            color: var(--white-base);
+          }
+        }
+
+
+
+      }
+    }
+
+    &.preview {
+      display: flex;
+      flex-wrap: wrap;
+      border-radius: 6px;
+      padding: 5px;
+
+      figure {
+        margin: 10px;
+
+        img {
+          max-width: 90px;
+        }
+      }
+      figcaption {
+        max-width: 90px;
+        font-size: 0.8rem;
+        color: var(--white-base);
+      }
+    }
+  }
+
+
+
+}

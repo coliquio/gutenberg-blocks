@@ -16,7 +16,6 @@ module.exports = {
   externals: {
     react: 'React',
     wp: 'wp',
-    'the-platform': 'the-platform'
   },
   output: {
     filename: '[name].js',
@@ -46,7 +45,7 @@ module.exports = {
       },
     ],
   },
-  mode: 'production',
+  mode: 'development',
   plugins: [
     cleanBuild,
     blockCSS,

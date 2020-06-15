@@ -51,5 +51,78 @@
   --orange-lighten-30: #FFD59E;
   --orange-lighten-40: #FFEBD1;
 }
-.wp-block-coliquio-coliquio-slideshow .container{border:1px dotted red;display:flex}.wp-block-coliquio-coliquio-slideshow .container figure{margin:5px}
-.wp-block-coliquio-cta{background-color:var(--green-base);color:var(--white-base);display:inline-block;white-space:nowrap;text-align:center;vertical-align:middle;cursor:pointer;border:1px solid var(--green-base);border-radius:4px;font-weight:400;padding:.5rem 1rem;outline:0;margin-bottom:.25rem;text-decoration:none;font-size:1.125rem}.wp-block-coliquio-cta[contenteditable]{cursor:text}.wp-block-coliquio-cta:active,.wp-block-coliquio-cta:hover{border:1px solid var(--black-lighten-20);background-color:var(--green-darken-10);color:var(--white-base);text-decoration:none}.wp-block-coliquio-cta--link{color:var(--green-base);background:none;border:none}.wp-block-coliquio-cta--link:active,.wp-block-coliquio-cta--link:hover{border:none;background:none;color:var(--green-darken-10)}
+.wp-block-coliquio-cta {
+  background-color: var(--green-base);
+  color: var(--white-base);
+  display: inline-block;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid var(--green-base);
+  border-radius: 4px;
+  font-weight: 400;
+  padding: .5rem 1rem;
+  outline: 0;
+  margin-bottom: .25rem;
+  text-decoration: none;
+  font-size: 1.125rem; }
+  .wp-block-coliquio-cta[contenteditable] {
+    cursor: text; }
+  .wp-block-coliquio-cta:active, .wp-block-coliquio-cta:hover {
+    border: 1px solid var(--black-lighten-20);
+    background-color: var(--green-darken-10);
+    color: var(--white-base);
+    text-decoration: none; }
+  .wp-block-coliquio-cta--link {
+    color: var(--green-base);
+    background: none;
+    border: none; }
+    .wp-block-coliquio-cta--link:active, .wp-block-coliquio-cta--link:hover {
+      border: none;
+      background: none;
+      color: var(--green-darken-10); }
+.wp-block-coliquio-coliquio-image-gallery .openGallery {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1.2rem; }
+
+.wp-block-coliquio-coliquio-image-gallery .container {
+  background-color: var(--black-base);
+  padding: 15px;
+  text-align: center; }
+  .wp-block-coliquio-coliquio-image-gallery .container .amount {
+    color: var(--black-lighten-40);
+    margin-top: 0; }
+  .wp-block-coliquio-coliquio-image-gallery .container figure {
+    margin: 0;
+    padding: 0 0 25px 0; }
+    .wp-block-coliquio-coliquio-image-gallery .container figure img {
+      width: 100%;
+      max-width: 600px;
+      height: auto; }
+    .wp-block-coliquio-coliquio-image-gallery .container figure figcaption {
+      margin: 0; }
+      .wp-block-coliquio-coliquio-image-gallery .container figure figcaption .count {
+        color: var(--black-lighten-40);
+        font-size: 1.4rem; }
+      .wp-block-coliquio-coliquio-image-gallery .container figure figcaption .desc {
+        color: var(--white-base);
+        margin: 0;
+        font-size: 1rem; }
+        .wp-block-coliquio-coliquio-image-gallery .container figure figcaption .desc a {
+          color: var(--white-base); }
+  .wp-block-coliquio-coliquio-image-gallery .container.preview {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 6px;
+    padding: 5px; }
+    .wp-block-coliquio-coliquio-image-gallery .container.preview figure {
+      margin: 10px; }
+      .wp-block-coliquio-coliquio-image-gallery .container.preview figure img {
+        max-width: 90px; }
+    .wp-block-coliquio-coliquio-image-gallery .container.preview figcaption {
+      max-width: 90px;
+      font-size: 0.8rem;
+      color: var(--white-base); }

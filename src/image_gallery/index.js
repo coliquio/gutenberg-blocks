@@ -1,9 +1,6 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {components, editor, element, i18n} from 'wp'
-import {useMedia} from 'the-platform'
-
-// import "slick-carousel/slick/slick.css"
-// import "slick-carousel/slick/slick-theme.css"
+import {useMedia} from 'the-platform';
 import './style.scss'
 
 const { Fragment } = element
@@ -12,8 +9,7 @@ const { __ } = i18n
 const { PanelBody, TextControl, ToggleControl, RadioControl, IconButton } = components
 const { RichText, BlockControls, MediaUpload, InspectorControls, MediaPlaceholder, Toolbar } = editor
 
-export const name = 'coliquio-slideshow'
-console.log(name);
+export const name = 'coliquio-image-gallery'
 
 /**
  * @todo: DRY!
@@ -29,10 +25,18 @@ function renderClassName(defaultClassName, attributes) {
   return className
 }
 
-export const settings = {
-  title: __('Image Slideshow'),
 
-  description: __('Simple slideshow'),
+const Gal = () => {
+  const isDesktop = useMedia('(min-width: 400px)');
+
+  return (<div>
+    <h2>isDesktop: {isDesktop.toString()}</h2>
+  </div>)
+}
+export const settings = {
+  title: __('Image Gallery'),
+
+  description: __('Simple Gallery that opens as an overlay'),
 
   icon: 'image',
 
@@ -43,34 +47,37 @@ export const settings = {
   },
 
   edit({ attributes, className, setAttributes }) {
-
     const hasImages = attributes.images && !!attributes.images.length;
-    console.log('imgs', attributes.images)
-
     const onSelectImages = (imgs) => {
       setAttributes({
         images: imgs,
       })
     }
-    const isDesktop = useMedia('(min-width: 400px)');
+    const onChangeCaption = (newCaption, id) => {
+      const { images } = attributes;
+
+      for (let imgObj in images) {
+        if (images[imgObj].id === id) {
+          images[imgObj].caption = newCaption;
+        }
+      }
+      return setAttributes({ images });
+    }
 
     return (
         <div className={className}>
-
-          <p>isDesktop: {isDesktop.toString()}</p>
-          <div className="container">
+          {/*<Gal/>*/}
+          <div className="container preview ">
             {
               hasImages && attributes.images.map(img => (
                   <figure key={img.id}>
-                    <img className="" width="100" src={img.url} alt={img.alt}/>
+                    <img className="" width="90" src={img.url} alt={img.alt}/>
                     <RichText
                         tagName="figcaption"
-                        placeholder={__('Bildbeschreibung')}
+                        placeholder={__('Caption')}
                         value={img.caption}
-                        onChange={(newCaption) =>
-                            setAttributes({ caption: newCaption })
-                        }
                         inlineToolbar
+                        onChange={caption => onChangeCaption(caption, img.id)}
                     />
                   </figure>
               ))
@@ -85,8 +92,8 @@ export const settings = {
               // disableMediaButtons={ hasImages && ! isSelected }
               icon={!hasImages && 'dashicons-images-alt'}
               labels={{
-                title: !hasImages && __('Image Slide Gallery'),
-                instructions: !hasImages && 'Bilder bitte auswählen',
+                title: !hasImages && __('Image Gallery'),
+                instructions: !hasImages && 'Bitte Bilder auswählen',
               }}
               onSelect={onSelectImages}
               accept="image/*"
@@ -104,27 +111,36 @@ export const settings = {
 
   save({ attributes, className }) {
 
-    const settings = {
-      dots: false,
-      infinite: true,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
-    const isDesktop = useMedia('(min-width: 400px)');
+    // const [open, setOpen] = useState(false);
 
-return (
-    <p>isDesktop: {isDesktop.toString()}</p>
-)
-    // return (
-        // <Slider {...settings}>
-        //   {
-        //     attributes.images.length > 0 && attributes.images.map(img => (
-        //         <div key={img.id}>
-        //           <img src={img.url} alt={img.alt}/>
-        //         </div>
-        //     ))
-        //   }
-        // </Slider>
-    // );
+    const len = attributes.images.length;
+    return (
+
+        <div className={className}>
+          <button className="openGallery" onClick={() => {}}>
+            Öffne Bildergallery
+          </button>
+
+          <p>open?: {open.toString()}</p>
+
+          <div className="container">
+            <p className="amount">{len} Bilder</p>
+            {
+              len > 0 && attributes.images.map((img, inx) => (
+                  <figure key={img.id}>
+                    <img src={img.url} alt={img.alt} />
+                    <figcaption>
+                      <span className="count">{`${(inx+1).toString()} / ${len}`}</span>
+                      <p className="desc" dangerouslySetInnerHTML={{__html: img.caption}} />
+                    </figcaption>
+                  </figure>
+              ))
+            }
+          </div>
+
+        </div>
+
+
+    )
   },
 }
