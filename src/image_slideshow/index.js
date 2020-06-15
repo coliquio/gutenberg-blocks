@@ -52,7 +52,7 @@ export const settings = {
         images: imgs,
       })
     }
-    const isDesktop = useMedia("min-width: 400px");
+    const isDesktop = useMedia('(min-width: 400px)');
 
     return (
         <div className={className}>
@@ -110,7 +110,7 @@ export const settings = {
       slidesToShow: 1,
       slidesToScroll: 1
     };
-    const isDesktop = useMedia("min-width: 400px");
+    const isDesktop = useMedia('(min-width: 400px)');
 
 return (
     <p>isDesktop: {isDesktop.toString()}</p>
