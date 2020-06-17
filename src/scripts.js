@@ -6,12 +6,9 @@
 const gallery = document.getElementsByClassName('wp-block-coliquio-image-gallery');
 
 function onOpenGallery(E) {
-  console.log(E)
   gallery[0]
       .getElementsByClassName('image-gallery-overlay')[0]
       .style.display = "block";
-
-console.log(document.querySelectorAll('btn-close-gallery'))
 
   document.querySelectorAll('.btn-close-gallery')
       .forEach(node => node.addEventListener('click', onCloseGallery));
@@ -19,7 +16,6 @@ console.log(document.querySelectorAll('btn-close-gallery'))
 }
 
 function onCloseGallery(e) {
-  console.log(e)
   gallery[0]
       .getElementsByClassName('image-gallery-overlay')[0]
       .style.display = "none";
