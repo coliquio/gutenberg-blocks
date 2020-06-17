@@ -52,7 +52,7 @@ export const settings = {
           <InspectorControls>
             <PanelBody title={__('Gallery settings')}>
               <TextControl
-                  label={__('Titel der Galerie')}
+                  label={__('Title of gallery')}
                   value={attributes.galleryTitle}
                   onChange={(val) => setAttributes({ galleryTitle: val })}
               />
@@ -61,7 +61,7 @@ export const settings = {
           <div className={className}>
             <div className="image-gallery-edit-container ">
               {
-                !hasImages && <strong>Keine Bilder ausgewählt</strong>
+                !hasImages && <strong>{__('No images selected yet')}</strong>
               }
               {
                 hasImages && attributes.images.map(img => (
@@ -87,7 +87,7 @@ export const settings = {
                 icon={!hasImages && 'dashicons-images-alt'}
                 labels={{
                   title: !hasImages && __('Image Gallery'),
-                  instructions: !hasImages && 'Bitte Bilder auswählen',
+                  instructions: !hasImages && __('Please select images'),
                 }}
                 onSelect={onSelectImages}
                 accept="image/*"
