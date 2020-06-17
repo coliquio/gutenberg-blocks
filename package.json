@@ -5,7 +5,9 @@
   "main": "build/index.js",
   "scripts": {
     "build": "NODE_ENV=production webpack",
-    "start": "npm run build && BLOCK_DIR=$PWD npm --prefix node_modules/@frontkom/g-editor start"
+    "start": "npm run build && BLOCK_DIR=$PWD npm --prefix node_modules/@frontkom/g-editor start",
+    "dev": "NODE_ENV=development webpack && BLOCK_DIR=$PWD npm --prefix node_modules/@frontkom/g-editor start",
+    "watch": "nodemon --watch src/ --delay 10ms --exec 'npm run dev'"
   },
   "peerDependencies": {
     "react": "^16.8.0"
@@ -13,7 +15,7 @@
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
-    "@frontkom/g-editor": "^1.4.1",
+    "@frontkom/g-editor": "^1.5.0",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
@@ -22,6 +24,7 @@
     "eslint-plugin-react": "^7.18.3",
     "extract-text-webpack-plugin": "4.0.0-beta.0",
     "node-sass": "^4.13.1",
+    "nodemon": "^2.0.4",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^8.0.2",
     "url-loader": "^3.0.0",
@@ -30,5 +33,12 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-cache": "^2.0.0-alpha.1",
+    "react-dom": "^16.13.1",
+    "scheduler": "^0.19.1",
+    "wp": "0.0.3"
   }
 }

@@ -1,1 +1,249 @@
-!function(e,t){if("object"==typeof exports&&"object"==typeof module)module.exports=t(require("React"),require("wp"));else if("function"==typeof define&&define.amd)define(["React","wp"],t);else{var n="object"==typeof exports?t(require("React"),require("wp")):t(e.React,e.wp);for(var o in n)("object"==typeof exports?exports:e)[o]=n[o]}}(window,(function(e,t){return function(e){var t={};function n(o){if(t[o])return t[o].exports;var a=t[o]={i:o,l:!1,exports:{}};return e[o].call(a.exports,a,a.exports,n),a.l=!0,a.exports}return n.m=e,n.c=t,n.d=function(e,t,o){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:o})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var o=Object.create(null);if(n.r(o),Object.defineProperty(o,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var a in e)n.d(o,a,function(t){return e[t]}.bind(null,a));return o},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=2)}([function(t,n){t.exports=e},function(e,n){e.exports=t},function(e,t,n){"use strict";n.r(t),n.d(t,"registerBlocks",(function(){return Z}));var o=n(1),a=n(0),l=n.n(a);n(3);const{Fragment:r}=o.element,{__:c}=o.i18n,{Toolbar:i,IconButton:s}=o.components,{BlockControls:u,RichText:m,MediaUpload:d}=o.editor,g={title:c("Image"),description:c("A custom block for Gutenberg Cloud"),icon:"cover-image",attributes:{src:{type:"string"},alt:{type:"string"},caption:{type:"string"}},edit:({attributes:e,className:t,setAttributes:n})=>l.a.createElement(r,null,l.a.createElement("figure",{className:t},e.src&&l.a.createElement("img",{src:e.src,alt:e.alt}),l.a.createElement(m,{tagName:"figcaption",value:e.caption,placeholder:c("Image caption"),onChange:e=>n({caption:e}),formattingControls:[]})),l.a.createElement(u,null,l.a.createElement(i,null,l.a.createElement(d,{allowedTypes:["image"],onSelect:(...e)=>(e=>{n({src:e.url,alt:e&&e.alt})})(...e),render:({open:e})=>l.a.createElement(s,{className:"components-toolbar__control",label:c("Edit image"),icon:"edit",onClick:e})})))),save:({attributes:e,className:t})=>l.a.createElement("figure",{className:t},l.a.createElement("img",{src:e.src,alt:e.alt}),l.a.createElement(m.Content,{tagName:"figcaption",value:e.caption}))};n(5);const{Fragment:p}=o.element,{__:b}=o.i18n,{PanelBody:f,TextControl:y,ToggleControl:E,RadioControl:C}=o.components,{RichText:v,InspectorControls:T}=o.editor;function k(e,t){let n=e;return"button"!=t.style&&(n=`${n} ${n}--${t.style}`),n}const N={title:b("Call To Action Button"),description:b("A CTA button that links to some content"),icon:"button",attributes:{text:{type:"string"},url:{type:"string"},targetNewWindow:{type:"boolean"},style:{type:"string"}},edit:({attributes:e,className:t,setAttributes:n})=>l.a.createElement(p,null,l.a.createElement(T,null,l.a.createElement(f,{title:b("CTA settings")},l.a.createElement(y,{label:b("Link to Content"),value:e.url||"/my-path",onChange:e=>n({url:e})}),l.a.createElement(C,{label:"Display Style",selected:e.style||"button",options:[{label:"Button",value:"button"},{label:"Link",value:"link"}],onChange:e=>n({style:e})}),l.a.createElement(E,{label:b("Open hyperlink in new tab?"),onChange:()=>n({targetNewWindow:!e.targetNewWindow}),checked:e.targetNewWindow}))),l.a.createElement(v,{className:k(t,e),tagName:"a",value:e.text,placeholder:b("Button Text"),target:e.targetNewWindow?"_blank":"_self",onChange:e=>n({text:e}),formattingControls:[]})),save:({attributes:e,className:t})=>l.a.createElement(v.Content,{tagName:"a",className:k(t,e),href:e.url,value:e.text,target:e.targetNewWindow?"_blank":"_self",rel:"noreferrer noopener"})};n(6);const{Fragment:h}=o.element,{__:x}=o.i18n,{PanelBody:w,RangeControl:_,ToggleControl:A}=o.components,{BlockControls:B,RichText:O,AlignmentToolbar:j,InnerBlocks:R,InspectorControls:S}=o.editor,I=["coliquio/accordion-item"],P={title:x("Accordion"),description:x("A custom Accordion block for Gutenberg Cloud"),icon:"cover-image",attributes:{accordionTitle:{type:"string"}},edit:({attributes:e,className:t,setAttributes:n})=>l.a.createElement(h,null,l.a.createElement(O,{tagName:"p",placeholder:x("Accordion Title"),value:e.accordionTitle,className:"",onChange:e=>n({accordionTitle:e})}),l.a.createElement("div",{className:"ab-accordion-text"},l.a.createElement(R,{allowedBlocks:I}))),save:({attributes:e,className:t})=>l.a.createElement("details",{open:e.accordionOpen},l.a.createElement("summary",null,l.a.createElement(O.Content,{value:e.accordionTitle})),l.a.createElement("div",null,l.a.createElement(R.Content,null)))};n(7);const{Fragment:q}=o.element,{__:F}=o.i18n,{PanelBody:W,RangeControl:M,ToggleControl:z}=o.components,{BlockControls:G,RichText:$,AlignmentToolbar:L,InnerBlocks:D,InspectorControls:U}=o.editor,H=["core/image","core/paragraph"],J={title:F("Accordion Item"),description:F("A custom Accordion block for Gutenberg Cloud"),icon:"cover-image",attributes:{src:{type:"string"},alt:{type:"string"},caption:{type:"string"},accordionTitle:{type:"string"},accordionText:{type:"string"},accordionOpen:{type:"boolean",default:!1}},edit:({attributes:e,className:t,setAttributes:n})=>l.a.createElement(q,null,l.a.createElement(G,{key:"controls"},l.a.createElement(L,{value:e.accordionAlignment,onChange:e=>n({accordionAlignment:e})})),l.a.createElement(U,{key:"inspector"},l.a.createElement(W,null,l.a.createElement(M,{label:F("Title Font Size","atomic-blocks"),value:e.accordionFontSize,onChange:e=>n({accordionFontSize:e}),min:14,max:24,step:1}),l.a.createElement(z,{label:F("Open by default","atomic-blocks"),checked:e.accordionOpen,onChange:()=>n({accordionOpen:!e.accordionOpen})}))),l.a.createElement($,{tagName:"p",placeholder:F("Accordion Title"),value:e.accordionTitle,className:"",onChange:e=>n({accordionTitle:e})}),l.a.createElement("div",{className:"ab-accordion-text"},l.a.createElement(D,{allowedBlocks:H}))),save:({attributes:e,className:t})=>l.a.createElement("details",{open:e.accordionOpen},l.a.createElement("summary",{class:"123"},l.a.createElement($.Content,{value:e.accordionTitle})),l.a.createElement("div",{class:"456"},l.a.createElement(D.Content,null)))},{registerBlockType:K}=o.blocks,{dispatch:Q,select:V}=o.data,{__:X}=o.i18n,Y={slug:"coliquio",title:X("coliquio Blocks")};function Z(){const e=V("core/blocks").getCategories().filter(e=>e.slug!==Y.slug);Q("core/blocks").setCategories([Y,...e]),K(Y.slug+"/image",{category:Y.slug,...g}),K(Y.slug+"/cta",{category:Y.slug,...N}),K(Y.slug+"/accordion",{category:Y.slug,...P}),K(Y.slug+"/accordion-item",{category:Y.slug,...J})}Z()},function(e,t){},,function(e,t){},function(e,t){},function(e,t){}])}));
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("React"), require("wp"));
+	else if(typeof define === 'function' && define.amd)
+		define(["React", "wp"], factory);
+	else {
+		var a = typeof exports === 'object' ? factory(require("React"), require("wp")) : factory(root["React"], root["wp"]);
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
+})(window, function(__WEBPACK_EXTERNAL_MODULE_react__, __WEBPACK_EXTERNAL_MODULE_wp__) {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./src/accordion-item/index.js":
+/*!*************************************!*\
+  !*** ./src/accordion-item/index.js ***!
+  \*************************************/
+/*! exports provided: name, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"name\", function() { return name; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"settings\", function() { return settings; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var wp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! wp */ \"wp\");\n/* harmony import */ var wp__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(wp__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ \"./src/accordion-item/style.scss\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_2__);\n/**\n * External dependencies\n */\n\n\n/**\n * Internal dependencies\n */\n\n\nconst {\n  Fragment\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"element\"];\nconst {\n  __\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"i18n\"];\nconst {\n  PanelBody,\n  RangeControl,\n  ToggleControl\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"components\"];\nconst {\n  BlockControls,\n  RichText,\n  AlignmentToolbar,\n  InnerBlocks,\n  InspectorControls\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"editor\"];\nconst name = 'accordion-item';\nconst ALLOWED_BLOCKS = ['core/image', 'core/paragraph'];\nconst settings = {\n  title: __('Accordion Item'),\n  description: __('A custom Accordion block for Gutenberg Cloud'),\n  icon: 'cover-image',\n  attributes: {\n    src: {\n      type: 'string'\n    },\n    alt: {\n      type: 'string'\n    },\n    caption: {\n      type: 'string'\n    },\n    accordionTitle: {\n      type: 'string'\n    },\n    accordionText: {\n      type: 'string'\n    },\n    accordionOpen: {\n      type: 'boolean',\n      default: false\n    }\n  },\n\n  edit({\n    attributes,\n    className,\n    setAttributes\n  }) {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(BlockControls, {\n      key: \"controls\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AlignmentToolbar, {\n      value: attributes.accordionAlignment,\n      onChange: value => setAttributes({\n        accordionAlignment: value\n      })\n    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InspectorControls, {\n      key: \"inspector\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PanelBody, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RangeControl, {\n      label: __('Title Font Size', 'atomic-blocks'),\n      value: attributes.accordionFontSize,\n      onChange: value => setAttributes({\n        accordionFontSize: value\n      }),\n      min: 14,\n      max: 24,\n      step: 1\n    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ToggleControl, {\n      label: __('Open by default', 'atomic-blocks'),\n      checked: attributes.accordionOpen,\n      onChange: () => setAttributes({\n        accordionOpen: !attributes.accordionOpen\n      })\n    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RichText, {\n      tagName: \"p\",\n      placeholder: __('Accordion Title'),\n      value: attributes.accordionTitle,\n      className: \"\",\n      onChange: value => setAttributes({\n        accordionTitle: value\n      })\n    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"ab-accordion-text\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InnerBlocks, {\n      allowedBlocks: ALLOWED_BLOCKS\n    })));\n  },\n\n  save({\n    attributes,\n    className\n  }) {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"details\", {\n      open: attributes.accordionOpen\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"summary\", {\n      class: \"123\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RichText.Content, {\n      value: attributes.accordionTitle\n    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      class: \"456\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InnerBlocks.Content, null)));\n  }\n\n};\n\n//# sourceURL=webpack:///./src/accordion-item/index.js?");
+
+/***/ }),
+
+/***/ "./src/accordion-item/style.scss":
+/*!***************************************!*\
+  !*** ./src/accordion-item/style.scss ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("// removed by extract-text-webpack-plugin\n\n//# sourceURL=webpack:///./src/accordion-item/style.scss?");
+
+/***/ }),
+
+/***/ "./src/accordion/index.js":
+/*!********************************!*\
+  !*** ./src/accordion/index.js ***!
+  \********************************/
+/*! exports provided: name, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"name\", function() { return name; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"settings\", function() { return settings; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var wp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! wp */ \"wp\");\n/* harmony import */ var wp__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(wp__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ \"./src/accordion/style.scss\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_2__);\n/**\n * External dependencies\n */\n\n\n/**\n * Internal dependencies\n */\n\n\nconst {\n  Fragment\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"element\"];\nconst {\n  __\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"i18n\"];\nconst {\n  RichText,\n  InnerBlocks\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"editor\"];\nconst name = 'accordion';\nconst ALLOWED_BLOCKS = ['coliquio/accordion-item'];\nconst settings = {\n  title: __('Accordion'),\n  description: __('A custom Accordion block for Gutenberg Cloud'),\n  icon: 'cover-image',\n  attributes: {\n    accordionTitle: {\n      type: 'string'\n    }\n  },\n\n  edit({\n    attributes,\n    className,\n    setAttributes\n  }) {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RichText, {\n      tagName: \"p\",\n      placeholder: __('Accordion Title'),\n      value: attributes.accordionTitle,\n      className: \"\",\n      onChange: value => setAttributes({\n        accordionTitle: value\n      })\n    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"ab-accordion-text\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InnerBlocks, {\n      allowedBlocks: ALLOWED_BLOCKS\n    })));\n  },\n\n  save({\n    attributes,\n    className\n  }) {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"details\", {\n      open: attributes.accordionOpen\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"summary\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RichText.Content, {\n      value: attributes.accordionTitle\n    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InnerBlocks.Content, null)));\n  }\n\n};\n\n//# sourceURL=webpack:///./src/accordion/index.js?");
+
+/***/ }),
+
+/***/ "./src/accordion/style.scss":
+/*!**********************************!*\
+  !*** ./src/accordion/style.scss ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("// removed by extract-text-webpack-plugin\n\n//# sourceURL=webpack:///./src/accordion/style.scss?");
+
+/***/ }),
+
+/***/ "./src/cta/index.js":
+/*!**************************!*\
+  !*** ./src/cta/index.js ***!
+  \**************************/
+/*! exports provided: name, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"name\", function() { return name; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"settings\", function() { return settings; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var wp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! wp */ \"wp\");\n/* harmony import */ var wp__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(wp__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ \"./src/cta/style.scss\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\nconst {\n  Fragment\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"element\"];\nconst {\n  __\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"i18n\"];\nconst {\n  PanelBody,\n  TextControl,\n  ToggleControl,\n  RadioControl\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"components\"];\nconst {\n  RichText,\n  InspectorControls\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"editor\"];\nconst name = 'cta';\n\nfunction renderClassName(defaultClassName, attributes) {\n  let className = defaultClassName;\n\n  if (attributes.style != 'button') {\n    className = `${className} ${className}--${attributes.style}`;\n  }\n\n  return className;\n}\n\nconst settings = {\n  title: __('Call To Action Button'),\n  description: __('A CTA button that links to some content'),\n  icon: 'button',\n  attributes: {\n    text: {\n      type: 'string'\n    },\n    url: {\n      type: 'string'\n    },\n    targetNewWindow: {\n      type: 'boolean'\n    },\n    style: {\n      type: 'string'\n    }\n  },\n\n  edit({\n    attributes,\n    className,\n    setAttributes\n  }) {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InspectorControls, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PanelBody, {\n      title: __('CTA settings')\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(TextControl, {\n      label: __('Link to Content'),\n      value: attributes.url || '/my-path',\n      onChange: val => setAttributes({\n        url: val\n      })\n    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RadioControl, {\n      label: \"Display Style\",\n      selected: attributes.style || 'button',\n      options: [{\n        label: 'Button',\n        value: 'button'\n      }, {\n        label: 'Link',\n        value: 'link'\n      }],\n      onChange: option => setAttributes({\n        style: option\n      })\n    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ToggleControl, {\n      label: __('Open hyperlink in new tab?'),\n      onChange: () => setAttributes({\n        targetNewWindow: !attributes.targetNewWindow\n      }),\n      checked: attributes.targetNewWindow\n    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RichText, {\n      className: renderClassName(className, attributes),\n      tagName: \"a\",\n      value: attributes.text,\n      placeholder: __('Button Text'),\n      target: attributes.targetNewWindow ? '_blank' : '_self',\n      onChange: value => setAttributes({\n        text: value\n      }),\n      formattingControls: []\n    }));\n  },\n\n  save({\n    attributes,\n    className\n  }) {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RichText.Content, {\n      tagName: \"a\",\n      className: renderClassName(className, attributes),\n      href: attributes.url,\n      value: attributes.text,\n      target: attributes.targetNewWindow ? '_blank' : '_self',\n      rel: \"noreferrer noopener\"\n    });\n  }\n\n};\n\n//# sourceURL=webpack:///./src/cta/index.js?");
+
+/***/ }),
+
+/***/ "./src/cta/style.scss":
+/*!****************************!*\
+  !*** ./src/cta/style.scss ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("// removed by extract-text-webpack-plugin\n\n//# sourceURL=webpack:///./src/cta/style.scss?");
+
+/***/ }),
+
+/***/ "./src/image/index.js":
+/*!****************************!*\
+  !*** ./src/image/index.js ***!
+  \****************************/
+/*! exports provided: name, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"name\", function() { return name; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"settings\", function() { return settings; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var wp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! wp */ \"wp\");\n/* harmony import */ var wp__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(wp__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ \"./src/image/style.scss\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_2__);\n/**\n * External dependencies\n */\n\n\n/**\n * Internal dependencies\n */\n\n\nconst {\n  Fragment\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"element\"];\nconst {\n  __\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"i18n\"];\nconst {\n  Toolbar,\n  IconButton\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"components\"];\nconst {\n  BlockControls,\n  RichText,\n  MediaUpload\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"editor\"];\nconst name = 'image';\nconst settings = {\n  title: __('Image'),\n  description: __('A custom block for Gutenberg Cloud'),\n  icon: 'cover-image',\n  attributes: {\n    src: {\n      type: 'string'\n    },\n    alt: {\n      type: 'string'\n    },\n    caption: {\n      type: 'string'\n    }\n  },\n\n  edit({\n    attributes,\n    className,\n    setAttributes\n  }) {\n    const onSelectImage = media => {\n      setAttributes({\n        src: media.url,\n        alt: media && media.alt\n      });\n    };\n\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"figure\", {\n      className: className\n    }, attributes.src && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"img\", {\n      src: attributes.src,\n      alt: attributes.alt\n    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RichText, {\n      tagName: \"figcaption\",\n      value: attributes.caption,\n      placeholder: __('Image caption'),\n      onChange: value => setAttributes({\n        caption: value\n      }),\n      formattingControls: []\n    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(BlockControls, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Toolbar, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MediaUpload, {\n      allowedTypes: ['image'],\n      onSelect: (...args) => onSelectImage(...args),\n      render: ({\n        open\n      }) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(IconButton, {\n        className: \"components-toolbar__control\",\n        label: __('Edit image'),\n        icon: \"edit\",\n        onClick: open\n      })\n    }))));\n  },\n\n  save({\n    attributes,\n    className\n  }) {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"figure\", {\n      className: className\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"img\", {\n      src: attributes.src,\n      alt: attributes.alt\n    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RichText.Content, {\n      tagName: \"figcaption\",\n      value: attributes.caption\n    }));\n  }\n\n};\n\n//# sourceURL=webpack:///./src/image/index.js?");
+
+/***/ }),
+
+/***/ "./src/image/style.scss":
+/*!******************************!*\
+  !*** ./src/image/style.scss ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("// removed by extract-text-webpack-plugin\n\n//# sourceURL=webpack:///./src/image/style.scss?");
+
+/***/ }),
+
+/***/ "./src/image_gallery/index.js":
+/*!************************************!*\
+  !*** ./src/image_gallery/index.js ***!
+  \************************************/
+/*! exports provided: name, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"name\", function() { return name; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"settings\", function() { return settings; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var wp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! wp */ \"wp\");\n/* harmony import */ var wp__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(wp__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ \"./src/image_gallery/style.scss\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\nconst {\n  __\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"i18n\"];\nconst {\n  PanelBody,\n  TextControl\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"components\"];\nconst {\n  RichText,\n  InspectorControls,\n  MediaPlaceholder\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"editor\"];\nconst name = 'image-gallery';\nconst settings = {\n  title: __('Image Gallery'),\n  description: __('Simple image gallery that opens as an overlay'),\n  icon: 'format-gallery',\n  attributes: {\n    images: {\n      type: 'array'\n    },\n    galleryTitle: {\n      type: 'string'\n    }\n  },\n\n  edit({\n    attributes,\n    className,\n    setAttributes,\n    isSelected\n  }) {\n    // For debugging purpose within Drupal, please keep\n    console.log(attributes.images);\n    const hasImages = attributes.images && !!attributes.images.length;\n\n    const onSelectImages = images => setAttributes({\n      images\n    });\n\n    const onChangeCaption = (newCaption, id) => {\n      const {\n        images\n      } = attributes;\n      images.filter(img => img.id === id).forEach(img => img.caption = newCaption);\n      return setAttributes({\n        images\n      });\n    };\n\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InspectorControls, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PanelBody, {\n      title: __('Gallery settings')\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(TextControl, {\n      label: __('Title of gallery'),\n      value: attributes.galleryTitle,\n      onChange: val => setAttributes({\n        galleryTitle: val\n      })\n    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: className\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"image-gallery-edit-container \"\n    }, !hasImages && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"strong\", null, __('No images selected yet')), hasImages && attributes.images.map(img => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"figure\", {\n      key: img.id\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"img\", {\n      className: \"\",\n      width: \"90\",\n      src: img.url,\n      alt: img.alt\n    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RichText, {\n      tagName: \"figcaption\",\n      placeholder: __('Caption'),\n      value: img.caption,\n      inlineToolbar: true,\n      onChange: caption => onChangeCaption(caption, img.id)\n    })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(MediaPlaceholder, {\n      addToGallery: hasImages,\n      isAppender: hasImages,\n      className: className,\n      disableMediaButtons: hasImages && !isSelected,\n      icon: !hasImages && 'dashicons-images-alt',\n      labels: {\n        title: !hasImages && __('Image Gallery'),\n        instructions: !hasImages && __('Please select images')\n      },\n      onSelect: onSelectImages,\n      accept: \"image/*\",\n      allowedTypes: ['image'],\n      value: attributes.images,\n      onError: alert,\n      multiple: true\n    })));\n  },\n\n  save({\n    attributes,\n    className\n  }) {\n    const len = attributes.images.length;\n    const prevImg = attributes.images[0];\n    const style = {\n      backgroundImage: `url('${prevImg.url}')`\n    };\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: className\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n      className: \"btn btn-open-gallery\",\n      style: style\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"txt-container\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"left\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n      className: \"heading\"\n    }, \"Bildergalerie\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n      className: \"gallery-title\"\n    }, attributes.galleryTitle || 'Galerietitel')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"amount\"\n    }, len, \" Bilder\"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"image-gallery-overlay\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"header\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n      className: \"btn btn-close-gallery\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"svg\", {\n      className: \"arrow-icon\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"path\", {\n      d: \"M12,8l-6,6l1.41,1.41L12,10.83l4.59,4.58L18,14L12,8z\"\n    })), \"Zur\\xFCck zum Beitrag\")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"section\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"p\", {\n      className: \"amount\"\n    }, len, \" Bilder\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"h2\", null, attributes.galleryTitle || 'Galerietitel'), len > 0 && attributes.images.map((img, inx) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"figure\", {\n      key: img.id\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"img\", {\n      src: img.url,\n      alt: img.alt\n    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"figcaption\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"span\", {\n      className: \"count\"\n    }, `${(inx + 1).toString()}/${len}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"p\", {\n      className: \"desc\",\n      dangerouslySetInnerHTML: {\n        __html: img.caption\n      }\n    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"p\", {\n      className: \"copyright\"\n    }, img.copyright)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"button\", {\n      className: \"btn btn-close-gallery bottom\"\n    }, \"Schlie\\xDFen\"))));\n  }\n\n};\n\n//# sourceURL=webpack:///./src/image_gallery/index.js?");
+
+/***/ }),
+
+/***/ "./src/image_gallery/style.scss":
+/*!**************************************!*\
+  !*** ./src/image_gallery/style.scss ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("// removed by extract-text-webpack-plugin\n\n//# sourceURL=webpack:///./src/image_gallery/style.scss?");
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! exports provided: registerBlocks */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"registerBlocks\", function() { return registerBlocks; });\n/* harmony import */ var wp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! wp */ \"wp\");\n/* harmony import */ var wp__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(wp__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./image */ \"./src/image/index.js\");\n/* harmony import */ var _cta__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cta */ \"./src/cta/index.js\");\n/* harmony import */ var _accordion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./accordion */ \"./src/accordion/index.js\");\n/* harmony import */ var _accordion_item__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./accordion-item */ \"./src/accordion-item/index.js\");\n/* harmony import */ var _image_gallery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./image_gallery */ \"./src/image_gallery/index.js\");\n\n\n\n\n\n\nconst {\n  registerBlockType\n} = wp__WEBPACK_IMPORTED_MODULE_0__[\"blocks\"];\nconst {\n  dispatch,\n  select\n} = wp__WEBPACK_IMPORTED_MODULE_0__[\"data\"];\nconst {\n  __\n} = wp__WEBPACK_IMPORTED_MODULE_0__[\"i18n\"]; // Category name and slug\n\nconst category = {\n  slug: 'coliquio',\n  // needs to match the css class of the block container: \".wp-block-coliquio-[block-name]\"\n  title: __('coliquio Blocks')\n}; // Register the new category and blocks\n\nfunction registerBlocks() {\n  const currentCategories = select('core/blocks').getCategories().filter(item => item.slug !== category.slug);\n  dispatch('core/blocks').setCategories([category, ...currentCategories]);\n  registerBlockType(`${category.slug}/${_image__WEBPACK_IMPORTED_MODULE_1__[\"name\"]}`, {\n    category: category.slug,\n    ..._image__WEBPACK_IMPORTED_MODULE_1__[\"settings\"]\n  });\n  registerBlockType(`${category.slug}/${_cta__WEBPACK_IMPORTED_MODULE_2__[\"name\"]}`, {\n    category: category.slug,\n    ..._cta__WEBPACK_IMPORTED_MODULE_2__[\"settings\"]\n  });\n  registerBlockType(`${category.slug}/${_accordion__WEBPACK_IMPORTED_MODULE_3__[\"name\"]}`, {\n    category: category.slug,\n    ..._accordion__WEBPACK_IMPORTED_MODULE_3__[\"settings\"]\n  });\n  registerBlockType(`${category.slug}/${_accordion_item__WEBPACK_IMPORTED_MODULE_4__[\"name\"]}`, {\n    category: category.slug,\n    ..._accordion_item__WEBPACK_IMPORTED_MODULE_4__[\"settings\"]\n  });\n  registerBlockType(`${category.slug}/${_image_gallery__WEBPACK_IMPORTED_MODULE_5__[\"name\"]}`, {\n    category: category.slug,\n    ..._image_gallery__WEBPACK_IMPORTED_MODULE_5__[\"settings\"]\n  });\n}\nregisterBlocks();\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "react":
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = __WEBPACK_EXTERNAL_MODULE_react__;\n\n//# sourceURL=webpack:///external_%22React%22?");
+
+/***/ }),
+
+/***/ "wp":
+/*!*********************!*\
+  !*** external "wp" ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = __WEBPACK_EXTERNAL_MODULE_wp__;\n\n//# sourceURL=webpack:///external_%22wp%22?");
+
+/***/ })
+
+/******/ });
+});

@@ -11,7 +11,7 @@ const editorCSS = new ExtractTextPlugin('editor.css');
 module.exports = {
   entry: {
     index: './src/index.js',
-    // scripts: './src/scripts.js',
+    scripts: './src/scripts.js',
   },
   externals: {
     react: 'React',
@@ -45,7 +45,7 @@ module.exports = {
       },
     ],
   },
-  mode: 'production',
+  mode: 'development',
   plugins: [
     cleanBuild,
     blockCSS,

@@ -3,6 +3,7 @@ import * as imageBlock from './image'
 import * as ctaBlock from './cta'
 import * as accordionBlock from './accordion'
 import * as accordionItemBlock from './accordion-item'
+import * as imageSlideshow from './image_gallery'
 
 const { registerBlockType } = blocks
 const { dispatch, select } = data
@@ -24,6 +25,7 @@ export function registerBlocks() {
   registerBlockType(`${category.slug}/${ctaBlock.name}`, { category: category.slug, ...ctaBlock.settings })
   registerBlockType(`${category.slug}/${accordionBlock.name}`, { category: category.slug, ...accordionBlock.settings })
   registerBlockType(`${category.slug}/${accordionItemBlock.name}`, { category: category.slug, ...accordionItemBlock.settings })
+  registerBlockType(`${category.slug}/${imageSlideshow.name}`, { category: category.slug, ...imageSlideshow.settings })
 }
 
 registerBlocks()
