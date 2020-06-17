@@ -15,7 +15,7 @@
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
-    "@frontkom/g-editor": "^1.4.1",
+    "@frontkom/g-editor": "^1.5.0",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
@@ -38,10 +38,7 @@
     "react": "^16.13.1",
     "react-cache": "^2.0.0-alpha.1",
     "react-dom": "^16.13.1",
-    "react-slick": "^0.26.1",
     "scheduler": "^0.19.1",
-    "slick-carousel": "^1.8.1",
-    "the-platform": "^0.10.1",
     "wp": "0.0.3"
   }
 }

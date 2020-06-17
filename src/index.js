@@ -19,8 +19,8 @@ export function registerBlocks() {
   const currentCategories = select('core/blocks').getCategories().filter(item => item.slug !== category.slug)
   dispatch('core/blocks').setCategories([category, ...currentCategories])
 
-  // registerBlockType(`${category.slug}/${imageBlock.name}`, { category: category.slug, ...imageBlock.settings })
-  // registerBlockType(`${category.slug}/${ctaBlock.name}`, { category: category.slug, ...ctaBlock.settings })
+  registerBlockType(`${category.slug}/${imageBlock.name}`, { category: category.slug, ...imageBlock.settings })
+  registerBlockType(`${category.slug}/${ctaBlock.name}`, { category: category.slug, ...ctaBlock.settings })
   registerBlockType(`${category.slug}/${imageSlideshow.name}`, { category: category.slug, ...imageSlideshow.settings })
 }
 

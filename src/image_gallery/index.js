@@ -1,52 +1,35 @@
-import React, {useState} from 'react'
-import {components, editor, element, i18n} from 'wp'
-import {useMedia} from 'the-platform';
+import React from 'react'
+import {components, editor, i18n} from 'wp'
+
 import './style.scss'
 
-const { Fragment } = element
 const { __ } = i18n
 
-const { PanelBody, TextControl, ToggleControl, RadioControl, IconButton } = components
-const { RichText, BlockControls, MediaUpload, InspectorControls, MediaPlaceholder, Toolbar } = editor
+const { PanelBody, TextControl } = components
+const { RichText, InspectorControls, MediaPlaceholder } = editor
 
-export const name = 'coliquio-image-gallery'
+export const name = 'image-gallery'
 
-/**
- * @todo: DRY!
- * @param defaultClassName
- * @param attributes
- * @returns {string}
- */
-function renderClassName(defaultClassName, attributes) {
-  let className = defaultClassName
-  if (attributes.style != 'button') {
-    className = `${className} ${className}--${attributes.style}`
-  }
-  return className
-}
-
-
-const Gal = () => {
-  const isDesktop = useMedia('(min-width: 400px)');
-
-  return (<div>
-    <h2>isDesktop: {isDesktop.toString()}</h2>
-  </div>)
-}
 export const settings = {
   title: __('Image Gallery'),
 
-  description: __('Simple Gallery that opens as an overlay'),
+  description: __('Simple image gallery that opens as an overlay'),
 
-  icon: 'image',
+  icon: 'format-gallery',
 
   attributes: {
     images: {
       type: 'array',
+    },
+    galleryTitle: {
+      type: 'string',
     }
   },
 
-  edit({ attributes, className, setAttributes }) {
+  edit({ attributes, className, setAttributes, isSelected }) {
+    // For debugging purpose within Drupal, please keep
+    console.log(attributes.images)
+
     const hasImages = attributes.images && !!attributes.images.length;
     const onSelectImages = (imgs) => {
       setAttributes({
@@ -65,82 +48,109 @@ export const settings = {
     }
 
     return (
-        <div className={className}>
-          {/*<Gal/>*/}
-          <div className="container preview ">
-            {
-              hasImages && attributes.images.map(img => (
-                  <figure key={img.id}>
-                    <img className="" width="90" src={img.url} alt={img.alt}/>
-                    <RichText
-                        tagName="figcaption"
-                        placeholder={__('Caption')}
-                        value={img.caption}
-                        inlineToolbar
-                        onChange={caption => onChangeCaption(caption, img.id)}
-                    />
-                  </figure>
-              ))
-            }
+        <>
+          <InspectorControls>
+            <PanelBody title={__('Gallery settings')}>
+              <TextControl
+                  label={__('Titel der Galerie')}
+                  value={attributes.galleryTitle}
+                  onChange={(val) => setAttributes({ galleryTitle: val })}
+              />
+            </PanelBody>
+          </InspectorControls>
+          <div className={className}>
+            <div className="image-gallery-edit-container ">
+              {
+                !hasImages && <strong>Keine Bilder ausgewählt</strong>
+              }
+              {
+                hasImages && attributes.images.map(img => (
+                    <figure key={img.id}>
+                      <img className="" width="90" src={img.url} alt={img.alt}/>
+                      <RichText
+                          tagName="figcaption"
+                          placeholder={__('Caption')}
+                          value={img.caption}
+                          inlineToolbar
+                          onChange={caption => onChangeCaption(caption, img.id)}
+                      />
+                    </figure>
+                ))
+              }
+            </div>
+
+            <MediaPlaceholder
+                addToGallery={hasImages}
+                isAppender={hasImages}
+                className={className}
+                disableMediaButtons={hasImages && !isSelected}
+                icon={!hasImages && 'dashicons-images-alt'}
+                labels={{
+                  title: !hasImages && __('Image Gallery'),
+                  instructions: !hasImages && 'Bitte Bilder auswählen',
+                }}
+                onSelect={onSelectImages}
+                accept="image/*"
+                allowedTypes={['image']}
+                value={attributes.images}
+                onError={alert}
+                multiple
+            />
+
           </div>
-
-
-          <MediaPlaceholder
-              addToGallery={hasImages}
-              isAppender={hasImages}
-              className={className}
-              // disableMediaButtons={ hasImages && ! isSelected }
-              icon={!hasImages && 'dashicons-images-alt'}
-              labels={{
-                title: !hasImages && __('Image Gallery'),
-                instructions: !hasImages && 'Bitte Bilder auswählen',
-              }}
-              onSelect={onSelectImages}
-              accept="image/*"
-              allowedTypes={['image']}
-              value={attributes.images}
-              onError={alert}
-              multiple
-              // notices={ hasImages ? undefined : noticeUI }
-              // onFocus={ this.props.onFocus }
-          />
-
-        </div>
+        </>
     )
   },
 
+
   save({ attributes, className }) {
-
-    // const [open, setOpen] = useState(false);
-
     const len = attributes.images.length;
+    const prevImg = attributes.images[0];
+    const style = {
+      backgroundImage: `url('${prevImg.url}')`
+    }
+
     return (
-
         <div className={className}>
-          <button className="openGallery" onClick={() => {}}>
-            Öffne Bildergallery
+          <button className="btn btn-open-gallery" style={style}>
+            <div className="txt-container">
+              <div className="left">
+                <span className="heading">Bildergalerie</span>
+                <span className="gallery-title">{attributes.galleryTitle || 'Galerietitel'}</span>
+              </div>
+              <div className="amount">{len} Bilder</div>
+            </div>
           </button>
-
-          <p>open?: {open.toString()}</p>
-
-          <div className="container">
-            <p className="amount">{len} Bilder</p>
-            {
-              len > 0 && attributes.images.map((img, inx) => (
-                  <figure key={img.id}>
-                    <img src={img.url} alt={img.alt} />
-                    <figcaption>
-                      <span className="count">{`${(inx+1).toString()} / ${len}`}</span>
-                      <p className="desc" dangerouslySetInnerHTML={{__html: img.caption}} />
-                    </figcaption>
-                  </figure>
-              ))
-            }
+          <div className="image-gallery-overlay">
+            <div className="header">
+              <button className="btn btn-close-gallery">
+                <svg className="arrow-icon">
+                  <path d="M12,8l-6,6l1.41,1.41L12,10.83l4.59,4.58L18,14L12,8z"/>
+                </svg>
+                Zurück zum Beitrag
+              </button>
+            </div>
+            <section>
+              <p className="amount">{len} Bilder</p>
+              <h2>{attributes.galleryTitle || 'Galerietitel'}</h2>
+              {
+                len > 0 && attributes.images.map((img, inx) => (
+                    <figure key={img.id}>
+                      <img src={img.url} alt={img.alt}/>
+                      <figcaption>
+                        <span className="count">{`${(inx + 1).toString()}/${len}`}</span>
+                        <p className="desc" dangerouslySetInnerHTML={{ __html: img.caption }}/>
+                        <p className="copyright">{img.copyright}</p>
+                      </figcaption>
+                    </figure>
+                ))
+              }
+              <button className="btn btn-close-gallery bottom">
+                Schließen
+              </button>
+            </section>
           </div>
-
         </div>
-
-
     )
   },
 }
