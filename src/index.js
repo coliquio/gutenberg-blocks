@@ -1,6 +1,7 @@
 import { blocks, data, i18n } from 'wp'
 import * as imageBlock from './image'
 import * as ctaBlock from './cta'
+import * as imageSlideshow from './image_gallery'
 
 const { registerBlockType } = blocks
 const { dispatch, select } = data
@@ -20,6 +21,7 @@ export function registerBlocks() {
 
   registerBlockType(`${category.slug}/${imageBlock.name}`, { category: category.slug, ...imageBlock.settings })
   registerBlockType(`${category.slug}/${ctaBlock.name}`, { category: category.slug, ...ctaBlock.settings })
+  registerBlockType(`${category.slug}/${imageSlideshow.name}`, { category: category.slug, ...imageSlideshow.settings })
 }
 
 registerBlocks()

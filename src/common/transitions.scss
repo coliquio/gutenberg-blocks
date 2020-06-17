@@ -1,0 +1,6 @@
+/**
+  Use this for hover states
+ */
+@mixin transition($property) {
+  transition: $property 200ms ease-out;
+}
