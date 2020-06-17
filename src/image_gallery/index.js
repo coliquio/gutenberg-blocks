@@ -31,19 +31,13 @@ export const settings = {
     console.log(attributes.images)
 
     const hasImages = attributes.images && !!attributes.images.length;
-    const onSelectImages = (imgs) => {
-      setAttributes({
-        images: imgs,
-      })
-    }
+    const onSelectImages = (images) => setAttributes({ images })
     const onChangeCaption = (newCaption, id) => {
       const { images } = attributes;
+      images
+          .filter(img => img.id === id)
+          .forEach(img => img.caption = newCaption)
 
-      for (let imgObj in images) {
-        if (images[imgObj].id === id) {
-          images[imgObj].caption = newCaption;
-        }
-      }
       return setAttributes({ images });
     }
 
