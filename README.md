@@ -4,7 +4,8 @@ Custom blocks for displaying content within Drupal.
 
 ## Our custom blocks
 * Image
-* CTA link 
+* CTA link
+* Image gallery (overlay)
 
 ## Docu
 
