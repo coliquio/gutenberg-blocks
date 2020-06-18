@@ -140,7 +140,8 @@ export const settings = {
                 ))
               }
               <button className="btn btn-close-gallery bottom">
-                Schließen
+                <span className="close-icon">X</span>
+                Schliessen
               </button>
             </section>
           </div>
