@@ -7,6 +7,10 @@ Custom blocks for displaying content within Drupal.
 * CTA link
 * Image gallery (overlay)
 
+## Deployment
+* Run `npm run build` before committing
+* Builed JS/CSS is loaded via custom Drupal module directly from git pages
+
 ## Docu
 
 https://developer.wordpress.org/block-editor/developers/
