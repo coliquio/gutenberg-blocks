@@ -1,12 +1,12 @@
 import React from 'react'
-import {components, editor, element, i18n} from 'wp'
+import {blockEditor, components, element, i18n} from 'wp'
 import './style.scss'
 
 const { Fragment } = element
 const { __ } = i18n
 
 const { PanelBody, TextControl, ToggleControl, RadioControl } = components
-const { RichText, InspectorControls } = editor
+const {RichText, InspectorControls} = blockEditor
 
 export const name = 'cta'
 
@@ -75,7 +75,6 @@ export const settings = {
               placeholder={__('Button Text')}
               target={attributes.targetNewWindow ? '_blank' : '_self'}
               onChange={value => setAttributes({ text: value })}
-              formattingControls={[]}
           />
 
         </Fragment>

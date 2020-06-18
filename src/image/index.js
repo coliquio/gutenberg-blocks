@@ -2,7 +2,7 @@
  * External dependencies
  */
 import React from 'react'
-import { components, editor, element, i18n } from 'wp'
+import {blockEditor, components, element, i18n} from 'wp'
 /**
  * Internal dependencies
  */
@@ -13,7 +13,7 @@ const { Fragment } = element
 const { __ } = i18n
 
 const { Toolbar, IconButton } = components
-const { BlockControls, RichText, MediaUpload } = editor
+const {RichText, BlockControls, MediaUpload} = blockEditor
 
 export const name = 'image'
 
@@ -47,7 +47,7 @@ export const settings = {
           {attributes.src && <img src={attributes.src} alt={attributes.alt}/>}
           <RichText
             tagName="figcaption" value={attributes.caption} placeholder={__('Image caption')}
-            onChange={value => setAttributes({ caption: value })} formattingControls={[]}
+            onChange={value => setAttributes({ caption: value })}
           />
         </figure>
 
