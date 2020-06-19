@@ -30,7 +30,7 @@ export const settings = {
     title: {
       type: 'string',
     },
-    open: {
+    isOpen: {
       type: 'boolean',
 		  default: false,
     }
@@ -54,10 +54,10 @@ export const settings = {
           <PanelBody>
             <ToggleControl
               label={ __( 'Open by default', 'atomic-blocks' ) }
-              checked={ attributes.open }
+              checked={ attributes.isOpen }
               onChange={ () =>
                 setAttributes( {
-                  open: ! attributes.open,
+                  isOpen: ! attributes.isOpen,
                 } )
               }
             />
@@ -84,7 +84,7 @@ export const settings = {
 
   save({ attributes, className }) {
     return (
-      <details open={ attributes.open }>
+      <details open={ attributes.isOpen }>
         <summary class="accordion-item-summary">
           <div class="summary-content">
             <RichText.Content
