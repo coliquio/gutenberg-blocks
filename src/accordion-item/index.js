@@ -27,13 +27,10 @@ export const settings = {
   icon: 'editor-insertmore',
 
   attributes: {
-    accordionTitle: {
+    title: {
       type: 'string',
     },
-    accordionText: {
-      type: 'string',
-    },
-    accordionOpen: {
+    open: {
       type: 'boolean',
 		  default: false,
     }
@@ -57,11 +54,10 @@ export const settings = {
           <PanelBody>
             <ToggleControl
               label={ __( 'Open by default', 'atomic-blocks' ) }
-              checked={ attributes.accordionOpen }
+              checked={ attributes.open }
               onChange={ () =>
                 setAttributes( {
-                  accordionOpen: ! attributes
-                    .accordionOpen,
+                  open: ! attributes.open,
                 } )
               }
             />
@@ -70,10 +66,10 @@ export const settings = {
         <RichText
           tagName="p"
           placeholder={ __( 'Accordion Title' ) }
-          value={ attributes.accordionTitle }
+          value={ attributes.title }
           className=""
           onChange={ ( value ) =>
-            setAttributes( { accordionTitle: value } )
+            setAttributes( { title: value } )
           }
         />
 
@@ -88,11 +84,11 @@ export const settings = {
 
   save({ attributes, className }) {
     return (
-      <details open={ attributes.accordionOpen }>
+      <details open={ attributes.open }>
         <summary class="accordion-item-summary">
           <div class="summary-content">
             <RichText.Content
-              value={ attributes.accordionTitle }
+              value={ attributes.title }
             />
           </div>
         </summary>
