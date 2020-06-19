@@ -23,7 +23,7 @@ export const settings = {
 
   description: __('A custom Accordion block for Gutenberg Cloud'),
 
-  icon: 'cover-image',
+  icon: 'excerpt-view',
 
   attributes: {
     accordionTitle: {
@@ -54,8 +54,8 @@ export const settings = {
 
   save({ attributes, className }) {
     return (
-      <details open={ attributes.accordionOpen }>
-        <summary>
+      <div>
+        <summary class="accordion-header">
           <RichText.Content
             value={ attributes.accordionTitle }
           />
@@ -63,7 +63,7 @@ export const settings = {
         <div>
           <InnerBlocks.Content />
         </div>
-      </details>
+      </div>
     )
   },
 }
