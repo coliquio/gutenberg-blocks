@@ -1,2 +1,18 @@
+@import "../common/colors.css";
+
 .wp-block-coliquio-image {
+  margin: 15px 0;
+
+  figcaption {
+    padding: 0;
+    margin: 0;
+    line-height: 1.4rem;
+    color: var(--black-lighten-40);
+  }
+
+  .copyright {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--black-lighten-50);
+  }
 }

@@ -1,26 +1,18 @@
-/**
- * External dependencies
- */
 import React from 'react'
-import {blockEditor, components, element, i18n} from 'wp'
-/**
- * Internal dependencies
- */
+import {blockEditor, components, i18n} from 'wp'
+
 import './style.scss'
 
-
-const { Fragment } = element
 const { __ } = i18n
-
-const { Toolbar, IconButton } = components
-const {RichText, BlockControls, MediaUpload} = blockEditor
+const { Toolbar, IconButton, TextControl, PanelBody } = components
+const { RichText, BlockControls, MediaUpload, MediaPlaceholder, InspectorControls } = blockEditor
 
 export const name = 'image'
 
 export const settings = {
-  title: __('Image'),
+  title: __('coliquio Image'),
 
-  description: __('A custom block for Gutenberg Cloud'),
+  description: __('Single image'),
 
   icon: 'cover-image',
 
@@ -34,43 +26,92 @@ export const settings = {
     caption: {
       type: 'string',
     },
+    copyright: {
+      type: 'string',
+    }
   },
 
-  edit({ attributes, className, setAttributes }) {
+  edit({ attributes, className, setAttributes, isSelected }) {
     const onSelectImage = (media) => {
-      setAttributes({ src: media.url, alt: media && media.alt })
+      setAttributes({ src: media.url, alt: media && media.alt, caption: media && media.caption })
     }
+    const {
+      src = '',
+      alt,
+      caption,
+      copyright,
+      id,
+    } = attributes;
 
     return (
-      <Fragment>
-        <figure className={className}>
-          {attributes.src && <img src={attributes.src} alt={attributes.alt}/>}
-          <RichText
-            tagName="figcaption" value={attributes.caption} placeholder={__('Image caption')}
-            onChange={value => setAttributes({ caption: value })}
-          />
-        </figure>
+        <>
+          <InspectorControls>
+            <PanelBody title={__('Image settings')}>
+              <TextControl
+                  label={__('Alt Tag')}
+                  value={alt}
+                  onChange={alt => setAttributes({ alt })}
+              />
+              <TextControl
+                  label={__('Copyright')}
+                  value={copyright}
+                  onChange={copyright => setAttributes({ copyright })}
+              />
+            </PanelBody>
+          </InspectorControls>
 
-        <BlockControls>
-          <Toolbar>
-            <MediaUpload
-              allowedTypes={['image']}
-              onSelect={(...args) => onSelectImage(...args)} render={({ open }) => (
-              <IconButton className="components-toolbar__control" label={__('Edit image')} icon="edit" onClick={open}/>
-            )}
+          <figure className={className}>
+            {
+              src && (
+                  <>
+                    <img src={src} alt={alt} width="300"/>
+                    <RichText
+                        tagName="figcaption" value={caption} placeholder={__('Put image caption here...')}
+                        onChange={caption => setAttributes({ caption })}
+                    />
+                    { copyright && <span className="copyright">{copyright}</span> }
+                  </>
+              )
+            }
+
+            <MediaPlaceholder
+                className={className}
+                disableMediaButtons={src && !isSelected}
+                icon={!src && 'dashicons-images-alt'}
+                labels={{
+                  title: !src && __('Image'),
+                  instructions: src ? __('Replace image') : __('Please select image'),
+                }}
+                onSelect={onSelectImage}
+                accept="image/*"
+                allowedTypes={['image']}
+                value={{ id }}
+                onError={alert}
             />
-          </Toolbar>
-        </BlockControls>
-      </Fragment>
+          </figure>
+
+          <BlockControls>
+            <Toolbar>
+              <MediaUpload
+                  allowedTypes={['image']}
+                  onSelect={(...args) => onSelectImage(...args)} render={({ open }) => (
+                  <IconButton className="components-toolbar__control" label={__('Edit image')} icon="edit"
+                              onClick={open}/>
+              )}
+              />
+            </Toolbar>
+          </BlockControls>
+        </>
     )
   },
 
   save({ attributes, className }) {
     return (
-      <figure className={className}>
-        <img src={attributes.src} alt={attributes.alt}/>
-        <RichText.Content tagName="figcaption" value={attributes.caption}/>
-      </figure>
+        <figure className={className}>
+          <img src={attributes.src} alt={attributes.alt}/>
+          <RichText.Content tagName="figcaption" value={attributes.caption}/>
+          { attributes.copyright && <span className="copyright">{attributes.copyright}</span> }
+        </figure>
     )
   },
 }

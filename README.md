@@ -18,4 +18,5 @@ https://developer.wordpress.org/block-editor/developers/
 ## To Do's
 
 * enable dev server with fast refresh
-* TBD: Remove gutenberg-block-image repo
+* think about responsive images (e.g. with `picture` element and different variants)
+* Remove gutenberg-block-image repo
