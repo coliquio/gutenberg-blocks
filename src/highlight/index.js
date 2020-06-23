@@ -9,6 +9,9 @@ const { InspectorControls, InnerBlocks } = blockEditor
 
 export const name = 'highlight'
 
+const normalizeClass = name =>
+    name && name.toLowerCase().replace('_', '-')
+
 /**
  * Visual variants for this highlight box
  */
@@ -61,8 +64,7 @@ export const settings = {
               />
             </PanelBody>
           </InspectorControls>
-
-          <section className={`${className} ${style.toLowerCase()}`}>
+          <section className={`${className} ${normalizeClass(style)}`}>
             {title && <div className="title">{title}</div>}
             <div className="content">
               <InnerBlocks/>
@@ -74,7 +76,7 @@ export const settings = {
 
   save({ attributes }) {
     return (
-        <section className={attributes.style.toLowerCase()}>
+        <section className={normalizeClass(attributes.style)}>
           {attributes.title && <div className="title">{attributes.title}</div>}
           <div className="content">
             <InnerBlocks.Content/>

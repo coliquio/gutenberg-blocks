@@ -17,17 +17,17 @@
     }
   }
 
-  // default
-  &.grey_box {
+  &.grey-box {
     border: 1px solid var(--black-lighten-40);
     background-color: var(--black-lighten-70);
 
     .title {
       color: var(--black-base);
+      line-height: 2rem;
     }
   }
 
-  &.blue_border {
+  &.blue-border {
     border: 2px solid var(--blue-base);
 
     .title {
@@ -36,4 +36,3 @@
     }
   }
 }
-
