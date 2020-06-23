@@ -5,7 +5,7 @@
 
 const gallery = document.getElementsByClassName('wp-block-coliquio-image-gallery');
 
-function onOpenGallery(E) {
+function onOpenGallery() {
   gallery[0]
       .getElementsByClassName('image-gallery-overlay')[0]
       .style.display = "block";
@@ -15,7 +15,7 @@ function onOpenGallery(E) {
 
 }
 
-function onCloseGallery(e) {
+function onCloseGallery() {
   gallery[0]
       .getElementsByClassName('image-gallery-overlay')[0]
       .style.display = "none";
@@ -25,7 +25,7 @@ function onCloseGallery(e) {
 
 }
 
-if (gallery) {
+if (gallery.length > 0) {
   gallery[0]
       .getElementsByClassName('btn-open-gallery')[0]
       .addEventListener('click', onOpenGallery);

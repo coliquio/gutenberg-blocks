@@ -1,12 +1,12 @@
 import React from 'react'
-import {components, editor, i18n} from 'wp'
+import {components, i18n, blockEditor} from 'wp'
 
 import './style.scss'
 
 const { __ } = i18n
 
 const { PanelBody, TextControl } = components
-const { RichText, InspectorControls, MediaPlaceholder } = editor
+const {RichText, MediaPlaceholder, InspectorControls} = blockEditor
 
 export const name = 'image-gallery'
 
@@ -140,7 +140,8 @@ export const settings = {
                 ))
               }
               <button className="btn btn-close-gallery bottom">
-                Schließen
+                <span className="close-icon">X</span>
+                Schliessen
               </button>
             </section>
           </div>
