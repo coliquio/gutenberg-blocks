@@ -1,10 +1,13 @@
 /**
  * Frontend script
- * Note: This is only used for the image gallery custom block.
  */
 
 const gallery = document.getElementsByClassName('wp-block-coliquio-image-gallery');
+const iFrame = document.getElementsByClassName('wp-block-coliquio-iframe');
 
+/**
+ * Gallery Block
+ */
 function onOpenGallery() {
   gallery[0]
       .getElementsByClassName('image-gallery-overlay')[0]
@@ -31,3 +34,23 @@ if (gallery.length > 0) {
       .addEventListener('click', onOpenGallery);
 }
 
+/**
+ * iFrame Block
+ */
+if (iFrame.length > 0) {
+  const iFrameNode = iFrame[0];
+
+  // Only run script if set to 'dynamic'
+  if (iFrameNode.height == 0) {
+    window.addEventListener('message', function (e) {
+      const eventName = e.data[0];
+      const height = e.data[1];
+      switch (eventName) {
+        case 'setHeight':
+          // +2 to compensate for the border
+          iFrameNode.height = height + 2;
+          break;
+      }
+    }, false);
+  }
+}

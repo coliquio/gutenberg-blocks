@@ -1,0 +1,12 @@
+@import "../common/colors.css";
+
+.wp-block-coliquio-iframe {
+  margin: 15px 0;
+  width: 100%;
+  min-height: 300px;
+
+  &.iframe,
+  &.iframe-survey {
+    border: 1px solid var(--black-lighten-40);
+  }
+}

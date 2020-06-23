@@ -256,3 +256,9 @@
     .wp-block-coliquio-highlight.blue-border .title {
       color: var(--white-base);
       background-color: var(--blue-base); }
+.wp-block-coliquio-iframe {
+  margin: 15px 0;
+  width: 100%;
+  min-height: 300px; }
+  .wp-block-coliquio-iframe.iframe, .wp-block-coliquio-iframe.iframe-survey {
+    border: 1px solid var(--black-lighten-40); }
