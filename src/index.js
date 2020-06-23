@@ -2,6 +2,7 @@ import { blocks, data, i18n } from 'wp'
 import * as imageBlock from './image'
 import * as ctaBlock from './cta'
 import * as imageSlideshow from './image_gallery'
+import * as highlight from './highlight'
 
 const { registerBlockType } = blocks
 const { dispatch, select } = data
@@ -11,6 +12,7 @@ const colBlocks = [
     imageBlock,
     ctaBlock,
     imageSlideshow,
+    highlight,
 ]
 
 // Category name and slug
