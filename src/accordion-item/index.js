@@ -17,7 +17,7 @@ const { BlockControls, RichText, AlignmentToolbar, InnerBlocks, InspectorControl
 
 export const name = 'accordion-item'
 
-const ALLOWED_BLOCKS = [ 'core/image', 'core/paragraph', 'coliquio/image' ];
+const ALLOWED_BLOCKS = [ 'core/paragraph', 'coliquio/image' ];
 
 export const settings = {
   title: __('Accordion Item'),

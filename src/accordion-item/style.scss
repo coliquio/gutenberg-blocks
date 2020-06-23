@@ -2,7 +2,6 @@
 @import '../common/mediaq.scss';
 
 .wp-block-coliquio-accordion-item {
-    font-family:"Source Sans Pro", sans-serif;
     &[open] .accordion-item {
         &-summary {
             &:before {
