@@ -235,3 +235,23 @@
     max-width: 90px;
     font-size: 0.8rem;
     color: var(--white-base); }
+.wp-block-coliquio-highlight {
+  margin: 15px 0; }
+  .wp-block-coliquio-highlight .title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem; }
+  .wp-block-coliquio-highlight .content {
+    padding: 0.5rem; }
+    .wp-block-coliquio-highlight .content ul {
+      padding-left: 2rem; }
+  .wp-block-coliquio-highlight.grey_box {
+    border: 1px solid var(--black-lighten-40);
+    background-color: var(--black-lighten-70); }
+    .wp-block-coliquio-highlight.grey_box .title {
+      color: var(--black-base); }
+  .wp-block-coliquio-highlight.blue_border {
+    border: 2px solid var(--blue-base); }
+    .wp-block-coliquio-highlight.blue_border .title {
+      color: var(--white-base);
+      background-color: var(--blue-base); }

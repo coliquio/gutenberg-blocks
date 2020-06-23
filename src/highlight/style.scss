@@ -1,0 +1,39 @@
+@import "../common/colors.css";
+
+.wp-block-coliquio-highlight {
+  margin: 15px 0;
+
+  .title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .content {
+    padding: 0.5rem;
+
+    ul {
+      padding-left: 2rem;
+    }
+  }
+
+  // default
+  &.grey_box {
+    border: 1px solid var(--black-lighten-40);
+    background-color: var(--black-lighten-70);
+
+    .title {
+      color: var(--black-base);
+    }
+  }
+
+  &.blue_border {
+    border: 2px solid var(--blue-base);
+
+    .title {
+      color: var(--white-base);
+      background-color: var(--blue-base);
+    }
+  }
+}
+

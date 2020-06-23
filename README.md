@@ -5,6 +5,7 @@ Custom blocks for displaying content within Drupal.
 ## Our custom blocks
 * Image
 * CTA link
+* Highlight (wrapper)
 * Image gallery (overlay)
 
 ## Deployment
