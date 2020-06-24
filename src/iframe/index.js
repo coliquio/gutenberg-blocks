@@ -63,9 +63,9 @@ export const settings = {
     return (
         <>
           <InspectorControls>
-            <PanelBody title={__('iFrame settings')}>
+            <PanelBody title={__('iframe settings')}>
               <SelectControl
-                  label={__('Type of iFrame (changes styling)')}
+                  label={__('Type of iframe (changes styling)')}
                   value={type}
                   options={typeOptionsUI}
                   onChange={type => setAttributes({ type })}
@@ -73,7 +73,10 @@ export const settings = {
               <TextControl
                   label={__('Source URL')}
                   value={src}
-                  onChange={src => setAttributes({ src, })}
+                  onChange={src => {
+                    console.log(src)
+                    setAttributes({ src, })
+                  }}
               />
               <SelectControl
                   label={__('Visual Height')}
@@ -83,12 +86,12 @@ export const settings = {
               />
             </PanelBody>
           </InspectorControls>
-          <iFrame frameborder={0} className={`${className} ${type}`} src={src} height={height}/>
+          <iframe frameborder={0} className={`${className} ${type}`} src={src} height={height}/>
         </>
     )
   },
 
   save({ attributes: { src, height, type } }) {
-    return <iFrame className={type} frameborder={0} src={src} height={height} allowfullscreen/>
+    return <iframe className={type} frameborder={0} src={`${src}`} height={height} allowfullscreen/>
   },
 }
