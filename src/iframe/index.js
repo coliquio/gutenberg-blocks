@@ -36,9 +36,6 @@ export const settings = {
     src: {
       type: 'string',
     },
-    srcAttr: {
-      type: 'string',
-    },
     height: {
       type: 'number',
       default: heightOptions.SMALL,
@@ -76,7 +73,7 @@ export const settings = {
               <TextControl
                   label={__('Source URL')}
                   value={src}
-                  onChange={src => setAttributes({ src, srcAttr: src })}
+                  onChange={src => setAttributes({ src, })}
               />
               <SelectControl
                   label={__('Visual Height')}
