@@ -73,10 +73,7 @@ export const settings = {
               <TextControl
                   label={__('Source URL')}
                   value={src}
-                  onChange={src => {
-                    console.log(src)
-                    setAttributes({ src, })
-                  }}
+                  onChange={src => setAttributes({ src, })}
               />
               <SelectControl
                   label={__('Visual Height')}
