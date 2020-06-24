@@ -1,22 +1,24 @@
-import { blocks, data, i18n } from 'wp'
-import * as imageBlock from './image'
-import * as ctaBlock from './cta'
+import {blocks, data, i18n} from 'wp'
 import * as accordionBlock from './accordion'
 import * as accordionItemBlock from './accordion-item'
-import * as imageSlideshow from './image_gallery'
+import * as checklist from './checklist'
+import * as ctaBlock from './cta'
 import * as highlight from './highlight'
+import * as imageBlock from './image'
+import * as imageSlideshow from './image_gallery'
 
 const { registerBlockType } = blocks
 const { dispatch, select } = data
 const { __ } = i18n
 
 const colBlocks = [
-    imageBlock,
-    ctaBlock,
-    imageSlideshow,
-    highlight,
-    accordionBlock,
-    accordionItemBlock,
+  accordionBlock,
+  accordionItemBlock,
+  checklist,
+  ctaBlock,
+  highlight,
+  imageBlock,
+  imageSlideshow,
 ]
 
 // Category name and slug
