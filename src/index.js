@@ -6,6 +6,7 @@ import * as ctaBlock from './cta'
 import * as highlight from './highlight'
 import * as imageBlock from './image'
 import * as imageSlideshow from './image_gallery'
+import * as iframe from './iframe'
 
 const { registerBlockType } = blocks
 const { dispatch, select } = data
@@ -19,6 +20,7 @@ const colBlocks = [
   highlight,
   imageBlock,
   imageSlideshow,
+  iframe,
 ]
 
 // Category name and slug
