@@ -5,6 +5,7 @@ import * as accordionBlock from './accordion'
 import * as accordionItemBlock from './accordion-item'
 import * as imageSlideshow from './image_gallery'
 import * as highlight from './highlight'
+import * as iframe from './iframe'
 
 const { registerBlockType } = blocks
 const { dispatch, select } = data
@@ -15,6 +16,7 @@ const colBlocks = [
     ctaBlock,
     imageSlideshow,
     highlight,
+    iframe,
     accordionBlock,
     accordionItemBlock,
 ]
