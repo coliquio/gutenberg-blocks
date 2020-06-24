@@ -27,11 +27,18 @@ export const settings = {
   },
 
   edit({ attributes, className, setAttributes, isSelected }) {
-    // For debugging purpose within Drupal, please keep
-    console.log(attributes.images)
-
     const hasImages = attributes.images && !!attributes.images.length;
-    const onSelectImages = (images) => setAttributes({ images })
+    const onSelectImages = (imagesFromMediaBrowser) => {
+      // For debugging purpose within Drupal, please keep
+      console.log('images from media browser', imagesFromMediaBrowser)
+      const images = imagesFromMediaBrowser.map(image => ({
+        id: image.id,
+        url: image.url,
+        caption: image.caption,
+        alt: image.alt
+      }))
+      setAttributes({ images })
+    }
     const onChangeCaption = (newCaption, id) => {
       const { images } = attributes;
       images
