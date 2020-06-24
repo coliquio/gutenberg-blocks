@@ -27,11 +27,18 @@ export const settings = {
   },
 
   edit({ attributes, className, setAttributes, isSelected }) {
-    // For debugging purpose within Drupal, please keep
-    console.log(attributes.images)
-
     const hasImages = attributes.images && !!attributes.images.length;
-    const onSelectImages = (images) => setAttributes({ images })
+    const onSelectImages = (imagesFromMediaBrowser) => {
+      // For debugging purpose within Drupal, please keep
+      console.log('images from media browser', imagesFromMediaBrowser)
+      const images = imagesFromMediaBrowser.map(image => ({
+        id: image.id,
+        url: image.url,
+        caption: image.caption,
+        alt: image.alt
+      }))
+      setAttributes({ images })
+    }
     const onChangeCaption = (newCaption, id) => {
       const { images } = attributes;
       images
@@ -110,7 +117,7 @@ export const settings = {
             <div className="txt-container">
               <div className="left">
                 <span className="heading">Bildergalerie</span>
-                <span className="gallery-title">{attributes.galleryTitle || 'Galerietitel'}</span>
+                <span className="gallery-title">{attributes.galleryTitle || ''}</span>
               </div>
               <div className="amount">{len} Bilder</div>
             </div>
@@ -126,7 +133,7 @@ export const settings = {
             </div>
             <section>
               <p className="amount">{len} Bilder</p>
-              <h2>{attributes.galleryTitle || 'Galerietitel'}</h2>
+              <h2>{attributes.galleryTitle || ''}</h2>
               {
                 len > 0 && attributes.images.map((img, inx) => (
                     <figure key={img.id}>
