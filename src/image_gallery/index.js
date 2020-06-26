@@ -92,7 +92,7 @@ export const settings = {
                 }}
                 onSelect={onSelectImages}
                 accept="image/*"
-                allowedTypes={['image', 'remote_image']}
+                allowedTypes={['image', 'remote image']}
                 value={attributes.images}
                 onError={alert}
                 multiple
