@@ -84,7 +84,7 @@ export const settings = {
                 }}
                 onSelect={onSelectImage}
                 accept="image/*"
-                allowedTypes={['image', 'remote image']}
+                allowedTypes={['image']}
                 value={{ id }}
                 onError={alert}
             />
@@ -93,7 +93,7 @@ export const settings = {
           <BlockControls>
             <Toolbar>
               <MediaUpload
-                  allowedTypes={['image', 'remote image']}
+                  allowedTypes={['image', 'remote_image']}
                   onSelect={(...args) => onSelectImage(...args)} render={({ open }) => (
                   <IconButton className="components-toolbar__control" label={__('Edit image')} icon="edit"
                               onClick={open}/>
