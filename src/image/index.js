@@ -84,7 +84,7 @@ export const settings = {
                 }}
                 onSelect={onSelectImage}
                 accept="image/*"
-                allowedTypes={['image']}
+                allowedTypes={['image', 'remote_image']}
                 value={{ id }}
                 onError={alert}
             />
