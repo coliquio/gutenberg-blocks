@@ -142,6 +142,29 @@ eval("// removed by extract-text-webpack-plugin\n\n//# sourceURL=webpack:///./sr
 
 /***/ }),
 
+/***/ "./src/checklist/index.js":
+/*!********************************!*\
+  !*** ./src/checklist/index.js ***!
+  \********************************/
+/*! exports provided: name, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"name\", function() { return name; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"settings\", function() { return settings; });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var wp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! wp */ \"wp\");\n/* harmony import */ var wp__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(wp__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ \"./src/checklist/style.scss\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\nconst {\n  __\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"i18n\"];\nconst {\n  RichText\n} = wp__WEBPACK_IMPORTED_MODULE_1__[\"blockEditor\"];\nconst name = 'checklist';\nconst settings = {\n  title: __('Checklist'),\n  description: __('List with green check marks'),\n  icon: 'list-view',\n  keywords: [__('checklist'), __('check marks')],\n  attributes: {\n    text: {\n      type: 'string'\n    }\n  },\n\n  edit({\n    attributes,\n    className,\n    setAttributes\n  }) {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RichText, {\n      tagName: \"ul\",\n      formattingControls: ['bold', 'link'],\n      className: className,\n      value: attributes.text,\n      placeholder: __('Write your checklist here...'),\n      onChange: text => setAttributes({\n        text\n      }),\n      multiline: \"li\"\n    });\n  },\n\n  save({\n    attributes,\n    className\n  }) {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(RichText.Content, {\n      tagName: \"ul\",\n      value: attributes.text,\n      className: className\n    });\n  }\n\n};\n\n//# sourceURL=webpack:///./src/checklist/index.js?");
+
+/***/ }),
+
+/***/ "./src/checklist/style.scss":
+/*!**********************************!*\
+  !*** ./src/checklist/style.scss ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("// removed by extract-text-webpack-plugin\n\n//# sourceURL=webpack:///./src/checklist/style.scss?");
+
+/***/ }),
+
 /***/ "./src/cta/index.js":
 /*!**************************!*\
   !*** ./src/cta/index.js ***!
