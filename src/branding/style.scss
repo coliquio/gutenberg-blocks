@@ -1,0 +1,38 @@
+@import "../common/colors.css";
+
+.wp-block-coliquio-branding-box {
+  margin: 15px 0;
+  width: 100%;
+
+  .branding-box-outer-wrapper {
+    border-bottom: 1px solid var(--black-lighten-60);
+    border-top: 1px solid var(--black-lighten-60);
+    text-align: center;
+    padding: 1rem 0;
+      
+    .branding-title {
+      font-size: 1.1875rem;
+      line-height: 1.75rem;
+      box-sizing: border-box;
+      color: var(--black-base);
+      display: inline;
+      font-weight: 400;
+      margin-right: 8px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .wp-block-coliquio-image {
+      display: inline-block;
+      padding: 0;
+      margin: 0;
+      vertical-align: middle;
+      height: 2.5rem;
+      max-height: 2.5rem;
+      img {
+        height: 2.5rem;
+        max-height: 2.5rem;
+      }
+    }
+
+  }
+}

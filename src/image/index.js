@@ -28,7 +28,15 @@ export const settings = {
     },
     copyright: {
       type: 'string',
-    }
+    },
+    displayCopyright: {
+      type: 'boolean',
+      default: true,
+    },
+    displayCaption: {
+      type: 'boolean',
+      default: true,
+    },
   },
 
   edit({ attributes, className, setAttributes, isSelected }) {
@@ -106,11 +114,16 @@ export const settings = {
   },
 
   save({ attributes, className }) {
+    const {
+      copyright,
+      displayCaption,
+      displayCopyright,
+    } = attributes;
     return (
         <figure className={className}>
           <img src={attributes.src} alt={attributes.alt}/>
-          <RichText.Content tagName="figcaption" value={attributes.caption}/>
-          { attributes.copyright && <span className="copyright">{attributes.copyright}</span> }
+          { displayCaption && <RichText.Content tagName="figcaption" value={attributes.caption}/> }
+          { displayCopyright && copyright && <span className="copyright">{copyright}</span> }
         </figure>
     )
   },
