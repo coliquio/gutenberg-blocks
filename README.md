@@ -7,6 +7,10 @@ Custom blocks for displaying content within Drupal.
 * CTA link
 * Highlight (wrapper)
 * Image gallery (overlay)
+* iFrame (with 3 types)
+* Checklist
+* Accordion
+
 
 ## Deployment
 * Run `npm run build` before committing
