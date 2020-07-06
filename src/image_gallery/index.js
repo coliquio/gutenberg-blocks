@@ -29,8 +29,6 @@ export const settings = {
   edit({ attributes, className, setAttributes, isSelected }) {
     const hasImages = attributes.images && !!attributes.images.length;
     const onSelectImages = (imagesFromMediaBrowser) => {
-      // For debugging purpose within Drupal, please keep
-      console.log('images from media browser', imagesFromMediaBrowser)
       const images = imagesFromMediaBrowser.map(image => ({
         id: image.id,
         // @see Drupal image styles: /admin/config/media/image-styles
@@ -40,6 +38,9 @@ export const settings = {
         alt: image.alt
       }))
       setAttributes({ images })
+      // For debugging purpose within Drupal, please keep
+      console.log('images from media browser', imagesFromMediaBrowser)
+      console.log('setting images attribute', images)
     }
     const onChangeCaption = (newCaption, id) => {
       const { images } = attributes;

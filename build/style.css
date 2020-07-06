@@ -167,7 +167,8 @@
 .wp-block-coliquio-image {
   margin: 15px 0; }
   .wp-block-coliquio-image img {
-    max-width: 400px; }
+    max-width: 400px !important;
+    float: none; }
   .wp-block-coliquio-image figcaption {
     padding: 0;
     margin: 0;
@@ -254,7 +255,7 @@
   width: 100%;
   height: 210px;
   padding: 15px;
-  max-width: 350px;
+  max-width: 400px;
   background-repeat: no-repeat;
   background-size: cover; }
   .wp-block-coliquio-image-gallery .btn-open-gallery .txt-container {
@@ -342,8 +343,9 @@
     padding: 0 0 50px 0; }
     .wp-block-coliquio-image-gallery .image-gallery-overlay figure img {
       width: 100%;
-      max-width: 400px;
-      height: auto; }
+      height: auto;
+      max-width: 400px !important;
+      float: none; }
     .wp-block-coliquio-image-gallery .image-gallery-overlay figure figcaption {
       margin: 0; }
       .wp-block-coliquio-image-gallery .image-gallery-overlay figure figcaption .count {
