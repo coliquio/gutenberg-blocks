@@ -3,6 +3,10 @@
 .wp-block-coliquio-image {
   margin: 15px 0;
 
+  img {
+    max-width: 400px;
+  }
+
   figcaption {
     padding: 0;
     margin: 0;

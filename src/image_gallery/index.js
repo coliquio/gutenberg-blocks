@@ -33,7 +33,9 @@ export const settings = {
       console.log('images from media browser', imagesFromMediaBrowser)
       const images = imagesFromMediaBrowser.map(image => ({
         id: image.id,
-        url: image.url,
+        // @see Drupal image styles: /admin/config/media/image-styles
+        url: image.media_details.sizes.crop_full_2x_ ? image.media_details.sizes.crop_full_2x_.source_url : image.url,
+        originalSource: image.url,
         caption: image.caption,
         alt: image.alt
       }))

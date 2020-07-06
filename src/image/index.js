@@ -40,8 +40,14 @@ export const settings = {
   },
 
   edit({ attributes, className, setAttributes, isSelected }) {
-    const onSelectImage = (media) => {
-      setAttributes({ src: media.url, alt: media && media.alt, caption: media && media.caption })
+    const onSelectImage = image => {
+      setAttributes({
+        // @see Drupal image styles: /admin/config/media/image-styles
+        src: image.media_details.sizes.crop_full_2x_ ? image.media_details.sizes.crop_full_2x_.source_url : image.url,
+        originalSource: image.url,
+        alt: image && image.alt,
+        caption: image && image.caption,
+      })
     }
     const {
       src = '',
@@ -72,7 +78,7 @@ export const settings = {
             {
               src && (
                   <>
-                    <img src={src} alt={alt} width="300"/>
+                    <img src={src} alt={alt} />
                     <RichText
                         tagName="figcaption" value={caption} placeholder={__('Put image caption here...')}
                         onChange={caption => setAttributes({ caption })}
