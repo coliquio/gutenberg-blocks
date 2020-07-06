@@ -43,7 +43,7 @@ export const settings = {
     const onSelectImage = image => {
       setAttributes({
         // @see Drupal image styles: /admin/config/media/image-styles
-        src: image.media_details.sizes.crop_full_2x_ ? image.media_details.sizes.crop_full_2x_.source_url : image.url,
+        src: (image.media_details && image.media_details.sizes && image.media_details.sizes.crop_full_2x_) ? image.media_details.sizes.crop_full_2x_.source_url : image.url,
         originalSource: image.url,
         alt: image && image.alt,
         caption: image && image.caption,
@@ -78,12 +78,12 @@ export const settings = {
             {
               src && (
                   <>
-                    <img src={src} alt={alt} />
+                    <img src={src} alt={alt}/>
                     <RichText
                         tagName="figcaption" value={caption} placeholder={__('Put image caption here...')}
                         onChange={caption => setAttributes({ caption })}
                     />
-                    { copyright && <span className="copyright">{copyright}</span> }
+                    {copyright && <span className="copyright">{copyright}</span>}
                   </>
               )
             }
@@ -128,8 +128,8 @@ export const settings = {
     return (
         <figure className={className}>
           <img src={attributes.src} alt={attributes.alt}/>
-          { displayCaption && <RichText.Content tagName="figcaption" value={attributes.caption}/> }
-          { displayCopyright && copyright && <span className="copyright">{copyright}</span> }
+          {displayCaption && <RichText.Content tagName="figcaption" value={attributes.caption}/>}
+          {displayCopyright && copyright && <span className="copyright">{copyright}</span>}
         </figure>
     )
   },
