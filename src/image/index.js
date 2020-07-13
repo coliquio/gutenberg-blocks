@@ -4,10 +4,17 @@ import {blockEditor, components, i18n} from 'wp'
 import './style.scss'
 
 const { __ } = i18n
-const { Toolbar, IconButton, TextControl, PanelBody } = components
+const { Toolbar, IconButton, TextControl, PanelBody, SelectControl, Notice } = components
 const { RichText, BlockControls, MediaUpload, MediaPlaceholder, InspectorControls } = blockEditor
 
 export const name = 'image'
+
+const alignOptions = {
+  NONE: 'align-none',
+  LEFT: 'align-left',
+  RIGHT: 'align-right',
+  CENTER: 'align-center',
+}
 
 export const settings = {
   title: __('coliquio Image'),
@@ -28,6 +35,10 @@ export const settings = {
     },
     copyright: {
       type: 'string',
+    },
+    alignment: {
+      type: 'string',
+      default: alignOptions.NONE,
     },
     displayCopyright: {
       type: 'boolean',
@@ -54,8 +65,14 @@ export const settings = {
       alt,
       caption,
       copyright,
+      alignment,
       id,
     } = attributes;
+
+    const alignOptionsUi = Object.keys(alignOptions).map(item => ({
+      label: item,
+      value: alignOptions[item]
+    }))
 
     return (
         <>
@@ -71,10 +88,23 @@ export const settings = {
                   value={copyright}
                   onChange={copyright => setAttributes({ copyright })}
               />
+              <SelectControl
+                  label={__('Image Alignment')}
+                  value={alignment}
+                  options={alignOptionsUi}
+                  onChange={alignment => setAttributes({ alignment })}
+                  help={__('The text will float around if you select left or right.')}
+              />
+              {
+                (alignment === alignOptions.LEFT || alignment === alignOptions.RIGHT) && (
+                    <Notice status="info" isDismissible={false}>
+                      To reselect this image block later on, it's easier to use the top left <strong>Block navigation</strong> if you use image alignment.
+                    </Notice>
+                )
+              }
             </PanelBody>
           </InspectorControls>
-
-          <figure className={className}>
+          <figure className={`${className} ${alignment}`}>
             {
               src && (
                   <>
@@ -119,14 +149,15 @@ export const settings = {
     )
   },
 
-  save({ attributes, className }) {
+  save({ attributes }) {
     const {
       copyright,
       displayCaption,
       displayCopyright,
+      alignment,
     } = attributes;
     return (
-        <figure className={className}>
+        <figure className={alignment}>
           <img src={attributes.src} alt={attributes.alt}/>
           {displayCaption && <RichText.Content tagName="figcaption" value={attributes.caption}/>}
           {displayCopyright && copyright && <span className="copyright">{copyright}</span>}

@@ -3,6 +3,18 @@
 .wp-block-coliquio-image {
   margin: 15px 0;
 
+  &.align-left {
+    float: left;
+    margin-right: 15px;
+  }
+  &.align-right {
+    margin-left: 15px;
+    float: right;
+  }
+  &.align-center {
+    text-align: center;
+  }
+
   img {
     max-width: 400px !important;
     float: none;
