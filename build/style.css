@@ -247,6 +247,15 @@
 /**
   Use this for hover states
  */
+.wp-block-coliquio-image-gallery .images-icon {
+  fill: white;
+  /* vars not working here */
+  height: 16px;
+  width: 25px;
+  margin-bottom: -2px; }
+  .wp-block-coliquio-image-gallery .images-icon path {
+    transform: scale(0.033); }
+
 .wp-block-coliquio-image-gallery .btn {
   border: none;
   outline: none;
