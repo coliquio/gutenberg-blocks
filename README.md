@@ -25,3 +25,5 @@ https://developer.wordpress.org/block-editor/developers/
 * enable dev server with fast refresh
 * think about responsive images (e.g. with `picture` element and different variants)
 * Remove gutenberg-block-image repo
+* Integrate fontawesome (https://github.com/FortAwesome/react-fontawesome doesen't work)
+
