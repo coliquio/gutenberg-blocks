@@ -5,13 +5,7 @@
 
   .images-icon {
     fill: white; /* vars not working here */
-    height: 16px;
-    width: 25px;
-    margin-bottom: -2px;
-
-    path {
-      transform: scale(0.033);
-    }
+    margin: -2px 10px 0 2px;
   }
 
   .btn {
@@ -49,6 +43,7 @@
 
       .left {
         text-align: left;
+        max-width: 260px;
 
         .heading {
           font-size: 0.8rem;
@@ -63,11 +58,15 @@
       }
 
       .amount {
-        background-color: var(--blue-base);
+        display: flex;
+        flex-direction: row;
+
+        background-color: var(--blue-accent);
+        border-radius: 17px;
+
         font-size: 0.8rem;
         font-weight: 600;
-        padding: 9px;
-        border-radius: 4px;
+        padding: 6px 12px;
       }
     }
 
