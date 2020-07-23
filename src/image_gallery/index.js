@@ -110,7 +110,6 @@ export const settings = {
   save({ attributes, className }) {
     const len = attributes.images.length;
     const prevImg = attributes.images[0];
-    console.log({attributes})
     const style = {
       backgroundImage: `url('${prevImg.url}')`
     }
