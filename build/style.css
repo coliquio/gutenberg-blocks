@@ -25,6 +25,7 @@
   --blue-darken-20: #154A6F;
   --blue-darken-10: #1D669A;
   --blue-base: #2581C4;
+  --blue-accent: #007AFF;
   --blue-lighten-10: #439CDB;
   --blue-lighten-20: #6DB2E3;
   --blue-lighten-30: #98C9EB;
@@ -164,28 +165,27 @@
 .wp-block-coliquio-accordion-item .wp-block-coliquio-image {
   margin-left: 0;
   margin-right: 0; }
-.wp-block-coliquio-image {
+.wp-block-coliquio-highlight {
   margin: 15px 0; }
-  .wp-block-coliquio-image.align-left {
-    float: left;
-    margin-right: 15px; }
-  .wp-block-coliquio-image.align-right {
-    margin-left: 15px;
-    float: right; }
-  .wp-block-coliquio-image.align-center {
-    text-align: center; }
-  .wp-block-coliquio-image img {
-    max-width: 400px !important;
-    float: none; }
-  .wp-block-coliquio-image figcaption {
-    padding: 0;
-    margin: 0;
-    line-height: 1.4rem;
-    color: var(--black-lighten-40); }
-  .wp-block-coliquio-image .copyright {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--black-lighten-50); }
+  .wp-block-coliquio-highlight .title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem; }
+  .wp-block-coliquio-highlight .content {
+    padding: 0.5rem; }
+    .wp-block-coliquio-highlight .content ul {
+      padding-left: 2rem; }
+  .wp-block-coliquio-highlight.grey-box {
+    border: 1px solid var(--black-lighten-40);
+    background-color: var(--black-lighten-70); }
+    .wp-block-coliquio-highlight.grey-box .title {
+      color: var(--black-base);
+      line-height: 2rem; }
+  .wp-block-coliquio-highlight.blue-border {
+    border: 2px solid var(--blue-base); }
+    .wp-block-coliquio-highlight.blue-border .title {
+      color: var(--white-base);
+      background-color: var(--blue-base); }
 .wp-block-coliquio-cta {
   background-color: var(--green-base);
   color: var(--white-base);
@@ -217,27 +217,28 @@
       border: none;
       background: none;
       color: var(--green-darken-10); }
-.wp-block-coliquio-highlight {
+.wp-block-coliquio-image {
   margin: 15px 0; }
-  .wp-block-coliquio-highlight .title {
-    font-size: 1.4rem;
-    font-weight: 600;
-    padding: 0.25rem 0.5rem; }
-  .wp-block-coliquio-highlight .content {
-    padding: 0.5rem; }
-    .wp-block-coliquio-highlight .content ul {
-      padding-left: 2rem; }
-  .wp-block-coliquio-highlight.grey-box {
-    border: 1px solid var(--black-lighten-40);
-    background-color: var(--black-lighten-70); }
-    .wp-block-coliquio-highlight.grey-box .title {
-      color: var(--black-base);
-      line-height: 2rem; }
-  .wp-block-coliquio-highlight.blue-border {
-    border: 2px solid var(--blue-base); }
-    .wp-block-coliquio-highlight.blue-border .title {
-      color: var(--white-base);
-      background-color: var(--blue-base); }
+  .wp-block-coliquio-image.align-left {
+    float: left;
+    margin-right: 15px; }
+  .wp-block-coliquio-image.align-right {
+    margin-left: 15px;
+    float: right; }
+  .wp-block-coliquio-image.align-center {
+    text-align: center; }
+  .wp-block-coliquio-image img {
+    max-width: 400px !important;
+    float: none; }
+  .wp-block-coliquio-image figcaption {
+    padding: 0;
+    margin: 0;
+    line-height: 1.4rem;
+    color: var(--black-lighten-40); }
+  .wp-block-coliquio-image .copyright {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--black-lighten-50); }
 .wp-block-coliquio-iframe {
   margin: 15px 0;
   width: 100%;
@@ -250,11 +251,7 @@
 .wp-block-coliquio-image-gallery .images-icon {
   fill: white;
   /* vars not working here */
-  height: 16px;
-  width: 25px;
-  margin-bottom: -2px; }
-  .wp-block-coliquio-image-gallery .images-icon path {
-    transform: scale(0.033); }
+  margin: -2px 10px 0 2px; }
 
 .wp-block-coliquio-image-gallery .btn {
   border: none;
@@ -292,11 +289,13 @@
         font-size: 1.1rem;
         font-weight: 600; }
     .wp-block-coliquio-image-gallery .btn-open-gallery .txt-container .amount {
-      background-color: var(--blue-base);
+      display: flex;
+      flex-direction: row;
+      background-color: var(--blue-accent);
+      border-radius: 17px;
       font-size: 0.8rem;
       font-weight: 600;
-      padding: 9px;
-      border-radius: 4px; }
+      padding: 6px 12px; }
   .wp-block-coliquio-image-gallery .btn-open-gallery img {
     max-width: 100px; }
 
