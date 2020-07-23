@@ -15,7 +15,7 @@ Custom blocks for displaying content within Drupal.
 ## Deployment
 * Run `npm run build` before committing
 * Builed JS/CSS is loaded via custom Drupal module directly from git pages
-* Run `npm run buildNative` to create CSS for native iOS app (copy file to xcode project)
+* Run `npm run buildNative` to create CSS for native iOS app (just copy generated file to xcode project)
 
 ## Docu
 

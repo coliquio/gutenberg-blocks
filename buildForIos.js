@@ -5,9 +5,12 @@ const fs = require('fs');
 
 (async function load() {
   try {
-    const file = await fs.readFileSync('./build/style.css', 'utf-8');
+    const file = await fs.readFileSync('./build/style.css', 'utf-8')
+        .replace(/(\d*)px/g, '$1pt') // px to pt
+        .replace(/:root {([\s\S]*?)}/g, ''); // remove root color definitions
+
     let output = '/* Note: This file is auto-generated, see "gutenberg-blocks" repo */ \n';
-        output += file.replace(/(\d*)px/g, '$1pt');
+        output += file
 
     fs.writeFileSync('./build/articleView.css', output)
     console.info('File articleView.css written.')
