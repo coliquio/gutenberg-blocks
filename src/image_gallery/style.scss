@@ -75,27 +75,31 @@
     }
   }
 
+  .center {
+    display: flex;
+    justify-content: center;
+  }
+
   .btn-close-gallery {
     display: flex;
     align-items: center;
-    font-size: 0.8rem;
-    color: var(--white-base);
+    font-size: 1rem;
+    color: var(--blue-accent);
 
     &.bottom {
-      width: 100%;
-      padding-bottom: 60px;
+      margin-bottom: 80px;
+      padding: 5px 15px;
       justify-content: center;
       flex-direction: column;
-
-      .close-icon {
-        font-size: 1.1rem;
-        display: block;
-      }
+      text-transform: uppercase;
+      background-color: var(--black-lighten-75);
+      color: var(--blue-accent);
+      border-radius: 16px;
     }
   }
 
   .image-gallery-overlay {
-    background-color: var(--black-base);
+    background-color: var(--white-base);
     display: none; /* toggled via JS */
     position: fixed;
     width: 100%;
@@ -110,14 +114,17 @@
 
     .header {
       .arrow-icon {
-        fill: white; /* vars not working here */
-        transform: rotate(-90deg);
-        margin: 3px 10px 0 -6px;
-        height: 20px;
-        width: 20px;
+        fill: #007AFF; /* vars not working here */
+        transform: rotate(-90deg) scale(1.5);
+        margin: -6px -2px 0 -6px;
+        height: 22px;
+        width: 22px;
       }
 
-      background-color: var(--black-lighten-30);
+      background-color: rgba(255, 255, 255, 0.65);
+      -webkit-backdrop-filter: blur(15px);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--black-lighten-60);
       padding-left: 15px;
       display: flex;
       height: 45px;
@@ -138,10 +145,9 @@
     }
 
     h2 {
-      color: var(--white-base);
-      font-size: 1.4rem;
+      color: var(--black-base);
+      font-size: 1.6rem;
       font-weight: 600;
-      margin: 0 0 45px;
     }
 
     figure {
@@ -157,27 +163,28 @@
 
       figcaption {
         margin: 0;
+        padding-top: 5px;
 
         .count {
-          color: var(--black-lighten-40);
+          color: var(--black-base);
+          font-weight: 600;
           font-size: 1rem;
-          margin: 5px 0;
           display: block;
         }
 
         .desc {
-          color: var(--white-base);
+          color: var(--black-base);
           margin: 0;
-          font-size: 0.8rem;
+          font-size: 1rem;
 
           a {
-            color: var(--white-base);
+            color: var(--black-base);
           }
         }
 
         .copyright {
-          color: var(--black-lighten-30);
-          font-size: 0.7rem;
+          color: var(--black-lighten-10);
+          font-size: 1rem;
           margin: 0;
         }
       }

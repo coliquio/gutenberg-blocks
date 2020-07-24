@@ -1,5 +1,5 @@
 :root {
-  --white-base: #FFFFFF;
+  --white-base: #ffffff;
 
   --black-darken-20: #000000;
   --black-darken-10: #1A1A1A;
@@ -23,6 +23,7 @@
   --blue-lighten-20: #6DB2E3;
   --blue-lighten-30: #98C9EB;
   --blue-lighten-40: #C3DFF4;
+  --blue-lighten-50: #F2F8FD;
 
   --green-darken-20: #376119;
   --green-darken-10: #4E8A24;

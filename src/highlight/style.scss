@@ -6,11 +6,13 @@
   .title {
     font-size: 1.4rem;
     font-weight: 600;
-    padding: 0.25rem 0.5rem;
+    padding: 1rem;
+    border-radius: 6px 6px 0 0;
   }
 
   .content {
-    padding: 0.5rem;
+    padding: 0.5rem 1rem 1rem 1rem;
+    border-radius: 0 0 6px 6px;
 
     ul {
       padding-left: 2rem;
@@ -18,21 +20,26 @@
   }
 
   &.grey-box {
-    border: 1px solid var(--black-lighten-40);
-    background-color: var(--black-lighten-70);
 
     .title {
       color: var(--black-base);
       line-height: 2rem;
     }
+    .content {
+      background-color: var(--black-lighten-75);
+      border-radius: 6px;
+    }
   }
 
   &.blue-border {
-    border: 2px solid var(--blue-base);
 
     .title {
       color: var(--white-base);
       background-color: var(--blue-base);
     }
+    .content {
+      background-color: var(--blue-lighten-50);
+    }
+
   }
 }
