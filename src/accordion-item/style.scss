@@ -20,12 +20,13 @@
       cursor: pointer;
       font-weight: 600;
       color: var(--blue-accent);
-      user-select: none;
       list-style: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      min-height: 40px;
+
+      .summary-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
       &::-webkit-details-marker {
         display: none;

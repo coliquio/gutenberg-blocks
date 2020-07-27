@@ -60,12 +60,11 @@
     cursor: pointer;
     font-weight: 600;
     color: var(--blue-accent);
-    user-select: none;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 40pt; }
+    list-style: none; }
+    .wp-block-coliquio-accordion-item .accordion-item-summary .summary-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
     .wp-block-coliquio-accordion-item .accordion-item-summary::-webkit-details-marker {
       display: none; }
     .wp-block-coliquio-accordion-item .accordion-item-summary .arrow-icon {

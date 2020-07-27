@@ -73,7 +73,7 @@ export const settings = {
           />
 
           <div className="ab-accordion-text">
-            <InnerBlocks />
+            <InnerBlocks/>
           </div>
         </Fragment>
     )
@@ -83,12 +83,14 @@ export const settings = {
     return (
         <details open={isOpen}>
           <summary className="accordion-item-summary">
-            <RichText.Content
-                tagName="div"
-                className="summary-content"
-                value={title}
-            />
-            <Arrow/>
+            <div className="summary-container">
+              <RichText.Content
+                  tagName="div"
+                  className="summary-content"
+                  value={title}
+              />
+              <Arrow/>
+            </div>
           </summary>
           <div className="accordion-item-content">
             <InnerBlocks.Content/>
