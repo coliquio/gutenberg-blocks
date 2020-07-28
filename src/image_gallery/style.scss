@@ -5,8 +5,10 @@
 .wp-block-coliquio-image-gallery {
 
   .images-icon {
-    fill: white; /* vars not working here */
+    @include images();
     margin: -2px 10px 0 2px;
+    width: 18px;
+    height: 18px;
   }
 
   .btn {
