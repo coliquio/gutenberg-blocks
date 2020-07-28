@@ -2,82 +2,96 @@
 @import '../common/mediaq.scss';
 
 .wp-block-coliquio-accordion-item {
-    &[open] .accordion-item {
-        &-summary {
-            &:before {
-                transform: rotate(270deg);
-            }
-        }
+  &[open] .accordion-item {
+    &-summary {
+      .arrow-icon {
+        transform: rotate(0);
+      }
+    }
+  }
+
+  border-radius: 6px;
+  background-color: var(--black-lighten-75);
+  margin-bottom: 15px;
+
+  .accordion-item {
+    &-summary {
+      line-height: 1.75rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--blue-accent);
+      list-style: none;
+
+      .summary-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+
+      .arrow-icon {
+        transform: rotate(180deg);
+        transition: transform 300ms ease-in-out;
+        transform-origin: 13px;
+        fill: #007AFF;
+        width: 26px;
+        height: 26px;
+        margin-right: 10px;
+      }
+
+      .summary-content {
+        margin: 10px 15px;
+      }
+
+      sup {
+        line-height: 0;
+      }
     }
 
-    .accordion-item {
-        &-summary {
-            font-size: 1rem;
-            line-height: 1.75rem;
-            cursor: pointer;
-            display: block;
-            font-weight: 400;
-            color: var(--blue-base);
-            user-select: none;
-            padding-left: 0.9375rem;
-            list-style: none;
+    &-content {
+      padding: 0 15px 15px 0;
+      margin: -15px 0 0 15px;
+      color: var(--black-base);
+      line-height: 1.2rem;
+      font-weight: 400;
+    }
+  }
 
-            @include md {
-                font-size: 1.5rem;
-            }
+  .wp-block-coliquio-image {
+    figcaption {
+      color: var(--black-lighten-40);
+      display: block;
+      font-weight: 400;
+      line-height: 1.3rem;
+    }
+  }
 
-            &::-webkit-details-marker {
-                display: none;
-            }
-            &:before {
-                content:"\A";
-                border-style: solid;
-                border-width: 5px 4px 5px 0;
-                border-color: transparent var(--black-lighten-20) transparent transparent;
-                position: absolute;
-                transform: rotate(180deg);
-                line-height: 2.75rem;
-                margin-top: .455rem;
-                @include md {
-                    font-size: 1rem;
-                }
-             }
-             .summary-content {
-                 margin-left: 0.9375rem;
-             }
-             sup {
-                line-height: 0;
-            }
-        }
-        &-content {
-            padding: .625rem;
-            margin-left: 1.25rem;
-            color: var(--black-base);
-            font-size: 1rem;
-            line-height: 1.2rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
-            @include md {
-                font-size: 1.125rem;
-                line-height: 1.5625rem;
-            }
-        }
+  p {
+    margin: 15px 0;
+
+    &:last-child {
+      margin: 0;
     }
-    .wp-block-coliquio-image  {
-        figcaption {
-            color: var(--black-lighten-40);
-            display: block;
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.3rem;
-        }
+  }
+
+  ol, ul {
+    padding: 0;
+    margin: 15px 0 0 15px;
+
+    li {
+      margin-bottom: 15px;
+
+      &:last-child {
+        margin: 0;
+      }
     }
-    p {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-    }
-    .wp-block-coliquio-image {
-        margin-left: 0;
-        margin-right: 0;
-    }
+  }
+
+  .wp-block-coliquio-image {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }

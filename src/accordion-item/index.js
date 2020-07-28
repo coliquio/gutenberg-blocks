@@ -2,11 +2,12 @@
  * External dependencies
  */
 import React from 'react'
-import { components, editor, element, i18n } from 'wp'
+import {components, editor, element, i18n} from 'wp'
 /**
  * Internal dependencies
  */
 import './style.scss'
+import Arrow from '../common/icons/Arrow';
 
 
 const { Fragment } = element
@@ -16,8 +17,6 @@ const { PanelBody, ToggleControl } = components
 const { BlockControls, RichText, AlignmentToolbar, InnerBlocks, InspectorControls } = editor
 
 export const name = 'accordion-item'
-
-const ALLOWED_BLOCKS = [ 'core/paragraph', 'coliquio/image' ];
 
 export const settings = {
   title: __('Accordion Item'),
@@ -32,70 +31,71 @@ export const settings = {
     },
     isOpen: {
       type: 'boolean',
-		  default: false,
+      default: false,
     }
   },
 
   edit({ attributes, setAttributes }) {
     return (
-      <Fragment>
-        <BlockControls key="controls">
-          <AlignmentToolbar
-            value={ attributes.accordionAlignment }
-            onChange={ ( value ) =>
-              setAttributes( {
-                accordionAlignment: value,
-              } )
-            }
-          />
-        </BlockControls>
-        
-        <InspectorControls key="inspector">
-          <PanelBody>
-            <ToggleControl
-              label={ __( 'Open by default', 'atomic-blocks' ) }
-              checked={ attributes.isOpen }
-              onChange={ () =>
-                setAttributes( {
-                  isOpen: ! attributes.isOpen,
-                } )
-              }
+        <Fragment>
+          <BlockControls key="controls">
+            <AlignmentToolbar
+                value={attributes.accordionAlignment}
+                onChange={(value) =>
+                    setAttributes({
+                      accordionAlignment: value,
+                    })
+                }
             />
-          </PanelBody>
-        </InspectorControls>
-        <RichText
-          tagName="p"
-          placeholder={ __( 'Accordion Title' ) }
-          value={ attributes.title }
-          className=""
-          onChange={ ( value ) =>
-            setAttributes( { title: value } )
-          }
-        />
+          </BlockControls>
 
-        <div className="ab-accordion-text">
-          <InnerBlocks
-            allowedBlocks={ ALLOWED_BLOCKS }
+          <InspectorControls key="inspector">
+            <PanelBody>
+              <ToggleControl
+                  label={__('Open by default', 'atomic-blocks')}
+                  checked={attributes.isOpen}
+                  onChange={() =>
+                      setAttributes({
+                        isOpen: !attributes.isOpen,
+                      })
+                  }
+              />
+            </PanelBody>
+          </InspectorControls>
+          <RichText
+              tagName="p"
+              placeholder={__('Accordion Title')}
+              value={attributes.title}
+              className=""
+              onChange={(value) =>
+                  setAttributes({ title: value })
+              }
           />
-        </div>
-      </Fragment>
+
+          <div className="ab-accordion-text">
+            <InnerBlocks/>
+          </div>
+        </Fragment>
     )
   },
 
-  save({ attributes, className }) {
+  save({ attributes: { isOpen, title } }) {
     return (
-      <details open={ attributes.isOpen }>
-        <summary class="accordion-item-summary">
-          <div class="summary-content">
-            <RichText.Content
-              value={ attributes.title }
-            />
+        <details open={isOpen}>
+          <summary className="accordion-item-summary">
+            <div className="summary-container">
+              <RichText.Content
+                  tagName="div"
+                  className="summary-content"
+                  value={title}
+              />
+              <Arrow/>
+            </div>
+          </summary>
+          <div className="accordion-item-content">
+            <InnerBlocks.Content/>
           </div>
-        </summary>
-        <div class="accordion-item-content">
-          <InnerBlocks.Content />
-        </div>
-      </details>
+        </details>
     )
   },
 }
