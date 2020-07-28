@@ -4,14 +4,13 @@
   margin: 15px 0;
 
   .title {
-    font-size: 1.4rem;
     font-weight: 600;
-    padding: 1rem;
+    padding: 10px 15px;
     border-radius: 6px 6px 0 0;
   }
 
   .content {
-    padding: 0.5rem 1rem 1rem 1rem;
+    padding: 1px 15px 5px 15px;
     border-radius: 0 0 6px 6px;
 
     ul {
@@ -23,7 +22,6 @@
 
     .title {
       color: var(--black-base);
-      line-height: 2rem;
     }
     .content {
       background-color: var(--black-lighten-75);
