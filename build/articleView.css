@@ -137,18 +137,16 @@
 .wp-block-coliquio-highlight {
   margin: 15pt 0; }
   .wp-block-coliquio-highlight .title {
-    font-size: 1.4rem;
     font-weight: 600;
-    padding: 1rem;
+    padding: 10pt 15pt;
     border-radius: 6pt 6pt 0 0; }
   .wp-block-coliquio-highlight .content {
-    padding: 0.5rem 1rem 1rem 1rem;
+    padding: 1pt 15pt 5pt 15pt;
     border-radius: 0 0 6pt 6pt; }
     .wp-block-coliquio-highlight .content ul {
       padding-left: 2rem; }
   .wp-block-coliquio-highlight.grey-box .title {
-    color: var(--black-base);
-    line-height: 2rem; }
+    color: var(--black-base); }
   .wp-block-coliquio-highlight.grey-box .content {
     background-color: var(--black-lighten-75);
     border-radius: 6pt; }
