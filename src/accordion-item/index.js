@@ -7,8 +7,6 @@ import {components, editor, element, i18n} from 'wp'
  * Internal dependencies
  */
 import './style.scss'
-import Arrow from '../common/icons/Arrow';
-
 
 const { Fragment } = element
 const { __ } = i18n
@@ -89,7 +87,7 @@ export const settings = {
                   className="summary-content"
                   value={title}
               />
-              <Arrow/>
+              <div className="arrow-icon" />
             </div>
           </summary>
           <div className="accordion-item-content">

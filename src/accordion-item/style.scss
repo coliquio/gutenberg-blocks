@@ -1,5 +1,6 @@
 @import "../common/colors.css";
 @import '../common/mediaq.scss';
+@import '../common/icons';
 
 .wp-block-coliquio-accordion-item {
   &[open] .accordion-item {
@@ -33,6 +34,7 @@
       }
 
       .arrow-icon {
+        @include arrow();
         transform: rotate(180deg);
         transition: transform 300ms ease-in-out;
         transform-origin: 13px;

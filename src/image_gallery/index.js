@@ -2,7 +2,6 @@ import React from 'react'
 import {components, i18n, blockEditor} from 'wp'
 
 import './style.scss'
-import Arrow from '../common/icons/Arrow';
 
 const { __ } = i18n
 
@@ -136,7 +135,7 @@ export const settings = {
           <div className="image-gallery-overlay">
             <div className="header">
               <button className="btn btn-close-gallery">
-                <Arrow />
+                <div className="arrow-icon" />
                 Zurück
               </button>
             </div>

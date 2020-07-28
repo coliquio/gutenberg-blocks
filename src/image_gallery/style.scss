@@ -1,5 +1,6 @@
 @import "../common/colors.css";
 @import "../common/transitions";
+@import '../common/icons';
 
 .wp-block-coliquio-image-gallery {
 
@@ -114,6 +115,7 @@
 
     .header {
       .arrow-icon {
+        @include arrow();
         fill: #007AFF; /* vars not working here */
         transform: rotate(-90deg) scale(1.5);
         margin: -6px -2px 0 -6px;
