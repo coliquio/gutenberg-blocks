@@ -6,9 +6,10 @@
 
   .images-icon {
     @include images();
-    margin: -2px 10px 0 2px;
     width: 18px;
     height: 18px;
+    margin-top: 2px;
+    transform: scale(1.2);
   }
 
   .btn {
@@ -46,16 +47,16 @@
 
       .left {
         text-align: left;
-        max-width: 260px;
+        max-width: 145px;
 
         .heading {
-          font-size: 0.8rem;
+          font-size: 12px;
         }
 
         .gallery-title {
           display: block;
           margin: 4px 10px 0 0;
-          font-size: 1.1rem;
+          font-size: 16px;
           font-weight: 600;
         }
       }
@@ -63,13 +64,11 @@
       .amount {
         display: flex;
         flex-direction: row;
-
+        padding: 4px 12px;
         background-color: var(--blue-accent);
         border-radius: 17px;
-
-        font-size: 0.8rem;
+        font-size: 15px;
         font-weight: 600;
-        padding: 6px 12px;
       }
     }
 
