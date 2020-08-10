@@ -22,6 +22,7 @@
       font-weight: 600;
       color: var(--blue-accent);
       list-style: none;
+      outline: none !important;
 
       .summary-container {
         display: flex;
@@ -46,6 +47,7 @@
 
       .summary-content {
         margin: 10px 15px;
+         max-width: 80%;
       }
 
       sup {

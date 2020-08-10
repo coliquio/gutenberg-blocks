@@ -118,8 +118,8 @@
       .arrow-icon {
         @include arrow();
         fill: #007AFF; /* vars not working here */
-        transform: rotate(-90deg) scale(1.5);
-        margin: -6px -2px 0 -6px;
+        transform: rotate(-90deg) scale(1.6);
+        margin: 0 2px 0 -8px;
         height: 22px;
         width: 22px;
       }

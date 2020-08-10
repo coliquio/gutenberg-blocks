@@ -1,16 +1,16 @@
 /* Note: This file is auto-generated, see "gutenberg-blocks" repo */ 
 .wp-block-coliquio-accordion {
-  padding: 15pt; }
+  padding: 15px; }
   .wp-block-coliquio-accordion .accordion-header {
     font-weight: 600;
-    padding: 10pt 15pt; }
+    padding: 10px 15px; }
 
 .wp-block-coliquio-branding-box {
-  margin: 15pt 0;
+  margin: 15px 0;
   width: 100%; }
   .wp-block-coliquio-branding-box .branding-box-outer-wrapper {
-    border-bottom: 1pt solid var(--black-lighten-60);
-    border-top: 1pt solid var(--black-lighten-60);
+    border-bottom: 1px solid var(--black-lighten-60);
+    border-top: 1px solid var(--black-lighten-60);
     text-align: center;
     padding: 1rem 0; }
     .wp-block-coliquio-branding-box .branding-box-outer-wrapper .branding-title {
@@ -20,7 +20,7 @@
       color: var(--black-base);
       display: inline;
       font-weight: 400;
-      margin-right: 8pt;
+      margin-right: 8px;
       text-align: center;
       vertical-align: middle; }
     .wp-block-coliquio-branding-box .branding-box-outer-wrapper .wp-block-coliquio-image {
@@ -34,7 +34,7 @@
         height: 2.5rem;
         max-height: 2.5rem; }
 .wp-block-coliquio-checklist {
-  margin: 15pt 0; }
+  margin: 15px 0; }
   .wp-block-coliquio-checklist[contenteditable] {
     cursor: text; }
   .wp-block-coliquio-checklist li {
@@ -44,11 +44,88 @@
     .wp-block-coliquio-checklist li::before {
       content: "";
       position: absolute;
-      top: 5pt;
-      left: -24pt;
-      width: 16pt;
-      height: 16pt;
-      background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0pt' y='0pt' viewBox='0 0 56.7 56.7' enable-background='new 0 0 56.7 56.7' xml:space='preserve'%3E%3Cg%3E%3Cpolygon fill='%2365b32e' points='24.5,46.3 6.3,28.2 12.4,22.1 30,39.8 '/%3E%3Cpolygon fill='%2365b32e' points='19,39.8 44.5,11.2 50.8,16.9 24.5,46.4 '/%3E%3C/g%3E%3C/svg%3E%0A"); }
+      top: 5px;
+      left: -24px;
+      width: 16px;
+      height: 16px;
+      background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 56.7 56.7' enable-background='new 0 0 56.7 56.7' xml:space='preserve'%3E%3Cg%3E%3Cpolygon fill='%2365b32e' points='24.5,46.3 6.3,28.2 12.4,22.1 30,39.8 '/%3E%3Cpolygon fill='%2365b32e' points='19,39.8 44.5,11.2 50.8,16.9 24.5,46.4 '/%3E%3C/g%3E%3C/svg%3E%0A"); }
+.wp-block-coliquio-accordion-item {
+  border-radius: 6px;
+  background-color: var(--black-lighten-75);
+  margin-bottom: 15px; }
+  .wp-block-coliquio-accordion-item[open] .accordion-item-summary .arrow-icon {
+    transform: rotate(0); }
+  .wp-block-coliquio-accordion-item .accordion-item-summary {
+    line-height: 1.75rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--blue-accent);
+    list-style: none;
+    outline: none !important; }
+    .wp-block-coliquio-accordion-item .accordion-item-summary .summary-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+    .wp-block-coliquio-accordion-item .accordion-item-summary::-webkit-details-marker {
+      display: none; }
+    .wp-block-coliquio-accordion-item .accordion-item-summary .arrow-icon {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23007AFF' d='M12,8l-6,6l1.41,1.41L12,10.83l4.59,4.58L18,14L12,8z'/%3E%3C/svg%3E");
+      transform: rotate(180deg);
+      transition: transform 300ms ease-in-out;
+      transform-origin: 13px;
+      fill: #007AFF;
+      width: 26px;
+      height: 26px;
+      margin-right: 10px; }
+    .wp-block-coliquio-accordion-item .accordion-item-summary .summary-content {
+      margin: 10px 15px;
+      max-width: 80%; }
+    .wp-block-coliquio-accordion-item .accordion-item-summary sup {
+      line-height: 0; }
+  .wp-block-coliquio-accordion-item .accordion-item-content {
+    padding: 0 15px 15px 0;
+    margin: -15px 0 0 15px;
+    color: var(--black-base);
+    line-height: 1.2rem;
+    font-weight: 400; }
+  .wp-block-coliquio-accordion-item .wp-block-coliquio-image figcaption {
+    color: var(--black-lighten-40);
+    display: block;
+    font-weight: 400;
+    line-height: 1.3rem; }
+  .wp-block-coliquio-accordion-item p {
+    margin: 15px 0; }
+    .wp-block-coliquio-accordion-item p:last-child {
+      margin: 0; }
+  .wp-block-coliquio-accordion-item ol, .wp-block-coliquio-accordion-item ul {
+    padding: 0;
+    margin: 15px 0 0 15px; }
+    .wp-block-coliquio-accordion-item ol li, .wp-block-coliquio-accordion-item ul li {
+      margin-bottom: 15px; }
+      .wp-block-coliquio-accordion-item ol li:last-child, .wp-block-coliquio-accordion-item ul li:last-child {
+        margin: 0; }
+  .wp-block-coliquio-accordion-item .wp-block-coliquio-image {
+    margin-left: 0;
+    margin-right: 0; }
+.wp-block-coliquio-highlight {
+  margin: 15px 0; }
+  .wp-block-coliquio-highlight .title {
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 6px 6px 0 0; }
+  .wp-block-coliquio-highlight .content {
+    padding: 1px 15px 5px 15px;
+    border-radius: 0 0 6px 6px; }
+  .wp-block-coliquio-highlight.grey-box .title {
+    color: var(--black-base); }
+  .wp-block-coliquio-highlight.grey-box .content {
+    background-color: var(--black-lighten-75);
+    border-radius: 6px; }
+  .wp-block-coliquio-highlight.blue-border .title {
+    color: var(--white-base);
+    background-color: var(--blue-base); }
+  .wp-block-coliquio-highlight.blue-border .content {
+    background-color: var(--blue-lighten-50); }
 .wp-block-coliquio-cta {
   background-color: var(--green-base);
   color: var(--white-base);
@@ -56,8 +133,8 @@
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  border: 1pt solid var(--green-base);
-  border-radius: 4pt;
+  border: 1px solid var(--green-base);
+  border-radius: 4px;
   font-weight: 400;
   padding: .5rem 1rem;
   outline: 0;
@@ -67,7 +144,7 @@
   .wp-block-coliquio-cta[contenteditable] {
     cursor: text; }
   .wp-block-coliquio-cta:active, .wp-block-coliquio-cta:hover {
-    border: 1pt solid var(--black-lighten-20);
+    border: 1px solid var(--black-lighten-20);
     background-color: var(--green-darken-10);
     color: var(--white-base);
     text-decoration: none; }
@@ -79,98 +156,21 @@
       border: none;
       background: none;
       color: var(--green-darken-10); }
-.wp-block-coliquio-highlight {
-  margin: 15pt 0; }
-  .wp-block-coliquio-highlight .title {
-    font-weight: 600;
-    padding: 10pt 15pt;
-    border-radius: 6pt 6pt 0 0; }
-  .wp-block-coliquio-highlight .content {
-    padding: 1pt 15pt 5pt 15pt;
-    border-radius: 0 0 6pt 6pt; }
-    .wp-block-coliquio-highlight .content ul {
-      padding-left: 2rem; }
-  .wp-block-coliquio-highlight.grey-box .title {
-    color: var(--black-base); }
-  .wp-block-coliquio-highlight.grey-box .content {
-    background-color: var(--black-lighten-75);
-    border-radius: 6pt; }
-  .wp-block-coliquio-highlight.blue-border .title {
-    color: var(--white-base);
-    background-color: var(--blue-base); }
-  .wp-block-coliquio-highlight.blue-border .content {
-    background-color: var(--blue-lighten-50); }
-.wp-block-coliquio-accordion-item {
-  border-radius: 6pt;
-  background-color: var(--black-lighten-75);
-  margin-bottom: 15pt; }
-  .wp-block-coliquio-accordion-item[open] .accordion-item-summary .arrow-icon {
-    transform: rotate(0); }
-  .wp-block-coliquio-accordion-item .accordion-item-summary {
-    line-height: 1.75rem;
-    cursor: pointer;
-    font-weight: 600;
-    color: var(--blue-accent);
-    list-style: none; }
-    .wp-block-coliquio-accordion-item .accordion-item-summary .summary-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center; }
-    .wp-block-coliquio-accordion-item .accordion-item-summary::-webkit-details-marker {
-      display: none; }
-    .wp-block-coliquio-accordion-item .accordion-item-summary .arrow-icon {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23007AFF' d='M12,8l-6,6l1.41,1.41L12,10.83l4.59,4.58L18,14L12,8z'/%3E%3C/svg%3E");
-      transform: rotate(180deg);
-      transition: transform 300ms ease-in-out;
-      transform-origin: 13pt;
-      fill: #007AFF;
-      width: 26pt;
-      height: 26pt;
-      margin-right: 10pt; }
-    .wp-block-coliquio-accordion-item .accordion-item-summary .summary-content {
-      margin: 10pt 15pt; }
-    .wp-block-coliquio-accordion-item .accordion-item-summary sup {
-      line-height: 0; }
-  .wp-block-coliquio-accordion-item .accordion-item-content {
-    padding: 0 15pt 15pt 0;
-    margin: -15pt 0 0 15pt;
-    color: var(--black-base);
-    line-height: 1.2rem;
-    font-weight: 400; }
-  .wp-block-coliquio-accordion-item .wp-block-coliquio-image figcaption {
-    color: var(--black-lighten-40);
-    display: block;
-    font-weight: 400;
-    line-height: 1.3rem; }
-  .wp-block-coliquio-accordion-item p {
-    margin: 15pt 0; }
-    .wp-block-coliquio-accordion-item p:last-child {
-      margin: 0; }
-  .wp-block-coliquio-accordion-item ol, .wp-block-coliquio-accordion-item ul {
-    padding: 0;
-    margin: 15pt 0 0 15pt; }
-    .wp-block-coliquio-accordion-item ol li, .wp-block-coliquio-accordion-item ul li {
-      margin-bottom: 15pt; }
-      .wp-block-coliquio-accordion-item ol li:last-child, .wp-block-coliquio-accordion-item ul li:last-child {
-        margin: 0; }
-  .wp-block-coliquio-accordion-item .wp-block-coliquio-image {
-    margin-left: 0;
-    margin-right: 0; }
 .wp-block-coliquio-image {
-  margin: 15pt 0; }
+  margin: 15px 0; }
   .wp-block-coliquio-image.align-left {
     float: left;
-    margin-right: 15pt; }
+    margin-right: 15px; }
   .wp-block-coliquio-image.align-right {
-    margin-left: 15pt;
+    margin-left: 15px;
     float: right; }
   .wp-block-coliquio-image.align-center {
     text-align: center; }
   .wp-block-coliquio-image img {
-    max-width: 400pt !important;
+    max-width: 400px !important;
     float: none; }
   .wp-block-coliquio-image figcaption {
-    padding: 5pt 0 0 0;
+    padding: 5px 0 0 0;
     margin: 0;
     line-height: 1.4rem;
     color: var(--black-base); }
@@ -179,19 +179,19 @@
     font-size: 0.8rem;
     color: var(--black-lighten-50); }
 .wp-block-coliquio-iframe {
-  margin: 15pt 0;
+  margin: 15px 0;
   width: 100%;
-  min-height: 300pt; }
+  min-height: 300px; }
   .wp-block-coliquio-iframe.iframe, .wp-block-coliquio-iframe.iframe-survey {
-    border: 1pt solid var(--black-lighten-40); }
+    border: 1px solid var(--black-lighten-40); }
 /**
   Use this for hover states
  */
 .wp-block-coliquio-image-gallery .images-icon {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M10.3125 9.78125C10.3125 10.1719 10.1758 10.5039 9.90234 10.7773C9.62891 11.0508 9.29688 11.1875 8.90625 11.1875H1.40625C1.01562 11.1875 0.683594 11.0508 0.410156 10.7773C0.136719 10.5039 0 10.1719 0 9.78125V2.28125C0 1.89063 0.136719 1.55859 0.410156 1.28516C0.683594 1.01172 1.01562 0.875 1.40625 0.875H8.90625C9.29688 0.875 9.62891 1.01172 9.90234 1.28516C10.1758 1.55859 10.3125 1.89063 10.3125 2.28125V9.78125ZM13.5938 5.5625C13.9844 5.5625 14.3164 5.69922 14.5898 5.97266C14.8633 6.24609 15 6.57812 15 6.96875V14.4688C15 14.8594 14.8633 15.1914 14.5898 15.4648C14.3164 15.7383 13.9844 15.875 13.5938 15.875H6.09375C5.70312 15.875 5.37109 15.7383 5.09766 15.4648C4.82422 15.1914 4.6875 14.8594 4.6875 14.4688V12.125H6.5625V14H13.125V7.4375H11.25V5.5625H13.5938Z'/%3E%3C/svg%3E");
-  width: 18pt;
-  height: 18pt;
-  margin-top: 2pt;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
   transform: scale(1.2); }
 
 .wp-block-coliquio-image-gallery .btn {
@@ -206,11 +206,11 @@
     opacity: 0.7; }
 
 .wp-block-coliquio-image-gallery .btn-open-gallery {
-  margin: 15pt 0;
+  margin: 15px 0;
   width: 100%;
-  height: 210pt;
-  padding: 15pt;
-  max-width: 400pt;
+  height: 210px;
+  padding: 15px;
+  max-width: 400px;
   background-repeat: no-repeat;
   background-size: cover; }
   .wp-block-coliquio-image-gallery .btn-open-gallery .txt-container {
@@ -222,24 +222,24 @@
     pointer-events: none; }
     .wp-block-coliquio-image-gallery .btn-open-gallery .txt-container .left {
       text-align: left;
-      max-width: 145pt; }
+      max-width: 145px; }
       .wp-block-coliquio-image-gallery .btn-open-gallery .txt-container .left .heading {
-        font-size: 12pt; }
+        font-size: 12px; }
       .wp-block-coliquio-image-gallery .btn-open-gallery .txt-container .left .gallery-title {
         display: block;
-        margin: 4pt 10pt 0 0;
-        font-size: 16pt;
+        margin: 4px 10px 0 0;
+        font-size: 16px;
         font-weight: 600; }
     .wp-block-coliquio-image-gallery .btn-open-gallery .txt-container .amount {
       display: flex;
       flex-direction: row;
-      padding: 4pt 12pt;
+      padding: 4px 12px;
       background-color: var(--blue-accent);
-      border-radius: 17pt;
-      font-size: 15pt;
+      border-radius: 17px;
+      font-size: 15px;
       font-weight: 600; }
   .wp-block-coliquio-image-gallery .btn-open-gallery img {
-    max-width: 100pt; }
+    max-width: 100px; }
 
 .wp-block-coliquio-image-gallery .center {
   display: flex;
@@ -251,14 +251,14 @@
   font-size: 1rem;
   color: var(--blue-accent); }
   .wp-block-coliquio-image-gallery .btn-close-gallery.bottom {
-    margin-bottom: 80pt;
-    padding: 5pt 15pt;
+    margin-bottom: 80px;
+    padding: 5px 15px;
     justify-content: center;
     flex-direction: column;
     text-transform: uppercase;
     background-color: var(--black-lighten-75);
     color: var(--blue-accent);
-    border-radius: 16pt; }
+    border-radius: 16px; }
 
 .wp-block-coliquio-image-gallery .image-gallery-overlay {
   background-color: var(--white-base);
@@ -276,12 +276,12 @@
   -webkit-overflow-scrolling: touch; }
   .wp-block-coliquio-image-gallery .image-gallery-overlay .header {
     background-color: rgba(255, 255, 255, 0.65);
-    -webkit-backdrop-filter: blur(15pt);
-    backdrop-filter: blur(15pt);
-    border-bottom: 1pt solid var(--black-lighten-60);
-    padding-left: 15pt;
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--black-lighten-60);
+    padding-left: 15px;
     display: flex;
-    height: 45pt;
+    height: 45px;
     width: 100vw;
     position: fixed;
     top: 0;
@@ -290,15 +290,15 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23007AFF' d='M12,8l-6,6l1.41,1.41L12,10.83l4.59,4.58L18,14L12,8z'/%3E%3C/svg%3E");
       fill: #007AFF;
       /* vars not working here */
-      transform: rotate(-90deg) scale(1.5);
-      margin: -6pt -2pt 0 -6pt;
-      height: 22pt;
-      width: 22pt; }
+      transform: rotate(-90deg) scale(1.6);
+      margin: 0 2px 0 -8px;
+      height: 22px;
+      width: 22px; }
   .wp-block-coliquio-image-gallery .image-gallery-overlay section {
-    padding: 50pt 15pt 0; }
+    padding: 50px 15px 0; }
   .wp-block-coliquio-image-gallery .image-gallery-overlay .amount {
     color: var(--black-lighten-40);
-    margin: 25pt 0 5pt 0;
+    margin: 25px 0 5px 0;
     font-size: 0.8rem; }
   .wp-block-coliquio-image-gallery .image-gallery-overlay h2 {
     color: var(--black-base);
@@ -306,15 +306,15 @@
     font-weight: 600; }
   .wp-block-coliquio-image-gallery .image-gallery-overlay figure {
     margin: 0;
-    padding: 0 0 50pt 0; }
+    padding: 0 0 50px 0; }
     .wp-block-coliquio-image-gallery .image-gallery-overlay figure img {
       width: 100%;
       height: auto;
-      max-width: 400pt !important;
+      max-width: 400px !important;
       float: none; }
     .wp-block-coliquio-image-gallery .image-gallery-overlay figure figcaption {
       margin: 0;
-      padding-top: 5pt; }
+      padding-top: 5px; }
       .wp-block-coliquio-image-gallery .image-gallery-overlay figure figcaption .count {
         color: var(--black-base);
         font-weight: 600;
@@ -336,13 +336,13 @@
   color: var(--black-lighten-70);
   display: flex;
   flex-wrap: wrap;
-  border-radius: 6pt;
-  padding: 5pt; }
+  border-radius: 6px;
+  padding: 5px; }
   .wp-block-coliquio-image-gallery .image-gallery-edit-container figure {
-    margin: 10pt; }
+    margin: 10px; }
     .wp-block-coliquio-image-gallery .image-gallery-edit-container figure img {
-      max-width: 90pt; }
+      max-width: 90px; }
   .wp-block-coliquio-image-gallery .image-gallery-edit-container figcaption {
-    max-width: 90pt;
+    max-width: 90px;
     font-size: 0.8rem;
     color: var(--white-base); }
