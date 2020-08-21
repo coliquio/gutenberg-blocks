@@ -96,7 +96,7 @@ export const settings = {
                   help={__('The text will float around if you select left or right.')}
               />
               {
-                (alignment === alignOptions.LEFT || alignment === alignOptions.RIGHT) && (
+                (alignment === 'left' || alignment === 'right') && (
                     <Notice status="info" isDismissible={false}>
                       To reselect this image block later on, it's easier to use the top left <strong>Block navigation</strong> if you use image alignment.
                     </Notice>
@@ -104,7 +104,7 @@ export const settings = {
               }
             </PanelBody>
           </InspectorControls>
-          <figure className={`${className} ${alignment}`}>
+          <figure className={`${className} ${alignOptions[alignment]}`}>
             {
               src && (
                   <>
@@ -157,7 +157,7 @@ export const settings = {
       alignment,
     } = attributes;
     return (
-        <figure className={alignment}>
+        <figure className={alignOptions[alignment]}>
           <img src={attributes.src} alt={attributes.alt}/>
           {displayCaption && <RichText.Content tagName="figcaption" value={attributes.caption}/>}
           {displayCopyright && copyright && <span className="copyright">{copyright}</span>}
