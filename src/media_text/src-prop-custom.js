@@ -37,7 +37,7 @@ const addSrcControlAttribute = ( settings, name ) => {
 addFilter( 'blocks.registerBlockType', 'extend-block-media-text/attribute/src', addSrcControlAttribute );
 
 /**
- * Create HOC to add spacing control to inspector controls of block.
+ * Create HOC to add src attribute to block.
  */
 const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
