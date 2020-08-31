@@ -8,6 +8,7 @@ import * as highlight from './highlight'
 import * as imageBlock from './image'
 import * as imageSlideshow from './image_gallery'
 import * as iframe from './iframe'
+import './media_text/src-prop-custom';
 
 
 const { registerBlockType } = blocks
