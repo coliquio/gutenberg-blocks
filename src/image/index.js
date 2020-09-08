@@ -48,6 +48,10 @@ export const settings = {
       type: 'boolean',
       default: true,
     },
+    url: {
+      type: 'string',
+      default: '',
+    },
   },
 
   edit({ attributes, className, setAttributes, isSelected }) {
@@ -67,6 +71,7 @@ export const settings = {
       copyright,
       alignment,
       id,
+      url,
     } = attributes;
 
     const alignOptionsUi = Object.keys(alignOptions).map(item => ({
@@ -88,6 +93,11 @@ export const settings = {
                   value={copyright}
                   onChange={copyright => setAttributes({ copyright })}
               />
+              <TextControl
+                  label={__('Link URL')}
+                  value={url}
+                  onChange={url => setAttributes({ url })}
+              />
               <SelectControl
                   label={__('Image Alignment')}
                   value={alignment}
@@ -108,7 +118,10 @@ export const settings = {
             {
               src && (
                   <>
-                    <img src={src} alt={alt}/>
+                    {!url && <img src={src} alt={alt}/>}
+
+                    {url && <a href={url}><img src={src} alt={alt}/></a>}
+
                     <RichText
                         tagName="figcaption" value={caption} placeholder={__('Put image caption here...')}
                         onChange={caption => setAttributes({ caption })}
@@ -155,10 +168,14 @@ export const settings = {
       displayCaption,
       displayCopyright,
       alignment,
+      url,
     } = attributes;
     return (
         <figure className={alignOptions[alignment]}>
-          <img src={attributes.src} alt={attributes.alt}/>
+          {!url && <img src={attributes.src} alt={attributes.alt}/>}
+
+          {url && <a href={attributes.url}><img src={attributes.src} alt={attributes.alt}/></a>}
+
           {displayCaption && <RichText.Content tagName="figcaption" value={attributes.caption}/>}
           {displayCopyright && copyright && <span className="copyright">{copyright}</span>}
         </figure>
