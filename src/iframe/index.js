@@ -89,6 +89,6 @@ export const settings = {
   },
 
   save({ attributes: { src, height, type } }) {
-    return <iframe className={type} frameborder={0} src={`${src}`} height={height} allowfullscreen/>
+    return <iframe className={type} frameborder={0} src={`${src}`} height={height} allowfullscreen=""/>
   },
 }
