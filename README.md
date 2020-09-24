@@ -28,3 +28,9 @@ https://developer.wordpress.org/block-editor/developers/
 * Remove gutenberg-block-image repo
 * Integrate fontawesome (https://github.com/FortAwesome/react-fontawesome doesen't work)
 
+## Alternative approach for extending gutenberg blocks
+
+* there is alternative way wich looks like the right way to customize functionality of existing modules used for Media & Text component
+* it's not documented well and not recomended officially as the right way to customize blocks but seems to work fine
+* some examples of implementing is here - https://jeffreycarandang.com/extending-gutenberg-core-blocks-with-custom-attributes-and-controls/
+

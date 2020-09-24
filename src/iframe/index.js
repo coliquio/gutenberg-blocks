@@ -73,22 +73,22 @@ export const settings = {
               <TextControl
                   label={__('Source URL')}
                   value={src}
-                  onChange={src => setAttributes({ src, })}
+                  onChange={src => setAttributes({ src })}
               />
               <SelectControl
                   label={__('Visual Height')}
                   value={height}
                   options={heightOptionsUi}
-                  onChange={height => setAttributes({ height })}
+                  onChange={height => setAttributes({ height: parseInt(height) })}
               />
             </PanelBody>
           </InspectorControls>
-          <iframe frameborder={0} className={`${className} ${type}`} src={src} height={height}/>
+          <iframe frameborder={0} className={`${className} ${type}`} src={src ? src : "about:blank"} height={height}/>
         </>
     )
   },
 
   save({ attributes: { src, height, type } }) {
-    return <iframe className={type} frameborder={0} src={`${src}`} height={height} allowfullscreen/>
+    return <iframe className={type} frameborder={0} src={`${src ? src : "about:blank"}`} height={height} allowfullscreen/>
   },
 }
