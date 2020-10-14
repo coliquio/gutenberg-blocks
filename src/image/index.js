@@ -52,6 +52,10 @@ export const settings = {
       type: 'string',
       default: '',
     },
+    zoomEnabled: {
+      type: 'boolean',
+      default: false,
+    },
   },
 
   edit({ attributes, className, setAttributes, isSelected }) {
@@ -72,6 +76,7 @@ export const settings = {
       alignment,
       id,
       url,
+      zoomEnabled,
     } = attributes;
 
     const alignOptionsUi = Object.keys(alignOptions).map(item => ({
@@ -104,6 +109,13 @@ export const settings = {
                   options={alignOptionsUi}
                   onChange={alignment => setAttributes({ alignment })}
                   help={__('The text will float around if you select left or right.')}
+              />
+              <SelectControl
+                  label={__('Zoom')}
+                  value={zoomEnabled}
+                  options={[{label: "DISABLED", value: false}, {label: "ENABLED", value: true}]}
+                  onChange={zoomEnabled => setAttributes({ zoomEnabled })}
+                  help={__('Zoom functionality for image')}
               />
               {
                 (alignment === 'left' || alignment === 'right') && (
