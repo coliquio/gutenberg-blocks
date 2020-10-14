@@ -52,9 +52,9 @@ export const settings = {
       type: 'string',
       default: '',
     },
-    zoomEnabled: {
-      type: 'boolean',
-      default: false,
+    magnification: {
+      type: 'string',
+      default: 'false',
     },
   },
 
@@ -76,7 +76,7 @@ export const settings = {
       alignment,
       id,
       url,
-      zoomEnabled,
+      magnification,
     } = attributes;
 
     const alignOptionsUi = Object.keys(alignOptions).map(item => ({
@@ -111,11 +111,11 @@ export const settings = {
                   help={__('The text will float around if you select left or right.')}
               />
               <SelectControl
-                  label={__('Zoom')}
-                  value={zoomEnabled}
-                  options={[{label: "DISABLED", value: false}, {label: "ENABLED", value: true}]}
-                  onChange={zoomEnabled => setAttributes({ zoomEnabled })}
-                  help={__('Zoom functionality for image')}
+                  label={__('Magnification')}
+                  value={magnification}
+                  options={[{label: __('DISABLED'), value: 'false'}, {label: __('ENABLED'), value: 'true'}]}
+                  onChange={magnification => setAttributes({ magnification })}
+                  help={__('Magnification functionality for image')}
               />
               {
                 (alignment === 'left' || alignment === 'right') && (
@@ -181,9 +181,10 @@ export const settings = {
       displayCopyright,
       alignment,
       url,
+      magnification,
     } = attributes;
     return (
-        <figure className={alignOptions[alignment]}>
+        <figure className={alignOptions[alignment], magnification === "true" ? "magnification" : ""}>
           {!url && <img src={attributes.src} alt={attributes.alt}/>}
 
           {url && <a href={attributes.url}><img src={attributes.src} alt={attributes.alt}/></a>}
