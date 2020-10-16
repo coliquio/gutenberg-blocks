@@ -7,7 +7,8 @@ const { __ } = wp.i18n;
 
 // Enable spacing control on the following blocks
 const enableSpacingControlOnBlocks = [
-    'core/media-text',
+	'core/media-text',
+	'core/image',
 ];
 
 /**
