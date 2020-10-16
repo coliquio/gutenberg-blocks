@@ -7,7 +7,8 @@ const { __ } = wp.i18n;
 
 // Enable spacing control on the following blocks
 const enableSpacingControlOnBlocks = [
-    'core/media-text',
+	'core/media-text',
+	'core/image',
 ];
 
 /**
@@ -26,6 +27,10 @@ const addSrcControlAttribute = ( settings, name ) => {
 	// Use Lodash's assign to gracefully handle if attributes are undefined
 	settings.attributes = assign( settings.attributes, {
 		src: {
+			type: 'string',
+			default: '',
+		},
+		className: {
 			type: 'string',
 			default: '',
 		},
@@ -48,6 +53,10 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
 			);
 		}
 
+		props.setAttributes( {
+			className: 'alignwide',
+		} );
+		
         let { src } = props.attributes;
         
 
