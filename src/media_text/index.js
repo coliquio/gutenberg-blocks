@@ -8,22 +8,14 @@ import { editor, element, i18n, blockEditor } from 'wp'
  */
 import './style.scss'
 
-// Theme
-// import namespace from '../../namespace';
-
-
-const { Fragment } = element
 const { __ } = i18n
 
-const { RichText, InnerBlocks } = editor
-const { MediaUpload } = blockEditor
+const { InnerBlocks } = editor
 
 export const name = 'media-text'
 
-const ALLOWED_BLOCKS = [ 'coliquio/image', 'core/paragraph' ];
-
 export const settings = {
-  title: __('Media&RichText'),
+  title: __('Media & RichText'),
 
   description: __('Custom media and rich text component'),
 
@@ -33,7 +25,7 @@ export const settings = {
     
   },
 
-  edit({ attributes, className, setAttributes }) {
+  edit({ className }) {
     const
         allowedBlocks = [
             'core/paragraph',
