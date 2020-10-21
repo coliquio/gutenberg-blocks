@@ -2,7 +2,7 @@
  * External dependencies
  */
 import React from 'react'
-import { editor, element, i18n, blockEditor, components } from 'wp'
+import { editor, element, i18n, blockEditor } from 'wp'
 /**
  * Internal dependencies
  */
@@ -45,10 +45,10 @@ export const settings = {
         template = [
             [ 'core/columns', {}, [
                 [ 'core/column', {}, [
-                    [ 'core/image' ],
+                    [ 'coliquio/image' ],
                 ] ],
                 [ 'core/column', {}, [
-                    [ 'core/paragraph', { placeholder: 'Enter side content...' } ],
+                    [ 'core/paragraph', { placeholder: __('Enter side content...') } ],
                 ] ],
             ] ]
         ];
@@ -70,7 +70,7 @@ export const settings = {
     );
   },
 
-  save({ attributes, className }) {
+  save({ className }) {
     return (
         <section
             className={
