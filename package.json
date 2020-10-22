@@ -4,7 +4,7 @@
   "description": "Custom coliquio blocks",
   "main": "build/index.js",
   "scripts": {
-    "build": "NODE_ENV=production webpack",
+    "build": "NODE_ENV=production webpack && cp -rf build integration_build",
     "buildNative": "node buildForIos",
     "start": "npm run build && BLOCK_DIR=$PWD npm --prefix node_modules/@frontkom/g-editor start",
     "dev": "NODE_ENV=development webpack && BLOCK_DIR=$PWD npm --prefix node_modules/@frontkom/g-editor start",
