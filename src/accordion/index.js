@@ -2,7 +2,7 @@
  * External dependencies
  */
 import React from 'react'
-import { components, editor, element, i18n } from 'wp'
+import { editor, element, i18n } from 'wp'
 /**
  * Internal dependencies
  */
@@ -34,6 +34,7 @@ export const settings = {
   edit({ attributes, className, setAttributes }) {
     return (
       <Fragment>
+        <h1>Image Start</h1>
         <RichText
           tagName="p"
           placeholder={ __( 'Accordion Title' ) }
@@ -43,6 +44,7 @@ export const settings = {
             setAttributes( { accordionTitle: value } )
           }
         />
+        <h1>Image End</h1>
         <div className="ab-accordion-text">
           <InnerBlocks
             allowedBlocks={ ALLOWED_BLOCKS }
