@@ -34,3 +34,9 @@
     color: var(--black-lighten-50);
   }
 }
+.block-editor-image-size-control {
+  display: none;
+}
+.wp-block-image .components-resizable-box__container.has-show-handle .components-resizable-box__handle {
+  display: none;
+}

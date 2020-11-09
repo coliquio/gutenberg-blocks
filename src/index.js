@@ -9,6 +9,8 @@ import * as imageBlock from './image'
 import * as imageSlideshow from './image_gallery'
 import * as iframe from './iframe'
 import * as mediaText from './media_text'
+// import './media_text/src-prop-custom';
+import './image/extend';
 
 
 const { registerBlockType } = blocks
