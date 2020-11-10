@@ -145,7 +145,7 @@ function getCropOptions(image) {
   })
 }
 
-function getCrop(image, cropName) {
+function getSizeForCrop(image, cropName) {
   if (!image) return
   const key = Object.keys(image.media_details.sizes).find(key => {
     return image.media_details.sizes[key].crop_name === cropName
@@ -225,17 +225,17 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
               value={ props.cropName }
               options={ getCropOptions(image) }
               onChange={ ( selectedCrop ) => {
-                const crop = getCrop(image, selectedCrop)
+                const size = getSizeForCrop(image, selectedCrop)
                 props.setAttributes( {
-                  url: crop.crop_url,
+                  url: size.crop_url,
                   width: undefined,
                   height: undefined,
-                  sizeSlug: crop.style_name,
+                  sizeSlug: size.style_name,
                   cropName: selectedCrop,
-                  crop_x: crop.x,
-                  crop_y: crop.y,
-                  crop_height: crop.height,
-                  crop_width: crop.width,
+                  crop_x: size.crop_x,
+                  crop_y: size.crop_y,
+                  crop_height: size.crop_height,
+                  crop_width: size.crop_width,
                 } );
               } }
             />
