@@ -8,6 +8,7 @@ const { __ } = wp.i18n;
 const { InspectorControls } = wp.editor;
 const { PanelBody, SelectControl, TextControl } = wp.components;
 const { unregisterBlockStyle } = wp.blocks;
+const { useSelect } = wp.data;
 
 // src in custom block has to be called url now
 // url used for link should be href - as it's taken by src
@@ -26,34 +27,34 @@ unregisterBlockStyle( 'core/quote', 'large' );
 
 // Enable properties on the following blocks
 const enableOnBlocks = [
-	'core/image',
+  'core/image',
 ];
 
 const spacingControlOptions = [
-	{
-		label: __( 'None' ),
-		value: '',
+  {
+    label: __( 'None' ),
+    value: '',
     },
     {
-		label: __( 'XS' ),
-		value: 'x-small',
-	},
-	{
-		label: __( 'S' ),
-		value: 'small',
-	},
-	{
-		label: __( 'M' ),
-		value: 'medium',
-	},
-	{
-		label: __( 'L' ),
-		value: 'large',
+    label: __( 'XS' ),
+    value: 'x-small',
+  },
+  {
+    label: __( 'S' ),
+    value: 'small',
+  },
+  {
+    label: __( 'M' ),
+    value: 'medium',
+  },
+  {
+    label: __( 'L' ),
+    value: 'large',
     },
     {
-		label: __( 'XL' ),
-		value: 'x-large',
-	},
+    label: __( 'XL' ),
+    value: 'x-large',
+  },
 ];
 
 /**
@@ -65,20 +66,21 @@ const spacingControlOptions = [
  * @returns {object} Modified block settings.
  */
 const addSrcControlAttribute = ( settings, name ) => {
-	// Do nothing if it's another block than our defined ones.
-	if ( ! enableOnBlocks.includes( name ) ) {
-		return settings;
+
+  // Do nothing if it's another block than our defined ones.
+  if ( ! enableOnBlocks.includes( name ) ) {
+    return settings;
     }
     // debugger;
-	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, {
-		src: {
-			type: 'string',
-			default: '',
-		},
-		classNameTest: {
-			type: 'string',
-			default: '',
+  // Use Lodash's assign to gracefully handle if attributes are undefined
+  settings.attributes = assign( settings.attributes, {
+    src: {
+      type: 'string',
+      default: '',
+    },
+    classNameTest: {
+      type: 'string',
+      default: '',
         },
         url: {
             type: 'string',
@@ -101,76 +103,147 @@ const addSrcControlAttribute = ( settings, name ) => {
             default: undefined,
         },
         spacing: {
-			type: 'string',
-			default: spacingControlOptions[ 0 ].value,
+          type: 'string',
+          default: spacingControlOptions[ 0 ].value,
         },
         copyright: {
             type: 'string',
         },
-	} );
+        cropName: {
+          type: 'string',
+          default: 'original'
+        },
+        cropX: {
+          type: 'number',
+          default: 0
+        },
+        cropY: {
+          type: 'number',
+          default: 0
+        },
+        cropWidth: {
+          type: 'number',
+          default: undefined
+        },
+        cropHeight: {
+          type: 'number',
+          default: undefined
+        }
+  } );
 
-	return settings;
+  return settings;
 };
 
 addFilter( 'blocks.registerBlockType', 'extend-block-image/attribute/src', addSrcControlAttribute );
 
+function getCropOptions(image) {
+  return Object.keys(image ? image.media_details.sizes : {}).map(key => {
+    return {
+      label: __( image.media_details.sizes[key].crop_name ),
+      value: image.media_details.sizes[key].crop_name
+    }
+  })
+}
+
+function getCrop(image, cropName) {
+  if (!image) return
+  const key = Object.keys(image.media_details.sizes).find(key => {
+    return image.media_details.sizes[key].crop_name === cropName
+  })
+  if (key) return image.media_details.sizes[key]
+}
 
 /**
  * Create HOC to add src attribute to block.
  */
 const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
-	return ( props ) => {
-		// Do nothing if it's another block than our defined ones.
-		if ( ! enableOnBlocks.includes( props.name ) ) {
-			return (
-				<BlockEdit { ...props } />
-			);
+  return ( props ) => {
+    // Do nothing if it's another block than our defined ones.
+    if ( ! enableOnBlocks.includes( props.name ) ) {
+      return (
+        <BlockEdit { ...props } />
+      );
         }
         // debugger;
 
         const { spacing, copyright } = props.attributes;
 
-		// add has-spacing-xy class to block
-		if ( spacing ) {
-			props.attributes.className = `coliquio-size-${ spacing }`;
-        }
+    // add has-spacing-xy class to block
+    if ( spacing ) {
+      props.attributes.className = `coliquio-size-${ spacing }`;
+    }
 
-        function isHtmlTag(text) {
-            let isTag = false;
-            if (/^ *(a)(:|::|,|\.|#)[:$#{}()\w\-\[\]='",\.# ]*$/.test(text)) {
-                isTag = true;
-            }
-            return isTag;
-          }
-        
-		return (
-			<Fragment>
-				<BlockEdit { ...props } />
-				<InspectorControls>
-					<PanelBody
-						title={ __( 'Sizing Control' ) }
-						initialOpen={ true }
-					>
-                        <TextControl
-                            label={__('Copyright')}
-                            value={copyright}
-                            onChange={copyright => props.setAttributes({ copyright })}
-                        />
-						<SelectControl
-							label={ __( 'Sizing' ) }
-							value={ spacing }
-							options={ spacingControlOptions }
-							onChange={ ( selectedSpacingOption ) => {
-								props.setAttributes( {
-									spacing: selectedSpacingOption,
-								} );
-							} }
-						/>
-					</PanelBody>
-				</InspectorControls>
-			</Fragment>
-		);
-	};
+    function isHtmlTag(text) {
+      let isTag = false;
+      if (/^ *(a)(:|::|,|\.|#)[:$#{}()\w\-\[\]='",\.# ]*$/.test(text)) {
+          isTag = true;
+      }
+      return isTag;
+    }
+
+    const {
+      imageSizes,
+      mediaUpload,
+    } = useSelect( ( select ) => {
+      const { getSettings } = select( 'core/block-editor' );
+      return getSettings();
+    } );
+
+    const image = useSelect(
+      ( select ) => {
+        const { getMedia } = select( 'core' );
+        return props.attributes.id && props.isSelected ? getMedia( props.attributes.id ) : null;
+      },
+      [ props.attributes.id, props.isSelected ]
+    );
+
+    return (
+      <Fragment>
+        <BlockEdit { ...props } />
+        <InspectorControls>
+          <PanelBody
+            title={ __( 'Sizing Control' ) }
+            initialOpen={ true }
+          >
+            <TextControl
+                label={__('Copyright')}
+                value={copyright}
+                onChange={copyright => props.setAttributes({ copyright })}
+            />
+            <SelectControl
+              label={ __( 'Sizing' ) }
+              value={ spacing }
+              options={ spacingControlOptions }
+              onChange={ ( selectedSpacingOption ) => {
+                props.setAttributes( {
+                  spacing: selectedSpacingOption,
+                } );
+              } }
+            />
+            <SelectControl
+              label={ __( 'Crop' ) }
+              value={ props.cropName }
+              options={ getCropOptions(image) }
+              onChange={ ( selectedCrop ) => {
+                const crop = getCrop(image, selectedCrop)
+                props.setAttributes( {
+                  url: crop.crop_url,
+                  width: undefined,
+                  height: undefined,
+                  sizeSlug: crop.style_name,
+                  cropName: selectedCrop,
+                  crop_x: crop.x,
+                  crop_y: crop.y,
+                  crop_height: crop.height,
+                  crop_width: crop.width,
+                } );
+              } }
+            />
+          </PanelBody>
+        </InspectorControls>
+      </Fragment>
+    );
+  };
 }, 'withSrcAttribute' );
 
 addFilter( 'editor.BlockEdit', 'extend-block-src/with-src-attribute', withSrcAttribute );
