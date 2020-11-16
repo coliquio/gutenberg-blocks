@@ -11,6 +11,7 @@ import * as iframe from './iframe'
 import * as mediaText from './media_text'
 // import './media_text/src-prop-custom';
 import './image/extend';
+import './group/extend';
 
 
 const { registerBlockType } = blocks

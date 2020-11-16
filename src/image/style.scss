@@ -34,9 +34,32 @@
     color: var(--black-lighten-50);
   }
 }
-.block-editor-image-size-control {
-  display: none;
-}
-.wp-block-image .components-resizable-box__container.has-show-handle .components-resizable-box__handle {
-  display: none;
+
+.wp-block-image {
+  &.coliquio-size-x-small {
+    border: 1px solid red;
+    width: 16%!important;
+  }
+  &.coliquio-size-small{
+    width: 25%!important;
+  }
+  &.coliquio-size-medium {
+    width: 33%!important;
+  }
+  &.coliquio-size-large {
+    width: 50%!important;
+  }
+  &.coliquio-size-x-large {
+    width: 100%!important;
+  }
+  .components-resizable-box__container {
+    width: 100%!important;
+    img {
+      float: none;
+      width: 100%!important;
+    }
+    .components-resizable-box__handle {
+      display: none;
+    }
+  }
 }

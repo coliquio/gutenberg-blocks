@@ -30,7 +30,7 @@ const enableOnBlocks = [
   'core/image',
 ];
 
-const spacingControlOptions = [
+const sizeControlOptions = [
   {
     label: __( 'None' ),
     value: '',
@@ -102,9 +102,9 @@ const addSrcControlAttribute = ( settings, name ) => {
             type: 'number',
             default: undefined,
         },
-        spacing: {
+        size: {
           type: 'string',
-          default: spacingControlOptions[ 0 ].value,
+          default: sizeControlOptions[ 0 ].value,
         },
         copyright: {
             type: 'string',
@@ -163,24 +163,34 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       return (
         <BlockEdit { ...props } />
       );
-        }
-        // debugger;
-
-        const { spacing, copyright } = props.attributes;
-
-    // add has-spacing-xy class to block
-    if ( spacing ) {
-      props.attributes.className = `coliquio-size-${ spacing }`;
     }
 
-    function isHtmlTag(text) {
-      let isTag = false;
-      if (/^ *(a)(:|::|,|\.|#)[:$#{}()\w\-\[\]='",\.# ]*$/.test(text)) {
-          isTag = true;
-      }
-      return isTag;
+    if (!(props.attributes.link !== undefined)) {
+      return (
+        <BlockEdit { ...props } />
+      );
     }
 
+    console.log('is subStr - ', props.attributes.className.includes('is-style-'));
+    console.log('class name - ', props.attributes.className);
+    console.log('props.attributes.link', props.attributes.link);
+    console.log('END*******');
+    
+
+    const { size, copyright } = props.attributes;
+
+    // add has-size-xy class to block
+    if ( size ) {
+        props.setAttributes( {
+            className: `coliquio-size-${ size }`,
+          } );
+    //   props.attributes.className = `coliquio-size-${ size }`;
+    }
+    if (typeof props.attributes.caption === 'object') {
+      props.setAttributes({
+        caption: props.attributes.caption.raw ? props.attributes.caption.raw : undefined
+      });
+    }
     const {
       imageSizes,
       mediaUpload,
@@ -188,7 +198,6 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       const { getSettings } = select( 'core/block-editor' );
       return getSettings();
     } );
-
     const image = useSelect(
       ( select ) => {
         const { getMedia } = select( 'core' );
@@ -196,7 +205,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       },
       [ props.attributes.id, props.isSelected ]
     );
-
+      console.log('createHigherOrderComponent - ', image);
     return (
       <Fragment>
         <BlockEdit { ...props } />
@@ -212,11 +221,12 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
             />
             <SelectControl
               label={ __( 'Sizing' ) }
-              value={ spacing }
-              options={ spacingControlOptions }
-              onChange={ ( selectedSpacingOption ) => {
+              value={ size }
+              options={ sizeControlOptions }
+              onChange={ ( selectedsizeOption ) => {
+                  console.log(selectedsizeOption);
                 props.setAttributes( {
-                  spacing: selectedSpacingOption,
+                  size: selectedsizeOption,
                 } );
               } }
             />
@@ -226,6 +236,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
               options={ getCropOptions(image) }
               onChange={ ( selectedCrop ) => {
                 const size = getSizeForCrop(image, selectedCrop)
+                console.log('img - ', image);
                 props.setAttributes( {
                   url: size.crop_url,
                   width: undefined,
@@ -258,7 +269,7 @@ addFilter( 'editor.BlockEdit', 'extend-block-src/with-src-attribute', withSrcAtt
  *
  * @returns {object} Modified props of save element.
  */
-const addSpacingExtraProps = ( saveElementProps, blockType, attributes ) => {
+const addSizeExtraProps = ( saveElementProps, blockType, attributes ) => {
     // Do nothing if it's another block than our defined ones.
     if ( ! enableOnBlocks.includes( blockType.name ) ) {
         return saveElementProps;
@@ -283,4 +294,4 @@ const addSpacingExtraProps = ( saveElementProps, blockType, attributes ) => {
     return saveElementProps;
 };
 
-addFilter( 'blocks.getSaveContent.extraProps', 'extend-block-example/get-save-content/extra-props', addSpacingExtraProps );
+addFilter( 'blocks.getSaveContent.extraProps', 'extend-block-example/get-save-content/extra-props', addSizeExtraProps );
