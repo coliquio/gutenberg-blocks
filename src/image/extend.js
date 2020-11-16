@@ -111,15 +111,15 @@ const addSrcControlAttribute = ( settings, name ) => {
         },
         cropName: {
           type: 'string',
-          default: 'original'
+          default: undefined
         },
         cropX: {
           type: 'number',
-          default: 0
+          default: undefined
         },
         cropY: {
           type: 'number',
-          default: 0
+          default: undefined
         },
         cropWidth: {
           type: 'number',
@@ -137,20 +137,20 @@ const addSrcControlAttribute = ( settings, name ) => {
 addFilter( 'blocks.registerBlockType', 'extend-block-image/attribute/src', addSrcControlAttribute );
 
 function getCropOptions(image) {
-  return Object.keys(image ? image.media_details.sizes : {}).map(key => {
+  return Object.keys(image ? image.media_details.crops : {}).map(key => {
     return {
-      label: __( image.media_details.sizes[key].crop_name ),
-      value: image.media_details.sizes[key].crop_name
+      label: __( image.media_details.crops[key].name ),
+      value: image.media_details.crops[key].name
     }
   })
 }
 
-function getSizeForCrop(image, cropName) {
+function getCrop(image, cropName) {
   if (!image) return
-  const key = Object.keys(image.media_details.sizes).find(key => {
-    return image.media_details.sizes[key].crop_name === cropName
+  const key = Object.keys(image.media_details.crops).find(key => {
+    return image.media_details.crops[key].name === cropName
   })
-  if (key) return image.media_details.sizes[key]
+  if (key) return image.media_details.crops[key]
 }
 
 /**
@@ -235,18 +235,22 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
               value={ props.cropName }
               options={ getCropOptions(image) }
               onChange={ ( selectedCrop ) => {
-                const size = getSizeForCrop(image, selectedCrop)
-                console.log('img - ', image);
+                // TODO if selectedCrop is null or
+                // -> put image.original_cdn_url 
+                // -> aspectRatioWidth + aspectRatioHeight to the image.width + image.height
+                const crop = getCrop(image, selectedCrop)
                 props.setAttributes( {
-                  url: size.crop_url,
+                  url: crop.cdn_url,
                   width: undefined,
                   height: undefined,
-                  sizeSlug: size.style_name,
+                  sizeSlug: crop.style_name,
                   cropName: selectedCrop,
-                  crop_x: size.crop_x,
-                  crop_y: size.crop_y,
-                  crop_height: size.crop_height,
-                  crop_width: size.crop_width,
+                  cropX: crop.x,
+                  cropY: crop.y,
+                  cropHeight: crop.height,
+                  cropWidth: crop.width,
+                  aspectRatioWidth: crop.aspect_ratio_width,
+                  aspectRatioHeight: crop.aspect_ratio_height
                 } );
               } }
             />
