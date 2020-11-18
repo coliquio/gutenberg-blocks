@@ -63,3 +63,18 @@
     }
   }
 }
+
+.components-panel__body {
+  >.components-base-control:nth-child(2) {
+    display: none;
+  }
+}
+.block-editor-image-size-control {
+  display: none;
+}
+
+.block-editor-block-inspector {
+  >div:nth-child(2) {
+    display: none;
+  }
+}

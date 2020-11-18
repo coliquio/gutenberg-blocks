@@ -20,9 +20,9 @@ const { useSelect } = wp.data;
 //     isDefault: true,
 //   });
 
-unregisterBlockStyle('core/image', 'rounded');
+// unregisterBlockStyle('core/image', 'rounded');
 
-unregisterBlockStyle( 'core/quote', 'large' );
+// unregisterBlockStyle( 'core/quote', 'large' );
 
 
 // Enable properties on the following blocks
@@ -137,12 +137,12 @@ const addSrcControlAttribute = ( settings, name ) => {
 addFilter( 'blocks.registerBlockType', 'extend-block-image/attribute/src', addSrcControlAttribute );
 
 function getCropOptions(image) {
-  return Object.keys(image ? image.media_details.crops : {}).map(key => {
+  return image && image.media_details && image.media_details.crops ? Object.keys(image.media_details.crops).map(key => {
     return {
       label: __( image.media_details.crops[key].name ),
       value: image.media_details.crops[key].name
     }
-  })
+  }) : [{ label: 'undefined', value: 'undefined'}]
 }
 
 function getCrop(image, cropName) {
@@ -165,16 +165,18 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       );
     }
 
-    if (!(props.attributes.link !== undefined)) {
-      return (
-        <BlockEdit { ...props } />
-      );
-    }
+    // debugger;
 
-    console.log('is subStr - ', props.attributes.className.includes('is-style-'));
-    console.log('class name - ', props.attributes.className);
-    console.log('props.attributes.link', props.attributes.link);
-    console.log('END*******');
+    // if (!(props.attributes.link !== undefined)) {
+    //   return (
+    //     <BlockEdit { ...props } />
+    //   );
+    // }
+
+    // console.log('is subStr - ', props.attributes.className.includes('is-style-'));
+    // console.log('class name - ', props.attributes.className);
+    // console.log('props.attributes.link', props.attributes.link);
+    // console.log('END*******');
     
 
     const { size, copyright } = props.attributes;
@@ -261,7 +263,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
   };
 }, 'withSrcAttribute' );
 
-addFilter( 'editor.BlockEdit', 'extend-block-src/with-src-attribute', withSrcAttribute );
+addFilter( 'editor.BlockEdit', 'extend-block-image/with-src-attribute', withSrcAttribute );
 
 
 /**
@@ -298,4 +300,4 @@ const addSizeExtraProps = ( saveElementProps, blockType, attributes ) => {
     return saveElementProps;
 };
 
-addFilter( 'blocks.getSaveContent.extraProps', 'extend-block-example/get-save-content/extra-props', addSizeExtraProps );
+addFilter( 'blocks.getSaveContent.extraProps', 'extend-block-image/get-save-content/extra-props', addSizeExtraProps );

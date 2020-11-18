@@ -6,7 +6,7 @@ const { Fragment } = wp.element;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 const { InspectorControls } = wp.editor;
-const { PanelBody, SelectControl, TextControl } = wp.components;
+const { PanelBody, CheckboxControl, TextControl } = wp.components;
 const { unregisterBlockStyle } = wp.blocks;
 const { useSelect } = wp.data;
 
@@ -39,15 +39,19 @@ const addSrcControlAttribute = ( settings, name ) => {
       default: '',
     },
     test: {
-        type: 'string',
-        default: '',
+      type: 'string',
+      default: '',
     },
+    isChecked: {
+      type: 'boolean',
+      default: false,
+    }
   } );
 
   return settings;
 };
 
-addFilter( 'blocks.registerBlockType', 'extend-block-image/attribute/src', addSrcControlAttribute );
+addFilter( 'blocks.registerBlockType', 'extend-block-group/attribute/column-layout', addSrcControlAttribute );
 
 /**
  * Create HOC to add src attribute to block.
@@ -61,6 +65,9 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       );
     }
 
+    console.log(props.attributes);
+    let { isChecked } = props.attributes;
+
     return (
       <Fragment>
         <BlockEdit { ...props } />
@@ -69,11 +76,16 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
             title={ __( 'Sizing Control' ) }
             initialOpen={ true }
           >
-            <TextControl
-                label={__('Copyright')}
-                value={test}
-                onChange={test => props.setAttributes({ test })}
-            />
+          <CheckboxControl
+            heading="Column layout"
+            label="Column layout for text in the group"
+            help="Enable/disable elements to be shown in column layout"
+            checked={ isChecked }
+            onChange={isChecked, test => {
+              console.log(isChecked, test);
+              props.setAttributes({ isChecked: !isChecked })}
+            }
+        />
           </PanelBody>
         </InspectorControls>
       </Fragment>
@@ -81,7 +93,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
   };
 }, 'withSrcAttribute' );
 
-addFilter( 'editor.BlockEdit', 'extend-block-src/with-src-attribute', withSrcAttribute );
+addFilter( 'editor.BlockEdit', 'extend-block-group/with-column-layout', withSrcAttribute );
 
 
 /**
@@ -100,15 +112,9 @@ const addSizeExtraProps = ( saveElementProps, blockType, attributes ) => {
     }
 
     if ( attributes.test ) {
-        saveElementProps.children.props.children.push(
-            React.createElement(
-                "span", // type
-                { type: "text" }, // props
-                attributes.test // children
-              )
-        );
+        debugger;
     }
     return saveElementProps;
 };
 
-addFilter( 'blocks.getSaveContent.extraProps', 'extend-block-example/get-save-content/extra-props', addSizeExtraProps );
+addFilter( 'blocks.getSaveContent.extraProps', 'extend-block-group/get-save-content/extra-props', addSizeExtraProps );
