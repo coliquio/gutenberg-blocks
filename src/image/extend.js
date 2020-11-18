@@ -57,6 +57,18 @@ const sizeControlOptions = [
   },
 ];
 
+const disabledElements = [
+  {
+    text: 'Styles',
+    selector: '.components-panel__body>h2>button',
+  },
+  {
+    text: 'Image size',
+    selector: '.components-base-control__label',
+  }
+];
+const disabledElementsSelectors = ['Styles', ];
+
 /**
  * Add src attribute to block.
  *
@@ -165,29 +177,26 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       );
     }
 
-    // debugger;
-
-    // if (!(props.attributes.link !== undefined)) {
-    //   return (
-    //     <BlockEdit { ...props } />
-    //   );
-    // }
-
-    // console.log('is subStr - ', props.attributes.className.includes('is-style-'));
-    // console.log('class name - ', props.attributes.className);
-    // console.log('props.attributes.link', props.attributes.link);
-    // console.log('END*******');
-    
+    // let a = document.querySelectorAll('.components-panel__body>h2>button');
+    // let b = document.querySelectorAll('.components-base-control__label');
+    disabledElements.forEach(el => {
+      const temp = document.querySelectorAll(el.selector);
+      temp.forEach(node => {
+        if (el.text === node.innerText && !node.parentNode.parentNode.className.includes('custom-hidden')) {
+          node.parentNode.parentNode.className += ' custom-hidden';
+        }
+      });
+    });   
 
     const { size, copyright } = props.attributes;
 
     // add has-size-xy class to block
     if ( size ) {
         props.setAttributes( {
-            className: `coliquio-size-${ size }`,
-          } );
-    //   props.attributes.className = `coliquio-size-${ size }`;
+          className: `custom-size-${ size }`,
+        });
     }
+
     if (typeof props.attributes.caption === 'object') {
       props.setAttributes({
         caption: props.attributes.caption.raw ? props.attributes.caption.raw : undefined
@@ -200,6 +209,8 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       const { getSettings } = select( 'core/block-editor' );
       return getSettings();
     } );
+
+
     const image = useSelect(
       ( select ) => {
         const { getMedia } = select( 'core' );
@@ -207,7 +218,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       },
       [ props.attributes.id, props.isSelected ]
     );
-      console.log('createHigherOrderComponent - ', image);
+
     return (
       <Fragment>
         <BlockEdit { ...props } />

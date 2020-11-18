@@ -36,20 +36,20 @@
 }
 
 .wp-block-image {
-  &.coliquio-size-x-small {
+  &.custom-size-x-small {
     border: 1px solid red;
     width: 16%!important;
   }
-  &.coliquio-size-small{
+  &.custom-size-small{
     width: 25%!important;
   }
-  &.coliquio-size-medium {
+  &.custom-size-medium {
     width: 33%!important;
   }
-  &.coliquio-size-large {
+  &.custom-size-large {
     width: 50%!important;
   }
-  &.coliquio-size-x-large {
+  &.custom-size-x-large {
     width: 100%!important;
   }
   .components-resizable-box__container {
@@ -64,17 +64,39 @@
   }
 }
 
-.components-panel__body {
-  >.components-base-control:nth-child(2) {
-    display: none;
-  }
+// there is js logic adding this class based on innerHtml of the buttons(text)
+.custom-hidden {
+  display: none;
 }
+
 .block-editor-image-size-control {
   display: none;
 }
 
-.block-editor-block-inspector {
-  >div:nth-child(2) {
-    display: none;
+// hide styles section for core/image
+.block-editor-block-switcher__styles__menugroup,
+.block-editor-block-switcher__container>.components-menu-group:nth-child(1) {
+  display: none;
+}
+// hide upload button from popup menu
+.components-form-file-upload {
+  display: none;
+}
+
+figure.wp-block-image {
+  &.custom-size-x-small {
+    width: 116px!important;
+  }
+  &.custom-size-small{
+    width: 180px!important;
+  }
+  &.custom-size-medium {
+    width: 240px!important;
+  }
+  &.custom-size-large {
+    width: 360px!important;
+  }
+  &.custom-size-x-large {
+    width: 720px!important;
   }
 }
