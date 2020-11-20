@@ -181,9 +181,9 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
 
     // add has-size-xy class to block
     if ( size ) {
-        props.setAttributes( {
-          className: `custom-size-${ size }`,
-        });
+      props.setAttributes( {
+        className: `custom-size-${ size }`,
+      });
     }
 
     if (typeof props.attributes.caption === 'object') {
@@ -191,14 +191,6 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
         caption: props.attributes.caption.raw ? props.attributes.caption.raw : undefined
       });
     }
-    const {
-      imageSizes,
-      mediaUpload,
-    } = useSelect( ( select ) => {
-      const { getSettings } = select( 'core/block-editor' );
-      return getSettings();
-    } );
-
 
     const image = useSelect(
       ( select ) => {
@@ -207,6 +199,22 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       },
       [ props.attributes.id, props.isSelected ]
     );
+
+    // ensure cdn url is used always
+    // TODO find if there is a better way doing this
+    if (!props.attributes.crop && image && image.media_details && props.attributes.url != image.media_details.cdn_url) {
+      props.setAttributes({
+        url: image.media_details.cdn_url,
+        width: undefined,
+        height: undefined,
+        sizeSlug: undefined,
+        crop: null,
+        aspectRatio: {
+          width: image.media_details.width,
+          height: image.media_details.height
+        }
+      });
+    }
 
     return (
       <Fragment>
@@ -238,7 +246,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
               onChange={ ( selectedCrop ) => {
                 const crop = getCrop(image, selectedCrop)
                 props.setAttributes( {
-                  url: crop ? crop.cdn_url : image.media_details.original_cdn_url,
+                  url: crop ? crop.cdn_url : image.media_details.cdn_url,
                   width: undefined,
                   height: undefined,
                   sizeSlug: undefined,
