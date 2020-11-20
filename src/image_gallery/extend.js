@@ -34,18 +34,14 @@ const addSrcControlAttribute = ( settings, name ) => {
 
   // Use Lodash's assign to gracefully handle if attributes are undefined
   settings.attributes = assign( settings.attributes, {
-    classNameTest: {
+    caption: {
       type: 'string',
       default: '',
     },
-    test: {
-      type: 'string',
-      default: '',
+    images: {
+      type: 'array',
+      default: [],
     },
-    isChecked: {
-      type: 'boolean',
-      default: false,
-    }
   } );
 
   return settings;
@@ -65,34 +61,40 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       );
     }
 
-    if (typeof props.attributes.caption === 'object') {
-        props.setAttributes({
-            caption: props.attributes.caption.raw ? props.attributes.caption.raw : undefined
+    // trnsform image caption to satisfy validation rules
+    if (props.attributes.images && props.attributes.images.length) {
+        let changed = false; // it looks weird but additional check is needed not to create endless loop in react
+        const temp = props.attributes.images.map((image, i) => {
+            if (typeof image.caption === 'object') {
+                changed = true;
+                image.caption = image.caption.raw ? image.caption.raw : undefined
+            }
+            return image;
         });
+        if (changed) {
+            props.setAttributes({
+                images: temp
+            });
+        }
     }
-
-    console.log(props.attributes);
-    let { isChecked } = props.attributes;
 
     return (
       <Fragment>
         <BlockEdit { ...props } />
         <InspectorControls>
-          <PanelBody
-            title={ __( 'Sizing Control' ) }
-            initialOpen={ true }
-          >
-          <CheckboxControl
-            heading="Column layout"
-            label="Column layout for text in the group"
-            help="Enable/disable elements to be shown in column layout"
-            checked={ isChecked }
-            onChange={isChecked, test => {
-              console.log(isChecked, test);
-              props.setAttributes({ isChecked: !isChecked })}
-            }
-        />
-          </PanelBody>
+            <PanelBody
+              title={ __( 'Sizing Control' ) }
+              initialOpen={ true }>
+                {/* <CheckboxControl
+                    heading="Column layout"
+                    label="Column layout for text in the group"
+                    help="Enable/disable elements to be shown in column layout"
+                    checked={ isChecked }
+                    onChange={isChecked, test => {
+                    console.log(isChecked, test);
+                    props.setAttributes({ isChecked: !isChecked })}
+                    }/> */}
+            </PanelBody>
         </InspectorControls>
       </Fragment>
     );
