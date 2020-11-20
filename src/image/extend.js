@@ -237,7 +237,6 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
               value={ size }
               options={ sizeControlOptions }
               onChange={ ( selectedsizeOption ) => {
-                  console.log(selectedsizeOption);
                 props.setAttributes( {
                   size: selectedsizeOption,
                 } );
