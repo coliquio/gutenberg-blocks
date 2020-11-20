@@ -32,16 +32,13 @@ const enableOnBlocks = [
 
 const sizeControlOptions = [
   {
-    label: __( 'None' ),
-    value: '',
-  },
-  {
     label: __( 'XS' ),
-    value: 'x-small',
+    value: 'extra-small',
   },
   {
     label: __( 'S' ),
     value: 'small',
+    default: true,
   },
   {
     label: __( 'M' ),
@@ -53,7 +50,7 @@ const sizeControlOptions = [
   },
   {
     label: __( 'XL' ),
-    value: 'x-large',
+    value: 'extra-large',
   },
 ];
 
@@ -116,7 +113,7 @@ const addSrcControlAttribute = ( settings, name ) => {
     },
     size: {
       type: 'string',
-      default: sizeControlOptions[ 0 ].value,
+      default: sizeControlOptions.find(o => o.default).value,
     },
     copyright: {
       type: 'string',
