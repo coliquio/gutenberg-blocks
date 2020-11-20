@@ -138,11 +138,15 @@ addFilter( 'blocks.registerBlockType', 'extend-block-image/attribute/src', addSr
 
 function getCropOptions(image) {
   return image && image.media_details && image.media_details.crops ? Object.keys(image.media_details.crops).map(key => {
+    const crop = image.media_details.crops[key]
     return {
-      label: __( image.media_details.crops[key].name ),
-      value: image.media_details.crops[key].name
+      label: __( crop.label + '  ' + (crop.description || '') ),
+      value: crop.name
     }
-  }) : []
+  }) : [{
+    label: __( '---') ),
+    value: undefined
+  }]
 }
 
 function getCrop(image, cropName) {
@@ -232,7 +236,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
             />
             <SelectControl
               label={ __( 'Crop' ) }
-              value={ props.cropName }
+              value={ props.crop ? props.crop.name : undefined }
               options={ getCropOptions(image) }
               onChange={ ( selectedCrop ) => {
                 const crop = getCrop(image, selectedCrop)
@@ -241,7 +245,13 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
                   width: undefined,
                   height: undefined,
                   sizeSlug: undefined,
-                  crop,
+                  crop: (crop ? {
+                    name: crop.name,
+                    width: crop.width,
+                    height: crop.height,
+                    x: crop.x,
+                    y: crop.y
+                  } : null),
                   aspectRatio: {
                     width: crop ? crop.aspect_ratio_width : image.width,
                     height: crop ? crop.aspect_ratio_height : image.height
