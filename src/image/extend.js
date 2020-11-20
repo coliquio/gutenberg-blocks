@@ -95,31 +95,31 @@ const addSrcControlAttribute = ( settings, name ) => {
       default: '',
     },
     url: {
-        type: 'string',
-        default: '',
+      type: 'string',
+      default: '',
     },
     href: {
-        type: 'string',
-        default: '',
+      type: 'string',
+      default: '',
     },
     alt: {
-        type: 'string',
-        default: '',
+      type: 'string',
+      default: '',
     },
     height: {
-        type: 'number',
-        default: undefined,
+      type: 'number',
+      default: undefined,
     },
     width: {
-        type: 'number',
-        default: undefined,
+      type: 'number',
+      default: undefined,
     },
     size: {
       type: 'string',
       default: sizeControlOptions[ 0 ].value,
     },
     copyright: {
-        type: 'string',
+      type: 'string',
     },
     cropName: {
       type: 'string',
