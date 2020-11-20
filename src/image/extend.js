@@ -211,6 +211,8 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       [ props.attributes.id, props.isSelected ]
     );
 
+console.log(1, props.crop ? props.crop.name : undefined, getCropOptions(image))
+
     return (
       <Fragment>
         <BlockEdit { ...props } />
