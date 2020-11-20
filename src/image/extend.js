@@ -144,7 +144,7 @@ function getCropOptions(image) {
       value: crop.name
     }
   }) : [{
-    label: __( '---') ),
+    label: __( '---'),
     value: undefined
   }]
 }
