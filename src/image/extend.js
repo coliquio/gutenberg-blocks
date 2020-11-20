@@ -154,7 +154,7 @@ function getCropOptions(image) {
       label: __( image.media_details.crops[key].name ),
       value: image.media_details.crops[key].name
     }
-  }) : [{ label: 'undefined', value: 'undefined'}]
+  }) : []
 }
 
 function getCrop(image, cropName) {
