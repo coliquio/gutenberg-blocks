@@ -34,3 +34,69 @@
     color: var(--black-lighten-50);
   }
 }
+
+.wp-block-image {
+  &.custom-size-x-small {
+    border: 1px solid red;
+    width: 16%!important;
+  }
+  &.custom-size-small{
+    width: 25%!important;
+  }
+  &.custom-size-medium {
+    width: 33%!important;
+  }
+  &.custom-size-large {
+    width: 50%!important;
+  }
+  &.custom-size-x-large {
+    width: 100%!important;
+  }
+  .components-resizable-box__container {
+    width: 100%!important;
+    img {
+      float: none;
+      width: 100%!important;
+    }
+    .components-resizable-box__handle {
+      display: none;
+    }
+  }
+}
+
+// there is js logic adding this class based on innerHtml of the buttons(text)
+.custom-hidden {
+  display: none;
+}
+
+.block-editor-image-size-control {
+  display: none;
+}
+
+// hide styles section for core/image
+.block-editor-block-switcher__styles__menugroup,
+.block-editor-block-switcher__container>.components-menu-group:nth-child(1) {
+  display: none;
+}
+// hide upload button from popup menu
+.components-form-file-upload {
+  display: none;
+}
+
+figure.wp-block-image {
+  &.custom-size-x-small {
+    width: 116px!important;
+  }
+  &.custom-size-small{
+    width: 180px!important;
+  }
+  &.custom-size-medium {
+    width: 240px!important;
+  }
+  &.custom-size-large {
+    width: 360px!important;
+  }
+  &.custom-size-x-large {
+    width: 720px!important;
+  }
+}
