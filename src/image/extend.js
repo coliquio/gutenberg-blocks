@@ -34,8 +34,8 @@ const sizeControlOptions = [
   {
     label: __( 'None' ),
     value: '',
-    },
-    {
+  },
+  {
     label: __( 'XS' ),
     value: 'x-small',
   },
@@ -50,8 +50,8 @@ const sizeControlOptions = [
   {
     label: __( 'L' ),
     value: 'large',
-    },
-    {
+  },
+  {
     label: __( 'XL' ),
     value: 'x-large',
   },
@@ -93,55 +93,55 @@ const addSrcControlAttribute = ( settings, name ) => {
     classNameTest: {
       type: 'string',
       default: '',
-        },
-        url: {
-            type: 'string',
-            default: '',
-        },
-        href: {
-            type: 'string',
-            default: '',
-        },
-        alt: {
-            type: 'string',
-            default: '',
-        },
-        height: {
-            type: 'number',
-            default: undefined,
-        },
-        width: {
-            type: 'number',
-            default: undefined,
-        },
-        size: {
-          type: 'string',
-          default: sizeControlOptions[ 0 ].value,
-        },
-        copyright: {
-            type: 'string',
-        },
-        cropName: {
-          type: 'string',
-          default: undefined
-        },
-        cropX: {
-          type: 'number',
-          default: undefined
-        },
-        cropY: {
-          type: 'number',
-          default: undefined
-        },
-        cropWidth: {
-          type: 'number',
-          default: undefined
-        },
-        cropHeight: {
-          type: 'number',
-          default: undefined
-        }
-  } );
+    },
+    url: {
+        type: 'string',
+        default: '',
+    },
+    href: {
+        type: 'string',
+        default: '',
+    },
+    alt: {
+        type: 'string',
+        default: '',
+    },
+    height: {
+        type: 'number',
+        default: undefined,
+    },
+    width: {
+        type: 'number',
+        default: undefined,
+    },
+    size: {
+      type: 'string',
+      default: sizeControlOptions[ 0 ].value,
+    },
+    copyright: {
+        type: 'string',
+    },
+    cropName: {
+      type: 'string',
+      default: undefined
+    },
+    cropX: {
+      type: 'number',
+      default: undefined
+    },
+    cropY: {
+      type: 'number',
+      default: undefined
+    },
+    cropWidth: {
+      type: 'number',
+      default: undefined
+    },
+    cropHeight: {
+      type: 'number',
+      default: undefined
+    }
+  });
 
   return settings;
 };
