@@ -137,16 +137,16 @@ const addSrcControlAttribute = ( settings, name ) => {
 addFilter( 'blocks.registerBlockType', 'extend-block-image/attribute/src', addSrcControlAttribute );
 
 function getCropOptions(image) {
-  return image && image.media_details && image.media_details.crops ? Object.keys(image.media_details.crops).map(key => {
+  return [{
+    label: __( '---'),
+    value: undefined
+  }].concat(image && image.media_details && image.media_details.crops ? Object.keys(image.media_details.crops).map(key => {
     const crop = image.media_details.crops[key]
     return {
       label: __( crop.label + '  ' + (crop.description || '') ),
       value: crop.name
     }
-  }) : [{
-    label: __( '---'),
-    value: undefined
-  }]
+  }) : [])
 }
 
 function getCrop(image, cropName) {
@@ -211,8 +211,6 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       [ props.attributes.id, props.isSelected ]
     );
 
-console.log(1, props.crop ? props.crop.name : undefined, getCropOptions(image))
-
     return (
       <Fragment>
         <BlockEdit { ...props } />
@@ -238,11 +236,10 @@ console.log(1, props.crop ? props.crop.name : undefined, getCropOptions(image))
             />
             <SelectControl
               label={ __( 'Crop' ) }
-              value={ props.crop ? props.crop.name : undefined }
+              value={ props.attributes.crop ? props.attributes.crop.name : undefined }
               options={ getCropOptions(image) }
               onChange={ ( selectedCrop ) => {
                 const crop = getCrop(image, selectedCrop)
-                console.log(image, crop, selectedCrop)
                 props.setAttributes( {
                   url: crop ? crop.cdn_url : image.media_details.original_cdn_url,
                   width: undefined,
@@ -256,8 +253,8 @@ console.log(1, props.crop ? props.crop.name : undefined, getCropOptions(image))
                     y: crop.y
                   } : null),
                   aspectRatio: {
-                    width: crop ? crop.aspect_ratio_width : image.width,
-                    height: crop ? crop.aspect_ratio_height : image.height
+                    width: crop ? crop.aspect_ratio_width : image.media_details.width,
+                    height: crop ? crop.aspect_ratio_height : image.media_details.height
                   }
                 } );
               } }
