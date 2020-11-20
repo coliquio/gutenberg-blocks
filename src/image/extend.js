@@ -240,8 +240,9 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
               options={ getCropOptions(image) }
               onChange={ ( selectedCrop ) => {
                 const crop = getCrop(image, selectedCrop)
+                console.log(image, crop, selectedCrop)
                 props.setAttributes( {
-                  url: crop ? crop.cdn_url : image.original_cdn_url,
+                  url: crop ? crop.cdn_url : image.media_details.original_cdn_url,
                   width: undefined,
                   height: undefined,
                   sizeSlug: undefined,
