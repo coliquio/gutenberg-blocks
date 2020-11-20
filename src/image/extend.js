@@ -140,7 +140,7 @@ function getCropOptions(image) {
   }].concat(image && image.media_details && image.media_details.crops ? Object.keys(image.media_details.crops).map(key => {
     const crop = image.media_details.crops[key]
     return {
-      label: __( crop.label + '  ' + (crop.description || '') ),
+      label: __( crop.label + (crop.description ? ' - ' + crop.description : '') ),
       value: crop.name
     }
   }) : [])
