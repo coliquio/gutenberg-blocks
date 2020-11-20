@@ -121,25 +121,13 @@ const addSrcControlAttribute = ( settings, name ) => {
     copyright: {
       type: 'string',
     },
-    cropName: {
-      type: 'string',
-      default: undefined
+    crop: {
+      type: 'object',
+      default: null
     },
-    cropX: {
-      type: 'number',
-      default: undefined
-    },
-    cropY: {
-      type: 'number',
-      default: undefined
-    },
-    cropWidth: {
-      type: 'number',
-      default: undefined
-    },
-    cropHeight: {
-      type: 'number',
-      default: undefined
+    aspectRatio: {
+      type: 'object',
+      default: null
     }
   });
 
@@ -247,22 +235,17 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
               value={ props.cropName }
               options={ getCropOptions(image) }
               onChange={ ( selectedCrop ) => {
-                // TODO if selectedCrop is null or
-                // -> put image.original_cdn_url 
-                // -> aspectRatioWidth + aspectRatioHeight to the image.width + image.height
                 const crop = getCrop(image, selectedCrop)
                 props.setAttributes( {
-                  url: crop.cdn_url,
+                  url: crop ? crop.cdn_url : image.original_cdn_url,
                   width: undefined,
                   height: undefined,
-                  sizeSlug: crop.style_name,
-                  cropName: selectedCrop,
-                  cropX: crop.x,
-                  cropY: crop.y,
-                  cropHeight: crop.height,
-                  cropWidth: crop.width,
-                  aspectRatioWidth: crop.aspect_ratio_width,
-                  aspectRatioHeight: crop.aspect_ratio_height
+                  sizeSlug: undefined,
+                  crop,
+                  aspectRatio: {
+                    width: crop ? crop.aspect_ratio_width : image.width,
+                    height: crop ? crop.aspect_ratio_height : image.height
+                  }
                 } );
               } }
             />
