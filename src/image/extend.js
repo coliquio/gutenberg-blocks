@@ -301,11 +301,9 @@ addFilter( 'editor.BlockEdit', 'extend-block-image/with-src-attribute', withSrcA
  * @returns {object} Modified props of save element.
  */
 const addSizeExtraProps = ( saveElementProps, blockType, attributes ) => {
-    // Do nothing if it's another block than our defined ones.
     if ( ! enableOnBlocks.includes( blockType.name ) ) {
         return saveElementProps;
     }
-    // console.log(attributes);
 
     if ( attributes.copyright ) {
         saveElementProps.children.props.children.push(
@@ -316,12 +314,6 @@ const addSizeExtraProps = ( saveElementProps, blockType, attributes ) => {
               )
         );
     }
-
-    // if ( true ) {
-    //     // Use Lodash's assign to gracefully handle if attributes are undefined
-    //     assign( saveElementProps, { style: { 'margin-bottom': margins.large } } );
-    // }
-    // console.log(saveElementProps);
     return saveElementProps;
 };
 
