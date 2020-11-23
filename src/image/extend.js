@@ -111,6 +111,10 @@ const addSrcControlAttribute = ( settings, name ) => {
       type: 'number',
       default: undefined,
     },
+    cdnFileId: {
+      type: 'string',
+      default: undefined,
+    },
     size: {
       type: 'string',
       default: sizeControlOptions.find(o => o.default).value,
@@ -200,11 +204,12 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       [ props.attributes.id, props.isSelected ]
     );
 
-    // ensure cdn url is used always
+    // ensure cdn url + file id is used always
     // TODO find if there is a better way doing this
     if (!props.attributes.crop && image && image.media_details && props.attributes.url != image.media_details.cdn_url) {
       props.setAttributes({
         url: image.media_details.cdn_url,
+        cdnFileId: image.media_details.cdn_file_id,
         width: undefined,
         height: undefined,
         sizeSlug: undefined,
@@ -247,6 +252,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
                 const crop = getCrop(image, selectedCrop)
                 props.setAttributes( {
                   url: crop ? crop.cdn_url : image.media_details.cdn_url,
+                  cdnFileId: image.media_details.cdn_file_id,
                   width: undefined,
                   height: undefined,
                   sizeSlug: undefined,
@@ -258,8 +264,8 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
                     y: crop.y
                   } : null),
                   aspectRatio: {
-                    width: crop ? crop.aspect_ratio_width : image.media_details.width,
-                    height: crop ? crop.aspect_ratio_height : image.media_details.height
+                    width: (crop && crop.aspect_ratio) ? crop.aspect_ratio.width : image.media_details.width,
+                    height: (crop && crop.aspect_ratio) ? crop.aspect_ratio.height : image.media_details.height
                   }
                 } );
               } }
