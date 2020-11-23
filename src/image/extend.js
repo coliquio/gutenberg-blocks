@@ -32,16 +32,13 @@ const enableOnBlocks = [
 
 const sizeControlOptions = [
   {
-    label: __( 'None' ),
-    value: '',
-    },
-    {
     label: __( 'XS' ),
-    value: 'x-small',
+    value: 'extra-small',
   },
   {
     label: __( 'S' ),
     value: 'small',
+    default: true,
   },
   {
     label: __( 'M' ),
@@ -50,10 +47,10 @@ const sizeControlOptions = [
   {
     label: __( 'L' ),
     value: 'large',
-    },
-    {
+  },
+  {
     label: __( 'XL' ),
-    value: 'x-large',
+    value: 'extra-large',
   },
 ];
 
@@ -93,55 +90,51 @@ const addSrcControlAttribute = ( settings, name ) => {
     classNameTest: {
       type: 'string',
       default: '',
-        },
-        url: {
-            type: 'string',
-            default: '',
-        },
-        href: {
-            type: 'string',
-            default: '',
-        },
-        alt: {
-            type: 'string',
-            default: '',
-        },
-        height: {
-            type: 'number',
-            default: undefined,
-        },
-        width: {
-            type: 'number',
-            default: undefined,
-        },
-        size: {
-          type: 'string',
-          default: sizeControlOptions[ 0 ].value,
-        },
-        copyright: {
-            type: 'string',
-        },
-        cropName: {
-          type: 'string',
-          default: undefined
-        },
-        cropX: {
-          type: 'number',
-          default: undefined
-        },
-        cropY: {
-          type: 'number',
-          default: undefined
-        },
-        cropWidth: {
-          type: 'number',
-          default: undefined
-        },
-        cropHeight: {
-          type: 'number',
-          default: undefined
-        }
-  } );
+    },
+    url: {
+      type: 'string',
+      default: '',
+    },
+    href: {
+      type: 'string',
+      default: '',
+    },
+    alt: {
+      type: 'string',
+      default: '',
+    },
+    height: {
+      type: 'number',
+      default: undefined,
+    },
+    width: {
+      type: 'number',
+      default: undefined,
+    },
+    cdnFileId: {
+      type: 'string',
+      default: undefined,
+    },
+    size: {
+      type: 'string',
+      default: sizeControlOptions.find(o => o.default).value,
+    },
+    copyright: {
+      type: 'string',
+    },
+    crop: {
+      type: 'object',
+      default: null
+    },
+    aspectRatio: {
+      type: 'object',
+      default: null
+    },
+    zoomImage: {
+      type: 'object',
+      default: null
+    }
+  });
 
   return settings;
 };
@@ -149,12 +142,16 @@ const addSrcControlAttribute = ( settings, name ) => {
 addFilter( 'blocks.registerBlockType', 'extend-block-image/attribute/src', addSrcControlAttribute );
 
 function getCropOptions(image) {
-  return image && image.media_details && image.media_details.crops ? Object.keys(image.media_details.crops).map(key => {
+  return [{
+    label: __( '---'),
+    value: undefined
+  }].concat(image && image.media_details && image.media_details.crops ? Object.keys(image.media_details.crops).map(key => {
+    const crop = image.media_details.crops[key]
     return {
-      label: __( image.media_details.crops[key].name ),
-      value: image.media_details.crops[key].name
+      label: __( crop.label + (crop.description ? ' - ' + crop.description : '') ),
+      value: crop.name
     }
-  }) : [{ label: 'undefined', value: 'undefined'}]
+  }) : [])
 }
 
 function getCrop(image, cropName) {
@@ -192,9 +189,9 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
 
     // add has-size-xy class to block
     if ( size ) {
-        props.setAttributes( {
-          className: `custom-size-${ size }`,
-        });
+      props.setAttributes( {
+        className: `custom-size-${ size }`,
+      });
     }
 
     if (typeof props.attributes.caption === 'object') {
@@ -202,14 +199,6 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
         caption: props.attributes.caption.raw ? props.attributes.caption.raw : undefined
       });
     }
-    const {
-      imageSizes,
-      mediaUpload,
-    } = useSelect( ( select ) => {
-      const { getSettings } = select( 'core/block-editor' );
-      return getSettings();
-    } );
-
 
     const image = useSelect(
       ( select ) => {
@@ -218,6 +207,30 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       },
       [ props.attributes.id, props.isSelected ]
     );
+
+    // ensure cdn url + file id is used always
+    // TODO find if there is a better way doing this
+    if (!props.attributes.crop && image && image.media_details && props.attributes.url != image.media_details.cdn_url) {
+      props.setAttributes({
+        url: image.media_details.cdn_url,
+        cdnFileId: image.media_details.cdn_file_id,
+        width: undefined,
+        height: undefined,
+        sizeSlug: undefined,
+        crop: null,
+        aspectRatio: {
+          width: image.media_details.width,
+          height: image.media_details.height
+        },
+        zoomImage: {
+          url: image.media_details.cdn_url,
+          aspectRatio: {
+            width: image.media_details.width,
+            height: image.media_details.height
+          }
+        }
+      });
+    }
 
     return (
       <Fragment>
@@ -237,7 +250,6 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
               value={ size }
               options={ sizeControlOptions }
               onChange={ ( selectedsizeOption ) => {
-                  console.log(selectedsizeOption);
                 props.setAttributes( {
                   size: selectedsizeOption,
                 } );
@@ -245,25 +257,27 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
             />
             <SelectControl
               label={ __( 'Crop' ) }
-              value={ props.cropName }
+              value={ props.attributes.crop ? props.attributes.crop.name : undefined }
               options={ getCropOptions(image) }
               onChange={ ( selectedCrop ) => {
-                // TODO if selectedCrop is null or
-                // -> put image.original_cdn_url 
-                // -> aspectRatioWidth + aspectRatioHeight to the image.width + image.height
                 const crop = getCrop(image, selectedCrop)
                 props.setAttributes( {
-                  url: crop.cdn_url,
+                  url: crop ? crop.cdn_url : image.media_details.cdn_url,
+                  cdnFileId: image.media_details.cdn_file_id,
                   width: undefined,
                   height: undefined,
-                  sizeSlug: crop.style_name,
-                  cropName: selectedCrop,
-                  cropX: crop.x,
-                  cropY: crop.y,
-                  cropHeight: crop.height,
-                  cropWidth: crop.width,
-                  aspectRatioWidth: crop.aspect_ratio_width,
-                  aspectRatioHeight: crop.aspect_ratio_height
+                  sizeSlug: undefined,
+                  crop: (crop ? {
+                    name: crop.name,
+                    width: crop.width,
+                    height: crop.height,
+                    x: crop.x,
+                    y: crop.y
+                  } : null),
+                  aspectRatio: {
+                    width: (crop && crop.aspect_ratio) ? crop.aspect_ratio.width : image.media_details.width,
+                    height: (crop && crop.aspect_ratio) ? crop.aspect_ratio.height : image.media_details.height
+                  }
                 } );
               } }
             />
