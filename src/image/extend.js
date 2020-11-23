@@ -129,6 +129,10 @@ const addSrcControlAttribute = ( settings, name ) => {
     aspectRatio: {
       type: 'object',
       default: null
+    },
+    zoomImage: {
+      type: 'object',
+      default: null
     }
   });
 
@@ -217,6 +221,13 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
         aspectRatio: {
           width: image.media_details.width,
           height: image.media_details.height
+        },
+        zoomImage: {
+          url: image.media_details.cdn_url,
+          aspectRatio: {
+            width: image.media_details.width,
+            height: image.media_details.height
+          }
         }
       });
     }
