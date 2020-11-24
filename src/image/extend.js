@@ -7,23 +7,7 @@ const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 const { InspectorControls } = wp.editor;
 const { PanelBody, SelectControl, TextControl } = wp.components;
-const { unregisterBlockStyle } = wp.blocks;
 const { useSelect } = wp.data;
-
-// src in custom block has to be called url now
-// url used for link should be href - as it's taken by src
-//  
-
-// registerBlockStyle( 'core/image' , {
-//     name: 'default',
-//     label: __( 'Default' ),
-//     isDefault: true,
-//   });
-
-// unregisterBlockStyle('core/image', 'rounded');
-
-// unregisterBlockStyle( 'core/quote', 'large' );
-
 
 // Enable properties on the following blocks
 const enableOnBlocks = [
@@ -79,15 +63,18 @@ const addSrcControlAttribute = ( settings, name ) => {
   // Do nothing if it's another block than our defined ones.
   if ( ! enableOnBlocks.includes( name ) ) {
     return settings;
-    }
-    // debugger;
-  // Use Lodash's assign to gracefully handle if attributes are undefined
+  }
+  
   settings.attributes = assign( settings.attributes, {
     src: {
       type: 'string',
       default: '',
     },
-    classNameTest: {
+    className: {
+      type: 'string',
+      default: '',
+    },
+    classNameZoom: {
       type: 'string',
       default: '',
     },
@@ -117,7 +104,6 @@ const addSrcControlAttribute = ( settings, name ) => {
     },
     size: {
       type: 'string',
-      default: sizeControlOptions.find(o => o.default).value,
     },
     copyright: {
       type: 'string',
@@ -133,7 +119,11 @@ const addSrcControlAttribute = ( settings, name ) => {
     zoomImage: {
       type: 'object',
       default: null
-    }
+    },
+    magnification: {
+      type: 'string',
+      default: 'false',
+    },
   });
 
   return settings;
@@ -174,8 +164,6 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       );
     }
 
-    // let a = document.querySelectorAll('.components-panel__body>h2>button');
-    // let b = document.querySelectorAll('.components-base-control__label');
     disabledElements.forEach(el => {
       const temp = document.querySelectorAll(el.selector);
       temp.forEach(node => {
@@ -185,14 +173,14 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       });
     });   
 
-    const { size, copyright } = props.attributes;
-
     // add has-size-xy class to block
-    if ( size ) {
+    if ( !props.attributes.size ) {
       props.setAttributes( {
-        className: `custom-size-${ size }`,
+        size: sizeControlOptions.find(o => o.default).value,
+        className: `custom-size-${ sizeControlOptions.find(o => o.default).value }`,
       });
     }
+    
 
     if (typeof props.attributes.caption === 'object') {
       props.setAttributes({
@@ -242,17 +230,20 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
           >
             <TextControl
                 label={__('Copyright')}
-                value={copyright}
+                value={props.attributes.copyright}
                 onChange={copyright => props.setAttributes({ copyright })}
             />
             <SelectControl
               label={ __( 'Sizing' ) }
-              value={ size }
+              value={ props.attributes.size }
               options={ sizeControlOptions }
               onChange={ ( selectedsizeOption ) => {
                 props.setAttributes( {
                   size: selectedsizeOption,
                 } );
+                props.setAttributes( {
+                  className: `custom-size-${ selectedsizeOption }`,
+                });
               } }
             />
             <SelectControl
@@ -281,6 +272,23 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
                 } );
               } }
             />
+            <SelectControl
+                label={__('Magnification')}
+                value={ props.attributes.magnification }
+                options={[{label: __('DISABLED'), value: 'false'}, {label: __('ENABLED'), value: 'true'}]}
+                onChange={ ( magnification ) => {
+                  props.setAttributes({ magnification });
+                  if (magnification === 'true') {
+                    props.setAttributes({
+                      classNameZoom: ' magnification-enabled',
+                    });
+                  } else {
+                    props.setAttributes({
+                      classNameZoom: '',
+                    });
+                  }
+                }}
+            />
           </PanelBody>
         </InspectorControls>
       </Fragment>
@@ -301,11 +309,11 @@ addFilter( 'editor.BlockEdit', 'extend-block-image/with-src-attribute', withSrcA
  * @returns {object} Modified props of save element.
  */
 const addSizeExtraProps = ( saveElementProps, blockType, attributes ) => {
-    // Do nothing if it's another block than our defined ones.
     if ( ! enableOnBlocks.includes( blockType.name ) ) {
         return saveElementProps;
     }
-    // console.log(attributes);
+
+    saveElementProps.className += attributes.classNameZoom;
 
     if ( attributes.copyright ) {
         saveElementProps.children.props.children.push(
@@ -317,11 +325,6 @@ const addSizeExtraProps = ( saveElementProps, blockType, attributes ) => {
         );
     }
 
-    // if ( true ) {
-    //     // Use Lodash's assign to gracefully handle if attributes are undefined
-    //     assign( saveElementProps, { style: { 'margin-bottom': margins.large } } );
-    // }
-    // console.log(saveElementProps);
     return saveElementProps;
 };
 
