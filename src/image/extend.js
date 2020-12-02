@@ -1,5 +1,6 @@
 import React from 'react'
-import assign from 'lodash.assign';
+import assign from 'lodash.assign'
+import './style.scss'
 
 const { createHigherOrderComponent } = wp.compose;
 const { Fragment } = wp.element;
@@ -144,6 +145,19 @@ function getCropOptions(image) {
   }) : [])
 }
 
+function getCopyright(image) {
+  return [{
+    label: __( '---'),
+    value: undefined
+  }].concat(image && image.media_details && image.media_details.crops ? Object.keys(image.media_details.crops).map(key => {
+    const crop = image.media_details.crops[key]
+    return {
+      label: __( crop.label + (crop.description ? ' - ' + crop.description : '') ),
+      value: crop.name
+    }
+  }) : [])
+}
+
 function getCrop(image, cropName) {
   if (!image) return
   const key = Object.keys(image.media_details.crops).find(key => {
@@ -220,12 +234,14 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       });
     }
 
+    console.log('image - ', image);
+
     return (
       <Fragment>
         <BlockEdit { ...props } />
         <InspectorControls>
           <PanelBody
-            title={ __( 'Sizing Control' ) }
+            title={ __( 'Custom Control' ) }
             initialOpen={ true }
           >
             <TextControl
@@ -308,14 +324,16 @@ addFilter( 'editor.BlockEdit', 'extend-block-image/with-src-attribute', withSrcA
  *
  * @returns {object} Modified props of save element.
  */
-const addSizeExtraProps = ( saveElementProps, blockType, attributes ) => {
+const addExtraProps = ( saveElementProps, blockType, attributes ) => {
     if ( ! enableOnBlocks.includes( blockType.name ) ) {
         return saveElementProps;
     }
+    wp.blocks.unregisterBlockStyle('core/image', 'rounded');
+    wp.blocks.unregisterBlockStyle('core/image', 'default');
 
     saveElementProps.className += attributes.classNameZoom;
 
-    if ( attributes.copyright ) {
+    if ( attributes.copyright && saveElementProps.children && saveElementProps.children.props) {
         saveElementProps.children.props.children.push(
             React.createElement(
                 "span", // type
@@ -328,4 +346,4 @@ const addSizeExtraProps = ( saveElementProps, blockType, attributes ) => {
     return saveElementProps;
 };
 
-addFilter( 'blocks.getSaveContent.extraProps', 'extend-block-image/get-save-content/extra-props', addSizeExtraProps );
+addFilter( 'blocks.getSaveContent.extraProps', 'extend-block-image/get-save-content/extra-props', addExtraProps );
