@@ -7,7 +7,7 @@ const { Fragment } = wp.element;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 const { InspectorControls } = wp.editor;
-const { PanelBody, SelectControl, TextControl } = wp.components;
+const { PanelBody, SelectControl, TextControl, Disabled, Popover } = wp.components;
 const { useSelect } = wp.data;
 
 // Enable properties on the following blocks
@@ -47,9 +47,12 @@ const disabledElements = [
   {
     text: 'Image size',
     selector: '.components-base-control__label',
+  },
+  {
+    text: 'Image dimensions',
+    selector: '.block-editor-image-size-control__row',
   }
 ];
-const disabledElementsSelectors = ['Styles', ];
 
 /**
  * Add src attribute to block.
@@ -146,16 +149,7 @@ function getCropOptions(image) {
 }
 
 function getCopyright(image) {
-  return [{
-    label: __( '---'),
-    value: undefined
-  }].concat(image && image.media_details && image.media_details.crops ? Object.keys(image.media_details.crops).map(key => {
-    const crop = image.media_details.crops[key]
-    return {
-      label: __( crop.label + (crop.description ? ' - ' + crop.description : '') ),
-      value: crop.name
-    }
-  }) : [])
+  return image ? image.media_fields.field_copyright.value.value : '';
 }
 
 function getCrop(image, cropName) {
@@ -178,6 +172,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       );
     }
 
+    console.log('disable');
     disabledElements.forEach(el => {
       const temp = document.querySelectorAll(el.selector);
       temp.forEach(node => {
@@ -234,7 +229,11 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       });
     }
 
-    console.log('image - ', image);
+    if (image && image.media_fields.field_copyright.value.value) {
+      props.setAttributes({
+        copyright: image.media_fields.field_copyright.value.value
+      });
+    }
 
     return (
       <Fragment>
@@ -244,11 +243,6 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
             title={ __( 'Custom Control' ) }
             initialOpen={ true }
           >
-            <TextControl
-                label={__('Copyright')}
-                value={props.attributes.copyright}
-                onChange={copyright => props.setAttributes({ copyright })}
-            />
             <SelectControl
               label={ __( 'Sizing' ) }
               value={ props.attributes.size }
@@ -305,6 +299,13 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
                   }
                 }}
             />
+            <Disabled>
+              <TextControl
+                label={__('Copyright')}
+                help={__('Could be changed in gallery')}
+                value={getCopyright(image)}
+              />
+            </Disabled>
           </PanelBody>
         </InspectorControls>
       </Fragment>

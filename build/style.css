@@ -215,11 +215,17 @@
     background-color: var(--blue-base); }
   .wp-block-coliquio-highlight.blue-border .content {
     background-color: var(--blue-lighten-50); }
-.wp-block-coliquio-accordion {
-  padding: 15px; }
-  .wp-block-coliquio-accordion .accordion-header {
-    font-weight: 600;
-    padding: 10px 15px; }
+section.wp-block-coliquio-media-text {
+  display: flex;
+  width: 100%; }
+  section.wp-block-coliquio-media-text .block-editor-inner-blocks {
+    width: 100%; }
+    section.wp-block-coliquio-media-text .block-editor-inner-blocks .block-editor-block-list__layout {
+      display: flex;
+      flex-direction: row; }
+  section.wp-block-coliquio-media-text .wp-block-group {
+    display: flex;
+    flex: 50%; }
 .wp-block-coliquio-image {
   margin: 15px 0; }
   .wp-block-coliquio-image.align-left {
@@ -247,7 +253,8 @@
 .wp-block-image {
   background-image: url("https://content.coliquio.integration.coliqu.io/core/themes/stable/images/core/throbber-active.gif");
   background-position: center;
-  background-repeat: no-repeat; }
+  background-repeat: no-repeat;
+  min-width: 140px; }
   .wp-block-image.custom-size-x-small {
     width: 16% !important; }
   .wp-block-image.custom-size-small {
@@ -293,3 +300,6 @@ figure.wp-block-image.custom-size-large {
 
 figure.wp-block-image.custom-size-x-large {
   width: 720px !important; }
+
+.components-disabled {
+  opacity: 0.7; }
