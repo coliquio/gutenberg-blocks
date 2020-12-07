@@ -5,7 +5,8 @@ const { createHigherOrderComponent } = wp.compose;
 const { InspectorControls } = wp.editor;
 const { Fragment } = wp.element;
 const { addFilter } = wp.hooks;
-const { PanelBody, TextControl } = wp.components;
+const { PanelBody, TextControl, Disabled } = wp.components;
+const { useSelect } = wp.data;
 
 // Enable properties on the following blocks
 const enableOnBlocks = [
@@ -37,10 +38,6 @@ const addSrcControlAttribute = ( settings, name ) => {
       type: 'array',
       default: [],
     },
-    copyrights: {
-      type: 'array',
-      default: [],
-    }
   } );
 
   return settings;
@@ -59,33 +56,66 @@ const withCustomFeatures = createHigherOrderComponent( ( BlockEdit ) => {
         <BlockEdit { ...props } />
       );
     }
-    console.log('new');
+
+    // const image = useSelect(
+    //   ( select ) => {
+    //     const { getMedia } = select( 'core' );
+    //     return props.attributes.images.length ? getMedia( props.attributes.id ) : null;
+    //   },
+    //   [ props.attributes.id, props.isSelected ]
+    // );
+
     
+
+
 
     // transform image caption to satisfy validation rules
     if (props.attributes.images && props.attributes.images.length) {
-        let changed = false; // it looks weird but additional check is needed not to create endless loop in react
-        const temp = props.attributes.images.map((image, i) => {
+
+
+      const images = useSelect(
+        ( select ) => {
+          const { getMedia } = select( 'core' );
+          return props.attributes.images ? props.attributes.images.map(i => getMedia(i.id)) : null;
+        },
+          [ props.attributes.images, props.attributes.images.map(i => i.id) ]
+        );
+
+        props.attributes.images.map((image, i) => {
             if (typeof image.caption === 'object') {
-                changed = true;
                 image.caption = image.caption.raw ? image.caption.raw : undefined
+            }
+
+            if (images && images[i] && images[i].media_fields && images[i].media_fields.field_copyright) {
+              image.copyright = images[i].media_fields ? images[i].media_fields.field_copyright.value.value : '';
+            }
+
+            if (images && images[i] && images[i].media_details && image.url != images[i].media_details.cdn_url) {
+              
+                image.url = images[i].media_details.crops.teaser.cdn_url;
+                image.cdnFileId = images[i].media_details.cdn_file_id;
+                image.width = undefined;
+                image.imageheight = undefined;
+                image.sizeSlug = undefined;
+                image.crop = null;
+                image.link = undefined;
+                image.aspectRatio = images[i].media_details.crops.teaser.aspect_ratio;
+                image.zoomImage = {
+                  url: images[i].media_details.cdn_url,
+                  aspectRatio: {
+                    width: images[i].media_details.width,
+                    height: images[i].media_details.height
+                  }
+                };
+              
             }
             return image;
         });
-        if (changed) {
-          console.log('changed');
-            props.setAttributes({
-                images: temp
-            });
-        }
     }
 
     return (
       <Fragment>
         <BlockEdit { ...props }/>
-        {props.attributes.copyrights.map((item, index)=>{
-                  return <span>{ item } { index }</span>
-              })}
         
         <InspectorControls>
           <PanelBody
@@ -93,22 +123,15 @@ const withCustomFeatures = createHigherOrderComponent( ( BlockEdit ) => {
               initialOpen={ true }
             >
               {props.attributes.images.map((item, index)=>{
-                  return <TextControl
+                  return 
+                  <Disabled>
+                    <TextControl
                       key={ index }
                       label={__('Copyright ')}
-                      value={props.attributes.copyrights[index]}
-                      onChange={copyright => {
-                        
-                        let temp = props.attributes.copyrights;
-                        temp[index] = copyright;
-
-                        props.setAttributes({
-                          copyrights: temp
-                        });
-
-                        console.log('props inside ', props);
-                      }}
-                  />
+                      help={__('Could be changed in gallery')}
+                      value={props.attributes.images[index].copyright}
+                    />
+                  </Disabled>
               })}
               
           </PanelBody>
@@ -140,15 +163,15 @@ const addExtraProps = ( saveElementProps, blockType, attributes ) => {
 
   saveElementProps.className += attributes.classNameZoom;
 
-  if ( attributes.copyright && saveElementProps.children && saveElementProps.children.props) {
-      saveElementProps.children.props.children.push(
-          React.createElement(
-              "span", // type
-              { type: "text" }, // props
-              attributes.copyright // children
-            )
-      );
-  }
+  // if ( attributes.copyright && saveElementProps.children && saveElementProps.children.props) {
+  //     saveElementProps.children.props.children.push(
+  //         React.createElement(
+  //             "span", // type
+  //             { type: "text" }, // props
+  //             attributes.copyright // children
+  //           )
+  //     );
+  // }
 
   return saveElementProps;
 };
