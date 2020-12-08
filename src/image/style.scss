@@ -36,8 +36,13 @@
 }
 
 .wp-block-image {
+
+  background-image: url("https://content.coliquio.integration.coliqu.io/core/themes/stable/images/core/throbber-active.gif");
+  background-position: center;
+  background-repeat: no-repeat;
+  min-width: 140px;
+
   &.custom-size-x-small {
-    border: 1px solid red;
     width: 16%!important;
   }
   &.custom-size-small{
@@ -62,6 +67,11 @@
       display: none;
     }
   }
+  .components-text-control__input {
+    border: none!important;
+    box-shadow: none!important;
+    text-align: center;
+  }
 }
 
 // there is js logic adding this class based on innerHtml of the buttons(text)
@@ -69,15 +79,10 @@
   display: none;
 }
 
-.block-editor-image-size-control {
+.block-editor-block-toolbar .media-replace-flow {
   display: none;
 }
 
-// hide styles section for core/image
-.block-editor-block-switcher__styles__menugroup,
-.block-editor-block-switcher__container>.components-menu-group:nth-child(1) {
-  display: none;
-}
 // hide upload button from popup menu
 .components-form-file-upload {
   display: none;
@@ -99,4 +104,8 @@ figure.wp-block-image {
   &.custom-size-x-large {
     width: 720px!important;
   }
+}
+
+.components-disabled {
+  opacity: 0.7;
 }

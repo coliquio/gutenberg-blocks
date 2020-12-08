@@ -35,14 +35,12 @@ export const settings = {
             'core/image'
         ],
         template = [
-            [ 'core/columns', {}, [
-                [ 'core/column', {}, [
-                    [ 'coliquio/image' ],
-                ] ],
-                [ 'core/column', {}, [
-                    [ 'core/paragraph', { placeholder: __('Enter side content...') } ],
-                ] ],
-            ] ]
+            [ 'core/group', {}, [
+                [ 'core/image' ],
+            ] ],
+            [ 'core/group', {}, [
+                [ 'core/paragraph', { placeholder: __('Enter side content...') } ],
+            ] ],
         ];
 
     return (
@@ -57,6 +55,7 @@ export const settings = {
             <InnerBlocks
                 allowedBlocks={ allowedBlocks }
                 template={ template }
+                templateLock={true}
             />
         </section>
     );

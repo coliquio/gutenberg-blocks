@@ -1,12 +1,13 @@
 import React from 'react'
-import assign from 'lodash.assign';
+import assign from 'lodash.assign'
+import './style.scss'
 
 const { createHigherOrderComponent } = wp.compose;
 const { Fragment } = wp.element;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 const { InspectorControls } = wp.editor;
-const { PanelBody, SelectControl, TextControl } = wp.components;
+const { PanelBody, SelectControl, TextControl, Disabled } = wp.components;
 const { useSelect } = wp.data;
 
 // Enable properties on the following blocks
@@ -46,9 +47,12 @@ const disabledElements = [
   {
     text: 'Image size',
     selector: '.components-base-control__label',
+  },
+  {
+    text: 'Image dimensions',
+    selector: '.block-editor-image-size-control__row',
   }
 ];
-const disabledElementsSelectors = ['Styles', ];
 
 /**
  * Add src attribute to block.
@@ -144,6 +148,10 @@ function getCropOptions(image) {
   }) : [])
 }
 
+function getCopyright(image) {
+  return image && image.media_fields ? image.media_fields.field_copyright.value.value : '';
+}
+
 function getCrop(image, cropName) {
   if (!image) return
   const key = Object.keys(image.media_details.crops).find(key => {
@@ -220,19 +228,20 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       });
     }
 
+    if (image && image.media_fields && image.media_fields.field_copyright.value.value) {
+      props.setAttributes({
+        copyright: image.media_fields.field_copyright.value.value
+      });
+    }
+
     return (
       <Fragment>
         <BlockEdit { ...props } />
         <InspectorControls>
           <PanelBody
-            title={ __( 'Sizing Control' ) }
+            title={ __( 'Custom Control' ) }
             initialOpen={ true }
           >
-            <TextControl
-                label={__('Copyright')}
-                value={props.attributes.copyright}
-                onChange={copyright => props.setAttributes({ copyright })}
-            />
             <SelectControl
               label={ __( 'Sizing' ) }
               value={ props.attributes.size }
@@ -289,6 +298,13 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
                   }
                 }}
             />
+            <Disabled>
+              <TextControl
+                label={__('Copyright')}
+                help={__('Could be changed in gallery')}
+                value={getCopyright(image)}
+              />
+            </Disabled>
           </PanelBody>
         </InspectorControls>
       </Fragment>
@@ -308,14 +324,16 @@ addFilter( 'editor.BlockEdit', 'extend-block-image/with-src-attribute', withSrcA
  *
  * @returns {object} Modified props of save element.
  */
-const addSizeExtraProps = ( saveElementProps, blockType, attributes ) => {
+const addExtraProps = ( saveElementProps, blockType, attributes ) => {
     if ( ! enableOnBlocks.includes( blockType.name ) ) {
         return saveElementProps;
     }
+    wp.blocks.unregisterBlockStyle('core/image', 'rounded');
+    wp.blocks.unregisterBlockStyle('core/image', 'default');
 
     saveElementProps.className += attributes.classNameZoom;
 
-    if ( attributes.copyright ) {
+    if ( attributes.copyright && saveElementProps.children && saveElementProps.children.props) {
         saveElementProps.children.props.children.push(
             React.createElement(
                 "span", // type
@@ -328,4 +346,4 @@ const addSizeExtraProps = ( saveElementProps, blockType, attributes ) => {
     return saveElementProps;
 };
 
-addFilter( 'blocks.getSaveContent.extraProps', 'extend-block-image/get-save-content/extra-props', addSizeExtraProps );
+addFilter( 'blocks.getSaveContent.extraProps', 'extend-block-image/get-save-content/extra-props', addExtraProps );
