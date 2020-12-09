@@ -229,12 +229,9 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       });
     }
     
-    const copyright = get(image, 'media_fields.field_copyright.value.value');
-    if (props.attributes.copyright != copyright) {
-      props.setAttributes({
-        copyright
-      });
-    }
+    props.setAttributes({
+      copyright: get(image, 'media_fields.field_copyright.value.value')
+    });
 
     return (
       <Fragment>
