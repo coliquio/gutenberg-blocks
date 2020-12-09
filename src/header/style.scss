@@ -1,0 +1,27 @@
+@import "../common/colors.css";
+
+.wp-block-coliquio-header {
+  &[contenteditable] {
+    cursor: text;
+  }
+
+  display: block;
+  text-align: left;
+  vertical-align: middle;
+  cursor: pointer;
+  padding: .5rem 1rem;
+  outline: 0;
+  margin-bottom: .25rem;
+  text-decoration: none;
+
+  .kicker {
+    font-weight: 400;
+    font-size: 1.125rem;
+    margin-bottom: .25rem;
+  }
+
+  .headline {
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+}

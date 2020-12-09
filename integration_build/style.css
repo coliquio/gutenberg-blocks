@@ -226,6 +226,24 @@ section.wp-block-coliquio-media-text {
   min-height: 300px; }
   .wp-block-coliquio-iframe.iframe, .wp-block-coliquio-iframe.iframe-survey {
     border: 1px solid var(--black-lighten-40); }
+.wp-block-coliquio-header {
+  display: block;
+  text-align: left;
+  vertical-align: middle;
+  cursor: pointer;
+  padding: .5rem 1rem;
+  outline: 0;
+  margin-bottom: .25rem;
+  text-decoration: none; }
+  .wp-block-coliquio-header[contenteditable] {
+    cursor: text; }
+  .wp-block-coliquio-header .kicker {
+    font-weight: 400;
+    font-size: 1.125rem;
+    margin-bottom: .25rem; }
+  .wp-block-coliquio-header .headline {
+    font-weight: 600;
+    font-size: 1.25rem; }
 .wp-block-coliquio-image {
   margin: 15px 0; }
   .wp-block-coliquio-image.align-left {
