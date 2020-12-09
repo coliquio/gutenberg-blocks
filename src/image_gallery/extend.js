@@ -1,5 +1,6 @@
 import React from 'react'
 import assign from 'lodash.assign';
+import get from 'lodash.get';
 
 const { createHigherOrderComponent } = wp.compose;
 const { InspectorControls } = wp.editor;
@@ -86,9 +87,7 @@ const withCustomFeatures = createHigherOrderComponent( ( BlockEdit ) => {
                 image.caption = image.caption.raw ? image.caption.raw : undefined
             }
 
-            if (images && images[i] && images[i].media_fields && images[i].media_fields.field_copyright) {
-              image.copyright = images[i].media_fields ? images[i].media_fields.field_copyright.value.value : '';
-            }
+            image.copyright = get(images, '['+i+'].media_fields.field_copyright.value.value', '');
 
             if (images && images[i] && images[i].media_details && image.url != images[i].media_details.cdn_url) {
               

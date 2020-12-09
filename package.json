@@ -38,6 +38,7 @@
   "dependencies": {
     "lodash": "^4.17.20",
     "lodash.assign": "^4.2.0",
+    "lodash.get": "^4.2.0",
     "react": "^16.13.1",
     "react-cache": "^2.0.0-alpha.1",
     "react-dom": "^16.13.1",
