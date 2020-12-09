@@ -66,50 +66,45 @@ const withCustomFeatures = createHigherOrderComponent( ( BlockEdit ) => {
     //   [ props.attributes.id, props.isSelected ]
     // );
 
-    
-
-
-
     // transform image caption to satisfy validation rules
     if (props.attributes.images && props.attributes.images.length) {
-
 
       const images = useSelect(
         ( select ) => {
           const { getMedia } = select( 'core' );
           return props.attributes.images ? props.attributes.images.map(i => getMedia(i.id)) : null;
         },
-          [ props.attributes.images, props.attributes.images.map(i => i.id) ]
-        );
+        [ props.attributes.images, props.attributes.images.map(i => i.id) ]
+      );
 
-        props.attributes.images.map((image, i) => {
-            if (typeof image.caption === 'object') {
-                image.caption = image.caption.raw ? image.caption.raw : undefined
-            }
+      props.attributes.images.forEach((image, i) => {
+        if (typeof image.caption === 'object') {
+            image.caption = image.caption.raw ? image.caption.raw : undefined
+        }
 
-            image.copyright = get(images, '['+i+'].media_fields.field_copyright.value.value', '');
+        image.copyright = get(images, '['+i+'].media_fields.field_copyright.value.value', '');
 
-            if (images && images[i] && images[i].media_details && image.url != images[i].media_details.cdn_url) {
-              
-                image.url = images[i].media_details.crops.teaser.cdn_url;
-                image.cdnFileId = images[i].media_details.cdn_file_id;
-                image.width = undefined;
-                image.imageheight = undefined;
-                image.sizeSlug = undefined;
-                image.crop = null;
-                image.link = undefined;
-                image.aspectRatio = images[i].media_details.crops.teaser.aspect_ratio;
-                image.zoomImage = {
-                  url: images[i].media_details.cdn_url,
-                  aspectRatio: {
-                    width: images[i].media_details.width,
-                    height: images[i].media_details.height
-                  }
-                };
-              
-            }
-            return image;
-        });
+        const mediaDetails = get(images, '['+i+'].media_fields');
+        if (mediaDetails && image.url != mediaDetails.cdn_url) {
+            image.url = mediaDetails.crops.teaser.cdn_url;
+            image.cdnFileId = mediaDetails.cdn_file_id;
+            image.width = undefined;
+            image.imageheight = undefined;
+            image.sizeSlug = undefined;
+            image.crop = null;
+            image.link = undefined;
+            image.aspectRatio = mediaDetails.crops.teaser.aspect_ratio;
+            image.zoomImage = {
+              url: mediaDetails.cdn_url,
+              aspectRatio: {
+                width: mediaDetails.width,
+                height: mediaDetails.height
+              }
+            };
+          
+        }
+        return image;
+      });
     }
 
     return (
