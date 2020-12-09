@@ -1,5 +1,6 @@
 import React from 'react'
 import assign from 'lodash.assign'
+import get from 'lodash.get'
 import './style.scss'
 
 const { createHigherOrderComponent } = wp.compose;
@@ -227,10 +228,11 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
         }
       });
     }
-
-    if (image && image.media_fields && image.media_fields.field_copyright.value.value) {
+    
+    const copyright = get(image, 'media_fields.field_copyright.value.value');
+    if (props.attributes.copyright != copyright) {
       props.setAttributes({
-        copyright: image.media_fields.field_copyright.value.value
+        copyright
       });
     }
 
