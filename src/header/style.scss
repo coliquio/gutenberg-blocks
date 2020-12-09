@@ -1,5 +1,20 @@
 @import "../common/colors.css";
 
+.header-valid {
+  font-weight: bold;
+  color: var(--green-base);
+}
+
+.header-invalid-too-long-1 {
+  font-weight: bold;
+  color: var(--orange-darken-10);
+}
+
+.header-invalid-too-long-2 {
+  font-weight: bold;
+  color: var(--red-base);
+}
+
 .wp-block-coliquio-header {
   &[contenteditable] {
     cursor: text;
@@ -13,6 +28,14 @@
   outline: 0;
   margin-bottom: .25rem;
   text-decoration: none;
+
+  &.warning-too-long-1 {
+    color: var(--orange-darken-10);
+  }
+
+  &.warning-too-long-2 {
+    color: var(--red-base);
+  }
 
   .kicker {
     font-weight: 400;

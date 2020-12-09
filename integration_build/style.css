@@ -226,6 +226,18 @@ section.wp-block-coliquio-media-text {
   min-height: 300px; }
   .wp-block-coliquio-iframe.iframe, .wp-block-coliquio-iframe.iframe-survey {
     border: 1px solid var(--black-lighten-40); }
+.header-valid {
+  font-weight: bold;
+  color: var(--green-base); }
+
+.header-invalid-too-long-1 {
+  font-weight: bold;
+  color: var(--orange-darken-10); }
+
+.header-invalid-too-long-2 {
+  font-weight: bold;
+  color: var(--red-base); }
+
 .wp-block-coliquio-header {
   display: block;
   text-align: left;
@@ -237,6 +249,10 @@ section.wp-block-coliquio-media-text {
   text-decoration: none; }
   .wp-block-coliquio-header[contenteditable] {
     cursor: text; }
+  .wp-block-coliquio-header.warning-too-long-1 {
+    color: var(--orange-darken-10); }
+  .wp-block-coliquio-header.warning-too-long-2 {
+    color: var(--red-base); }
   .wp-block-coliquio-header .kicker {
     font-weight: 400;
     font-size: 1.125rem;

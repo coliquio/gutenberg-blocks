@@ -1,5 +1,6 @@
 import React from 'react'
 import {blockEditor, components, element, i18n} from 'wp'
+import get from 'lodash.get'
 import './style.scss'
 
 const { Fragment } = element
@@ -27,10 +28,35 @@ export const settings = {
   },
 
   edit({ attributes, className, setAttributes }) {
+    const length = get(attributes, 'kicker.length', 0) + get(attributes, 'headline.length', 0)
+    const idealLength = 70
+    const veryBadLength = 90
+    const classNames = [className]
+    const warnLevel = length > idealLength ? (length > veryBadLength ? 2 : 1) : 0
+    if (warnLevel > 0) {
+      classNames.push('warning-too-long-' + warnLevel)
+    }
     return (
         <Fragment>
+          <InspectorControls>
+            <PanelBody title={ __( 'Title Size' ) }>
+              <p>
+                {length} Characters
+                {
+                  warnLevel > 0 ?
+                  <div className={'header-invalid-too-long-'+warnLevel}>
+                    Exceeding ideal size by {length - idealLength} Characters!
+                  </div>
+                  :
+                  <div className={'header-valid'}>
+                    Perfect!
+                  </div>
+                }
+              </p>
+            </PanelBody>
+          </InspectorControls>
 
-          <div className={className}>
+          <div className={classNames.join(' ')}>
             <RichText
                 className='kicker'
                 tagName="p"
