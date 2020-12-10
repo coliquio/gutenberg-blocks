@@ -85,15 +85,17 @@ const withCustomFeatures = createHigherOrderComponent( ( BlockEdit ) => {
         image.copyright = get(images, '['+i+'].media_fields.field_copyright.value.value', '');
 
         const mediaDetails = get(images, '['+i+'].media_fields');
-        if (mediaDetails && image.url != mediaDetails.cdn_url) {
-            image.url = mediaDetails.crops.teaser.cdn_url;
+        const teaserCrop = get(mediaDetails, 'crops.teaser');
+
+        if (mediaDetails && teaserCrop && image.url != mediaDetails.cdn_url) {
+            image.url = teaserCrop.cdn_url;
             image.cdnFileId = mediaDetails.cdn_file_id;
             image.width = undefined;
             image.imageheight = undefined;
             image.sizeSlug = undefined;
             image.crop = null;
             image.link = undefined;
-            image.aspectRatio = mediaDetails.crops.teaser.aspect_ratio;
+            image.aspectRatio = teaserCrop.aspect_ratio;
             image.zoomImage = {
               url: mediaDetails.cdn_url,
               aspectRatio: {
