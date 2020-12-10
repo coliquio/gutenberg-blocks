@@ -84,7 +84,7 @@ const withCustomFeatures = createHigherOrderComponent( ( BlockEdit ) => {
 
         image.copyright = get(images, '['+i+'].media_fields.field_copyright.value.value', '');
 
-        const mediaDetails = get(images, '['+i+'].media_fields');
+        const mediaDetails = get(images, '['+i+'].media_details');
         const teaserCrop = get(mediaDetails, 'crops.teaser');
 
         if (mediaDetails && teaserCrop && image.url != mediaDetails.cdn_url) {
