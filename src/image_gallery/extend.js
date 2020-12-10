@@ -3,7 +3,7 @@ import assign from 'lodash.assign';
 import get from 'lodash.get';
 
 const { createHigherOrderComponent } = wp.compose;
-const { InspectorControls } = wp.editor;
+const { InspectorControls } = wp.blockEditor;
 const { Fragment } = wp.element;
 const { addFilter } = wp.hooks;
 const { PanelBody, TextControl, Disabled } = wp.components;

@@ -7,7 +7,7 @@ const { createHigherOrderComponent } = wp.compose;
 const { Fragment } = wp.element;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
-const { InspectorControls } = wp.editor;
+const { InspectorControls } = wp.blockEditor;
 const { PanelBody, SelectControl, TextControl, Disabled } = wp.components;
 const { useSelect } = wp.data;
 
