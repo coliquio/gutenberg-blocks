@@ -4,14 +4,11 @@
   "description": "Custom coliquio blocks",
   "main": "build/index.js",
   "scripts": {
-    "build": "NODE_ENV=production webpack && cp -rf build/ integration_build/",
+    "build": "NODE_ENV=developmet webpack && cp -rf build/ integration_build/",
     "buildNative": "node buildForIos",
     "start": "npm run build && BLOCK_DIR=$PWD npm --prefix node_modules/@frontkom/g-editor start",
     "dev": "NODE_ENV=development webpack && BLOCK_DIR=$PWD npm --prefix node_modules/@frontkom/g-editor start",
     "watch": "nodemon --watch src/ --delay 10ms --exec 'npm run dev'"
-  },
-  "peerDependencies": {
-    "react": "^16.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
@@ -36,9 +33,11 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "dependencies": {
+    "@wordpress/dom-ready": "^2.11.0",
     "lodash": "^4.17.20",
     "lodash.assign": "^4.2.0",
     "lodash.get": "^4.2.0",
+    "lodash.merge": "^4.6.2",
     "react": "^16.13.1",
     "react-cache": "^2.0.0-alpha.1",
     "react-dom": "^16.13.1",

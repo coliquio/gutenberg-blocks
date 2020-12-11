@@ -3,6 +3,7 @@
  */
 import React from 'react'
 import { editor, element, i18n, blockEditor } from 'wp'
+const { RichText } = editor
 /**
  * Internal dependencies
  */
@@ -22,10 +23,13 @@ export const settings = {
   icon: 'excerpt-view',
 
   attributes: {
-    
+    content: {
+        type: 'string',
+        default: '',
+    },
   },
 
-  edit({ className }) {
+  edit({ className, attributes, setAttributes }) {
     const
         allowedBlocks = [
             'core/paragraph',
@@ -35,12 +39,7 @@ export const settings = {
             'core/image'
         ],
         template = [
-            [ 'core/group', {}, [
-                [ 'core/image' ],
-            ] ],
-            [ 'core/group', {}, [
-                [ 'core/paragraph', { placeholder: __('Enter side content...') } ],
-            ] ],
+            [ 'core/image', {}, [] ]
         ];
 
     return (
@@ -55,13 +54,22 @@ export const settings = {
             <InnerBlocks
                 allowedBlocks={ allowedBlocks }
                 template={ template }
-                templateLock={true}
+                templateLock="all"
+            />
+            <RichText
+              tagName="p"
+              placeholder={__('Content')}
+              value={attributes.content}
+              className=""
+              onChange={(content) =>
+                  setAttributes({ content })
+              }
             />
         </section>
     );
   },
 
-  save({ className }) {
+  save({ className, attributes: { content } }) {
     return (
         <section
             className={
@@ -72,6 +80,13 @@ export const settings = {
             }
         >
             <InnerBlocks.Content />
+        <div className="media-text-content">
+            <RichText.Content
+                  tagName="div"
+                  className="media-text-content"
+                  value={ content }
+              />
+        </div>
         </section>
     );
   },

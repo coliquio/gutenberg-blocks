@@ -1,6 +1,7 @@
 import React from 'react'
 import assign from 'lodash.assign';
 import get from 'lodash.get';
+import merge from 'lodash.merge';
 
 const { createHigherOrderComponent } = wp.compose;
 const { InspectorControls } = wp.editor;
@@ -8,10 +9,18 @@ const { Fragment } = wp.element;
 const { addFilter } = wp.hooks;
 const { PanelBody, TextControl, Disabled } = wp.components;
 const { useSelect } = wp.data;
+const { __ } = wp.i18n;
 
 // Enable properties on the following blocks
 const enableOnBlocks = [
   'core/gallery',
+];
+
+const disabledElements = [
+  {
+    text: 'Images size',
+    selector: '.components-base-control__label',
+  },
 ];
 
 /**
@@ -28,6 +37,8 @@ const addSrcControlAttribute = ( settings, name ) => {
   if ( ! enableOnBlocks.includes( name ) ) {
     return settings;
   }
+
+  console.log('blocks.registerBlockType');
 
   // Use Lodash's assign to gracefully handle if attributes are undefined
   settings.attributes = assign( settings.attributes, {
@@ -58,18 +69,24 @@ const withCustomFeatures = createHigherOrderComponent( ( BlockEdit ) => {
       );
     }
 
-    // const image = useSelect(
-    //   ( select ) => {
-    //     const { getMedia } = select( 'core' );
-    //     return props.attributes.images.length ? getMedia( props.attributes.id ) : null;
-    //   },
-    //   [ props.attributes.id, props.isSelected ]
-    // );
+    setTimeout(function() { 
+      console.log('disable');
+      disabledElements.forEach(el => {
+        console.log(el.selector);
+        const temp = document.querySelectorAll(el.selector);
+        console.log(temp);
+        temp.forEach(node => {
+          if (el.text === node.innerText && !node.parentNode.parentNode.className.includes('custom-hidden')) {
+            node.parentNode.parentNode.className += ' custom-hidden';
+          }
+        });
+      }); 
+  
+     }, 50);
 
-    // transform image caption to satisfy validation rules
     if (props.attributes.images && props.attributes.images.length) {
 
-      const images = useSelect(
+      let images = useSelect(
         ( select ) => {
           const { getMedia } = select( 'core' );
           return props.attributes.images ? props.attributes.images.map(i => getMedia(i.id)) : null;
@@ -77,34 +94,47 @@ const withCustomFeatures = createHigherOrderComponent( ( BlockEdit ) => {
         [ props.attributes.images, props.attributes.images.map(i => i.id) ]
       );
 
-      props.attributes.images.forEach((image, i) => {
-        if (typeof image.caption === 'object') {
-            image.caption = image.caption.raw ? image.caption.raw : undefined
-        }
+      // console.log("images - ", images);
+      // console.log("props.attributes.images - ", props.attributes.images);
 
-        image.copyright = get(images, '['+i+'].media_fields.field_copyright.value.value', '');
+      let imagesReal = images.map((image, i) => {
 
-        const mediaDetails = get(images, '['+i+'].media_fields');
-        if (mediaDetails && image.url != mediaDetails.cdn_url) {
-            image.url = mediaDetails.crops.teaser.cdn_url;
-            image.cdnFileId = mediaDetails.cdn_file_id;
-            image.width = undefined;
-            image.imageheight = undefined;
-            image.sizeSlug = undefined;
-            image.crop = null;
-            image.link = undefined;
-            image.aspectRatio = mediaDetails.crops.teaser.aspect_ratio;
-            image.zoomImage = {
-              url: mediaDetails.cdn_url,
-              aspectRatio: {
-                width: mediaDetails.width,
-                height: mediaDetails.height
-              }
-            };
-          
+        let storage = {};
+        
+        if (image) {
+
+            if (typeof image.caption === 'object') {
+              storage.caption = image.caption.raw ? image.caption.raw : undefined
+            }
+
+            storage.copyright = get(images, '['+i+'].media_fields.field_copyright.value.value', '');
+
+            const mediaDetails = get(images, '['+i+'].media_details');
+
+            if (mediaDetails) {
+
+              storage.url = get(mediaDetails, 'crops.teaser.cdn_url');
+              storage.cdnFileId = mediaDetails.cdn_file_id;
+              storage.width = undefined;
+              storage.height = undefined;
+              storage.sizeSlug = undefined;
+              storage.crop = null;
+              storage.link = undefined;
+              storage.aspectRatio = get(mediaDetails, 'crops.teaser.aspect_ratio');
+              storage.zoomImage = {
+                url: mediaDetails.cdn_url,
+                aspectRatio: {
+                  width: mediaDetails.width,
+                  height: mediaDetails.height
+                }
+              };
+            }
+
+          return storage;
         }
-        return image;
       });
+
+      merge(props.attributes.images, imagesReal);
     }
 
     return (
@@ -116,17 +146,16 @@ const withCustomFeatures = createHigherOrderComponent( ( BlockEdit ) => {
               title={ __( 'Custom Control' ) }
               initialOpen={ true }
             >
-              {props.attributes.images.map((item, index)=>{
-                  return 
+              {props.attributes.images.map((item, index) => 
                   <Disabled>
                     <TextControl
                       key={ index }
-                      label={__('Copyright ')}
+                      label={__('Copyright id' + item.id)}
                       help={__('Could be changed in gallery')}
-                      value={props.attributes.images[index].copyright}
+                      value={item.copyright}
                     />
                   </Disabled>
-              })}
+              )}
               
           </PanelBody>
         </InspectorControls>
@@ -155,8 +184,12 @@ const addExtraProps = ( saveElementProps, blockType, attributes ) => {
   wp.blocks.unregisterBlockStyle('core/image', 'rounded');
   wp.blocks.unregisterBlockStyle('core/image', 'default');
 
+  console.log('blocks.getSaveContent.extraProps');
+
   saveElementProps.className += attributes.classNameZoom;
 
+  // FIX ME - there should be better way to do it - causing problems on save(looooooop)
+  // DISABLED FOR TEST
   // if ( attributes.copyright && saveElementProps.children && saveElementProps.children.props) {
   //     saveElementProps.children.props.children.push(
   //         React.createElement(

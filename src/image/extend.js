@@ -2,14 +2,20 @@ import React from 'react'
 import assign from 'lodash.assign'
 import get from 'lodash.get'
 import './style.scss'
+import domReady from '@wordpress/dom-ready'
 
 const { createHigherOrderComponent } = wp.compose;
 const { Fragment } = wp.element;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
-const { InspectorControls } = wp.editor;
-const { PanelBody, SelectControl, TextControl, Disabled } = wp.components;
+const { InspectorControls, MediaUpload, MediaUploadCheck } = wp.editor;
+const { PanelBody, SelectControl, TextControl, Disabled, Button, ResponsiveWrapper } = wp.components;
 const { useSelect } = wp.data;
+
+
+domReady( function() {
+  console.log('domReady');
+} );
 
 // Enable properties on the following blocks
 const enableOnBlocks = [
@@ -41,10 +47,6 @@ const sizeControlOptions = [
 ];
 
 const disabledElements = [
-  {
-    text: 'Styles',
-    selector: '.components-panel__body>h2>button',
-  },
   {
     text: 'Image size',
     selector: '.components-base-control__label',
@@ -172,15 +174,22 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
         <BlockEdit { ...props } />
       );
     }
+    
 
-    disabledElements.forEach(el => {
-      const temp = document.querySelectorAll(el.selector);
-      temp.forEach(node => {
-        if (el.text === node.innerText && !node.parentNode.parentNode.className.includes('custom-hidden')) {
-          node.parentNode.parentNode.className += ' custom-hidden';
-        }
-      });
-    });   
+    setTimeout(function() { 
+      console.log('disable');
+      disabledElements.forEach(el => {
+        console.log(el.selector);
+        const temp = document.querySelectorAll(el.selector);
+        console.log(temp);
+        temp.forEach(node => {
+          if (el.text === node.innerText && !node.parentNode.parentNode.className.includes('custom-hidden')) {
+            node.parentNode.parentNode.className += ' custom-hidden';
+          }
+        });
+      }); 
+  
+     }, 50);
 
     // add has-size-xy class to block
     if ( !props.attributes.size ) {
@@ -232,6 +241,49 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
     props.setAttributes({
       copyright: get(image, 'media_fields.field_copyright.value.value')
     });
+
+    const removeMedia = () => {
+      props.setAttributes({
+        id: 0,
+        url: ''
+      });
+    }
+   
+    const onSelectMedia = (media) => {
+      // REFACTOR ME to avoid repetitions and make one setAttr out of all
+      const propsToUpdate = {
+        id: media.id,
+        caption: get(media, 'caption.raw', undefined),
+        copyright: get(media, 'media_fields.field_copyright.value.value'),
+        url: get(media, 'media_details.cdn_url'),
+        cdnFileId: media.media_details.cdn_file_id,
+        width: undefined,
+        height: undefined,
+        sizeSlug: undefined,
+        crop: null,
+        aspectRatio: {
+          width: get(media, 'media_details.width', undefined),
+          height: get(media, 'media_details.height', undefined),
+        },
+        zoomImage: {
+          url: get(media, 'media_details.cdn_url', undefined),
+          aspectRatio: {
+            width: get(media, 'media_details.width', undefined),
+            height: get(media, 'media_details.height', undefined),
+          }
+        }
+      };
+      props.setAttributes(propsToUpdate);
+      console.log(propsToUpdate);
+    }
+      
+    props.setAttributes({
+      copyright: get(image, 'media_fields.field_copyright.value.value')
+    });
+   
+    const blockStyle = {
+      backgroundImage: props.attributes.mediaUrl != '' ? 'url("' + props.attributes.mediaUrl + '")' : 'none'
+    };
 
     return (
       <Fragment>
@@ -297,6 +349,52 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
                   }
                 }}
             />
+
+            <div className="editor-post-featured-image">
+						<MediaUploadCheck>
+							<MediaUpload
+								onSelect={onSelectMedia}
+								value={props.attributes.mediaId}
+								allowedTypes={ ['image'] }
+								render={({open}) => (
+									<Button 
+										className={props.attributes.mediaId == 0 ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
+										onClick={open}
+									>
+										{props.attributes.mediaId == 0 && __('Choose an image', 'awp')}
+										{props.media != undefined && 
+						            			<ResponsiveWrapper
+									    		naturalWidth={ props.media.media_details.width }
+											naturalHeight={ props.media.media_details.height }
+									    	>
+									    		<img src={props.media.source_url} />
+									    	</ResponsiveWrapper>
+						            		}
+									</Button>
+								)}
+							/>
+						</MediaUploadCheck>
+						{props.attributes.mediaId != 0 && 
+							<MediaUploadCheck>
+								<MediaUpload
+									title={__('Replace image', 'awp')}
+									value={props.attributes.mediaId}
+									onSelect={onSelectMedia}
+									allowedTypes={['image']}
+									render={({open}) => (
+										<Button onClick={open} isDefault isLarge>{__('Replace image', 'awp')}</Button>
+									)}
+								/>
+							</MediaUploadCheck>
+						}
+						{props.attributes.mediaId != 0 && 
+							<MediaUploadCheck>
+								<Button onClick={removeMedia} isLink isDestructive>{__('Remove image', 'awp')}</Button>
+							</MediaUploadCheck>
+						}
+					</div>
+
+
             <Disabled>
               <TextControl
                 label={__('Copyright')}
@@ -332,15 +430,17 @@ const addExtraProps = ( saveElementProps, blockType, attributes ) => {
 
     saveElementProps.className += attributes.classNameZoom;
 
-    if ( attributes.copyright && saveElementProps.children && saveElementProps.children.props) {
-        saveElementProps.children.props.children.push(
-            React.createElement(
-                "span", // type
-                { type: "text" }, // props
-                attributes.copyright // children
-              )
-        );
-    }
+    // FIX ME - there should be better way to do it - causing problems on save(looooooop)
+    // if ( attributes.copyright && saveElementProps.children && saveElementProps.children.props) {
+        
+    //     saveElementProps.children.props.children.props.children.push(
+    //         React.createElement(
+    //             "span", // type
+    //             { type: "text" }, // props
+    //             attributes.copyright // children
+    //           )
+    //     );
+    // }
 
     return saveElementProps;
 };
