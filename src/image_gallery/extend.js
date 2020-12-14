@@ -184,21 +184,7 @@ const addExtraProps = ( saveElementProps, blockType, attributes ) => {
   wp.blocks.unregisterBlockStyle('core/image', 'rounded');
   wp.blocks.unregisterBlockStyle('core/image', 'default');
 
-  console.log('blocks.getSaveContent.extraProps');
-
   saveElementProps.className += attributes.classNameZoom;
-
-  // FIX ME - there should be better way to do it - causing problems on save(looooooop)
-  // DISABLED FOR TEST
-  // if ( attributes.copyright && saveElementProps.children && saveElementProps.children.props) {
-  //     saveElementProps.children.props.children.push(
-  //         React.createElement(
-  //             "span", // type
-  //             { type: "text" }, // props
-  //             attributes.copyright // children
-  //           )
-  //     );
-  // }
 
   return saveElementProps;
 };

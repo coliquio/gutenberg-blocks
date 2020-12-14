@@ -128,9 +128,13 @@ const addSrcControlAttribute = ( settings, name ) => {
       default: null
     },
     magnification: {
-      type: 'string',
-      default: 'false',
+      type: 'bool',
+      default: false,
     },
+    caption: {
+      type: 'string',
+      default: undefined,
+    }
   });
 
   return settings;
@@ -335,7 +339,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
             <SelectControl
                 label={__('Magnification')}
                 value={ props.attributes.magnification }
-                options={[{label: __('DISABLED'), value: 'false'}, {label: __('ENABLED'), value: 'true'}]}
+                options={[{label: __('DISABLED'), value: false}, {label: __('ENABLED'), value: true}]}
                 onChange={ ( magnification ) => {
                   props.setAttributes({ magnification });
                   if (magnification === 'true') {
@@ -429,18 +433,6 @@ const addExtraProps = ( saveElementProps, blockType, attributes ) => {
     wp.blocks.unregisterBlockStyle('core/image', 'default');
 
     saveElementProps.className += attributes.classNameZoom;
-
-    // FIX ME - there should be better way to do it - causing problems on save(looooooop)
-    // if ( attributes.copyright && saveElementProps.children && saveElementProps.children.props) {
-        
-    //     saveElementProps.children.props.children.props.children.push(
-    //         React.createElement(
-    //             "span", // type
-    //             { type: "text" }, // props
-    //             attributes.copyright // children
-    //           )
-    //     );
-    // }
 
     return saveElementProps;
 };
