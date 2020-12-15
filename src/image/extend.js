@@ -242,9 +242,12 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       });
     }
     
-    props.setAttributes({
-      copyright: get(image, 'media_fields.field_copyright.value.value')
-    });
+    if (get(image, 'media_fields.field_copyright.value.value')) {
+      props.setAttributes({
+        copyright: get(image, 'media_fields.field_copyright.value.value')
+      });
+    }
+    
 
     const removeMedia = () => {
       props.setAttributes({
@@ -280,7 +283,8 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       props.setAttributes(propsToUpdate);
       console.log(propsToUpdate);
     }
-      
+    
+    console.log('this is set - ', get(image, 'media_fields.field_copyright.value.value'));
     props.setAttributes({
       copyright: get(image, 'media_fields.field_copyright.value.value')
     });
