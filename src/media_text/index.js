@@ -34,36 +34,28 @@ export const settings = {
         allowedBlocks = [
             'core/paragraph',
             'core/heading',
-            'core/columns',
             'core/column',
-            'core/image'
+            'core/image',
+            'core/group'
         ],
         template = [
-            [ 'core/image', {}, [] ]
+            [ 'core/image', {}, [] ],
+            [ 'core/group', {}, [
+                [ 'core/heading', {}, [] ],
+                [ 'core/paragraph', {}, [] ]
+            ] ],
+
         ];
 
     return (
         <section
             className={
-                `${ className } 
-                    wp-block--coliquio 
-                    u-relative-hidden
-                    is-back-end`
+                'wp-block--coliquio u-relative-hidden is-back-end'
             }
         >
             <InnerBlocks
                 allowedBlocks={ allowedBlocks }
                 template={ template }
-                templateLock="all"
-            />
-            <RichText
-              tagName="p"
-              placeholder={__('Content')}
-              value={attributes.content}
-              className=""
-              onChange={(content) =>
-                  setAttributes({ content })
-              }
             />
         </section>
     );
@@ -73,20 +65,10 @@ export const settings = {
     return (
         <section
             className={
-                `${className}
-                 wp-block--coliquio
-                 u-relative-hidden 
-                 is-front-end`
+                'wp-block--coliquio u-relative-hidden is-front-end'
             }
         >
             <InnerBlocks.Content />
-        <div className="media-text-content">
-            <RichText.Content
-                  tagName="div"
-                  className="media-text-content"
-                  value={ content }
-              />
-        </div>
         </section>
     );
   },
