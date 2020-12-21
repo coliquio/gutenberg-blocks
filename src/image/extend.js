@@ -1,8 +1,11 @@
 import React from 'react'
 import assign from 'lodash.assign'
 import get from 'lodash.get'
+import reduce from 'lodash.reduce'
+import filter from 'lodash.filter'
+import isEqual from 'lodash.isequal'
 import './style.scss'
-import domReady from '@wordpress/dom-ready'
+
 
 const { createHigherOrderComponent } = wp.compose;
 const { Fragment } = wp.element;
@@ -11,11 +14,6 @@ const { __ } = wp.i18n;
 const { InspectorControls, MediaUpload, MediaUploadCheck } = wp.editor;
 const { PanelBody, SelectControl, TextControl, Disabled, Button, ResponsiveWrapper } = wp.components;
 const { useSelect } = wp.data;
-
-
-domReady( function() {
-  console.log('domReady');
-} );
 
 // Enable properties on the following blocks
 const enableOnBlocks = [
@@ -81,10 +79,10 @@ const addSrcControlAttribute = ( settings, name ) => {
       type: 'string',
       default: '',
     },
-    classNameZoom: {
-      type: 'string',
-      default: '',
-    },
+    // classNameZoom: {
+    //   type: 'string',
+    //   default: '',
+    // },
     url: {
       type: 'string',
       default: '',
@@ -179,13 +177,11 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       );
     }
     
+    console.log('create higherOrderComponent');
 
     setTimeout(function() { 
-      console.log('disable');
       disabledElements.forEach(el => {
-        console.log(el.selector);
         const temp = document.querySelectorAll(el.selector);
-        console.log(temp);
         temp.forEach(node => {
           if (el.text === node.innerText && !node.parentNode.parentNode.className.includes('custom-hidden')) {
             node.parentNode.parentNode.className += ' custom-hidden';
@@ -194,21 +190,61 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       }); 
   
      }, 50);
-
-    // add has-size-xy class to block
-    if ( !props.attributes.size ) {
-      props.setAttributes( {
-        size: sizeControlOptions.find(o => o.default).value,
-        className: `custom-size-${ sizeControlOptions.find(o => o.default).value }`,
-      });
-    }
     
 
-    if (typeof props.attributes.caption === 'object') {
-      props.setAttributes({
-        caption: props.attributes.caption.raw ? props.attributes.caption.raw : undefined
-      });
+    const updateImageProps = (image) => {
+
+      if (typeof props.attributes.caption === 'object') {
+
+        props.setAttributes({
+          caption: props.attributes.caption.raw ? props.attributes.caption.raw : undefined
+        });
+
+      }
+
+      if (image && image.media_details) {
+
+        let propsToUpdate = {
+          id: image.id,
+          url: get(image, 'media_details.cdn_url'),
+          cdnFileId: get(image, 'media_details.cdn_file_id'),
+          width: undefined,
+          height: undefined,
+          sizeSlug: undefined,
+          alt: get(image, 'media_fields.field_media_image.value.alt'),
+          copyright: get(image, 'media_fields.field_copyright.value.value'),
+          size: !props.attributes.size ? sizeControlOptions.find(o => o.default).value : props.attributes.size,
+          className: !props.attributes.size ? `custom-size-${ sizeControlOptions.find(o => o.default).value }` : props.attributes.className,
+          crop: null,
+          aspectRatio: {
+            width: get(image, 'media_details.width'),
+            height: get(image, 'media_details.height')
+          },
+          zoomImage: {
+            url: get(image, 'media_details.cdn_url'),
+            aspectRatio: {
+              width: get(image, 'media_details.width'),
+              height: get(image, 'media_details.height')
+            }
+          }
+        };
+  
+        let reducedPropsToUpdate = reduce(propsToUpdate, function(result, value, key) {
+          isEqual(value, props.attributes[key]) ?
+            false : (result[key] || (result[key] = value));
+          return result;
+        }, {});
+  
+        if (Object.keys(reducedPropsToUpdate).length) {
+          console.log('SET ATTR CORE/IMG');
+          console.log(Object.keys(reducedPropsToUpdate));
+          props.setAttributes(reducedPropsToUpdate);
+        }
+
+      }
     }
+
+    
 
     const image = useSelect(
       ( select ) => {
@@ -218,35 +254,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       [ props.attributes.id, props.isSelected ]
     );
 
-    // ensure cdn url + file id is used always
-    // TODO find if there is a better way doing this
-    if (!props.attributes.crop && image && image.media_details && props.attributes.url != image.media_details.cdn_url) {
-      props.setAttributes({
-        url: image.media_details.cdn_url,
-        cdnFileId: image.media_details.cdn_file_id,
-        width: undefined,
-        height: undefined,
-        sizeSlug: undefined,
-        crop: null,
-        aspectRatio: {
-          width: image.media_details.width,
-          height: image.media_details.height
-        },
-        zoomImage: {
-          url: image.media_details.cdn_url,
-          aspectRatio: {
-            width: image.media_details.width,
-            height: image.media_details.height
-          }
-        }
-      });
-    }
-    
-    if (get(image, 'media_fields.field_copyright.value.value')) {
-      props.setAttributes({
-        copyright: get(image, 'media_fields.field_copyright.value.value')
-      });
-    }
+    updateImageProps(image);
     
 
     const removeMedia = () => {
@@ -255,39 +263,6 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
         url: ''
       });
     }
-   
-    const onSelectMedia = (media) => {
-      // REFACTOR ME to avoid repetitions and make one setAttr out of all
-      const propsToUpdate = {
-        id: media.id,
-        caption: get(media, 'caption.raw', undefined),
-        copyright: get(media, 'media_fields.field_copyright.value.value'),
-        url: get(media, 'media_details.cdn_url'),
-        cdnFileId: media.media_details.cdn_file_id,
-        width: undefined,
-        height: undefined,
-        sizeSlug: undefined,
-        crop: null,
-        aspectRatio: {
-          width: get(media, 'media_details.width', undefined),
-          height: get(media, 'media_details.height', undefined),
-        },
-        zoomImage: {
-          url: get(media, 'media_details.cdn_url', undefined),
-          aspectRatio: {
-            width: get(media, 'media_details.width', undefined),
-            height: get(media, 'media_details.height', undefined),
-          }
-        }
-      };
-      props.setAttributes(propsToUpdate);
-      console.log(propsToUpdate);
-    }
-    
-    console.log('this is set - ', get(image, 'media_fields.field_copyright.value.value'));
-    props.setAttributes({
-      copyright: get(image, 'media_fields.field_copyright.value.value')
-    });
    
     const blockStyle = {
       backgroundImage: props.attributes.mediaUrl != '' ? 'url("' + props.attributes.mediaUrl + '")' : 'none'
@@ -346,22 +321,13 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
                 options={[{label: __('DISABLED'), value: false}, {label: __('ENABLED'), value: true}]}
                 onChange={ ( magnification ) => {
                   props.setAttributes({ magnification });
-                  if (magnification === 'true') {
-                    props.setAttributes({
-                      classNameZoom: ' magnification-enabled',
-                    });
-                  } else {
-                    props.setAttributes({
-                      classNameZoom: '',
-                    });
-                  }
                 }}
             />
 
             <div className="editor-post-featured-image">
 						<MediaUploadCheck>
 							<MediaUpload
-								onSelect={onSelectMedia}
+								onSelect={updateImageProps}
 								value={props.attributes.mediaId}
 								allowedTypes={ ['image'] }
 								render={({open}) => (
@@ -387,7 +353,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
 								<MediaUpload
 									title={__('Replace image', 'awp')}
 									value={props.attributes.mediaId}
-									onSelect={onSelectMedia}
+									onSelect={updateImageProps}
 									allowedTypes={['image']}
 									render={({open}) => (
 										<Button onClick={open} isDefault isLarge>{__('Replace image', 'awp')}</Button>
@@ -434,9 +400,7 @@ const addExtraProps = ( saveElementProps, blockType, attributes ) => {
         return saveElementProps;
     }
     wp.blocks.unregisterBlockStyle('core/image', 'rounded');
-    wp.blocks.unregisterBlockStyle('core/image', 'default');
-
-    saveElementProps.className += attributes.classNameZoom;
+    wp.blocks.unregisterBlockStyle('core/image', 'default');   
 
     return saveElementProps;
 };

@@ -22,13 +22,6 @@ export const settings = {
 
   icon: 'excerpt-view',
 
-  attributes: {
-    content: {
-        type: 'string',
-        default: '',
-    },
-  },
-
   edit({ className, attributes, setAttributes }) {
     const
         allowedBlocks = [
@@ -61,7 +54,7 @@ export const settings = {
     );
   },
 
-  save({ className, attributes: { content } }) {
+  save() {
     return (
         <section
             className={
