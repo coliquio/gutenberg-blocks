@@ -79,10 +79,10 @@ const addSrcControlAttribute = ( settings, name ) => {
       type: 'string',
       default: '',
     },
-    // classNameZoom: {
-    //   type: 'string',
-    //   default: '',
-    // },
+    selectedCrop: {
+      type: 'string',
+      default: '',
+    },
     url: {
       type: 'string',
       default: '',
@@ -192,7 +192,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
      }, 50);
     
 
-    const updateImageProps = (image) => {
+    const updateImageProps = (image, crop) => {
 
       if (typeof props.attributes.caption === 'object') {
 
@@ -204,9 +204,14 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
 
       if (image && image.media_details) {
 
+        let crop = null;
+        if (props.attributes.selectedCrop) {
+          crop = getCrop(image, props.attributes.selectedCrop);
+        }
+
         let propsToUpdate = {
           id: image.id,
-          url: get(image, 'media_details.cdn_url'),
+          url: crop ? crop.cdn_url : get(image, 'media_details.cdn_url'),
           cdnFileId: get(image, 'media_details.cdn_file_id'),
           width: undefined,
           height: undefined,
@@ -215,10 +220,16 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
           copyright: get(image, 'media_fields.field_copyright.value.value'),
           size: !props.attributes.size ? sizeControlOptions.find(o => o.default).value : props.attributes.size,
           className: !props.attributes.size ? `custom-size-${ sizeControlOptions.find(o => o.default).value }` : props.attributes.className,
-          crop: null,
+          crop: (crop ? {
+            name: crop.name,
+            width: crop.width,
+            height: crop.height,
+            x: crop.x,
+            y: crop.y
+          } : null),
           aspectRatio: {
-            width: get(image, 'media_details.width'),
-            height: get(image, 'media_details.height')
+            width: (crop && crop.aspect_ratio) ? crop.aspect_ratio.width : get(image, 'media_details.width'),
+            height: (crop && crop.aspect_ratio) ? crop.aspect_ratio.height : get(image, 'media_details.height')
           },
           zoomImage: {
             url: get(image, 'media_details.cdn_url'),
@@ -230,7 +241,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
         };
   
         let reducedPropsToUpdate = reduce(propsToUpdate, function(result, value, key) {
-          isEqual(value, props.attributes[key]) ?
+          isEqual(value, props.attributes[key]) && !!value ?
             false : (result[key] || (result[key] = value));
           return result;
         }, {});
@@ -254,8 +265,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       [ props.attributes.id, props.isSelected ]
     );
 
-    updateImageProps(image);
-    
+    updateImageProps(image);    
 
     const removeMedia = () => {
       props.setAttributes({
@@ -294,25 +304,9 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
               value={ props.attributes.crop ? props.attributes.crop.name : undefined }
               options={ getCropOptions(image) }
               onChange={ ( selectedCrop ) => {
-                const crop = getCrop(image, selectedCrop)
-                props.setAttributes( {
-                  url: crop ? crop.cdn_url : image.media_details.cdn_url,
-                  cdnFileId: image.media_details.cdn_file_id,
-                  width: undefined,
-                  height: undefined,
-                  sizeSlug: undefined,
-                  crop: (crop ? {
-                    name: crop.name,
-                    width: crop.width,
-                    height: crop.height,
-                    x: crop.x,
-                    y: crop.y
-                  } : null),
-                  aspectRatio: {
-                    width: (crop && crop.aspect_ratio) ? crop.aspect_ratio.width : image.media_details.width,
-                    height: (crop && crop.aspect_ratio) ? crop.aspect_ratio.height : image.media_details.height
-                  }
-                } );
+                props.setAttributes({
+                  selectedCrop
+                });
               } }
             />
             <SelectControl
@@ -337,12 +331,12 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
 									>
 										{props.attributes.mediaId == 0 && __('Choose an image', 'awp')}
 										{props.media != undefined && 
-						            			<ResponsiveWrapper
-									    		naturalWidth={ props.media.media_details.width }
-											naturalHeight={ props.media.media_details.height }
-									    	>
-									    		<img src={props.media.source_url} />
-									    	</ResponsiveWrapper>
+                      <ResponsiveWrapper
+                        naturalWidth={ props.media.media_details.width }
+											  naturalHeight={ props.media.media_details.height }
+                      >
+                        <img src={props.media.source_url} />
+                      </ResponsiveWrapper>
 						            		}
 									</Button>
 								)}

@@ -114,6 +114,7 @@ const withCustomFeatures = createHigherOrderComponent( ( BlockEdit ) => {
             if (mediaDetails) {
 
               storage.url = get(mediaDetails, 'crops.teaser.cdn_url');
+              storage.alt = get(image, 'media_fields.field_media_image.value.alt');
               storage.cdnFileId = mediaDetails.cdn_file_id;
               storage.width = undefined;
               storage.height = undefined;
