@@ -176,8 +176,6 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
         <BlockEdit { ...props } />
       );
     }
-    
-    console.log('create higherOrderComponent');
 
     setTimeout(function() { 
       disabledElements.forEach(el => {

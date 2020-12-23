@@ -42,9 +42,7 @@ export const settings = {
 
     return (
         <section
-            className={
-                'wp-block--coliquio u-relative-hidden is-back-end'
-            }
+            className={'wp-block--coliquio media-rich-text'}
         >
             <InnerBlocks
                 allowedBlocks={ allowedBlocks }
@@ -57,9 +55,7 @@ export const settings = {
   save() {
     return (
         <section
-            className={
-                'wp-block--coliquio u-relative-hidden is-front-end'
-            }
+            className={'wp-block--coliquio media-rich-text'}
         >
             <InnerBlocks.Content />
         </section>

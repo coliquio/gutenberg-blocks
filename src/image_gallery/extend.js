@@ -1,7 +1,7 @@
 import React from 'react'
 import assign from 'lodash.assign';
 import get from 'lodash.get';
-import merge from 'lodash.merge';
+import assignWith from 'lodash.assignwith';
 
 const { createHigherOrderComponent } = wp.compose;
 const { InspectorControls } = wp.blockEditor;
@@ -94,48 +94,46 @@ const withCustomFeatures = createHigherOrderComponent( ( BlockEdit ) => {
         [ props.attributes.images, props.attributes.images.map(i => i.id) ]
       );
 
-      // console.log("images - ", images);
-      // console.log("props.attributes.images - ", props.attributes.images);
-
       let imagesReal = images.map((image, i) => {
 
         let storage = {};
         
         if (image) {
+          if (typeof image.caption === 'object') {
+            storage.caption = image.caption.raw ? image.caption.raw : undefined
+          }
 
-            if (typeof image.caption === 'object') {
-              storage.caption = image.caption.raw ? image.caption.raw : undefined
-            }
+          storage.copyright = get(images, '['+i+'].media_fields.field_copyright.value.value', '');
 
-            storage.copyright = get(images, '['+i+'].media_fields.field_copyright.value.value', '');
+          const mediaDetails = get(images, '['+i+'].media_details');
 
-            const mediaDetails = get(images, '['+i+'].media_details');
+          if (mediaDetails) {
 
-            if (mediaDetails) {
-
-              storage.url = get(mediaDetails, 'crops.teaser.cdn_url');
-              storage.alt = get(image, 'media_fields.field_media_image.value.alt');
-              storage.cdnFileId = mediaDetails.cdn_file_id;
-              storage.width = undefined;
-              storage.height = undefined;
-              storage.sizeSlug = undefined;
-              storage.crop = null;
-              storage.link = undefined;
-              storage.aspectRatio = get(mediaDetails, 'crops.teaser.aspect_ratio');
-              storage.zoomImage = {
-                url: mediaDetails.cdn_url,
-                aspectRatio: {
-                  width: mediaDetails.width,
-                  height: mediaDetails.height
-                }
-              };
-            }
-
+            storage.url = get(mediaDetails, 'crops.teaser.cdn_url');
+            storage.alt = get(image, 'media_fields.field_media_image.value.alt');
+            storage.cdnFileId = mediaDetails.cdn_file_id;
+            storage.width = undefined;
+            storage.height = undefined;
+            storage.sizeSlug = undefined;
+            storage.crop = null;
+            storage.link = undefined;
+            storage.aspectRatio = get(mediaDetails, 'crops.teaser.aspect_ratio');
+            storage.zoomImage = {
+              url: mediaDetails.cdn_url,
+              aspectRatio: {
+                width: mediaDetails.width,
+                height: mediaDetails.height
+              }
+            };
+          }
           return storage;
         }
       });
 
-      merge(props.attributes.images, imagesReal);
+      function customizer(objValue, srcValue) {
+        return _.isUndefined(srcValue) ? objValue : srcValue;;
+      }
+      assignWith(props.attributes.images, imagesReal, customizer);
     }
 
     return (
@@ -151,7 +149,7 @@ const withCustomFeatures = createHigherOrderComponent( ( BlockEdit ) => {
                   <Disabled>
                     <TextControl
                       key={ index }
-                      label={__('Copyright id' + item.id)}
+                      label={__('Copyright id' + item ? item.id : '')}
                       help={__('Could be changed in gallery')}
                       value={item.copyright}
                     />
