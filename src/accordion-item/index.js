@@ -46,32 +46,33 @@ export const settings = {
                 }
             />
           </BlockControls>
+          <div class="accordion-item-component">
+            <InspectorControls key="inspector">
+              <PanelBody>
+                <ToggleControl
+                    label={__('Open by default', 'atomic-blocks')}
+                    checked={attributes.isOpen}
+                    onChange={() =>
+                        setAttributes({
+                          isOpen: !attributes.isOpen,
+                        })
+                    }
+                />
+              </PanelBody>
+            </InspectorControls>
+            <RichText
+                tagName="p"
+                placeholder={__('Accordion Item Title')}
+                value={attributes.title}
+                className="accordion-item-header"
+                onChange={(value) =>
+                    setAttributes({ title: value })
+                }
+            />
 
-          <InspectorControls key="inspector">
-            <PanelBody>
-              <ToggleControl
-                  label={__('Open by default', 'atomic-blocks')}
-                  checked={attributes.isOpen}
-                  onChange={() =>
-                      setAttributes({
-                        isOpen: !attributes.isOpen,
-                      })
-                  }
-              />
-            </PanelBody>
-          </InspectorControls>
-          <RichText
-              tagName="p"
-              placeholder={__('Accordion Title')}
-              value={attributes.title}
-              className=""
-              onChange={(value) =>
-                  setAttributes({ title: value })
-              }
-          />
-
-          <div className="ab-accordion-text">
-            <InnerBlocks/>
+            <div>
+              <InnerBlocks/>
+            </div>
           </div>
         </Fragment>
     )

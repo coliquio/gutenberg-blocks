@@ -34,21 +34,21 @@ export const settings = {
   edit({ attributes, className, setAttributes }) {
     return (
       <Fragment>
-        <h1>Image Start</h1>
-        <RichText
-          tagName="p"
-          placeholder={ __( 'Accordion Title' ) }
-          value={ attributes.accordionTitle }
-          className=""
-          onChange={ ( value ) =>
-            setAttributes( { accordionTitle: value } )
-          }
-        />
-        <h1>Image End</h1>
-        <div className="ab-accordion-text">
-          <InnerBlocks
-            allowedBlocks={ ALLOWED_BLOCKS }
+        <div class="accordion-component">
+          <RichText
+            tagName="p"
+            placeholder={ __( 'Accordion Title(optional)' ) }
+            value={ attributes.accordionTitle }
+            className="accordion-component-header"
+            onChange={ ( value ) =>
+              setAttributes( { accordionTitle: value } )
+            }
           />
+          <div>
+            <InnerBlocks
+              allowedBlocks={ ALLOWED_BLOCKS }
+            />
+          </div>
         </div>
       </Fragment>
     )

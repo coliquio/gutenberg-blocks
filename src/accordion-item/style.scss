@@ -99,3 +99,11 @@
     margin-right: 0;
   }
 }
+
+// editor styles
+.accordion-item-component {
+  border: 1px solid #999;
+  .accordion-item-header {
+    font-size: 18px;
+  }
+}
