@@ -44,6 +44,21 @@ const sizeControlOptions = [
   },
 ];
 
+const layoutControlOptions = [
+  {
+    label: __( 'Default' ),
+    value: undefined,
+  },
+  {
+    label: __( 'Column' ),
+    value: 'layout-column',
+  },
+  {
+    label: __( 'Branding' ),
+    value: 'branding-block',
+  },
+];
+
 const disabledElements = [
   {
     text: 'Image size',
@@ -110,6 +125,10 @@ const addSrcControlAttribute = ( settings, name ) => {
     size: {
       type: 'string',
     },
+    layout: {
+      type: 'string',
+      default: undefined,
+    },
     copyright: {
       type: 'string',
     },
@@ -132,7 +151,7 @@ const addSrcControlAttribute = ( settings, name ) => {
     caption: {
       type: 'string',
       default: undefined,
-    }
+    },
   });
 
   return settings;
@@ -314,6 +333,17 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
                 onChange={ ( magnification ) => {
                   props.setAttributes({ magnification });
                 }}
+            />
+
+            <SelectControl
+              label={ __( 'Layout' ) }
+              value={ props.attributes.layout }
+              options={ layoutControlOptions }
+              onChange={ ( layout ) => {
+                props.setAttributes( {
+                  layout,
+                } );
+              } }
             />
 
             <div className="editor-post-featured-image">
