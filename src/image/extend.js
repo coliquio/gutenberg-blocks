@@ -24,23 +24,33 @@ const sizeControlOptions = [
   {
     label: __( 'XS' ),
     value: 'extra-small',
+    widthPer: '16%',
+    widthPx: '155px',
   },
   {
     label: __( 'S' ),
     value: 'small',
     default: true,
+    widthPer: '25%',
+    widthPx: '196px',
   },
   {
     label: __( 'M' ),
     value: 'medium',
+    widthPer: '33%',
+    widthPx: '250px',
   },
   {
     label: __( 'L' ),
     value: 'large',
+    widthPer: '50%',
+    widthPx: '360px',
   },
   {
     label: __( 'XL' ),
     value: 'extra-large',
+    widthPer: '100%',
+    widthPx: '720px',
   },
 ];
 
@@ -204,7 +214,36 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
             node.parentNode.parentNode.className += ' custom-hidden';
           }
         });
-      }); 
+      });
+      
+      if (props.attributes.layout === 'layout-column') {
+        let imageWrapper = document.getElementById('block-' + props.clientId).parentNode;
+
+        if (imageWrapper.dataset.align === 'left') {
+          let nextSibl = imageWrapper.nextSibling;
+          if (nextSibl.nodeName === 'P') {
+            nextSibl.style.paddingLeft = sizeControlOptions.find(o => o.value === props.attributes.size).widthPx;
+            nextSibl.style.paddingRight = 0;
+          }
+          if (nextSibl.nodeName === 'DIV') {
+            nextSibl.style.marginLeft = sizeControlOptions.find(o => o.value === props.attributes.size).widthPx;
+            nextSibl.style.marginRight = 0;
+          }
+        }
+        if (imageWrapper.dataset.align === 'right') {
+          let nextSibl = imageWrapper.nextSibling;
+          if (nextSibl.nodeName === 'P') {
+            nextSibl.style.paddingRight = sizeControlOptions.find(o => o.value === props.attributes.size).widthPx;
+            nextSibl.style.paddingLeft = 0;
+          }
+          if (nextSibl.nodeName === 'DIV') {
+            nextSibl.style.marginRight = sizeControlOptions.find(o => o.value === props.attributes.size).widthPx;
+            nextSibl.style.marginLeft = 0;
+          }
+        }
+
+      }
+
   
      }, 50);
     
@@ -271,8 +310,6 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
 
       }
     }
-
-    
 
     const image = useSelect(
       ( select ) => {

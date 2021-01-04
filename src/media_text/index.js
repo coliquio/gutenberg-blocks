@@ -40,6 +40,8 @@ export const settings = {
 
         ];
 
+    console.log('edit');
+
     return (
         <section
             className={'wp-block--coliquio media-rich-text'}
