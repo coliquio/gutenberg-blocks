@@ -38,13 +38,13 @@ const sizeControlOptions = [
     label: __( 'M' ),
     value: 'medium',
     widthPer: '33%',
-    widthPx: '250px',
+    widthPx: '256px',
   },
   {
     label: __( 'L' ),
     value: 'large',
     widthPer: '50%',
-    widthPx: '360px',
+    widthPx: '376px',
   },
   {
     label: __( 'XL' ),
@@ -62,10 +62,6 @@ const layoutControlOptions = [
   {
     label: __( 'Column' ),
     value: 'layout-column',
-  },
-  {
-    label: __( 'Branding' ),
-    value: 'branding-block',
   },
 ];
 
@@ -241,10 +237,28 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
             nextSibl.style.marginLeft = 0;
           }
         }
+      } else {
+        let imageWrapper = document.getElementById('block-' + props.clientId).parentNode;
 
+        if (imageWrapper.dataset.align === 'left') {
+          let nextSibl = imageWrapper.nextSibling;
+          if (nextSibl.nodeName === 'P') {
+            nextSibl.style.paddingLeft = 0;
+          }
+          if (nextSibl.nodeName === 'DIV') {
+            nextSibl.style.marginLeft = 0;
+          }
+        }
+        if (imageWrapper.dataset.align === 'right') {
+          let nextSibl = imageWrapper.nextSibling;
+          if (nextSibl.nodeName === 'P') {
+            nextSibl.style.paddingRight = 0;
+          }
+          if (nextSibl.nodeName === 'DIV') {
+            nextSibl.style.marginRight = 0;
+          }
+        }
       }
-
-  
      }, 50);
     
 

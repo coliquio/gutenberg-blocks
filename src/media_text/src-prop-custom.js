@@ -56,12 +56,12 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
 			className: 'alignwide',
 		} );
 		
-        let { src } = props.attributes;
+        let { mediaUrl } = props.attributes;
         
 
         if (props.attributes.mediaUrl) {
             props.setAttributes( {
-                src: props.attributes.mediaUrl,
+                src: mediaUrl,
             } );
         }
 
