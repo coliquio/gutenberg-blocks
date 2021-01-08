@@ -1,25 +1,20 @@
 @import "../common/colors.css";
 
-.wp-block-coliquio-branding-box {
-  margin: 15px 0;
-  width: 100%;
 
-  .branding-box-outer-wrapper {
-    border-bottom: 1px solid var(--black-lighten-60);
-    border-top: 1px solid var(--black-lighten-60);
-    text-align: center;
-    padding: 1rem 0;
-      
-    .branding-title {
-      font-size: 1.1875rem;
-      line-height: 1.75rem;
-      box-sizing: border-box;
-      color: var(--black-base);
-      display: inline;
-      font-weight: 400;
-      margin-right: 8px;
-      text-align: center;
-      vertical-align: middle;
+// editor styles
+
+.block-editor-block-list__block {
+  .wp-block-coliquio-branding-box {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 15px 0;
+    width: 100%;
+    min-height: 180px;
+        
+    input.components-text-control__input {
+      border: 1px solid #999;
+      border-radius: 4px;
     }
     .wp-block-coliquio-image {
       display: inline-block;
@@ -33,6 +28,30 @@
         max-height: 2.5rem;
       }
     }
+  }
+}
 
+//view styles
+article {
+  .wp-block-coliquio-branding-box {
+    .branding-box-outer-wrapper {
+      padding: 0;
+      .branding-box-inner-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .branding-title {
+          font-size: 22px;
+        }
+        .wp-block-image {
+          display: block;
+          margin: 4px 0 0;
+          img {
+            width: 154px;
+            height: 40px;
+          }
+        }
+      }
+    }
   }
 }

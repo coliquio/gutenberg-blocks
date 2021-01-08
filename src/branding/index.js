@@ -39,7 +39,6 @@ export const settings = {
     return (
       <div className={ className }>
         <TextControl
-          label={__('Branding Title')}
           value={title || ''}
           onChange={title => setAttributes({ title })}
         />
