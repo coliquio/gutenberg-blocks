@@ -179,7 +179,7 @@ function getCropOptions(image) {
 }
 
 function getCopyright(image) {
-  return image && image.media_fields ? image.media_fields.field_copyright.value.value : '';
+  return image && image.media_fields ? get(image, 'media_fields.field_copyright.value.value') : '';
 }
 
 function getCrop(image, cropName) {

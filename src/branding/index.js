@@ -9,7 +9,7 @@ const { InnerBlocks } = blockEditor
 export const name = 'branding-box'
 
 const TEMPLATE = [
-  ['coliquio/image', {
+  ['core/image', {
       displayCopyright: false,
       displayCaption: false,
     },
@@ -26,6 +26,7 @@ export const settings = {
   attributes: {
     title: {
       type: 'string',
+      default: undefined,
     },
   },
 
