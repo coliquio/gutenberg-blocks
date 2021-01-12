@@ -11,6 +11,8 @@ import * as header from './header'
 import './image/extend';
 import './image_gallery/extend';
 
+import './common/common.scss'
+
 
 const { registerBlockType } = blocks
 const { dispatch, select } = data

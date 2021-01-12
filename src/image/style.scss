@@ -1,118 +1,120 @@
 @import "../common/colors.css";
 
-.wp-block-coliquio-image {
-  margin: 15px 0;
-
-  &.align-left {
-    float: left;
-    margin-right: 15px;
-  }
-  &.align-right {
-    margin-left: 15px;
-    float: right;
-  }
-  &.align-center {
-    text-align: center;
-  }
-
-  img {
-    max-width: 400px;
-    float: none;
-    width: 100%;
-  }
-
-  figcaption {
-    padding: 5px 0 0 0;
-    margin: 0;
-    line-height: 1.4rem;
-    color: var(--black-base);
-  }
-
-  .copyright {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--black-lighten-50);
-  }
-}
-
-.wp-block-image {
-  min-width: 140px;
-
-  &.custom-size-extra-small {
-    width: 16%!important;
-  }
-  &.custom-size-small{
-    width: 25%!important;
-  }
-  &.custom-size-medium {
-    width: 33%!important;
-  }
-  &.custom-size-large {
-    width: 50%!important;
-  }
-  &.custom-size-extra-large {
-    width: 100%!important;
-  }
-  .components-resizable-box__container {
-    width: 100%!important;
+.block-editor-block-list__layout {
+  .wp-block-coliquio-image {
+    margin: 15px 0;
+  
+    &.align-left {
+      float: left;
+      margin-right: 15px;
+    }
+    &.align-right {
+      margin-left: 15px;
+      float: right;
+    }
+    &.align-center {
+      text-align: center;
+    }
+  
     img {
+      max-width: 400px;
       float: none;
+      width: 100%;
+    }
+  
+    figcaption {
+      padding: 5px 0 0 0;
+      margin: 0;
+      line-height: 1.4rem;
+      color: var(--black-base);
+    }
+  
+    .copyright {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--black-lighten-50);
+    }
+  }
+  
+  .wp-block-image {
+    min-width: 140px;
+  
+    &.custom-size-extra-small {
+      width: 16%!important;
+    }
+    &.custom-size-small{
+      width: 25%!important;
+    }
+    &.custom-size-medium {
+      width: 33%!important;
+    }
+    &.custom-size-large {
+      width: 50%!important;
+    }
+    &.custom-size-extra-large {
       width: 100%!important;
     }
-    .components-resizable-box__handle {
-      display: none;
+    .components-resizable-box__container {
+      width: 100%!important;
+      img {
+        float: none;
+        width: 100%!important;
+      }
+      .components-resizable-box__handle {
+        display: none;
+      }
+    }
+    .components-text-control__input {
+      border: none!important;
+      box-shadow: none!important;
+      text-align: center;
     }
   }
-  .components-text-control__input {
-    border: none!important;
-    box-shadow: none!important;
-    text-align: center;
+  
+  // there is js logic adding this class based on innerHtml of the buttons(text)
+  .custom-hidden {
+    display: none;
   }
-}
-
-// there is js logic adding this class based on innerHtml of the buttons(text)
-.custom-hidden {
-  display: none;
-}
-
-.block-editor-block-toolbar .media-replace-flow {
-  display: none;
-}
-
-// hide upload button from popup menu
-.components-form-file-upload {
-  display: none;
-}
-
-figure.wp-block-image {
-  &.custom-size-extra-small {
-    width: 116px!important;
+  
+  .block-editor-block-toolbar .media-replace-flow {
+    display: none;
   }
-  &.custom-size-small{
-    width: 180px!important;
+  
+  // hide upload button from popup menu
+  .components-form-file-upload {
+    display: none;
   }
-  &.custom-size-medium {
-    width: 240px!important;
+  
+  figure.wp-block-image {
+    &.custom-size-extra-small {
+      width: 116px!important;
+    }
+    &.custom-size-small{
+      width: 180px!important;
+    }
+    &.custom-size-medium {
+      width: 240px!important;
+    }
+    &.custom-size-large {
+      width: 360px!important;
+    }
+    &.custom-size-extra-large {
+      width: 720px!important;
+    }
   }
-  &.custom-size-large {
-    width: 360px!important;
+  
+  .components-disabled {
+    opacity: 0.7;
   }
-  &.custom-size-extra-large {
-    width: 720px!important;
-  }
-}
-
-.components-disabled {
-  opacity: 0.7;
-}
-
-.block-editor-block-list__layout {
-  .layout-column-left-small {
-    margin-left: 196px;
-    margin-right: 0;
-  }
-  .layout-column-right-small {
-    margin-right: 196px;
-    margin-left: 0;
-  }
+  
+  .block-editor-block-list__layout {
+    .layout-column-left-small {
+      margin-left: 196px;
+      margin-right: 0;
+    }
+    .layout-column-right-small {
+      margin-right: 196px;
+      margin-left: 0;
+    }
+  }   
 }
