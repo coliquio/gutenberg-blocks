@@ -219,22 +219,22 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
           let nextSibl = imageWrapper.nextSibling;
           if (nextSibl.nodeName === 'P') {
             nextSibl.style.paddingLeft = sizeControlOptions.find(o => o.value === props.attributes.size).widthPx;
-            nextSibl.style.paddingRight = 0;
+            nextSibl.style.paddingRight = '';
           }
           if (nextSibl.nodeName === 'DIV') {
             nextSibl.style.marginLeft = sizeControlOptions.find(o => o.value === props.attributes.size).widthPx;
-            nextSibl.style.marginRight = 0;
+            nextSibl.style.marginRight = '';
           }
         }
         if (imageWrapper.dataset.align === 'right') {
           let nextSibl = imageWrapper.nextSibling;
           if (nextSibl.nodeName === 'P') {
             nextSibl.style.paddingRight = sizeControlOptions.find(o => o.value === props.attributes.size).widthPx;
-            nextSibl.style.paddingLeft = 0;
+            nextSibl.style.paddingLeft = '';
           }
           if (nextSibl.nodeName === 'DIV') {
             nextSibl.style.marginRight = sizeControlOptions.find(o => o.value === props.attributes.size).widthPx;
-            nextSibl.style.marginLeft = 0;
+            nextSibl.style.marginLeft = '';
           }
         }
       } else {
@@ -243,19 +243,19 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
         if (imageWrapper.dataset.align === 'left') {
           let nextSibl = imageWrapper.nextSibling;
           if (nextSibl.nodeName === 'P') {
-            nextSibl.style.paddingLeft = 0;
+            nextSibl.style.paddingLeft = '';
           }
           if (nextSibl.nodeName === 'DIV') {
-            nextSibl.style.marginLeft = 0;
+            nextSibl.style.marginLeft = '';
           }
         }
         if (imageWrapper.dataset.align === 'right') {
           let nextSibl = imageWrapper.nextSibling;
           if (nextSibl.nodeName === 'P') {
-            nextSibl.style.paddingRight = 0;
+            nextSibl.style.paddingRight = '';
           }
           if (nextSibl.nodeName === 'DIV') {
-            nextSibl.style.marginRight = 0;
+            nextSibl.style.marginRight = '';
           }
         }
       }

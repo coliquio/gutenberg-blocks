@@ -34,14 +34,20 @@
 //view styles
 article {
   .wp-block-coliquio-branding-box {
+    margin-bottom: 2rem;
+    margin-top: 15px;
     .branding-box-outer-wrapper {
       padding: 0;
       .branding-box-inner-wrapper {
         display: flex;
         align-items: center;
         justify-content: center;
+        border-top: 1px solid var(--black-lighten-60);
+        border-bottom: 1px solid var(--black-lighten-60);
+
         .branding-title {
           font-size: 22px;
+          margin-right: .5rem;
         }
         .wp-block-image {
           display: block;

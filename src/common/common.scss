@@ -1,28 +1,10 @@
 @import './mediaq';
 
+.block-editor-block-list__layout {
+
+}
+
 article {
-    h1 > span.headline {
-        font-size: 1.5rem;
-        margin-top: 0;
-        @include md {
-          margin-bottom: 1.5rem;
-          font-size: 2.25rem;
-          line-height: 2.375rem;
-        }
-    }
     
-    .wp-block-image {
-        .alignright {
-            display: block;
-            float: right;
-            border: 1px solid blue;
-        }
-        
-        .alignleft {
-            display: block;
-            float: left;
-            border: 1px solid green;
-        }
-    }
 }
 
