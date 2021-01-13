@@ -39,8 +39,6 @@ article {
       display: none;
     }
   
-
-  
     sup {
       line-height: 0;
     }
@@ -69,6 +67,9 @@ article {
       padding-top: 15px;
     }
   } //.wp-block-coliquio-accordion-item END
+  summary{
+    outline: none;
+  }
 }
 
 

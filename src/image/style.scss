@@ -1,5 +1,12 @@
 @import "../common/colors.css";
 
+$image-x-small-width: 16%!important;
+$image-small-width: 25%!important;
+$image-medium-width: 33%!important;
+$image-large-width: 50%!important;
+$image-x-large-width: 100%!important;
+
+
 .block-editor-block-list__layout {
   .wp-block-coliquio-image {
     margin: 15px 0;
@@ -40,25 +47,25 @@
     min-width: 140px;
   
     &.custom-size-extra-small {
-      width: 16%!important;
+      width: $image-x-small-width;
     }
     &.custom-size-small{
-      width: 25%!important;
+      width: $image-small-width;
     }
     &.custom-size-medium {
-      width: 33%!important;
+      width: $image-medium-width;
     }
     &.custom-size-large {
-      width: 50%!important;
+      width: $image-large-width;
     }
     &.custom-size-extra-large {
-      width: 100%!important;
+      width: $image-x-large-width;
     }
     .components-resizable-box__container {
-      width: 100%!important;
+      width: $image-x-large-width;
       img {
         float: none;
-        width: 100%!important;
+        width: $image-x-large-width;
       }
       .components-resizable-box__handle {
         display: none;
@@ -129,37 +136,56 @@ article {
         display: block;
       }
     }
+    img {
+      margin: 0 auto;
+      display: block;
+    }
   
     &.custom-size-extra-small {
       .alignright, .alignleft {
-        width: 16%!important;
+        width: $image-x-small-width;
+      }
+      &>img {
+        width: $image-x-small-width;
       }
     }
     &.custom-size-small {
       .alignright, .alignleft {
-        width: 25%!important;
+        width: $image-small-width;
+      }
+      &>img {
+        width: $image-small-width;
       }
     }
     &.custom-size-medium {
       .alignright, .alignleft {
-        width: 33%!important;
+        width: $image-medium-width;
+      }
+      &>img {
+        width: $image-medium-width;
       }
     }
     &.custom-size-large {
       .alignright, .alignleft {
-        width: 50%!important;
+        width: $image-large-width;
+      }
+      &>img {
+        width: $image-x-small-width;
       }
     }
     &.custom-size-extra-large {
       .alignright, .alignleft {
-        width: 100%!important;
+        width: $image-x-large-width;
+      }
+      &>img {
+        width: $image-x-large-width;
       }
     }
     .components-resizable-box__container {
-      width: 100%!important;
+      width: $image-x-large-width;
       img {
         float: none;
-        width: 100%!important;
+        width: $image-x-large-width;
       }
       .components-resizable-box__handle {
         display: none;

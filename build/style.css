@@ -112,6 +112,9 @@ article .wp-block-coliquio-accordion-item {
   article .wp-block-coliquio-accordion-item .accordion-item-content {
     padding-top: 15px; }
 
+article summary {
+  outline: none; }
+
 .accordion-item-component {
   border: 1px solid #999;
   padding: 15px 5px; }
@@ -277,32 +280,6 @@ article h1.wp-block-coliquio-header {
     line-height: 1.875rem; }
   article h1.wp-block-coliquio-header span.headline {
     margin-bottom: 0; }
-article h1 > span.headline {
-  font-size: 1.5rem;
-  margin-top: 0; }
-  @media (min-width: 768px) {
-    article h1 > span.headline {
-      margin-bottom: 1.5rem;
-      font-size: 2.25rem;
-      line-height: 2.375rem; } }
-
-article .wp-block-image .alignright {
-  display: block;
-  float: right;
-  border: 1px solid blue; }
-
-article .wp-block-image .alignleft {
-  display: block;
-  float: left;
-  border: 1px solid green; }
-
-article sup, article sub {
-  vertical-align: baseline;
-  position: relative;
-  top: -0.4em; }
-
-article sub {
-  top: 0.4em; }
 .block-editor-block-list__layout .wp-block-coliquio-image {
   margin: 15px 0; }
   .block-editor-block-list__layout .wp-block-coliquio-image.align-left {
@@ -391,15 +368,28 @@ article .wp-block-image {
   article .wp-block-image figure.alignleft figcaption, article .wp-block-image figure.alignright figcaption {
     width: 100%;
     display: block; }
+  article .wp-block-image img {
+    margin: 0 auto;
+    display: block; }
   article .wp-block-image.custom-size-extra-small .alignright, article .wp-block-image.custom-size-extra-small .alignleft {
+    width: 16% !important; }
+  article .wp-block-image.custom-size-extra-small > img {
     width: 16% !important; }
   article .wp-block-image.custom-size-small .alignright, article .wp-block-image.custom-size-small .alignleft {
     width: 25% !important; }
+  article .wp-block-image.custom-size-small > img {
+    width: 25% !important; }
   article .wp-block-image.custom-size-medium .alignright, article .wp-block-image.custom-size-medium .alignleft {
+    width: 33% !important; }
+  article .wp-block-image.custom-size-medium > img {
     width: 33% !important; }
   article .wp-block-image.custom-size-large .alignright, article .wp-block-image.custom-size-large .alignleft {
     width: 50% !important; }
+  article .wp-block-image.custom-size-large > img {
+    width: 16% !important; }
   article .wp-block-image.custom-size-extra-large .alignright, article .wp-block-image.custom-size-extra-large .alignleft {
+    width: 100% !important; }
+  article .wp-block-image.custom-size-extra-large > img {
     width: 100% !important; }
   article .wp-block-image .components-resizable-box__container {
     width: 100% !important; }
