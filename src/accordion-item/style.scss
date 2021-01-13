@@ -5,6 +5,14 @@
 article {
   .wp-block-coliquio-accordion-item {
 
+    &[open] .accordion-item {
+      &-summary {
+        .arrow-icon {
+          transform: rotate(0);
+        }
+      }
+    }
+
     margin-bottom: 15px;
     border-radius: 0;
     background-color: transparent;
@@ -12,6 +20,9 @@ article {
     border-right: none;
   
     .accordion-item-summary {
+      &::-webkit-details-marker {
+        display: none;
+      }
       &:hover {
         background: #f2f2f2;
       }
@@ -32,6 +43,16 @@ article {
           line-height: 1.2rem;
           font-weight: 400;
         }
+      }
+      .arrow-icon {
+        @include arrow();
+        transform: rotate(180deg);
+        transition: transform 300ms ease-in-out;
+        transform-origin: 13px;
+        fill: #007AFF;
+        width: 26px;
+        height: 26px;
+        margin-right: 10px;
       }
     }
   
