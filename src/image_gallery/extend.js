@@ -142,7 +142,7 @@ const withCustomFeatures = createHigherOrderComponent( ( BlockEdit ) => {
         
         <InspectorControls>
           <PanelBody
-              title={ __( 'Custom Control' ) }
+              title={ __( 'Copyright Info' ) }
               initialOpen={ true }
             >
               {props.attributes.images.map((item, index) => 
@@ -150,7 +150,7 @@ const withCustomFeatures = createHigherOrderComponent( ( BlockEdit ) => {
                     <TextControl
                       key={ index }
                       label={__('Copyright id' + item ? item.id : '')}
-                      help={__('Could be changed in gallery')}
+                      help={__('can be changed in media library')}
                       value={item.copyright}
                     />
                   </Disabled>

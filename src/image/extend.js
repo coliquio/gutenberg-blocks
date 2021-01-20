@@ -259,6 +259,13 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
           }
         }
       }
+
+      // document.querySelectorAll('div.wp-block[data-align="left"] + div,p');
+
+      // let imgsLeft = document.querySelectorAll('div.wp-block[data-align="left"]');
+
+      // console.log(imgsLeft);
+
      }, 50);
     
 
