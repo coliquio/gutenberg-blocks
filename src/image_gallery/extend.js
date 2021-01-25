@@ -183,7 +183,7 @@ const addExtraProps = ( saveElementProps, blockType, attributes ) => {
   wp.blocks.unregisterBlockStyle('core/image', 'rounded');
   wp.blocks.unregisterBlockStyle('core/image', 'default');
 
-  saveElementProps.className += attributes.classNameZoom;
+  saveElementProps.className += attributes.classNameZoom ? attributes.classNameZoom : '';
 
   return saveElementProps;
 };

@@ -55,6 +55,7 @@ export const settings = {
   },
 
   save({ attributes, className }) {
+    let titleBlock = '';
     if (attributes.accordionTitle) {
       titleBlock = <summary class="accordion-header"><RichText.Content value={ attributes.accordionTitle } /></summary>;
     }
