@@ -238,9 +238,10 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
           }
         }
       } else {
-        let imageWrapper = document.getElementById('block-' + props.clientId).parentNode;
+        let imageBlock = document.getElementById('block-' + props.clientId);
+        let imageWrapper = imageBlock ? imageBlock.parentNode : undefined;
 
-        if (imageWrapper.dataset.align === 'left') {
+        if (imageWrapper && imageWrapper.dataset.align === 'left') {
           let nextSibl = imageWrapper.nextSibling;
           if (nextSibl.nodeName === 'P') {
             nextSibl.style.paddingLeft = '';
@@ -249,7 +250,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
             nextSibl.style.marginLeft = '';
           }
         }
-        if (imageWrapper.dataset.align === 'right') {
+        if (imageWrapper && imageWrapper.dataset.align === 'right') {
           let nextSibl = imageWrapper.nextSibling;
           if (nextSibl.nodeName === 'P') {
             nextSibl.style.paddingRight = '';
@@ -266,7 +267,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
 
       // console.log(imgsLeft);
 
-     }, 50);
+     }, 500);
     
 
     const updateImageProps = (image, crop) => {
@@ -389,7 +390,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
                 value={ props.attributes.magnification }
                 options={[{label: __('DISABLED'), value: false}, {label: __('ENABLED'), value: true}]}
                 onChange={ ( magnification ) => {
-                  props.setAttributes({ magnification });
+                  props.setAttributes({ magnification: magnification === 'true' ? true : false });
                 }}
             />
 
