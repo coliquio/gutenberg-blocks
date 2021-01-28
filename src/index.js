@@ -7,8 +7,9 @@ import * as ctaBlock from './cta'
 import * as highlight from './highlight'
 import * as iframe from './iframe'
 import * as header from './header'
-import './image/extend';
-import './image_gallery/extend';
+import * as mediaRichText from './media_text'
+import './image/extend'
+import './image_gallery/extend'
 
 import './common/common.scss'
 
@@ -26,6 +27,7 @@ const colBlocks = [
   highlight,
   iframe,
   header,
+  mediaRichText,
 ]
 
 // Category name and slug

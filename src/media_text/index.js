@@ -33,11 +33,7 @@ export const settings = {
         ],
         template = [
             [ 'core/image', {}, [] ],
-            [ 'core/group', {}, [
-                [ 'core/heading', {}, [] ],
-                [ 'core/paragraph', {}, [] ]
-            ] ],
-
+            [ 'core/paragraph', {}, [] ]
         ];
 
     console.log('edit');
