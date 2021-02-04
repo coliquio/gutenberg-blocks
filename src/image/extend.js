@@ -211,6 +211,13 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
           }
         });
       });
+
+      let imagesInGroup = document.querySelectorAll('.wp-block-image');
+
+      imagesInGroup.forEach(image => {
+        console.log(image.clientHeight);
+        image.closest('.wp-block-group').style['min-height'] = image.clientHeight + 10 + 'px';
+      });
       
       if (props.attributes.layout === 'layout-column') {
         let imageWrapper = document.getElementById('block-' + props.clientId).parentNode;

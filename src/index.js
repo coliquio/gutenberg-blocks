@@ -9,6 +9,7 @@ import * as iframe from './iframe'
 import * as header from './header'
 import * as mediaRichText from './media_text'
 import './image/extend'
+import './group/extend'
 import './image_gallery/extend'
 
 import './common/common.scss'
