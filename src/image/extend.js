@@ -215,7 +215,9 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       let imagesInGroup = document.querySelectorAll('.wp-block-image');
 
       imagesInGroup.forEach(image => {
-        image.closest('.wp-block-group').style['min-height'] = image.clientHeight + 10 + 'px';
+        let closestGroup = image.closest('.wp-block-group');
+        if (closestGroup)
+          closestGroup.style['min-height'] = image.clientHeight + 10 + 'px';
       });
       
       if (props.attributes.layout === 'layout-column') {

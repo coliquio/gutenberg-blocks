@@ -83,10 +83,6 @@ $image-x-large-width: 100%!important;
     display: none;
   }
   
-  .block-editor-block-toolbar .media-replace-flow {
-    display: none;
-  }
-  
   // hide upload button from popup menu
   .components-form-file-upload {
     display: none;
@@ -124,6 +120,11 @@ $image-x-large-width: 100%!important;
       margin-left: 0;
     }
   }   
+}
+
+// context menu in editor
+.block-editor-block-toolbar .media-replace-flow {
+  display: none!important;
 }
 
 article {
