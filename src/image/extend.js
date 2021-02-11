@@ -325,6 +325,8 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
             }
           }
         };
+
+        console.log('URL - ', propsToUpdate);
   
         let reducedPropsToUpdate = reduce(propsToUpdate, function(result, value, key) {
           isEqual(value, props.attributes[key]) && !!value ?
