@@ -353,7 +353,9 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       [ props.attributes.id, props.isSelected ]
     );
 
-    updateImageProps(image);    
+    console.log('Image useSelect - ', image);
+
+    updateImageProps(image);
 
     const removeMedia = () => {
       props.setAttributes({
