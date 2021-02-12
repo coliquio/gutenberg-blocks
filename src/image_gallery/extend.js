@@ -69,7 +69,7 @@ const withCustomFeatures = createHigherOrderComponent( ( BlockEdit ) => {
       );
     }
 
-    setTimeout(function() { 
+    setTimeout(function() {
       console.log('disable');
       disabledElements.forEach(el => {
         console.log(el.selector);
@@ -183,7 +183,7 @@ const addExtraProps = ( saveElementProps, blockType, attributes ) => {
   wp.blocks.unregisterBlockStyle('core/image', 'rounded');
   wp.blocks.unregisterBlockStyle('core/image', 'default');
 
-  saveElementProps.className += attributes.classNameZoom ? attributes.classNameZoom : '';
+  // saveElementProps.className += attributes.classNameZoom ? attributes.classNameZoom : '';
 
   return saveElementProps;
 };
