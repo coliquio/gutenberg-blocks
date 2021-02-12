@@ -54,16 +54,16 @@ const sizeControlOptions = [
   },
 ];
 
-const layoutControlOptions = [
-  {
-    label: __( 'Default' ),
-    value: undefined,
-  },
-  {
-    label: __( 'Column' ),
-    value: 'layout-column',
-  },
-];
+// const layoutControlOptions = [
+//   {
+//     label: __( 'Default' ),
+//     value: undefined,
+//   },
+//   {
+//     label: __( 'Column' ),
+//     value: 'layout-column',
+//   },
+// ];
 
 const disabledElements = [
   {
@@ -299,7 +299,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
 
         let propsToUpdate = {
           id: image.id,
-          url: crop ? crop.cdn_url : get(image, 'media_details.cdn_url'),
+          url: crop ? crop.cdn_url : get(image, 'media_details.crops.main.cdn_url'),
           cdnFileId: get(image, 'media_details.cdn_file_id'),
           width: undefined,
           height: undefined,
@@ -394,6 +394,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
               value={ props.attributes.crop ? props.attributes.crop.name : undefined }
               options={ getCropOptions(image) }
               onChange={ ( selectedCrop ) => {
+                alert('Hello Rami');
                 props.setAttributes({
                   selectedCrop
                 });
@@ -408,7 +409,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
                 }}
             />
 
-            <SelectControl
+            {/* <SelectControl
               label={ __( 'Layout' ) }
               value={ props.attributes.layout }
               options={ layoutControlOptions }
@@ -417,7 +418,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
                   layout,
                 } );
               } }
-            />
+            /> */}
 
             <div className="editor-post-featured-image">
 						<MediaUploadCheck>
