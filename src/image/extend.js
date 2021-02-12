@@ -295,6 +295,8 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
           crop = getCrop(image, props.attributes.selectedCrop);
         }
 
+        console.log('CROP - ', crop);
+
         let propsToUpdate = {
           id: image.id,
           url: crop ? crop.cdn_url : get(image, 'media_details.cdn_url'),
