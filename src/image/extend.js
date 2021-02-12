@@ -167,7 +167,7 @@ addFilter( 'blocks.registerBlockType', 'extend-block-image/attribute/src', addSr
 
 function getCropOptions(image) {
   return [{
-    label: __( '---'),
+    label: __('---'),
     value: undefined
   }].concat(image && image.media_details && image.media_details.crops ? Object.keys(image.media_details.crops).map(key => {
     const crop = image.media_details.crops[key]
@@ -299,7 +299,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
 
         let propsToUpdate = {
           id: image.id,
-          url: crop ? crop.cdn_url : get(image, 'media_details.crops.main.cdn_url'),
+          url: crop ? crop.cdn_url : get(image, 'media_details.cdn_url'),
           cdnFileId: get(image, 'media_details.cdn_file_id'),
           width: undefined,
           height: undefined,
@@ -394,7 +394,6 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
               value={ props.attributes.crop ? props.attributes.crop.name : undefined }
               options={ getCropOptions(image) }
               onChange={ ( selectedCrop ) => {
-                alert('Hello Rami');
                 props.setAttributes({
                   selectedCrop
                 });
