@@ -308,7 +308,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
           copyright: get(image, 'media_fields.field_copyright.value.value'),
           size: !props.attributes.size ? sizeControlOptions.find(o => o.default).value : props.attributes.size,
           className: !props.attributes.size ? `custom-size-${ sizeControlOptions.find(o => o.default).value }` : props.attributes.className,
-          crop: (crop && image.props.selectedCrop ? {
+          crop: (crop && props.selectedCrop ? {
             name: crop.name,
             width: crop.width,
             height: crop.height,
