@@ -316,7 +316,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
             height: crop.height,
             x: crop.x,
             y: crop.y
-          } : crop),
+          } : props.attributes.crop),
           aspectRatio: {
             width: (crop && crop.aspect_ratio) ? crop.aspect_ratio.width : get(image, 'media_details.width'),
             height: (crop && crop.aspect_ratio) ? crop.aspect_ratio.height : get(image, 'media_details.height')
