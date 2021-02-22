@@ -54,17 +54,6 @@ const sizeControlOptions = [
   },
 ];
 
-// const layoutControlOptions = [
-//   {
-//     label: __( 'Default' ),
-//     value: undefined,
-//   },
-//   {
-//     label: __( 'Column' ),
-//     value: 'layout-column',
-//   },
-// ];
-
 const disabledElements = [
   {
     text: 'Image size',
@@ -270,17 +259,20 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
           }
         }
       }
-
-      // document.querySelectorAll('div.wp-block[data-align="left"] + div,p');
-
-      // let imgsLeft = document.querySelectorAll('div.wp-block[data-align="left"]');
-
-      // console.log(imgsLeft);
-
      }, 500);
     
 
     const updateImageProps = (image, crop) => {
+
+      disabledElements.forEach(el => {
+        const temp = document.querySelectorAll(el.selector);
+        console.log('temp - ', temp);
+        temp.forEach(node => {
+          if (el.text === node.innerText && !node.parentNode.parentNode.className.includes('custom-hidden')) {
+            node.parentNode.parentNode.className += ' custom-hidden';
+          }
+        });
+      });
 
       if (typeof props.attributes.caption === 'object') {
 
@@ -411,17 +403,6 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
                   props.setAttributes({ magnification: magnification === 'true' ? true : false });
                 }}
             />
-
-            {/* <SelectControl
-              label={ __( 'Layout' ) }
-              value={ props.attributes.layout }
-              options={ layoutControlOptions }
-              onChange={ ( layout ) => {
-                props.setAttributes( {
-                  layout,
-                } );
-              } }
-            /> */}
 
             <div className="editor-post-featured-image">
 						<MediaUploadCheck>

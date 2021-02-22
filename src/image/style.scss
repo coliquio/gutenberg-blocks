@@ -127,6 +127,10 @@ $image-x-large-width: 100%!important;
   display: none!important;
 }
 
+.block-editor-image-size-control__row {
+  display: none;
+}
+
 article {
   .wp-block-image {
     min-width: 140px;
