@@ -1,6 +1,11 @@
 import React from 'react'
 import assign from 'lodash.assign';
 
+/**
+ * Internal dependencies
+ */
+import './style.scss'
+
 const { createHigherOrderComponent } = wp.compose;
 const { Fragment } = wp.element;
 const { addFilter } = wp.hooks;
@@ -16,6 +21,8 @@ const enableOnBlocks = [
   'core/list',
 ];
 
+
+alert(1);
 
 /**
  * Add src attribute to block.
@@ -57,7 +64,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       );
     }
 
-    console.log(props.attributes);
+    console.log('LIST CODE');
     let { isChecked } = props.attributes;
 
     return (
