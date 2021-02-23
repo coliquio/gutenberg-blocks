@@ -196,6 +196,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
     setTimeout(function() { 
       disabledElements.forEach(el => {
         const temp = document.querySelectorAll(el.selector);
+        console.log('temp2 - ', temp);
         temp.forEach(node => {
           if (el.text === node.innerText && !node.parentNode.parentNode.className.includes('custom-hidden')) {
             node.parentNode.parentNode.className += ' custom-hidden';
@@ -266,7 +267,7 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
 
       disabledElements.forEach(el => {
         const temp = document.querySelectorAll(el.selector);
-        console.log('temp - ', temp);
+        console.log('temp1 - ', temp);
         temp.forEach(node => {
           if (el.text === node.innerText && !node.parentNode.parentNode.className.includes('custom-hidden')) {
             node.parentNode.parentNode.className += ' custom-hidden';
