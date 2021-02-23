@@ -194,15 +194,15 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
     }
 
     setTimeout(function() { 
-      disabledElements.forEach(el => {
-        const temp = document.querySelectorAll(el.selector);
-        console.log('temp2 - ', temp);
-        temp.forEach(node => {
-          if (el.text === node.innerText && !node.parentNode.parentNode.className.includes('custom-hidden')) {
-            node.parentNode.parentNode.className += ' custom-hidden';
-          }
-        });
-      });
+      // disabledElements.forEach(el => {
+      //   const temp = document.querySelectorAll(el.selector);
+      //   console.log('temp2 - ', temp);
+      //   temp.forEach(node => {
+      //     if (el.text === node.innerText && !node.parentNode.parentNode.className.includes('custom-hidden')) {
+      //       node.parentNode.parentNode.className += ' custom-hidden';
+      //     }
+      //   });
+      // });
 
       let imagesInGroup = document.querySelectorAll('.wp-block-image');
 
@@ -265,15 +265,15 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
 
     const updateImageProps = (image, crop) => {
 
-      disabledElements.forEach(el => {
-        const temp = document.querySelectorAll(el.selector);
-        console.log('temp1 - ', temp);
-        temp.forEach(node => {
-          if (el.text === node.innerText && !node.parentNode.parentNode.className.includes('custom-hidden')) {
-            node.parentNode.parentNode.className += ' custom-hidden';
-          }
-        });
-      });
+      // disabledElements.forEach(el => {
+      //   const temp = document.querySelectorAll(el.selector);
+      //   console.log('temp1 - ', temp);
+      //   temp.forEach(node => {
+      //     if (el.text === node.innerText && !node.parentNode.parentNode.className.includes('custom-hidden')) {
+      //       node.parentNode.parentNode.className += ' custom-hidden';
+      //     }
+      //   });
+      // });
 
       if (typeof props.attributes.caption === 'object') {
 
