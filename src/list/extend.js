@@ -11,18 +11,13 @@ const { Fragment } = wp.element;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 const { InspectorControls } = wp.blockEditor;
-const { PanelBody, CheckboxControl, TextControl } = wp.components;
-const { unregisterBlockStyle } = wp.blocks;
-const { useSelect } = wp.data;
+const { PanelBody, ToggleControl } = wp.components;
 
 
 // Enable properties on the following blocks
 const enableOnBlocks = [
   'core/list',
 ];
-
-
-alert(1);
 
 /**
  * Add src attribute to block.
@@ -41,7 +36,11 @@ const addSrcControlAttribute = ( settings, name ) => {
 
   // Use Lodash's assign to gracefully handle if attributes are undefined
   settings.attributes = assign( settings.attributes, {
-    test: {
+    customEnumeration: {
+      type: 'boolean',
+      default: false,
+    },
+    className: {
       type: 'string',
       default: '',
     },
@@ -64,28 +63,38 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       );
     }
 
-    console.log('LIST CODE');
-    let { isChecked } = props.attributes;
+    let { customEnumeration } = props.attributes;
+    let pannelControl;
 
+    if (props.attributes.ordered) {
+      pannelControl =
+        <PanelBody
+          title={ __( 'Style Controls' ) }
+          initialOpen={ true }
+        >
+          <ToggleControl
+            label="Numbered sublists"
+            help="1 1.1 1.1.1"
+            checked={ customEnumeration }
+            onChange={customEnumeration => {
+              props.setAttributes({
+                customEnumeration: !!customEnumeration,
+                className: !!customEnumeration ? 'custom-enumeration' : ''
+              })}
+            }
+          />
+        </PanelBody>
+    } else {
+      props.setAttributes({
+        customEnumeration: false,
+        className: '',
+      });
+    }
     return (
       <Fragment>
         <BlockEdit { ...props } />
         <InspectorControls>
-          <PanelBody
-            title={ __( 'Sizing Control' ) }
-            initialOpen={ true }
-          >
-          <CheckboxControl
-            heading="Test attr"
-            label="Test label"
-            help="Test help"
-            checked={ isChecked }
-            onChange={isChecked, test => {
-              console.log(isChecked, test);
-              props.setAttributes({ isChecked: !isChecked })}
-            }
-        />
-          </PanelBody>
+          {pannelControl}
         </InspectorControls>
       </Fragment>
     );
@@ -110,9 +119,7 @@ const addSizeExtraProps = ( saveElementProps, blockType, attributes ) => {
         return saveElementProps;
     }
 
-    if ( attributes.test ) {
-        debugger;
-    }
+
     return saveElementProps;
 };
 
