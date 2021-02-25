@@ -38,10 +38,6 @@ const addSrcControlAttribute = (settings, name) => {
       type: 'boolean',
       default: false,
     },
-    customChecked: {
-      type: 'boolean',
-      default: false,
-    },
     className: {
       type: 'string',
       default: '',
@@ -98,26 +94,6 @@ const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
         customEnumeration: false,
         className: props.attributes.className.replace('rich__list--enumerated', ''),
       });
-
-      const { customChecked } = props.attributes;
-
-      pannelControl =
-        <PanelBody
-          title={ __('Style Controls') }
-          initialOpen={ true }
-        >
-          <ToggleControl
-            label="Checked"
-            checked={ customChecked }
-            onChange={newCustomChecked => {
-              props.setAttributes({
-                customChecked: !!newCustomChecked,
-                className: newCustomChecked ? 'rich__list--checked' : '',
-              });
-            }
-            }
-          />
-        </PanelBody>;
     }
     return (
       <Fragment>
