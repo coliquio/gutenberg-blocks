@@ -1,0 +1,9 @@
+# Ignore
+build/*
+integration_build/*
+webpack.config.js
+buildForIos.js
+
+# Todo: Include them again as soon the linting is done 
+src/image
+src/image_gallery

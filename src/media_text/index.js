@@ -1,19 +1,13 @@
-/**
- * External dependencies
- */
-import React from 'react'
-import { editor, element, i18n, blockEditor } from 'wp'
-const { RichText } = editor
-/**
- * Internal dependencies
- */
-import './style.scss'
+import React from 'react';
+import { editor, i18n } from 'wp';
 
-const { __ } = i18n
+import './style.scss';
 
-const { InnerBlocks } = editor
+const { __ } = i18n;
 
-export const name = 'media-text'
+const { InnerBlocks } = editor;
+
+export const name = 'media-text';
 
 export const settings = {
   title: __('Media & RichText'),
@@ -22,41 +16,41 @@ export const settings = {
 
   icon: 'excerpt-view',
 
-  edit({ className, attributes, setAttributes }) {
+  edit () {
     const
-        allowedBlocks = [
-            'core/paragraph',
-            'core/heading',
-            'core/column',
-            'core/image',
-            'core/group'
-        ],
-        template = [
-            [ 'core/image', {}, [] ],
-            [ 'core/paragraph', {}, [] ]
-        ];
+      allowedBlocks = [
+        'core/paragraph',
+        'core/heading',
+        'core/column',
+        'core/image',
+        'core/group',
+      ],
+      template = [
+        [ 'core/image', {}, [] ],
+        [ 'core/paragraph', {}, [] ],
+      ];
 
     console.log('edit');
 
     return (
-        <section
-            className={'wp-block--coliquio media-rich-text'}
-        >
-            <InnerBlocks
-                allowedBlocks={ allowedBlocks }
-                template={ template }
-            />
-        </section>
+      <section
+        className={'wp-block--coliquio media-rich-text'}
+      >
+        <InnerBlocks
+          allowedBlocks={ allowedBlocks }
+          template={ template }
+        />
+      </section>
     );
   },
 
-  save() {
+  save () {
     return (
-        <section
-            className={'wp-block--coliquio media-rich-text'}
-        >
-            <InnerBlocks.Content />
-        </section>
+      <section
+        className={'wp-block--coliquio media-rich-text'}
+      >
+        <InnerBlocks.Content />
+      </section>
     );
   },
-}
+};
