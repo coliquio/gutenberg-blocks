@@ -7,7 +7,7 @@
         }
     }
 
-    ol.custom-enumeration, ol.custom-enumeration ol {
+    ol.rich__list--enumerated, ol.rich__list--enumerated ol {
         list-style-type: none;
         counter-reset: item;
         padding: 5px 0 0 40px;
@@ -32,7 +32,26 @@
             content: counters(item, ".") " ";
         }
     }
-    ul > li:before {
-        display: none;
+    // ul > li:before {
+    //     display: none;
+    // }
+
+    ul.rich__list--checked {
+        list-style-type: none;
+
+        li {
+            display: table;
+        }
+
+        li:before {
+            content: "";
+            display: table-cell;
+            background-repeat: no-repeat;
+            background-position-x: center;
+            padding-right: 0.6em;
+            width: 18px;
+            height: 16px;
+            background-image: url(./svg/hook.svg);
+        }
     }
 }

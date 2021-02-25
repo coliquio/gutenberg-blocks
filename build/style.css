@@ -1,22 +1,33 @@
-.wp-block-coliquio-highlight {
-  margin: 15px 0; }
-  .wp-block-coliquio-highlight .title {
-    font-weight: 600;
-    padding: 10px 15px;
-    border-radius: 6px 6px 0 0; }
-  .wp-block-coliquio-highlight .content {
-    padding: 1px 15px 5px 15px;
-    border-radius: 0 0 6px 6px; }
-  .wp-block-coliquio-highlight.card--primary .title {
-    color: var(--black-base); }
-  .wp-block-coliquio-highlight.card--primary .content {
-    background-color: var(--black-lighten-75);
-    border-radius: 6px; }
-  .wp-block-coliquio-highlight.card--secondary .title {
+.wp-block-coliquio-cta {
+  background-color: var(--green-base);
+  color: var(--white-base);
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid var(--green-base);
+  border-radius: 4px;
+  font-weight: 400;
+  padding: .5rem 1rem;
+  outline: 0;
+  margin-bottom: .25rem;
+  text-decoration: none;
+  font-size: 1.125rem; }
+  .wp-block-coliquio-cta[contenteditable] {
+    cursor: text; }
+  .wp-block-coliquio-cta:active, .wp-block-coliquio-cta:hover {
+    border: 1px solid var(--black-lighten-20);
+    background-color: var(--green-darken-10);
     color: var(--white-base);
-    background-color: var(--blue-base); }
-  .wp-block-coliquio-highlight.card--secondary .content {
-    background-color: var(--blue-lighten-50); }
+    text-decoration: none; }
+  .wp-block-coliquio-cta--link {
+    color: var(--green-base);
+    background: none;
+    border: none; }
+    .wp-block-coliquio-cta--link:active, .wp-block-coliquio-cta--link:hover {
+      border: none;
+      background: none;
+      color: var(--green-darken-10); }
 .wp-block-coliquio-accordion {
   padding: 15px; }
   .wp-block-coliquio-accordion .accordion-header {
@@ -207,36 +218,25 @@ article summary {
   --orange-lighten-30: #FFD59E;
   --orange-lighten-40: #FFEBD1;
 }
-.wp-block-coliquio-cta {
-  background-color: var(--green-base);
-  color: var(--white-base);
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  border: 1px solid var(--green-base);
-  border-radius: 4px;
-  font-weight: 400;
-  padding: .5rem 1rem;
-  outline: 0;
-  margin-bottom: .25rem;
-  text-decoration: none;
-  font-size: 1.125rem; }
-  .wp-block-coliquio-cta[contenteditable] {
-    cursor: text; }
-  .wp-block-coliquio-cta:active, .wp-block-coliquio-cta:hover {
-    border: 1px solid var(--black-lighten-20);
-    background-color: var(--green-darken-10);
+.wp-block-coliquio-highlight {
+  margin: 15px 0; }
+  .wp-block-coliquio-highlight .title {
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 6px 6px 0 0; }
+  .wp-block-coliquio-highlight .content {
+    padding: 1px 15px 5px 15px;
+    border-radius: 0 0 6px 6px; }
+  .wp-block-coliquio-highlight.card--primary .title {
+    color: var(--black-base); }
+  .wp-block-coliquio-highlight.card--primary .content {
+    background-color: var(--black-lighten-75);
+    border-radius: 6px; }
+  .wp-block-coliquio-highlight.card--secondary .title {
     color: var(--white-base);
-    text-decoration: none; }
-  .wp-block-coliquio-cta--link {
-    color: var(--green-base);
-    background: none;
-    border: none; }
-    .wp-block-coliquio-cta--link:active, .wp-block-coliquio-cta--link:hover {
-      border: none;
-      background: none;
-      color: var(--green-darken-10); }
+    background-color: var(--blue-base); }
+  .wp-block-coliquio-highlight.card--secondary .content {
+    background-color: var(--blue-lighten-50); }
 section.wp-block-coliquio-media-text {
   display: flex;
   width: 100%;
@@ -310,25 +310,36 @@ article h1.wp-block-coliquio-header {
   .block-editor-block-list__layout ol li, .block-editor-block-list__layout ul li {
     margin-bottom: 9px; }
 
-.block-editor-block-list__layout ol.custom-enumeration, .block-editor-block-list__layout ol.custom-enumeration ol {
+.block-editor-block-list__layout ol.rich__list--enumerated, .block-editor-block-list__layout ol.rich__list--enumerated ol {
   list-style-type: none;
   counter-reset: item;
   padding: 5px 0 0 40px; }
-  .block-editor-block-list__layout ol.custom-enumeration > li, .block-editor-block-list__layout ol.custom-enumeration ol > li {
+  .block-editor-block-list__layout ol.rich__list--enumerated > li, .block-editor-block-list__layout ol.rich__list--enumerated ol > li {
     display: table;
     counter-increment: item;
     margin-bottom: 0.6em; }
-  .block-editor-block-list__layout ol.custom-enumeration > li:before, .block-editor-block-list__layout ol.custom-enumeration ol > li:before {
+  .block-editor-block-list__layout ol.rich__list--enumerated > li:before, .block-editor-block-list__layout ol.rich__list--enumerated ol > li:before {
     content: counters(item, ".") ". ";
     display: table-cell;
     padding-right: 0.6em; }
-  .block-editor-block-list__layout ol.custom-enumeration > li ol li, .block-editor-block-list__layout ol.custom-enumeration ol > li ol li {
+  .block-editor-block-list__layout ol.rich__list--enumerated > li ol li, .block-editor-block-list__layout ol.rich__list--enumerated ol > li ol li {
     margin: 0; }
-  .block-editor-block-list__layout ol.custom-enumeration > li ol li:before, .block-editor-block-list__layout ol.custom-enumeration ol > li ol li:before {
+  .block-editor-block-list__layout ol.rich__list--enumerated > li ol li:before, .block-editor-block-list__layout ol.rich__list--enumerated ol > li ol li:before {
     content: counters(item, ".") " "; }
 
-.block-editor-block-list__layout ul > li:before {
-  display: none; }
+.block-editor-block-list__layout ul.rich__list--checked {
+  list-style-type: none; }
+  .block-editor-block-list__layout ul.rich__list--checked li {
+    display: table; }
+  .block-editor-block-list__layout ul.rich__list--checked li:before {
+    content: "";
+    display: table-cell;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    padding-right: 0.6em;
+    width: 18px;
+    height: 16px;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJFYmVuZV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU2LjcgNTYuNyIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNTYuNyA1Ni43IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8cG9seWdvbiBmaWxsPSIjNjViMzJlIiBwb2ludHM9IjI0LjUsNDYuMyA2LjMsMjguMiAxMi40LDIyLjEgMzAsMzkuOCAgIi8+Cgk8cG9seWdvbiBmaWxsPSIjNjViMzJlIiBwb2ludHM9IjE5LDM5LjggNDQuNSwxMS4yIDUwLjgsMTYuOSAyNC41LDQ2LjQgICIvPgo8L2c+Cjwvc3ZnPg==); }
 .block-editor-block-list__layout .wp-block-coliquio-image {
   margin: 15px 0; }
   .block-editor-block-list__layout .wp-block-coliquio-image.align-left {
