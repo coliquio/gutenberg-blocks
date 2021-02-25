@@ -14,7 +14,7 @@
     border-radius: 0 0 6px 6px;
   }
 
-  &.grey-box {
+  &.card--primary {
 
     .title {
       color: var(--black-base);
@@ -25,7 +25,7 @@
     }
   }
 
-  &.blue-border {
+  &.card--secondary {
 
     .title {
       color: var(--white-base);

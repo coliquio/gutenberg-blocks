@@ -13,8 +13,8 @@ export const name = 'highlight'
  * Visual variants for this highlight box
  */
 const styleType = {
-  GREY_BOX: 'grey-box',
-  BLUE_BORDER: 'blue-border',
+  GREY_BOX: 'card card--primary',
+  BLUE_BORDER: 'card card--secondary',
 }
 
 export const settings = {
@@ -72,8 +72,9 @@ export const settings = {
   },
 
   save({ attributes }) {
+    const { style } = attributes;
     return (
-        <section className={attributes.style}>
+        <section className={style}>
           {attributes.title && <div className="title">{attributes.title}</div>}
           <div className="content">
             <InnerBlocks.Content/>
