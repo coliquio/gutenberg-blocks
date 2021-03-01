@@ -1,0 +1,5 @@
+# Ignore
+build/*
+integration_build/*
+webpack.config.js
+buildForIos.js

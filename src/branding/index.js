@@ -1,20 +1,20 @@
-import React from 'react'
-import {blockEditor, components, i18n} from 'wp'
-import './style.scss'
+import React from 'react';
+import { blockEditor, components, i18n } from 'wp';
+import './style.scss';
 
-const { __ } = i18n
-const { TextControl } = components
-const { InnerBlocks } = blockEditor
+const { __ } = i18n;
+const { TextControl } = components;
+const { InnerBlocks } = blockEditor;
 
-export const name = 'branding-box'
+export const name = 'branding-box';
 
 const TEMPLATE = [
   ['core/image', {
-      displayCopyright: false,
-      displayCaption: false,
-    },
+    displayCopyright: false,
+    displayCaption: false,
+  },
   ],
-]
+];
 
 export const settings = {
   title: __('Branding Box'),
@@ -30,7 +30,7 @@ export const settings = {
     },
   },
 
-  edit({ attributes, className, setAttributes }) {
+  edit ({ attributes, className, setAttributes }) {
 
     const {
       title,
@@ -40,29 +40,29 @@ export const settings = {
       <div className={ className }>
         <TextControl
           value={title || ''}
-          onChange={title => setAttributes({ title })}
+          onChange={newTitle => setAttributes({ newTitle })}
         />
         <InnerBlocks
           template={ TEMPLATE }
-           />
+        />
       </div>
-    )
+    );
   },
 
-  save({ attributes, className }) {
+  save ({ attributes, className }) {
     const {
       title,
     } = attributes;
 
     return (
       <div className={ className }>
-        <div class="branding-box-outer-wrapper">
-          <aside class="branding-box-inner-wrapper">
+        <div className="branding-box-outer-wrapper">
+          <aside className="branding-box-inner-wrapper">
             {title && <span className="branding-title">{title}</span>}
             <InnerBlocks.Content />
           </aside>
         </div>
       </div>
-    )
+    );
   },
-}
+};

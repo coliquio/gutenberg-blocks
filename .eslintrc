@@ -27,7 +27,8 @@
 	],
 	"settings": {
 		"react": {
-			"pragma": "React"
+			"pragma": "React",
+			"version": "detect"
 		}
 	},
 	"rules": {

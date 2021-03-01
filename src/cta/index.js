@@ -1,21 +1,21 @@
-import React from 'react'
-import {blockEditor, components, element, i18n} from 'wp'
-import './style.scss'
+import React from 'react';
+import { blockEditor, components, element, i18n } from 'wp';
+import './style.scss';
 
-const { Fragment } = element
-const { __ } = i18n
+const { Fragment } = element;
+const { __ } = i18n;
 
-const { PanelBody, TextControl, ToggleControl, RadioControl } = components
-const {RichText, InspectorControls} = blockEditor
+const { PanelBody, TextControl, ToggleControl, RadioControl } = components;
+const { RichText, InspectorControls } = blockEditor;
 
-export const name = 'cta'
+export const name = 'cta';
 
-function renderClassName(defaultClassName, attributes) {
-  let className = defaultClassName
-  if (attributes.style != 'button') {
-    className = `${className} ${className}--${attributes.style}`
+function renderClassName (defaultClassName, attributes) {
+  let className = defaultClassName;
+  if (attributes.style !== 'button') {
+    className = `${className} ${className}--${attributes.style}`;
   }
-  return className
+  return className;
 }
 
 export const settings = {
@@ -37,60 +37,60 @@ export const settings = {
     },
     style: {
       type: 'string',
-    }
+    },
   },
 
-  edit({ attributes, className, setAttributes }) {
+  edit ({ attributes, className, setAttributes }) {
     return (
-        <Fragment>
+      <Fragment>
 
-          <InspectorControls>
-            <PanelBody title={ __( 'CTA settings' ) }>
-              <TextControl
-                  label={ __( 'Link to Content' ) }
-                  value={ attributes.url || '/my-path'}
-                  onChange={ (val) => setAttributes({ url: val }) }
-              />
-              <RadioControl
-                label="Display Style"
-                selected={ attributes.style || 'button' }
-                options={ [
-                  { label: 'Button', value: 'button' },
-                  { label: 'Link', value: 'link' },
-                ] }
-                onChange={(option) => setAttributes({ style: option })}
-              />
-              <ToggleControl
-                  label={__('Open hyperlink in new tab?')}
-                  onChange={() => setAttributes({ targetNewWindow: !attributes.targetNewWindow })}
-                  checked={attributes.targetNewWindow}
-              />
-            </PanelBody>
-          </InspectorControls>
+        <InspectorControls>
+          <PanelBody title={ __('CTA settings') }>
+            <TextControl
+              label={ __('Link to Content') }
+              value={ attributes.url || '/my-path'}
+              onChange={ val => setAttributes({ url: val }) }
+            />
+            <RadioControl
+              label="Display Style"
+              selected={ attributes.style || 'button' }
+              options={ [
+                { label: 'Button', value: 'button' },
+                { label: 'Link', value: 'link' },
+              ] }
+              onChange={option => setAttributes({ style: option })}
+            />
+            <ToggleControl
+              label={__('Open hyperlink in new tab?')}
+              onChange={() => setAttributes({ targetNewWindow: !attributes.targetNewWindow })}
+              checked={attributes.targetNewWindow}
+            />
+          </PanelBody>
+        </InspectorControls>
 
-          <RichText
-              className={renderClassName(className, attributes)}
-              tagName="a"
-              value={attributes.text}
-              placeholder={__('Button Text')}
-              target={attributes.targetNewWindow ? '_blank' : '_self'}
-              onChange={value => setAttributes({ text: value })}
-          />
-
-        </Fragment>
-    )
-  },
-
-  save({ attributes, className }) {
-    return (
-        <RichText.Content
-            tagName="a"
-            className={renderClassName(className, attributes)}
-            href={attributes.url}
-            value={attributes.text}
-            target={attributes.targetNewWindow ? '_blank' : '_self'}
-            rel="noreferrer noopener"
+        <RichText
+          className={renderClassName(className, attributes)}
+          tagName="a"
+          value={attributes.text}
+          placeholder={__('Button Text')}
+          target={attributes.targetNewWindow ? '_blank' : '_self'}
+          onChange={value => setAttributes({ text: value })}
         />
-    )
+
+      </Fragment>
+    );
   },
-}
+
+  save ({ attributes, className }) {
+    return (
+      <RichText.Content
+        tagName="a"
+        className={renderClassName(className, attributes)}
+        href={attributes.url}
+        value={attributes.text}
+        target={attributes.targetNewWindow ? '_blank' : '_self'}
+        rel="noreferrer noopener"
+      />
+    );
+  },
+};

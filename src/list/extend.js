@@ -1,17 +1,15 @@
-import React from 'react'
+import React from 'react';
 import assign from 'lodash.assign';
+import { blockEditor, components, compose, element, hooks, i18n } from 'wp';
 
-/**
- * Internal dependencies
- */
-import './style.scss'
+import './style.scss';
 
-const { createHigherOrderComponent } = wp.compose;
-const { Fragment } = wp.element;
-const { addFilter } = wp.hooks;
-const { __ } = wp.i18n;
-const { InspectorControls } = wp.blockEditor;
-const { PanelBody, ToggleControl } = wp.components;
+const { createHigherOrderComponent } = compose;
+const { Fragment } = element;
+const { addFilter } = hooks;
+const { __ } = i18n;
+const { InspectorControls } = blockEditor;
+const { PanelBody, ToggleControl } = components;
 
 
 // Enable properties on the following blocks
@@ -27,15 +25,15 @@ const enableOnBlocks = [
  *
  * @returns {object} Modified block settings.
  */
-const addSrcControlAttribute = ( settings, name ) => {
+const addSrcControlAttribute = (settings, name) => {
 
   // Do nothing if it's another block than our defined ones.
-  if ( ! enableOnBlocks.includes( name ) ) {
+  if (! enableOnBlocks.includes(name)) {
     return settings;
   }
 
   // Use Lodash's assign to gracefully handle if attributes are undefined
-  settings.attributes = assign( settings.attributes, {
+  settings.attributes = assign(settings.attributes, {
     customEnumeration: {
       type: 'boolean',
       default: false,
@@ -44,56 +42,57 @@ const addSrcControlAttribute = ( settings, name ) => {
       type: 'string',
       default: '',
     },
-  } );
+  });
 
   return settings;
 };
 
-addFilter( 'blocks.registerBlockType', 'extend-block-group/attribute/extend-styles', addSrcControlAttribute );
+addFilter('blocks.registerBlockType', 'extend-block-group/attribute/extend-styles', addSrcControlAttribute);
 
 /**
  * Create HOC to add src attribute to block.
  */
-const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
-  return ( props ) => {
+const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
+  return props => {
     // Do nothing if it's another block than our defined ones.
-    if ( ! enableOnBlocks.includes( props.name ) ) {
+    if (! enableOnBlocks.includes(props.name)) {
       return (
         <BlockEdit { ...props } />
       );
     }
 
-    let { customEnumeration } = props.attributes;
+    const { customEnumeration } = props.attributes;
     let pannelControl;
 
     if (props.attributes.ordered) {
       props.setAttributes({
         customChecked: false,
-        className: props.attributes.className.replace('rich__list--checked',''),
+        className: props.attributes.className.replace('rich__list--checked', ''),
       });
       pannelControl =
         <PanelBody
-          title={ __( 'Style Controls' ) }
+          title={ __('Style Controls') }
           initialOpen={ true }
         >
           <ToggleControl
             label="Numbered sublists"
             help="1 1.1 1.1.1"
             checked={ customEnumeration }
-            onChange={customEnumeration => {
+            onChange={newCustomEnumeration => {
               props.setAttributes({
-                customEnumeration: !!customEnumeration,
-                className: !!customEnumeration ? 'rich__list--enumerated' : ''
-              })}
+                customEnumeration: !!newCustomEnumeration,
+                className: newCustomEnumeration ? 'rich__list--enumerated' : '',
+              });
+            }
             }
           />
-        </PanelBody>
+        </PanelBody>;
     }
 
     if (!props.attributes.ordered) {
       props.setAttributes({
         customEnumeration: false,
-        className: props.attributes.className.replace('rich__list--enumerated',''),
+        className: props.attributes.className.replace('rich__list--enumerated', ''),
       });
     }
     return (
@@ -105,9 +104,9 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       </Fragment>
     );
   };
-}, 'withSrcAttribute' );
+}, 'withSrcAttribute');
 
-addFilter( 'editor.BlockEdit', 'extend-block-group/with-column-layout', withSrcAttribute );
+addFilter('editor.BlockEdit', 'extend-block-group/with-column-layout', withSrcAttribute);
 
 
 /**
@@ -119,14 +118,14 @@ addFilter( 'editor.BlockEdit', 'extend-block-group/with-column-layout', withSrcA
  *
  * @returns {object} Modified props of save element.
  */
-const addSizeExtraProps = ( saveElementProps, blockType, attributes ) => {
-    // Do nothing if it's another block than our defined ones.
-    if ( ! enableOnBlocks.includes( blockType.name ) ) {
-        return saveElementProps;
-    }
-
-
+const addSizeExtraProps = (saveElementProps, blockType) => {
+  // Do nothing if it's another block than our defined ones.
+  if (! enableOnBlocks.includes(blockType.name)) {
     return saveElementProps;
+  }
+
+
+  return saveElementProps;
 };
 
-addFilter( 'blocks.getSaveContent.extraProps', 'extend-block-group/get-save-content/extra-props', addSizeExtraProps );
+addFilter('blocks.getSaveContent.extraProps', 'extend-block-group/get-save-content/extra-props', addSizeExtraProps);
