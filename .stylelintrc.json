@@ -1,0 +1,16 @@
+{
+    "plugins": ["stylelint-prettier"],
+    "rules": {
+      "prettier/prettier": true,
+      "max-nesting-depth": null,
+      "declaration-property-value-disallowed-list": null,
+      "scss/at-import-partial-extension-blacklist": null,
+      "scss/selector-no-redundant-nesting-selector": null,
+      "selector-class-pattern": null,
+      "selector-max-compound-selectors": null,
+      "selector-no-qualifying-type": null
+      
+
+    },
+    "extends": ["stylelint-config-sass-guidelines", "stylelint-config-prettier"]
+  }

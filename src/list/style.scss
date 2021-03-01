@@ -1,57 +1,58 @@
 .block-editor-block-list__layout {
+  ol,
+  ul {
+    padding: 5px 0 0 40px;
+    li {
+      margin-bottom: 9px;
+    }
+  }
 
-    ol, ul {
-        padding: 5px 0 0 40px;
-        li {
-            margin-bottom: 9px;
-        }
+  ol.rich__list--enumerated,
+  ol.rich__list--enumerated ol {
+    counter-reset: item;
+    list-style-type: none;
+    padding: 5px 0 0 40px;
+
+    & > li {
+      counter-increment: item;
+      display: table;
+      margin-bottom: 0.6em;
     }
 
-    ol.rich__list--enumerated, ol.rich__list--enumerated ol {
-        list-style-type: none;
-        counter-reset: item;
-        padding: 5px 0 0 40px;
-
-        &>li {
-            display: table;
-            counter-increment: item;
-            margin-bottom: 0.6em;
-        }
-            
-        &>li:before {
-            content: counters(item, ".") ". ";
-            display: table-cell;
-            padding-right: 0.6em;    
-        }
-        
-        &>li ol li {
-            margin: 0;
-        }
-        
-        &>li ol li:before {
-            content: counters(item, ".") " ";
-        }
+    & > li::before {
+      content: counters(item, ".") ". ";
+      display: table-cell;
+      padding-right: 0.6em;
     }
-    // ul > li:before {
-    //     display: none;
-    // }
 
-    ul.rich__list--checked {
-        list-style-type: none;
-
-        li {
-            display: table;
-        }
-
-        li:before {
-            content: "";
-            display: table-cell;
-            background-repeat: no-repeat;
-            background-position-x: center;
-            padding-right: 0.6em;
-            width: 18px;
-            height: 16px;
-            background-image: url(./svg/hook.svg);
-        }
+    & > li ol li {
+      margin: 0;
     }
+
+    & > li ol li::before {
+      content: counters(item, ".") " ";
+    }
+  }
+  // ul > li:before {
+  //     display: none;
+  // }
+
+  ul.rich__list--checked {
+    list-style-type: none;
+
+    li {
+      display: table;
+    }
+
+    li::before {
+      background-image: url("./svg/hook.svg");
+      background-position-x: center;
+      background-repeat: no-repeat;
+      content: "";
+      display: table-cell;
+      height: 16px;
+      padding-right: 0.6em;
+      width: 18px;
+    }
+  }
 }

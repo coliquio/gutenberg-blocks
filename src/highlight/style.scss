@@ -4,18 +4,17 @@
   margin: 15px 0;
 
   .title {
+    border-radius: 6px 6px 0 0;
     font-weight: 600;
     padding: 10px 15px;
-    border-radius: 6px 6px 0 0;
   }
 
   .content {
-    padding: 1px 15px 5px 15px;
     border-radius: 0 0 6px 6px;
+    padding: 1px 15px 5px;
   }
 
   &.card--primary {
-
     .title {
       color: var(--black-base);
     }
@@ -26,14 +25,12 @@
   }
 
   &.card--secondary {
-
     .title {
-      color: var(--white-base);
       background-color: var(--blue-base);
+      color: var(--white-base);
     }
     .content {
       background-color: var(--blue-lighten-50);
     }
-
   }
 }
