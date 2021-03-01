@@ -1,0 +1,81 @@
+@import "../common/colors.css";
+
+.header-valid {
+  font-weight: bold;
+  color: var(--green-base);
+}
+
+.header-invalid-too-long-1 {
+  font-weight: bold;
+  color: var(--orange-darken-10);
+}
+
+.header-invalid-too-long-2 {
+  font-weight: bold;
+  color: var(--red-base);
+}
+
+.wp-block-coliquio-myheader {
+  &[contenteditable] {
+    cursor: text;
+  }
+
+  display: block;
+  text-align: left;
+  vertical-align: middle;
+  cursor: pointer;
+  padding: .5rem 1rem;
+  outline: 0;
+  margin-bottom: .25rem;
+  text-decoration: none;
+
+  &.warning-too-long-1 {
+    color: var(--orange-darken-10);
+  }
+
+  &.warning-too-long-2 {
+    color: var(--red-base);
+  }
+
+  &.is-style-rounded {
+    border-radius: 25px;
+    border: 2px solid olive;
+  }
+
+  &.is-style-dashed {
+    border: 2px solid lightseagreen;
+    border-style: dashed;
+  } 
+}
+
+// preview styles
+article {
+  .field--name-field-body-word-count {
+    margin: 0 1rem;
+    display: flex;
+    div.field__label {
+        display: flex;
+    }
+    div:first-child {
+      padding-right: 5px;
+    }
+    div:nth-child(2) {
+      padding-left: 5px;
+    }
+  }
+  h1.wp-block-coliquio-myheader {
+    padding-left: 0;
+    padding-right: 0;
+    display: flex;
+    flex-direction: column;
+    .kicker {
+      margin-bottom: .25rem;
+      font-size: 1.625rem;
+      line-height: 1.875rem;
+    }
+    span.headline {
+      margin-bottom: 0;
+    }
+  }
+}
+
