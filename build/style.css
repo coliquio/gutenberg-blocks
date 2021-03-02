@@ -1,0 +1,110 @@
+:root {
+  --white-base: #ffffff;
+
+  --black-darken-20: #000000;
+  --black-darken-10: #1A1A1A;
+  --black-base: #333333;
+  --black-lighten-10: #4D4D4D;
+  --black-lighten-20: #666666;
+  --black-lighten-30: #808080;
+  --black-lighten-40: #999999;
+  --black-lighten-50: #B3B3B3;
+  --black-lighten-60: #CCCCCC;
+  --black-lighten-70: #E6E6E6;
+  --black-lighten-75: #F2F2F2;
+
+  --blue-darken-35: #091F2F;
+  --blue-darken-30: #0D2D45;
+  --blue-darken-20: #154A6F;
+  --blue-darken-10: #1D669A;
+  --blue-base: #2581C4;
+  --blue-accent: #007AFF;
+  --blue-lighten-10: #439CDB;
+  --blue-lighten-20: #6DB2E3;
+  --blue-lighten-30: #98C9EB;
+  --blue-lighten-40: #C3DFF4;
+  --blue-lighten-50: #F2F8FD;
+
+  --green-darken-20: #376119;
+  --green-darken-10: #4E8A24;
+  --green-base: #65B32E;
+  --green-lighten-10: #7ECF44;
+  --green-lighten-20: #9AD96D;
+  --green-lighten-30: #B6E496;
+  --green-lighten-40: #D2EEBE;
+
+  --red-darken-30: #471010;
+  --red-darken-25: #5B1515;
+  --red-darken-20: #701919;
+  --red-darken-10: #9A2323;
+  --red-base: #C42D2D;
+  --red-lighten-10: #D64C4C;
+  --red-lighten-20: #E07676;
+  --red-lighten-30: #E99F9F;
+  --red-lighten-40: #F3C9C9;
+
+  --orange-darken-35: #522E00;
+  --orange-darken-30: #6B3D00;
+  --orange-darken-20: #9E5A00;
+  --orange-darken-10: #D17600;
+  --orange-base: #FF9105;
+  --orange-lighten-10: #FFA938;
+  --orange-lighten-20: #FFBF6B;
+  --orange-lighten-30: #FFD59E;
+  --orange-lighten-40: #FFEBD1;
+}
+.header-valid {
+  font-weight: bold;
+  color: var(--green-base); }
+
+.header-invalid-too-long-1 {
+  font-weight: bold;
+  color: var(--orange-darken-10); }
+
+.header-invalid-too-long-2 {
+  font-weight: bold;
+  color: var(--red-base); }
+
+.wp-block-coliquio-myheader {
+  display: block;
+  text-align: left;
+  vertical-align: middle;
+  cursor: pointer;
+  padding: .5rem 1rem;
+  outline: 0;
+  margin-bottom: .25rem;
+  text-decoration: none; }
+  .wp-block-coliquio-myheader[contenteditable] {
+    cursor: text; }
+  .wp-block-coliquio-myheader.warning-too-long-1 {
+    color: var(--orange-darken-10); }
+  .wp-block-coliquio-myheader.warning-too-long-2 {
+    color: var(--red-base); }
+  .wp-block-coliquio-myheader.is-style-rounded {
+    border-radius: 25px;
+    border: 2px solid olive; }
+  .wp-block-coliquio-myheader.is-style-dashed {
+    border: 2px solid lightseagreen;
+    border-style: dashed; }
+
+article .field--name-field-body-word-count {
+  margin: 0 1rem;
+  display: flex; }
+  article .field--name-field-body-word-count div.field__label {
+    display: flex; }
+  article .field--name-field-body-word-count div:first-child {
+    padding-right: 5px; }
+  article .field--name-field-body-word-count div:nth-child(2) {
+    padding-left: 5px; }
+
+article h1.wp-block-coliquio-myheader {
+  padding-left: 0;
+  padding-right: 0;
+  display: flex;
+  flex-direction: column; }
+  article h1.wp-block-coliquio-myheader .kicker {
+    margin-bottom: .25rem;
+    font-size: 1.625rem;
+    line-height: 1.875rem; }
+  article h1.wp-block-coliquio-myheader span.headline {
+    margin-bottom: 0; }

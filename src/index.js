@@ -1,6 +1,7 @@
 // import { blocks, data, i18n } from 'wp';
 
-import { registerBlockType } from '@wordpress/blocks';
+// import { registerBlockType } from '@wordpress/blocks';
+const { registerBlockType } = window.wp.blocks; // https://github.com/WordPress/gutenberg/issues/18519
 import { __ } from '@wordpress/i18n';
 
 // import * as accordionBlock from './accordion';
