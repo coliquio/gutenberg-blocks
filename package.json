@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@wordpress/block-editor": "^5.2.9",
+    "@wordpress/blocks": "^7.0.5",
     "@wordpress/components": "^12.0.7",
     "@wordpress/dom-ready": "^2.11.0",
     "@wordpress/i18n": "^3.18.0",
@@ -51,9 +52,9 @@
     "lodash.merge": "^4.6.2",
     "lodash.reduce": "^4.6.0",
     "lodash.transform": "^4.6.0",
-    "react": "^16.13.1",
+    "react": "^17.0.1",
     "react-cache": "^2.0.0-alpha.1",
-    "react-dom": "^16.13.1",
+    "react-dom": "^17.0.1",
     "scheduler": "^0.19.1"
   },
   "husky": {

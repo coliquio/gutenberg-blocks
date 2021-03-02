@@ -15,7 +15,7 @@ module.exports = {
   },
   externals: {
     react: 'React',
-    wp: 'wp',
+    // wp: 'wp',
   },
   output: {
     filename: '[name].js',
