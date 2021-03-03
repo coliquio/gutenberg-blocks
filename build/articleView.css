@@ -147,13 +147,6 @@ article summary {
   padding: 15px 5px; }
   .accordion-item-component .accordion-item-header {
     font-size: 18px; }
-.wp-block-coliquio-iframe {
-  margin: 15px 0;
-  width: 100%;
-  min-height: 300px; }
-  .wp-block-coliquio-iframe.iframe, .wp-block-coliquio-iframe.iframe-survey {
-    border: 1px solid var(--black-lighten-40); }
-
 .wp-block-coliquio-cta {
   background-color: var(--green-base);
   color: var(--white-base);
@@ -184,6 +177,7 @@ article summary {
       border: none;
       background: none;
       color: var(--green-darken-10); }
+
 section.wp-block-coliquio-media-text {
   display: flex;
   width: 100%;
@@ -196,6 +190,12 @@ section.wp-block-coliquio-media-text {
   section.wp-block-coliquio-media-text .wp-block-group {
     display: flex;
     flex: 50%; }
+.wp-block-coliquio-iframe {
+  margin: 15px 0;
+  width: 100%;
+  min-height: 300px; }
+  .wp-block-coliquio-iframe.iframe, .wp-block-coliquio-iframe.iframe-survey {
+    border: 1px solid var(--black-lighten-40); }
 .header-valid {
   font-weight: bold;
   color: var(--green-base); }
