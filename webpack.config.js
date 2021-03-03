@@ -1,6 +1,7 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 
 const cleanBuild = new CleanWebpackPlugin({
   cleanOnceBeforeBuildPatterns: ['build'],
@@ -47,6 +48,7 @@ module.exports = {
   },
   mode: 'development',
   plugins: [
+    new DependencyExtractionWebpackPlugin(),
     cleanBuild,
     blockCSS,
     editorCSS,

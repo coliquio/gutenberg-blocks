@@ -1,7 +1,6 @@
 // import { blocks, data, i18n } from 'wp';
 
-// import { registerBlockType } from '@wordpress/blocks';
-const { registerBlockType } = window.wp.blocks; // https://github.com/WordPress/gutenberg/issues/18519
+import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 
 // import * as accordionBlock from './accordion';
@@ -11,11 +10,11 @@ import { __ } from '@wordpress/i18n';
 // import * as ctaBlock from './cta';
 // import * as highlight from './highlight';
 // import * as iframe from './iframe';
-// import * as header from './header';
 // import * as mediaRichText from './media_text';
 
 // Test Block
 import * as myheader from './myheader';
+import * as header from './header';
 
 // import './image/extend';
 // import './group/extend';
@@ -30,6 +29,7 @@ import './common/common.scss';
 
 const colBlocks = [
   myheader,
+  header,
   // accordionBlock,
   // accordionItemBlock,
   // brandingBlock,
@@ -56,7 +56,7 @@ export function registerBlocks () {
 
   colBlocks.forEach(block => {
     registerBlockType(`${category.slug}/${block.name}`, {
-      category: category.slug,
+      category: 'coliquio',
       ...block.settings,
     });
   });

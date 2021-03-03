@@ -1,8 +1,9 @@
 import React from 'react';
-import { __ } from '@wordpress/i18n';
-import { TextControl } from '@wordpress/components';
 
-// import { useBlockProps } from '@wordpress/block-editor';
+// Wordpress Gutenberg
+import { __ } from '@wordpress/i18n';
+import { useBlockProps } from '@wordpress/block-editor';
+import { TextControl } from '@wordpress/components';
 
 import './style.scss';
 export const name = 'myheader';
@@ -45,7 +46,7 @@ export const settings = {
       name: 'artist',
       title: __('Artist'),
       description: __('Code is poetry!'),
-      icon: 'art',
+      icon: 'button',
       attributes: { content: 'Art' },
     },
     {
@@ -59,16 +60,14 @@ export const settings = {
   ],
 
   edit ({ attributes, className, setAttributes }) {
-    console.log('attributes', attributes);
-    console.log('classname', className);
-
-    // const blockProps = useBlockProps();
+    const blockProps = useBlockProps();
+    console.log('blockProps', blockProps);
 
     const updateFieldValue = val => {
       setAttributes({ content: val });
     };
     return (
-      <div className={[className].join(' ')}>
+      <div {...blockProps} className={[className].join(' ')}>
         <TextControl
           label="My Test Block"
           value={attributes.content}
@@ -79,6 +78,8 @@ export const settings = {
   },
 
   save ({ attributes }) {
-    return <div> {attributes.content} </div>;
+    const blockProps = useBlockProps.save();
+
+    return <div {...blockProps}> {attributes.content} </div>;
   },
 };
