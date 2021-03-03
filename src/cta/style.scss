@@ -1,42 +1,41 @@
 @import "../common/colors.css";
 
 .wp-block-coliquio-cta {
+  background-color: var(--green-base);
+  border: 1px solid var(--green-base);
+  border-radius: 4px;
+  color: var(--white-base);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.125rem;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+  outline: 0;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
   &[contenteditable] {
     cursor: text;
   }
 
-  background-color: var(--green-base);
-  color: var(--white-base);
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  border: 1px solid var(--green-base);
-  border-radius: 4px;
-  font-weight: 400;
-  padding: .5rem 1rem;
-  outline: 0;
-  margin-bottom: .25rem;
-  text-decoration: none;
-  font-size: 1.125rem;
-
   &:active,
   &:hover {
-    border: 1px solid var(--black-lighten-20);
     background-color: var(--green-darken-10);
+    border: 1px solid var(--black-lighten-20);
     color: var(--white-base);
     text-decoration: none;
   }
 
   &--link {
-    color: var(--green-base);
     background: none;
     border: none;
+    color: var(--green-base);
 
     &:active,
     &:hover {
-      border: none;
       background: none;
+      border: none;
       color: var(--green-darken-10);
     }
   }

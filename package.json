@@ -9,6 +9,8 @@
     "dev": "NODE_ENV=development webpack && BLOCK_DIR=$PWD npm --prefix node_modules/@frontkom/g-editor start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "lint:scss": "stylelint src/**/*.scss",
+    "lint:scss:fix": "stylelint src/**/*.scss --fix",
     "start": "npm run build && BLOCK_DIR=$PWD npm --prefix node_modules/@frontkom/g-editor start",
     "watch": "nodemon --watch src/ --delay 10ms --exec 'npm run dev'"
   },
@@ -30,6 +32,11 @@
     "postcss-loader": "^3.0.0",
     "prettier": "2.2.1",
     "sass-loader": "^9.0.2",
+    "stylelint": "^13.11.0",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-sass-guidelines": "^8.0.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-prettier": "^1.2.0",
     "url-loader": "^3.0.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
@@ -60,6 +67,7 @@
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
-    "*.{js,css,md}": "prettier --write"
+    "*.scss": "stylelint --fix",
+    "*.{js,md}": "prettier --write"
   }
 }

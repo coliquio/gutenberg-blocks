@@ -1,33 +1,33 @@
 @import "../common/colors.css";
 
 .header-valid {
-  font-weight: bold;
   color: var(--green-base);
+  font-weight: bold;
 }
 
 .header-invalid-too-long-1 {
-  font-weight: bold;
   color: var(--orange-darken-10);
+  font-weight: bold;
 }
 
 .header-invalid-too-long-2 {
-  font-weight: bold;
   color: var(--red-base);
+  font-weight: bold;
 }
 
 .wp-block-coliquio-header {
+  cursor: pointer;
+
+  display: block;
+  margin-bottom: 0.25rem;
+  outline: 0;
+  padding: 0.5rem 1rem;
+  text-align: left;
+  text-decoration: none;
+  vertical-align: middle;
   &[contenteditable] {
     cursor: text;
   }
-
-  display: block;
-  text-align: left;
-  vertical-align: middle;
-  cursor: pointer;
-  padding: .5rem 1rem;
-  outline: 0;
-  margin-bottom: .25rem;
-  text-decoration: none;
 
   &.warning-too-long-1 {
     color: var(--orange-darken-10);
@@ -38,24 +38,24 @@
   }
 
   .kicker {
-    font-weight: 400;
     font-size: 1.125rem;
-    margin-bottom: .25rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
   }
 
   .headline {
-    font-weight: 600;
     font-size: 1.25rem;
+    font-weight: 600;
   }
 }
 
 // preview styles
 article {
   .field--name-field-body-word-count {
-    margin: 0 1rem;
     display: flex;
+    margin: 0 1rem;
     div.field__label {
-        display: flex;
+      display: flex;
     }
     div:first-child {
       padding-right: 5px;
@@ -65,18 +65,17 @@ article {
     }
   }
   h1.wp-block-coliquio-header {
-    padding-left: 0;
-    padding-right: 0;
     display: flex;
     flex-direction: column;
+    padding-left: 0;
+    padding-right: 0;
     .kicker {
-      margin-bottom: .25rem;
       font-size: 1.625rem;
       line-height: 1.875rem;
+      margin-bottom: 0.25rem;
     }
     span.headline {
       margin-bottom: 0;
     }
   }
 }
-

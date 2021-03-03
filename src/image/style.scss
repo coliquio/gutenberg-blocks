@@ -1,55 +1,54 @@
 @import "../common/colors.css";
 
-$image-x-small-width: 16%!important;
-$image-small-width: 25%!important;
-$image-medium-width: 33%!important;
-$image-large-width: 50%!important;
-$image-x-large-width: 100%!important;
-
+$image-x-small-width: 16% !important;
+$image-small-width: 25% !important;
+$image-medium-width: 33% !important;
+$image-large-width: 50% !important;
+$image-x-large-width: 100% !important;
 
 .block-editor-block-list__layout {
   .wp-block-coliquio-image {
     margin: 15px 0;
-  
+
     &.align-left {
       float: left;
       margin-right: 15px;
     }
     &.align-right {
-      margin-left: 15px;
       float: right;
+      margin-left: 15px;
     }
     &.align-center {
       text-align: center;
     }
-  
+
     img {
-      max-width: 400px;
       float: none;
+      max-width: 400px;
       width: 100%;
     }
-  
+
     figcaption {
-      padding: 5px 0 0 0;
-      margin: 0;
-      line-height: 1.4rem;
       color: var(--black-base);
+      line-height: 1.4rem;
+      margin: 0;
+      padding: 5px 0 0;
     }
-  
+
     .copyright {
+      color: var(--black-lighten-50);
       display: block;
       font-size: 0.8rem;
-      color: var(--black-lighten-50);
     }
   }
-  
+
   .wp-block-image {
     min-width: 140px;
-  
+
     &.custom-size-extra-small {
       width: $image-x-small-width;
     }
-    &.custom-size-small{
+    &.custom-size-small {
       width: $image-small-width;
     }
     &.custom-size-medium {
@@ -72,59 +71,59 @@ $image-x-large-width: 100%!important;
       }
     }
     .components-text-control__input {
-      border: none!important;
-      box-shadow: none!important;
+      border: none !important;
+      box-shadow: none !important;
       text-align: center;
     }
   }
-  
+
   // there is js logic adding this class based on innerHtml of the buttons(text)
   .custom-hidden {
     display: none;
   }
-  
+
   // hide upload button from popup menu
   .components-form-file-upload {
     display: none;
   }
-  
+
   figure.wp-block-image {
     &.custom-size-extra-small {
-      width: 116px!important;
+      width: 116px !important;
     }
-    &.custom-size-small{
-      width: 180px!important;
+    &.custom-size-small {
+      width: 180px !important;
     }
     &.custom-size-medium {
-      width: 240px!important;
+      width: 240px !important;
     }
     &.custom-size-large {
-      width: 360px!important;
+      width: 360px !important;
     }
     &.custom-size-extra-large {
-      width: 720px!important;
+      width: 720px !important;
     }
   }
-  
+
   .components-disabled {
     opacity: 0.7;
   }
-  
+
   .block-editor-block-list__layout {
     .layout-column-left-small {
       margin-left: 196px;
       margin-right: 0;
     }
     .layout-column-right-small {
-      margin-right: 196px;
       margin-left: 0;
+      margin-right: 196px;
     }
-  }   
+  }
 }
 
 // context menu in editor
 .block-editor-block-toolbar .media-replace-flow {
-  display: none!important;
+  display: none !important;
 }
 
 .block-editor-image-size-control .block-editor-image-size-control__row {
@@ -135,54 +134,60 @@ article {
   .wp-block-image {
     min-width: 140px;
 
-    figure.alignleft, figure.alignright {
+    figure.alignleft,
+    figure.alignright {
       figcaption {
-        width: 100%;
         display: block;
+        width: 100%;
       }
     }
     img {
-      margin: 0 auto;
       display: block;
+      margin: 0 auto;
     }
-  
+
     &.custom-size-extra-small {
-      .alignright, .alignleft {
+      .alignright,
+      .alignleft {
         width: $image-x-small-width;
       }
-      &>img {
+      & > img {
         width: $image-x-small-width;
       }
     }
     &.custom-size-small {
-      .alignright, .alignleft {
+      .alignright,
+      .alignleft {
         width: $image-small-width;
       }
-      &>img {
+      & > img {
         width: $image-small-width;
       }
     }
     &.custom-size-medium {
-      .alignright, .alignleft {
+      .alignright,
+      .alignleft {
         width: $image-medium-width;
       }
-      &>img {
+      & > img {
         width: $image-medium-width;
       }
     }
     &.custom-size-large {
-      .alignright, .alignleft {
+      .alignright,
+      .alignleft {
         width: $image-large-width;
       }
-      &>img {
+      & > img {
         width: $image-x-small-width;
       }
     }
     &.custom-size-extra-large {
-      .alignright, .alignleft {
+      .alignright,
+      .alignleft {
         width: $image-x-large-width;
       }
-      &>img {
+      & > img {
         width: $image-x-large-width;
       }
     }
@@ -197,20 +202,20 @@ article {
       }
     }
     .components-text-control__input {
-      border: none!important;
-      box-shadow: none!important;
+      border: none !important;
+      box-shadow: none !important;
       text-align: center;
     }
   }
   .wp-block-image {
     .alignright {
-        display: block;
-        float: right;
+      display: block;
+      float: right;
     }
-    
+
     .alignleft {
-        display: block;
-        float: left;
+      display: block;
+      float: left;
     }
-}
+  }
 }
