@@ -30,11 +30,13 @@ export const settings = {
     },
     style: {
       type: 'string',
-      default: styleType.BLUE_BORDER,
     },
   },
 
   edit ({ attributes, className, setAttributes }) {
+    if (!attributes.style) {
+      setAttributes({ style: styleType.BLUE_BORDER });
+    }
     const { title, style } = attributes;
 
     return (
@@ -44,7 +46,7 @@ export const settings = {
             <TextControl
               label={__('Box Title')}
               value={title || ''}
-              onChange={newTitle => setAttributes({ newTitle })}
+              onChange={title => setAttributes({ title })}
             />
             <SelectControl
               label={__('Visual Appearance')}

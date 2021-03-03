@@ -1,64 +1,33 @@
-article .wp-block-coliquio-accordion-item {
-  margin-bottom: 15px;
-  border-radius: 0;
-  background-color: transparent;
-  border-left: none;
-  border-right: none; }
-  article .wp-block-coliquio-accordion-item[open] .accordion-item-summary .arrow-icon {
-    transform: rotate(0); }
-  article .wp-block-coliquio-accordion-item .accordion-item-summary::-webkit-details-marker {
-    display: none; }
-  article .wp-block-coliquio-accordion-item .accordion-item-summary:hover {
-    background: #f2f2f2; }
-  article .wp-block-coliquio-accordion-item .accordion-item-summary .summary-container {
-    font-size: 22px;
-    font-weight: 400;
-    line-height: 44px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; }
-    article .wp-block-coliquio-accordion-item .accordion-item-summary .summary-container .summary-content {
-      margin: 10px 0;
-      max-width: 80%;
-      padding: 5px 15px 5px 0;
-      color: #2581c4;
-      line-height: 1.2rem;
-      font-weight: 400; }
-  article .wp-block-coliquio-accordion-item .accordion-item-summary .arrow-icon {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23007AFF' d='M12,8l-6,6l1.41,1.41L12,10.83l4.59,4.58L18,14L12,8z'/%3E%3C/svg%3E");
-    transform: rotate(180deg);
-    transition: transform 300ms ease-in-out;
-    transform-origin: 13px;
-    fill: #007AFF;
-    width: 26px;
-    height: 26px;
-    margin-right: 10px; }
-  article .wp-block-coliquio-accordion-item::-webkit-details-marker {
-    display: none; }
-  article .wp-block-coliquio-accordion-item sup {
-    line-height: 0; }
-  article .wp-block-coliquio-accordion-item p {
-    margin: 5px 0 5px; }
-    article .wp-block-coliquio-accordion-item p:last-child {
-      margin: 0; }
-  article .wp-block-coliquio-accordion-item ol, article .wp-block-coliquio-accordion-item ul {
-    padding: 0;
-    margin: 15px 0 0 15px; }
-    article .wp-block-coliquio-accordion-item ol li, article .wp-block-coliquio-accordion-item ul li {
-      margin-bottom: 15px; }
-      article .wp-block-coliquio-accordion-item ol li:last-child, article .wp-block-coliquio-accordion-item ul li:last-child {
-        margin: 0; }
-  article .wp-block-coliquio-accordion-item .accordion-item-content {
-    padding-top: 15px; }
-
-article summary {
-  outline: none; }
-
-.accordion-item-component {
-  border: 1px solid #999;
-  padding: 15px 5px; }
-  .accordion-item-component .accordion-item-header {
-    font-size: 18px; }
+.wp-block-coliquio-cta {
+  background-color: var(--green-base);
+  color: var(--white-base);
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid var(--green-base);
+  border-radius: 4px;
+  font-weight: 400;
+  padding: .5rem 1rem;
+  outline: 0;
+  margin-bottom: .25rem;
+  text-decoration: none;
+  font-size: 1.125rem; }
+  .wp-block-coliquio-cta[contenteditable] {
+    cursor: text; }
+  .wp-block-coliquio-cta:active, .wp-block-coliquio-cta:hover {
+    border: 1px solid var(--black-lighten-20);
+    background-color: var(--green-darken-10);
+    color: var(--white-base);
+    text-decoration: none; }
+  .wp-block-coliquio-cta--link {
+    color: var(--green-base);
+    background: none;
+    border: none; }
+    .wp-block-coliquio-cta--link:active, .wp-block-coliquio-cta--link:hover {
+      border: none;
+      background: none;
+      color: var(--green-darken-10); }
 .wp-block-coliquio-accordion {
   padding: 15px; }
   .wp-block-coliquio-accordion .accordion-header {
@@ -127,55 +96,73 @@ article .wp-block-coliquio-branding-box {
       width: 16px;
       height: 16px;
       background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 56.7 56.7' enable-background='new 0 0 56.7 56.7' xml:space='preserve'%3E%3Cg%3E%3Cpolygon fill='%2365b32e' points='24.5,46.3 6.3,28.2 12.4,22.1 30,39.8 '/%3E%3Cpolygon fill='%2365b32e' points='19,39.8 44.5,11.2 50.8,16.9 24.5,46.4 '/%3E%3C/g%3E%3C/svg%3E%0A"); }
-.wp-block-coliquio-cta {
-  background-color: var(--green-base);
-  color: var(--white-base);
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  border: 1px solid var(--green-base);
-  border-radius: 4px;
-  font-weight: 400;
-  padding: .5rem 1rem;
-  outline: 0;
-  margin-bottom: .25rem;
-  text-decoration: none;
-  font-size: 1.125rem; }
-  .wp-block-coliquio-cta[contenteditable] {
-    cursor: text; }
-  .wp-block-coliquio-cta:active, .wp-block-coliquio-cta:hover {
-    border: 1px solid var(--black-lighten-20);
-    background-color: var(--green-darken-10);
-    color: var(--white-base);
-    text-decoration: none; }
-  .wp-block-coliquio-cta--link {
-    color: var(--green-base);
-    background: none;
-    border: none; }
-    .wp-block-coliquio-cta--link:active, .wp-block-coliquio-cta--link:hover {
-      border: none;
-      background: none;
-      color: var(--green-darken-10); }
-.wp-block-coliquio-highlight {
-  margin: 15px 0; }
-  .wp-block-coliquio-highlight .title {
-    font-weight: 600;
-    padding: 10px 15px;
-    border-radius: 6px 6px 0 0; }
-  .wp-block-coliquio-highlight .content {
-    padding: 1px 15px 5px 15px;
-    border-radius: 0 0 6px 6px; }
-  .wp-block-coliquio-highlight.card--primary .title {
-    color: var(--black-base); }
-  .wp-block-coliquio-highlight.card--primary .content {
-    background-color: var(--black-lighten-75);
-    border-radius: 6px; }
-  .wp-block-coliquio-highlight.card--secondary .title {
-    color: var(--white-base);
-    background-color: var(--blue-base); }
-  .wp-block-coliquio-highlight.card--secondary .content {
-    background-color: var(--blue-lighten-50); }
+article .wp-block-coliquio-accordion-item {
+  margin-bottom: 15px;
+  border-radius: 0;
+  background-color: transparent;
+  border-left: none;
+  border-right: none; }
+  article .wp-block-coliquio-accordion-item[open] .accordion-item-summary .arrow-icon {
+    transform: rotate(0); }
+  article .wp-block-coliquio-accordion-item .accordion-item-summary::-webkit-details-marker {
+    display: none; }
+  article .wp-block-coliquio-accordion-item .accordion-item-summary:hover {
+    background: #f2f2f2; }
+  article .wp-block-coliquio-accordion-item .accordion-item-summary .summary-container {
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+    article .wp-block-coliquio-accordion-item .accordion-item-summary .summary-container .summary-content {
+      margin: 10px 0;
+      max-width: 80%;
+      padding: 5px 15px 5px 0;
+      color: #2581c4;
+      line-height: 1.2rem;
+      font-weight: 400; }
+  article .wp-block-coliquio-accordion-item .accordion-item-summary .arrow-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23007AFF' d='M12,8l-6,6l1.41,1.41L12,10.83l4.59,4.58L18,14L12,8z'/%3E%3C/svg%3E");
+    transform: rotate(180deg);
+    transition: transform 300ms ease-in-out;
+    transform-origin: 13px;
+    fill: #007AFF;
+    width: 26px;
+    height: 26px;
+    margin-right: 10px; }
+  article .wp-block-coliquio-accordion-item::-webkit-details-marker {
+    display: none; }
+  article .wp-block-coliquio-accordion-item sup {
+    line-height: 0; }
+  article .wp-block-coliquio-accordion-item p {
+    margin: 5px 0 5px; }
+    article .wp-block-coliquio-accordion-item p:last-child {
+      margin: 0; }
+  article .wp-block-coliquio-accordion-item ol, article .wp-block-coliquio-accordion-item ul {
+    padding: 0;
+    margin: 15px 0 0 15px; }
+    article .wp-block-coliquio-accordion-item ol li, article .wp-block-coliquio-accordion-item ul li {
+      margin-bottom: 15px; }
+      article .wp-block-coliquio-accordion-item ol li:last-child, article .wp-block-coliquio-accordion-item ul li:last-child {
+        margin: 0; }
+  article .wp-block-coliquio-accordion-item .accordion-item-content {
+    padding-top: 15px; }
+
+article summary {
+  outline: none; }
+
+.accordion-item-component {
+  border: 1px solid #999;
+  padding: 15px 5px; }
+  .accordion-item-component .accordion-item-header {
+    font-size: 18px; }
+.wp-block-coliquio-iframe {
+  margin: 15px 0;
+  width: 100%;
+  min-height: 300px; }
+  .wp-block-coliquio-iframe.iframe, .wp-block-coliquio-iframe.iframe-survey {
+    border: 1px solid var(--black-lighten-40); }
 :root {
   --white-base: #ffffff;
 
@@ -231,6 +218,25 @@ article .wp-block-coliquio-branding-box {
   --orange-lighten-30: #FFD59E;
   --orange-lighten-40: #FFEBD1;
 }
+.wp-block-coliquio-highlight {
+  margin: 15px 0; }
+  .wp-block-coliquio-highlight .title {
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 6px 6px 0 0; }
+  .wp-block-coliquio-highlight .content {
+    padding: 1px 15px 5px 15px;
+    border-radius: 0 0 6px 6px; }
+  .wp-block-coliquio-highlight.card--primary .title {
+    color: var(--black-base); }
+  .wp-block-coliquio-highlight.card--primary .content {
+    background-color: var(--black-lighten-75);
+    border-radius: 6px; }
+  .wp-block-coliquio-highlight.card--secondary .title {
+    color: var(--white-base);
+    background-color: var(--blue-base); }
+  .wp-block-coliquio-highlight.card--secondary .content {
+    background-color: var(--blue-lighten-50); }
 section.wp-block-coliquio-media-text {
   display: flex;
   width: 100%;
@@ -243,12 +249,6 @@ section.wp-block-coliquio-media-text {
   section.wp-block-coliquio-media-text .wp-block-group {
     display: flex;
     flex: 50%; }
-.wp-block-coliquio-iframe {
-  margin: 15px 0;
-  width: 100%;
-  min-height: 300px; }
-  .wp-block-coliquio-iframe.iframe, .wp-block-coliquio-iframe.iframe-survey {
-    border: 1px solid var(--black-lighten-40); }
 .header-valid {
   font-weight: bold;
   color: var(--green-base); }
