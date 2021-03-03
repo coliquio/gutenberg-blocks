@@ -35,11 +35,7 @@ export const settings = {
   },
 
   edit ({ attributes, className, setAttributes }) {
-
-    const {
-      title,
-      style,
-    } = attributes;
+    const { title, style } = attributes;
 
     return (
       <>
@@ -54,10 +50,13 @@ export const settings = {
               label={__('Visual Appearance')}
               value={style}
               options={[
-                { label: __('Thick Blue Border'), value: styleType.BLUE_BORDER },
+                {
+                  label: __('Thick Blue Border'),
+                  value: styleType.BLUE_BORDER,
+                },
                 { label: __('Soft Grey Box'), value: styleType.GREY_BOX },
               ]}
-              onChange={newStyle => setAttributes({ newStyle })}
+              onChange={style => setAttributes({ style })}
             />
           </PanelBody>
         </InspectorControls>
