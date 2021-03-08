@@ -12,9 +12,9 @@ import './image/extend';
 import './group/extend';
 import './image_gallery/extend';
 import './list/extend';
+import './common/extend/disableDefaultStylePicker';
 
 import './common/common.scss';
-
 
 const { registerBlockType } = blocks;
 const { dispatch, select } = data;
@@ -40,13 +40,17 @@ const category = {
 
 // Register the new category and blocks
 export function registerBlocks () {
-  const currentCategories = select('core/blocks').getCategories().filter(item => item.slug !== category.slug);
+  const currentCategories = select('core/blocks')
+  .getCategories()
+  .filter(item => item.slug !== category.slug);
   dispatch('core/blocks').setCategories([category, ...currentCategories]);
 
   colBlocks.forEach(block => {
-    registerBlockType(`${category.slug}/${block.name}`, { category: category.slug, ...block.settings });
+    registerBlockType(`${category.slug}/${block.name}`, {
+      category: category.slug,
+      ...block.settings,
+    });
   });
-
 }
 
 registerBlocks();
