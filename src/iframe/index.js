@@ -43,15 +43,12 @@ export const settings = {
   },
 
   edit ({ attributes, className, setAttributes }) {
-
-    const {
-      src,
-      height,
-      type,
-    } = attributes;
+    const { src, height, type } = attributes;
 
     const heightOptionsUi = Object.keys(heightOptions).map(item => ({
-      label: `${item} ${heightOptions[item] !== 0 ? `(${heightOptions[item]}px)` : ''}`,
+      label: `${item} ${
+        heightOptions[item] !== 0 ? `(${heightOptions[item]}px)` : ''
+      }`,
       value: heightOptions[item],
     }));
 
@@ -68,27 +65,43 @@ export const settings = {
               label={__('Type of iframe (changes styling)')}
               value={type}
               options={typeOptionsUI}
-              onChange={newType => setAttributes({ newType })}
+              // eslint-disable-next-line no-shadow
+              onChange={type => setAttributes({ type })}
             />
             <TextControl
               label={__('Source URL')}
               value={src}
-              onChange={newSrc => setAttributes({ newSrc })}
+              // eslint-disable-next-line no-shadow
+              onChange={src => setAttributes({ src })}
             />
             <SelectControl
               label={__('Visual Height')}
               value={height}
               options={heightOptionsUi}
-              onChange={newHeight => setAttributes({ height: parseInt(newHeight) })}
+              // eslint-disable-next-line no-shadow
+              onChange={height => setAttributes({ height: parseInt(height) })}
             />
           </PanelBody>
         </InspectorControls>
-        <iframe frameBorder={0} className={`${className} ${type}`} src={src ? src : 'about:blank'} height={height} />
+        <iframe
+          frameBorder={0}
+          className={`${className} ${type}`}
+          src={src ? src : 'about:blank'}
+          height={height}
+        />
       </>
     );
   },
 
   save ({ attributes: { src, height, type } }) {
-    return <iframe className={type} frameBorder={0} src={`${src ? src : 'about:blank'}`} height={height} allowFullScreen />;
+    return (
+      <iframe
+        className={type}
+        frameBorder={0}
+        src={`${src ? src : 'about:blank'}`}
+        height={height}
+        allowFullScreen
+      />
+    );
   },
 };
