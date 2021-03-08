@@ -150,8 +150,6 @@ article summary {
   padding: 15px 5px; }
   .accordion-item-component .accordion-item-header {
     font-size: 18px; }
-<<<<<<< HEAD
-=======
 .wp-block-coliquio-iframe {
   margin: 15px 0;
   min-height: 300px;
@@ -159,7 +157,6 @@ article summary {
   .wp-block-coliquio-iframe.iframe, .wp-block-coliquio-iframe.iframe-survey {
     border: 1px solid var(--black-lighten-40); }
 
->>>>>>> style/add-stylelint
 .wp-block-coliquio-cta {
   background-color: var(--green-base);
   border: 1px solid var(--green-base);
@@ -190,7 +187,6 @@ article summary {
       background: none;
       border: none;
       color: var(--green-darken-10); }
-
 section.wp-block-coliquio-media-text {
   display: flex;
   flex-direction: row;
@@ -203,12 +199,6 @@ section.wp-block-coliquio-media-text {
   section.wp-block-coliquio-media-text .wp-block-group {
     display: flex;
     flex: 50%; }
-.wp-block-coliquio-iframe {
-  margin: 15px 0;
-  width: 100%;
-  min-height: 300px; }
-  .wp-block-coliquio-iframe.iframe, .wp-block-coliquio-iframe.iframe-survey {
-    border: 1px solid var(--black-lighten-40); }
 .header-valid {
   color: var(--green-base);
   font-weight: bold; }
