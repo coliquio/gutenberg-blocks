@@ -2,8 +2,8 @@ import { hooks } from 'wp';
 
 const { addFilter } = hooks;
 
-// Enable properties on the following blocks
-const enableOnBlocks = [
+// Disable defaultStylePicker on the following blocks
+const disableOnBlocks = [
   'core/image',
   'core/quote',
   'core/button',
@@ -14,7 +14,7 @@ const enableOnBlocks = [
 ];
 
 /**
- * Add src attribute to block.
+ * Set defaultStylePicker to false for block settings.
  *
  * @param {object} settings Current block settings.
  * @param {string} name Name of block.
@@ -23,7 +23,7 @@ const enableOnBlocks = [
  */
 const disableDefaultStylePicker = (settings, name) => {
   // Do nothing if it's another block than our defined ones.
-  if (!enableOnBlocks.includes(name)) {
+  if (!disableOnBlocks.includes(name)) {
     return settings;
   }
 
