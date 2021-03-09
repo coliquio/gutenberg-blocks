@@ -9,10 +9,12 @@ const { InnerBlocks } = blockEditor;
 export const name = 'branding-box';
 
 const TEMPLATE = [
-  ['core/image', {
-    displayCopyright: false,
-    displayCaption: false,
-  },
+  [
+    'core/image',
+    {
+      displayCopyright: false,
+      displayCaption: false,
+    },
   ],
 ];
 
@@ -31,31 +33,25 @@ export const settings = {
   },
 
   edit ({ attributes, className, setAttributes }) {
-
-    const {
-      title,
-    } = attributes;
+    const { title } = attributes;
 
     return (
-      <div className={ className }>
+      <div className={className}>
         <TextControl
           value={title || ''}
-          onChange={newTitle => setAttributes({ newTitle })}
+          // eslint-disable-next-line no-shadow
+          onChange={title => setAttributes({ title })}
         />
-        <InnerBlocks
-          template={ TEMPLATE }
-        />
+        <InnerBlocks template={TEMPLATE} />
       </div>
     );
   },
 
   save ({ attributes, className }) {
-    const {
-      title,
-    } = attributes;
+    const { title } = attributes;
 
     return (
-      <div className={ className }>
+      <div className={className}>
         <div className="branding-box-outer-wrapper">
           <aside className="branding-box-inner-wrapper">
             {title && <span className="branding-title">{title}</span>}

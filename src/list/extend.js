@@ -11,11 +11,8 @@ const { __ } = i18n;
 const { InspectorControls } = blockEditor;
 const { PanelBody, ToggleControl } = components;
 
-
 // Enable properties on the following blocks
-const enableOnBlocks = [
-  'core/list',
-];
+const enableOnBlocks = ['core/list'];
 
 /**
  * Add src attribute to block.
@@ -26,9 +23,8 @@ const enableOnBlocks = [
  * @returns {object} Modified block settings.
  */
 const addSrcControlAttribute = (settings, name) => {
-
   // Do nothing if it's another block than our defined ones.
-  if (! enableOnBlocks.includes(name)) {
+  if (!enableOnBlocks.includes(name)) {
     return settings;
   }
 
@@ -47,7 +43,11 @@ const addSrcControlAttribute = (settings, name) => {
   return settings;
 };
 
-addFilter('blocks.registerBlockType', 'extend-block-group/attribute/extend-styles', addSrcControlAttribute);
+addFilter(
+  'blocks.registerBlockType',
+  'extend-block-group/attribute/extend-styles',
+  addSrcControlAttribute
+);
 
 /**
  * Create HOC to add src attribute to block.
@@ -55,10 +55,8 @@ addFilter('blocks.registerBlockType', 'extend-block-group/attribute/extend-style
 const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
   return props => {
     // Do nothing if it's another block than our defined ones.
-    if (! enableOnBlocks.includes(props.name)) {
-      return (
-        <BlockEdit { ...props } />
-      );
+    if (!enableOnBlocks.includes(props.name)) {
+      return <BlockEdit {...props} />;
     }
 
     const { customEnumeration } = props.attributes;
@@ -67,47 +65,52 @@ const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
     if (props.attributes.ordered) {
       props.setAttributes({
         customChecked: false,
-        className: props.attributes.className.replace('rich__list--checked', ''),
+        className: props.attributes.className.replace(
+          'rich__list--checked',
+          ''
+        ),
       });
-      pannelControl =
-        <PanelBody
-          title={ __('Style Controls') }
-          initialOpen={ true }
-        >
+      pannelControl = (
+        <PanelBody title={__('Style Controls')} initialOpen={true}>
           <ToggleControl
             label="Numbered sublists"
             help="1 1.1 1.1.1"
-            checked={ customEnumeration }
-            onChange={newCustomEnumeration => {
+            checked={customEnumeration}
+            // eslint-disable-next-line no-shadow
+            onChange={customEnumeration => {
               props.setAttributes({
-                customEnumeration: !!newCustomEnumeration,
-                className: newCustomEnumeration ? 'rich__list--enumerated' : '',
+                customEnumeration: !!customEnumeration,
+                className: customEnumeration ? 'rich__list--enumerated' : '',
               });
-            }
-            }
+            }}
           />
-        </PanelBody>;
+        </PanelBody>
+      );
     }
 
     if (!props.attributes.ordered) {
       props.setAttributes({
         customEnumeration: false,
-        className: props.attributes.className.replace('rich__list--enumerated', ''),
+        className: props.attributes.className.replace(
+          'rich__list--enumerated',
+          ''
+        ),
       });
     }
     return (
       <Fragment>
-        <BlockEdit { ...props } />
-        <InspectorControls>
-          {pannelControl}
-        </InspectorControls>
+        <BlockEdit {...props} />
+        <InspectorControls>{pannelControl}</InspectorControls>
       </Fragment>
     );
   };
 }, 'withSrcAttribute');
 
-addFilter('editor.BlockEdit', 'extend-block-group/with-column-layout', withSrcAttribute);
-
+addFilter(
+  'editor.BlockEdit',
+  'extend-block-group/with-column-layout',
+  withSrcAttribute
+);
 
 /**
  * Add margin style attribute to save element of block.
@@ -120,12 +123,15 @@ addFilter('editor.BlockEdit', 'extend-block-group/with-column-layout', withSrcAt
  */
 const addSizeExtraProps = (saveElementProps, blockType) => {
   // Do nothing if it's another block than our defined ones.
-  if (! enableOnBlocks.includes(blockType.name)) {
+  if (!enableOnBlocks.includes(blockType.name)) {
     return saveElementProps;
   }
-
 
   return saveElementProps;
 };
 
-addFilter('blocks.getSaveContent.extraProps', 'extend-block-group/get-save-content/extra-props', addSizeExtraProps);
+addFilter(
+  'blocks.getSaveContent.extraProps',
+  'extend-block-group/get-save-content/extra-props',
+  addSizeExtraProps
+);
