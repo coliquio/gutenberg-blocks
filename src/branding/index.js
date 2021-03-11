@@ -28,7 +28,7 @@ export const settings = {
   attributes: {
     title: {
       type: 'string',
-      default: undefined,
+      default: 'Dieser Beitrag wird Ihnen präsentiert von',
     },
   },
 
@@ -42,7 +42,7 @@ export const settings = {
           // eslint-disable-next-line no-shadow
           onChange={title => setAttributes({ title })}
         />
-        <InnerBlocks template={TEMPLATE} />
+        <InnerBlocks template={TEMPLATE} templateLock="all" />
       </div>
     );
   },
