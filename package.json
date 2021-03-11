@@ -12,7 +12,9 @@
     "lint:scss": "stylelint src/**/*.scss",
     "lint:scss:fix": "stylelint src/**/*.scss --fix",
     "start": "npm run build && BLOCK_DIR=$PWD npm --prefix node_modules/@frontkom/g-editor start",
-    "watch": "nodemon --watch src/ --delay 10ms --exec 'npm run dev'"
+    "serve": "node server/server.js",
+    "watch": "nodemon --watch src/ --delay 10ms --exec 'npm run dev'",
+    "serve:build": "concurrently \"npm run serve\" \"nodemon --watch src/ --delay 10ms --exec 'npm run build'\""
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
@@ -46,6 +48,8 @@
   },
   "dependencies": {
     "@wordpress/dom-ready": "^2.11.0",
+    "concurrently": "^6.0.0",
+    "express": "^4.17.1",
     "lodash": "^4.17.20",
     "lodash.assign": "^4.2.0",
     "lodash.assignwith": "^4.2.0",
