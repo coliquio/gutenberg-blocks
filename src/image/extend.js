@@ -1,68 +1,72 @@
-import React from 'react'
-import assign from 'lodash.assign'
-import get from 'lodash.get'
-import reduce from 'lodash.reduce'
-import filter from 'lodash.filter'
-import isEqual from 'lodash.isequal'
-import './style.scss'
-
+import React from "react";
+import assign from "lodash.assign";
+import get from "lodash.get";
+import reduce from "lodash.reduce";
+import filter from "lodash.filter";
+import isEqual from "lodash.isequal";
+import "./style.scss";
 
 const { createHigherOrderComponent } = wp.compose;
 const { Fragment } = wp.element;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 const { InspectorControls, MediaUpload, MediaUploadCheck } = wp.editor;
-const { PanelBody, SelectControl, TextControl, Disabled, Button, ResponsiveWrapper } = wp.components;
+const {
+  PanelBody,
+  SelectControl,
+  TextControl,
+  Disabled,
+  Button,
+  ResponsiveWrapper,
+} = wp.components;
 const { useSelect } = wp.data;
 
 // Enable properties on the following blocks
-const enableOnBlocks = [
-  'core/image',
-];
+const enableOnBlocks = ["core/image"];
 
 const sizeControlOptions = [
   {
-    label: __( 'XS' ),
-    value: 'extra-small',
-    widthPer: '16%',
-    widthPx: '155px',
+    label: __("XS"),
+    value: "extra-small",
+    widthPer: "16%",
+    widthPx: "155px",
   },
   {
-    label: __( 'S' ),
-    value: 'small',
+    label: __("S"),
+    value: "small",
     default: true,
-    widthPer: '25%',
-    widthPx: '196px',
+    widthPer: "25%",
+    widthPx: "196px",
   },
   {
-    label: __( 'M' ),
-    value: 'medium',
-    widthPer: '33%',
-    widthPx: '256px',
+    label: __("M"),
+    value: "medium",
+    widthPer: "33%",
+    widthPx: "256px",
   },
   {
-    label: __( 'L' ),
-    value: 'large',
-    widthPer: '50%',
-    widthPx: '376px',
+    label: __("L"),
+    value: "large",
+    widthPer: "50%",
+    widthPx: "376px",
   },
   {
-    label: __( 'XL' ),
-    value: 'extra-large',
-    widthPer: '100%',
-    widthPx: '720px',
+    label: __("XL"),
+    value: "extra-large",
+    widthPer: "100%",
+    widthPx: "720px",
   },
 ];
 
 const disabledElements = [
   {
-    text: 'Image size',
-    selector: '.components-base-control__label',
+    text: "Image size",
+    selector: ".components-base-control__label",
   },
   {
-    text: 'Image dimensions',
-    selector: '.block-editor-image-size-control__row',
-  }
+    text: "Image dimensions",
+    selector: ".block-editor-image-size-control__row",
+  },
 ];
 
 /**
@@ -73,127 +77,142 @@ const disabledElements = [
  *
  * @returns {object} Modified block settings.
  */
-const addSrcControlAttribute = ( settings, name ) => {
-
+const addSrcControlAttribute = (settings, name) => {
   // Do nothing if it's another block than our defined ones.
-  if ( ! enableOnBlocks.includes( name ) ) {
+  if (!enableOnBlocks.includes(name)) {
     return settings;
   }
-  
-  settings.attributes = assign( settings.attributes, {
+
+  settings.attributes = assign(settings.attributes, {
     src: {
-      type: 'string',
-      default: '',
+      type: "string",
+      default: "",
     },
     className: {
-      type: 'string',
-      default: '',
+      type: "string",
+      default: "",
     },
     selectedCrop: {
-      type: 'string',
-      default: '',
+      type: "string",
+      default: "",
     },
     url: {
-      type: 'string',
-      default: '',
+      type: "string",
+      default: "",
     },
     href: {
-      type: 'string',
-      default: '',
+      type: "string",
+      default: "",
     },
     alt: {
-      type: 'string',
-      default: '',
+      type: "string",
+      default: "",
     },
     height: {
-      type: 'number',
+      type: "number",
       default: undefined,
     },
     width: {
-      type: 'number',
+      type: "number",
       default: undefined,
     },
     cdnFileId: {
-      type: 'string',
+      type: "string",
       default: undefined,
     },
     size: {
-      type: 'string',
+      type: "string",
     },
     layout: {
-      type: 'string',
+      type: "string",
       default: undefined,
     },
     copyright: {
-      type: 'string',
+      type: "string",
     },
     crop: {
-      type: 'object',
-      default: null
+      type: "object",
+      default: null,
     },
     aspectRatio: {
-      type: 'object',
-      default: null
+      type: "object",
+      default: null,
     },
     zoomImage: {
-      type: 'object',
-      default: null
+      type: "object",
+      default: null,
     },
     magnification: {
-      type: 'bool',
+      type: "bool",
       default: false,
     },
     caption: {
-      type: 'string',
+      type: "string",
       default: undefined,
+    },
+    branding: {
+      type: "bool",
+      default: false,
     },
   });
 
-  console.log('SETTINGS - ', settings);
+  console.log("SETTINGS - ", settings);
 
   return settings;
 };
 
-addFilter( 'blocks.registerBlockType', 'extend-block-image/attribute/src', addSrcControlAttribute );
+addFilter(
+  "blocks.registerBlockType",
+  "extend-block-image/attribute/src",
+  addSrcControlAttribute
+);
 
 function getCropOptions(image) {
-  return [{
-    label: __('---'),
-    value: undefined
-  }].concat(image && image.media_details && image.media_details.crops ? Object.keys(image.media_details.crops).map(key => {
-    const crop = image.media_details.crops[key]
-    return {
-      label: __( crop.label + (crop.description ? ' - ' + crop.description : '') ),
-      value: crop.name
-    }
-  }) : [])
+  return [
+    {
+      label: __("---"),
+      value: undefined,
+    },
+  ].concat(
+    image && image.media_details && image.media_details.crops
+      ? Object.keys(image.media_details.crops).map((key) => {
+          const crop = image.media_details.crops[key];
+          return {
+            label: __(
+              crop.label + (crop.description ? " - " + crop.description : "")
+            ),
+            value: crop.name,
+          };
+        })
+      : []
+  );
 }
 
 function getCopyright(image) {
-  return image && image.media_fields ? get(image, 'media_fields.field_copyright.value.value') : '';
+  return image && image.media_fields
+    ? get(image, "media_fields.field_copyright.value.value")
+    : "";
 }
 
 function getCrop(image, cropName) {
-  if (!image) return
-  const key = Object.keys(image.media_details.crops).find(key => {
-    return image.media_details.crops[key].name === cropName
-  })
-  if (key) return image.media_details.crops[key]
+  if (!image) return;
+  const key = Object.keys(image.media_details.crops).find((key) => {
+    return image.media_details.crops[key].name === cropName;
+  });
+  if (key) return image.media_details.crops[key];
 }
 
 /**
  * Create HOC to add src attribute to block.
  */
-const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
-  return ( props ) => {
+const withSrcAttribute = createHigherOrderComponent((BlockEdit) => {
+  return (props) => {
     // Do nothing if it's another block than our defined ones.
-    if ( ! enableOnBlocks.includes( props.name ) ) {
-      return (
-        <BlockEdit { ...props } />
-      );
+    if (!enableOnBlocks.includes(props.name)) {
+      return <BlockEdit {...props} />;
     }
 
-    setTimeout(function() { 
+    setTimeout(function () {
       // disabledElements.forEach(el => {
       //   const temp = document.querySelectorAll(el.selector);
       //   console.log('temp2 - ', temp);
@@ -204,67 +223,74 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       //   });
       // });
 
-      let imagesInGroup = document.querySelectorAll('.wp-block-image');
+      let imagesInGroup = document.querySelectorAll(".wp-block-image");
 
-      imagesInGroup.forEach(image => {
-        let closestGroup = image.closest('.wp-block-group');
+      imagesInGroup.forEach((image) => {
+        let closestGroup = image.closest(".wp-block-group");
         if (closestGroup)
-          closestGroup.style['min-height'] = image.clientHeight + 10 + 'px';
+          closestGroup.style["min-height"] = image.clientHeight + 10 + "px";
       });
-      
-      if (props.attributes.layout === 'layout-column') {
-        let imageWrapper = document.getElementById('block-' + props.clientId).parentNode;
 
-        if (imageWrapper.dataset.align === 'left') {
+      if (props.attributes.layout === "layout-column") {
+        let imageWrapper = document.getElementById("block-" + props.clientId)
+          .parentNode;
+
+        if (imageWrapper.dataset.align === "left") {
           let nextSibl = imageWrapper.nextSibling;
-          if (nextSibl.nodeName === 'P') {
-            nextSibl.style.paddingLeft = sizeControlOptions.find(o => o.value === props.attributes.size).widthPx;
-            nextSibl.style.paddingRight = '';
+          if (nextSibl.nodeName === "P") {
+            nextSibl.style.paddingLeft = sizeControlOptions.find(
+              (o) => o.value === props.attributes.size
+            ).widthPx;
+            nextSibl.style.paddingRight = "";
           }
-          if (nextSibl.nodeName === 'DIV') {
-            nextSibl.style.marginLeft = sizeControlOptions.find(o => o.value === props.attributes.size).widthPx;
-            nextSibl.style.marginRight = '';
+          if (nextSibl.nodeName === "DIV") {
+            nextSibl.style.marginLeft = sizeControlOptions.find(
+              (o) => o.value === props.attributes.size
+            ).widthPx;
+            nextSibl.style.marginRight = "";
           }
         }
-        if (imageWrapper.dataset.align === 'right') {
+        if (imageWrapper.dataset.align === "right") {
           let nextSibl = imageWrapper.nextSibling;
-          if (nextSibl.nodeName === 'P') {
-            nextSibl.style.paddingRight = sizeControlOptions.find(o => o.value === props.attributes.size).widthPx;
-            nextSibl.style.paddingLeft = '';
+          if (nextSibl.nodeName === "P") {
+            nextSibl.style.paddingRight = sizeControlOptions.find(
+              (o) => o.value === props.attributes.size
+            ).widthPx;
+            nextSibl.style.paddingLeft = "";
           }
-          if (nextSibl.nodeName === 'DIV') {
-            nextSibl.style.marginRight = sizeControlOptions.find(o => o.value === props.attributes.size).widthPx;
-            nextSibl.style.marginLeft = '';
+          if (nextSibl.nodeName === "DIV") {
+            nextSibl.style.marginRight = sizeControlOptions.find(
+              (o) => o.value === props.attributes.size
+            ).widthPx;
+            nextSibl.style.marginLeft = "";
           }
         }
       } else {
-        let imageBlock = document.getElementById('block-' + props.clientId);
+        let imageBlock = document.getElementById("block-" + props.clientId);
         let imageWrapper = imageBlock ? imageBlock.parentNode : undefined;
 
-        if (imageWrapper && imageWrapper.dataset.align === 'left') {
+        if (imageWrapper && imageWrapper.dataset.align === "left") {
           let nextSibl = imageWrapper.nextSibling;
-          if (nextSibl.nodeName === 'P') {
-            nextSibl.style.paddingLeft = '';
+          if (nextSibl.nodeName === "P") {
+            nextSibl.style.paddingLeft = "";
           }
-          if (nextSibl.nodeName === 'DIV') {
-            nextSibl.style.marginLeft = '';
+          if (nextSibl.nodeName === "DIV") {
+            nextSibl.style.marginLeft = "";
           }
         }
-        if (imageWrapper && imageWrapper.dataset.align === 'right') {
+        if (imageWrapper && imageWrapper.dataset.align === "right") {
           let nextSibl = imageWrapper.nextSibling;
-          if (nextSibl.nodeName === 'P') {
-            nextSibl.style.paddingRight = '';
+          if (nextSibl.nodeName === "P") {
+            nextSibl.style.paddingRight = "";
           }
-          if (nextSibl.nodeName === 'DIV') {
-            nextSibl.style.marginRight = '';
+          if (nextSibl.nodeName === "DIV") {
+            nextSibl.style.marginRight = "";
           }
         }
       }
-     }, 500);
-    
+    }, 500);
 
     const updateImageProps = (image, crop) => {
-
       // disabledElements.forEach(el => {
       //   const temp = document.querySelectorAll(el.selector);
       //   console.log('temp1 - ', temp);
@@ -275,185 +301,220 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       //   });
       // });
 
-      if (typeof props.attributes.caption === 'object') {
-
+      if (typeof props.attributes.caption === "object") {
         props.setAttributes({
-          caption: props.attributes.caption.raw ? props.attributes.caption.raw : undefined
+          caption: props.attributes.caption.raw
+            ? props.attributes.caption.raw
+            : undefined,
         });
-
       }
 
       if (image && image.media_details) {
-
         let crop = null;
         if (props.attributes.selectedCrop) {
           crop = getCrop(image, props.attributes.selectedCrop);
         }
 
-        console.log('CROP - ', crop);
+        console.log("CROP - ", crop);
 
-        console.log('undef crop - ', props.attributes.crop)
+        console.log("undef crop - ", props.attributes.crop);
 
         let propsToUpdate = {
           id: image.id,
-          url: crop ? crop.cdn_url : get(image, 'media_details.crops.main.cdn_url'),
-          cdnFileId: get(image, 'media_details.cdn_file_id'),
+          url: crop
+            ? crop.cdn_url
+            : get(image, "media_details.crops.main.cdn_url"),
+          cdnFileId: get(image, "media_details.cdn_file_id"),
           width: undefined,
           height: undefined,
           sizeSlug: undefined,
-          alt: get(image, 'media_fields.field_media_image.value.alt'),
-          copyright: get(image, 'media_fields.field_copyright.value.value'),
-          size: !props.attributes.size ? sizeControlOptions.find(o => o.default).value : props.attributes.size,
-          className: !props.attributes.size ? `custom-size-${ sizeControlOptions.find(o => o.default).value }` : props.attributes.className,
-          crop: (crop && props.attributes.selectedCrop ? {
-            name: crop.name,
-            width: crop.width,
-            height: crop.height,
-            x: crop.x,
-            y: crop.y
-          } : props.attributes.crop),
+          alt: get(image, "media_fields.field_media_image.value.alt"),
+          copyright: get(image, "media_fields.field_copyright.value.value"),
+          size: !props.attributes.size
+            ? sizeControlOptions.find((o) => o.default).value
+            : props.attributes.size,
+          className: !props.attributes.size
+            ? `custom-size-${sizeControlOptions.find((o) => o.default).value}`
+            : props.attributes.className,
+          crop:
+            crop && props.attributes.selectedCrop
+              ? {
+                  name: crop.name,
+                  width: crop.width,
+                  height: crop.height,
+                  x: crop.x,
+                  y: crop.y,
+                }
+              : props.attributes.crop,
           aspectRatio: {
-            width: (crop && crop.aspect_ratio) ? crop.aspect_ratio.width : get(image, 'media_details.width'),
-            height: (crop && crop.aspect_ratio) ? crop.aspect_ratio.height : get(image, 'media_details.height')
+            width:
+              crop && crop.aspect_ratio
+                ? crop.aspect_ratio.width
+                : get(image, "media_details.width"),
+            height:
+              crop && crop.aspect_ratio
+                ? crop.aspect_ratio.height
+                : get(image, "media_details.height"),
           },
           zoomImage: {
-            url: get(image, 'media_details.cdn_url'),
+            url: get(image, "media_details.cdn_url"),
             aspectRatio: {
-              width: get(image, 'media_details.width'),
-              height: get(image, 'media_details.height')
-            }
-          }
+              width: get(image, "media_details.width"),
+              height: get(image, "media_details.height"),
+            },
+          },
         };
 
-        console.log('URL - ', propsToUpdate);
-  
-        let reducedPropsToUpdate = reduce(propsToUpdate, function(result, value, key) {
-          isEqual(value, props.attributes[key]) && !!value ?
-            false : (result[key] || (result[key] = value));
-          return result;
-        }, {});
-  
+        console.log("URL - ", propsToUpdate);
+
+        let reducedPropsToUpdate = reduce(
+          propsToUpdate,
+          function (result, value, key) {
+            isEqual(value, props.attributes[key]) && !!value
+              ? false
+              : result[key] || (result[key] = value);
+            return result;
+          },
+          {}
+        );
+
         if (Object.keys(reducedPropsToUpdate).length) {
-          console.log('SET ATTR CORE/IMG');
+          console.log("SET ATTR CORE/IMG");
           console.log(Object.keys(reducedPropsToUpdate));
           props.setAttributes(reducedPropsToUpdate);
         }
-
       }
-    }
+    };
 
     const image = useSelect(
-      ( select ) => {
-        const { getMedia } = select( 'core' );
-        return props.attributes.id && props.isSelected ? getMedia( props.attributes.id ) : null;
+      (select) => {
+        const { getMedia } = select("core");
+        return props.attributes.id && props.isSelected
+          ? getMedia(props.attributes.id)
+          : null;
       },
-      [ props.attributes.id, props.isSelected ]
+      [props.attributes.id, props.isSelected]
     );
 
-    console.log('Image useSelect - ', image);
+    console.log("Image useSelect - ", image);
 
     updateImageProps(image);
 
     const removeMedia = () => {
       props.setAttributes({
         id: 0,
-        url: ''
+        url: "",
       });
-    }
-   
+    };
+
     const blockStyle = {
-      backgroundImage: props.attributes.mediaUrl != '' ? 'url("' + props.attributes.mediaUrl + '")' : 'none'
+      backgroundImage:
+        props.attributes.mediaUrl != ""
+          ? 'url("' + props.attributes.mediaUrl + '")'
+          : "none",
     };
 
     return (
       <Fragment>
-        <BlockEdit { ...props } />
+        <BlockEdit {...props} />
         <InspectorControls>
-          <PanelBody
-            title={ __( 'Custom Control' ) }
-            initialOpen={ true }
-          >
+          <PanelBody title={__("Custom Control")} initialOpen={true}>
             <SelectControl
-              label={ __( 'Sizing' ) }
-              value={ props.attributes.size }
-              options={ sizeControlOptions }
-              onChange={ ( selectedsizeOption ) => {
-                props.setAttributes( {
-                  size: selectedsizeOption,
-                } );
-                props.setAttributes( {
-                  className: `custom-size-${ selectedsizeOption }`,
-                });
-              } }
-            />
-            <SelectControl
-              label={ __( 'Crop' ) }
-              value={ props.attributes.crop ? props.attributes.crop.name : undefined }
-              options={ getCropOptions(image) }
-              onChange={ ( selectedCrop ) => {
+              label={__("Sizing")}
+              value={props.attributes.size}
+              options={sizeControlOptions}
+              onChange={(selectedsizeOption) => {
                 props.setAttributes({
-                  selectedCrop
+                  size: selectedsizeOption,
                 });
-              } }
+                props.setAttributes({
+                  className: `custom-size-${selectedsizeOption}`,
+                });
+              }}
             />
             <SelectControl
-                label={__('Magnification')}
-                value={ props.attributes.magnification }
-                options={[{label: __('DISABLED'), value: false}, {label: __('ENABLED'), value: true}]}
-                onChange={ ( magnification ) => {
-                  props.setAttributes({ magnification: magnification === 'true' ? true : false });
-                }}
+              label={__("Crop")}
+              value={
+                props.attributes.crop ? props.attributes.crop.name : undefined
+              }
+              options={getCropOptions(image)}
+              onChange={(selectedCrop) => {
+                props.setAttributes({
+                  selectedCrop,
+                });
+              }}
+            />
+            <SelectControl
+              label={__("Magnification")}
+              value={props.attributes.magnification}
+              options={[
+                { label: __("DISABLED"), value: false },
+                { label: __("ENABLED"), value: true },
+              ]}
+              onChange={(magnification) => {
+                props.setAttributes({
+                  magnification: magnification === "true" ? true : false,
+                });
+              }}
             />
 
             <div className="editor-post-featured-image">
-						<MediaUploadCheck>
-							<MediaUpload
-								onSelect={updateImageProps}
-								value={props.attributes.mediaId}
-								allowedTypes={ ['image'] }
-								render={({open}) => (
-									<Button 
-										className={props.attributes.mediaId == 0 ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
-										onClick={open}
-									>
-										{props.attributes.mediaId == 0 && __('Choose an image', 'awp')}
-										{props.media != undefined && 
-                      <ResponsiveWrapper
-                        naturalWidth={ props.media.media_details.width }
-											  naturalHeight={ props.media.media_details.height }
-                      >
-                        <img src={props.media.source_url} />
-                      </ResponsiveWrapper>
-						            		}
-									</Button>
-								)}
-							/>
-						</MediaUploadCheck>
-						{props.attributes.mediaId != 0 && 
-							<MediaUploadCheck>
-								<MediaUpload
-									title={__('Replace image', 'awp')}
-									value={props.attributes.mediaId}
-									onSelect={updateImageProps}
-									allowedTypes={['image']}
-									render={({open}) => (
-										<Button onClick={open} isDefault isLarge>{__('Replace image', 'awp')}</Button>
-									)}
-								/>
-							</MediaUploadCheck>
-						}
-						{props.attributes.mediaId != 0 && 
-							<MediaUploadCheck>
-								<Button onClick={removeMedia} isLink isDestructive>{__('Remove image', 'awp')}</Button>
-							</MediaUploadCheck>
-						}
-					</div>
-
+              <MediaUploadCheck>
+                <MediaUpload
+                  onSelect={updateImageProps}
+                  value={props.attributes.mediaId}
+                  allowedTypes={["image"]}
+                  render={({ open }) => (
+                    <Button
+                      className={
+                        props.attributes.mediaId == 0
+                          ? "editor-post-featured-image__toggle"
+                          : "editor-post-featured-image__preview"
+                      }
+                      onClick={open}
+                    >
+                      {props.attributes.mediaId == 0 &&
+                        __("Choose an image", "awp")}
+                      {props.media != undefined && (
+                        <ResponsiveWrapper
+                          naturalWidth={props.media.media_details.width}
+                          naturalHeight={props.media.media_details.height}
+                        >
+                          <img src={props.media.source_url} />
+                        </ResponsiveWrapper>
+                      )}
+                    </Button>
+                  )}
+                />
+              </MediaUploadCheck>
+              {props.attributes.mediaId != 0 && (
+                <MediaUploadCheck>
+                  <MediaUpload
+                    title={__("Replace image", "awp")}
+                    value={props.attributes.mediaId}
+                    onSelect={updateImageProps}
+                    allowedTypes={["image"]}
+                    render={({ open }) => (
+                      <Button onClick={open} isDefault isLarge>
+                        {__("Replace image", "awp")}
+                      </Button>
+                    )}
+                  />
+                </MediaUploadCheck>
+              )}
+              {props.attributes.mediaId != 0 && (
+                <MediaUploadCheck>
+                  <Button onClick={removeMedia} isLink isDestructive>
+                    {__("Remove image", "awp")}
+                  </Button>
+                </MediaUploadCheck>
+              )}
+            </div>
 
             <Disabled>
               <TextControl
-                label={__('Copyright')}
-                help={__('Could be changed in gallery')}
+                label={__("Copyright")}
+                help={__("Could be changed in gallery")}
                 value={getCopyright(image)}
               />
             </Disabled>
@@ -462,10 +523,13 @@ const withSrcAttribute = createHigherOrderComponent( ( BlockEdit ) => {
       </Fragment>
     );
   };
-}, 'withSrcAttribute' );
+}, "withSrcAttribute");
 
-addFilter( 'editor.BlockEdit', 'extend-block-image/with-src-attribute', withSrcAttribute );
-
+addFilter(
+  "editor.BlockEdit",
+  "extend-block-image/with-src-attribute",
+  withSrcAttribute
+);
 
 /**
  * Add margin style attribute to save element of block.
@@ -476,14 +540,18 @@ addFilter( 'editor.BlockEdit', 'extend-block-image/with-src-attribute', withSrcA
  *
  * @returns {object} Modified props of save element.
  */
-const addExtraProps = ( saveElementProps, blockType, attributes ) => {
-    if ( ! enableOnBlocks.includes( blockType.name ) ) {
-        return saveElementProps;
-    }
-    wp.blocks.unregisterBlockStyle('core/image', 'rounded');
-    wp.blocks.unregisterBlockStyle('core/image', 'default');   
-
+const addExtraProps = (saveElementProps, blockType, attributes) => {
+  if (!enableOnBlocks.includes(blockType.name)) {
     return saveElementProps;
+  }
+  wp.blocks.unregisterBlockStyle("core/image", "rounded");
+  wp.blocks.unregisterBlockStyle("core/image", "default");
+
+  return saveElementProps;
 };
 
-addFilter( 'blocks.getSaveContent.extraProps', 'extend-block-image/get-save-content/extra-props', addExtraProps );
+addFilter(
+  "blocks.getSaveContent.extraProps",
+  "extend-block-image/get-save-content/extra-props",
+  addExtraProps
+);
