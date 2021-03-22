@@ -28,7 +28,7 @@ export const settings = {
   attributes: {
     title: {
       type: 'string',
-      default: undefined,
+      default: 'Dieser Beitrag wird Ihnen präsentiert von',
     },
   },
 
