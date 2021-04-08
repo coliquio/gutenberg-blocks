@@ -1,14 +1,19 @@
 import React from 'react';
-import { blockEditor, components, i18n } from 'wp';
+import { blockEditor, i18n } from 'wp';
 import './style.scss';
 
 const { __ } = i18n;
-const { TextControl } = components;
 const { InnerBlocks } = blockEditor;
 
 export const name = 'branding-box';
 
 const TEMPLATE = [
+  [
+    'core/paragraph',
+    {
+      content: 'Dieser Beitrag wird Ihnen präsentiert von',
+    },
+  ],
   [
     'core/image',
     {
@@ -25,36 +30,19 @@ export const settings = {
 
   icon: 'tickets-alt',
 
-  attributes: {
-    title: {
-      type: 'string',
-      default: undefined,
-    },
-  },
-
-  edit ({ attributes, className, setAttributes }) {
-    const { title } = attributes;
-
+  edit ({ className }) {
     return (
       <div className={className}>
-        <TextControl
-          value={title || ''}
-          // eslint-disable-next-line no-shadow
-          onChange={title => setAttributes({ title })}
-        />
-        <InnerBlocks template={TEMPLATE} />
+        <InnerBlocks template={TEMPLATE} templateLock="all" />
       </div>
     );
   },
 
-  save ({ attributes, className }) {
-    const { title } = attributes;
-
+  save ({ className }) {
     return (
       <div className={className}>
         <div className="branding-box-outer-wrapper">
           <aside className="branding-box-inner-wrapper">
-            {title && <span className="branding-title">{title}</span>}
             <InnerBlocks.Content />
           </aside>
         </div>

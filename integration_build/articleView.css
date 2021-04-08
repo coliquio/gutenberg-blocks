@@ -47,7 +47,7 @@
   min-height: 180px;
   padding: 5px;
   width: 100%; }
-  .block-editor-block-list__block .wp-block-coliquio-branding-box input.components-text-control__input {
+  .block-editor-block-list__block .wp-block-coliquio-branding-box p.block-editor-block-list__block {
     border: 1px solid #999;
     border-radius: 4px; }
   .block-editor-block-list__block .wp-block-coliquio-branding-box .wp-block-coliquio-image {
