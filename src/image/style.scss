@@ -87,6 +87,9 @@ $image-x-large-width: 100% !important;
     display: none;
   }
 
+  .wp-block[data-align="left"] > .wp-block-image {
+    margin-right: 2.5em;
+  }
   figure.wp-block-image {
     &.custom-size-extra-small {
       width: 116px !important;
