@@ -90,6 +90,14 @@ $image-x-large-width: 100% !important;
   .wp-block[data-align="left"] > .wp-block-image {
     margin-right: 2.5em;
   }
+
+  .wp-block[data-align="left"] {
+    clear: left;
+  }
+  .wp-block[data-align="right"] {
+    clear: right;
+  }
+
   figure.wp-block-image {
     &.custom-size-extra-small {
       width: 116px !important;
