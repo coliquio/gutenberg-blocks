@@ -12,7 +12,7 @@ export const name = 'cta';
 
 function renderClassName (defaultClassName, attributes) {
   let className = defaultClassName;
-  if (attributes.style !== 'button') {
+  if (attributes.style !== 'button' && className) {
     className = `${className} ${className}--${attributes.style}`;
   }
   return className;
@@ -43,26 +43,27 @@ export const settings = {
   edit ({ attributes, className, setAttributes }) {
     return (
       <Fragment>
-
         <InspectorControls>
-          <PanelBody title={ __('CTA settings') }>
+          <PanelBody title={__('CTA settings')}>
             <TextControl
-              label={ __('Link to Content') }
-              value={ attributes.url || '/my-path'}
-              onChange={ val => setAttributes({ url: val }) }
+              label={__('Link to Content')}
+              value={attributes.url || '/my-path'}
+              onChange={val => setAttributes({ url: val })}
             />
             <RadioControl
               label="Display Style"
-              selected={ attributes.style || 'button' }
-              options={ [
+              selected={attributes.style || 'button'}
+              options={[
                 { label: 'Button', value: 'button' },
                 { label: 'Link', value: 'link' },
-              ] }
+              ]}
               onChange={option => setAttributes({ style: option })}
             />
             <ToggleControl
               label={__('Open hyperlink in new tab?')}
-              onChange={() => setAttributes({ targetNewWindow: !attributes.targetNewWindow })}
+              onChange={() =>
+                setAttributes({ targetNewWindow: !attributes.targetNewWindow })
+              }
               checked={attributes.targetNewWindow}
             />
           </PanelBody>
@@ -76,7 +77,6 @@ export const settings = {
           target={attributes.targetNewWindow ? '_blank' : '_self'}
           onChange={value => setAttributes({ text: value })}
         />
-
       </Fragment>
     );
   },

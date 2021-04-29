@@ -1,5 +1,8 @@
 @import "../common/colors.css";
 
+[data-type="coliquio/cta"] {
+  clear: both;
+}
 .wp-block-coliquio-cta {
   background-color: var(--green-base);
   border: 1px solid var(--green-base);
@@ -38,5 +41,15 @@
       border: none;
       color: var(--green-darken-10);
     }
+  }
+}
+
+// styles for sidebar custom radio buttons
+.components-panel__body .components-base-control__field {
+  .components-radio-control__option {
+    display: flex;
+  }
+  .components-radio-control__input {
+    padding: 0;
   }
 }
