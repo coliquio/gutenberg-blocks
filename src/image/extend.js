@@ -300,7 +300,7 @@ const withSrcAttribute = createHigherOrderComponent((BlockEdit) => {
         if (props.attributes.selectedCrop) {
           crop = getCrop(image, props.attributes.selectedCrop);
         } else if (props.attributes.crop) {
-          crop = getCrop(image, props.attributes.crop);
+          crop = getCrop(image, props.attributes.crop.name);
         }
 
         console.log("CROP - ", crop);
