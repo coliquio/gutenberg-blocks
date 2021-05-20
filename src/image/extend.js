@@ -17,7 +17,7 @@ const {
   TextControl,
   Disabled,
   Button,
-  ResponsiveWrapper
+  ResponsiveWrapper,
 } = wp.components;
 const { useSelect } = wp.data;
 
@@ -29,44 +29,44 @@ const sizeControlOptions = [
     label: __("XS"),
     value: "extra-small",
     widthPer: "16%",
-    widthPx: "155px"
+    widthPx: "155px",
   },
   {
     label: __("S"),
     value: "small",
     default: true,
     widthPer: "25%",
-    widthPx: "196px"
+    widthPx: "196px",
   },
   {
     label: __("M"),
     value: "medium",
     widthPer: "33%",
-    widthPx: "256px"
+    widthPx: "256px",
   },
   {
     label: __("L"),
     value: "large",
     widthPer: "50%",
-    widthPx: "376px"
+    widthPx: "376px",
   },
   {
     label: __("XL"),
     value: "extra-large",
     widthPer: "100%",
-    widthPx: "720px"
-  }
+    widthPx: "720px",
+  },
 ];
 
 const disabledElements = [
   {
     text: "Image size",
-    selector: ".components-base-control__label"
+    selector: ".components-base-control__label",
   },
   {
     text: "Image dimensions",
-    selector: ".block-editor-image-size-control__row"
-  }
+    selector: ".block-editor-image-size-control__row",
+  },
 ];
 
 /**
@@ -86,70 +86,70 @@ const addSrcControlAttribute = (settings, name) => {
   settings.attributes = assign(settings.attributes, {
     src: {
       type: "string",
-      default: ""
+      default: "",
     },
     className: {
       type: "string",
-      default: ""
+      default: "",
     },
     selectedCrop: {
       type: "string",
-      default: ""
+      default: "",
     },
     url: {
       type: "string",
-      default: ""
+      default: "",
     },
     href: {
       type: "string",
-      default: ""
+      default: "",
     },
     alt: {
       type: "string",
-      default: ""
+      default: "",
     },
     height: {
       type: "number",
-      default: undefined
+      default: undefined,
     },
     width: {
       type: "number",
-      default: undefined
+      default: undefined,
     },
     cdnFileId: {
       type: "string",
-      default: undefined
+      default: undefined,
     },
     size: {
-      type: "string"
+      type: "string",
     },
     layout: {
       type: "string",
-      default: undefined
+      default: undefined,
     },
     copyright: {
-      type: "string"
+      type: "string",
     },
     crop: {
       type: "object",
-      default: null
+      default: null,
     },
     aspectRatio: {
       type: "object",
-      default: null
+      default: null,
     },
     zoomImage: {
       type: "object",
-      default: null
+      default: null,
     },
     magnification: {
       type: "bool",
-      default: false
+      default: false,
     },
     caption: {
       type: "string",
-      default: undefined
-    }
+      default: undefined,
+    },
   });
 
   console.log("SETTINGS - ", settings);
@@ -167,17 +167,17 @@ function getCropOptions(image) {
   return [
     {
       label: __("---"),
-      value: undefined
-    }
+      value: undefined,
+    },
   ].concat(
     image && image.media_details && image.media_details.crops
-      ? Object.keys(image.media_details.crops).map(key => {
+      ? Object.keys(image.media_details.crops).map((key) => {
           const crop = image.media_details.crops[key];
           return {
             label: __(
               crop.label + (crop.description ? " - " + crop.description : "")
             ),
-            value: crop.name
+            value: crop.name,
           };
         })
       : []
@@ -192,7 +192,7 @@ function getCopyright(image) {
 
 function getCrop(image, cropName) {
   if (!image) return;
-  const key = Object.keys(image.media_details.crops).find(key => {
+  const key = Object.keys(image.media_details.crops).find((key) => {
     return image.media_details.crops[key].name === cropName;
   });
   if (key) return image.media_details.crops[key];
@@ -201,14 +201,14 @@ function getCrop(image, cropName) {
 /**
  * Create HOC to add src attribute to block.
  */
-const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
-  return props => {
+const withSrcAttribute = createHigherOrderComponent((BlockEdit) => {
+  return (props) => {
     // Do nothing if it's another block than our defined ones.
     if (!enableOnBlocks.includes(props.name)) {
       return <BlockEdit {...props} />;
     }
 
-    setTimeout(function() {
+    setTimeout(function () {
       // disabledElements.forEach(el => {
       //   const temp = document.querySelectorAll(el.selector);
       //   console.log('temp2 - ', temp);
@@ -221,7 +221,7 @@ const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
 
       let imagesInGroup = document.querySelectorAll(".wp-block-image");
 
-      imagesInGroup.forEach(image => {
+      imagesInGroup.forEach((image) => {
         let closestGroup = image.closest(".wp-block-group");
         if (closestGroup)
           closestGroup.style["min-height"] = image.clientHeight + 10 + "px";
@@ -235,13 +235,13 @@ const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
           let nextSibl = imageWrapper.nextSibling;
           if (nextSibl.nodeName === "P") {
             nextSibl.style.paddingLeft = sizeControlOptions.find(
-              o => o.value === props.attributes.size
+              (o) => o.value === props.attributes.size
             ).widthPx;
             nextSibl.style.paddingRight = "";
           }
           if (nextSibl.nodeName === "DIV") {
             nextSibl.style.marginLeft = sizeControlOptions.find(
-              o => o.value === props.attributes.size
+              (o) => o.value === props.attributes.size
             ).widthPx;
             nextSibl.style.marginRight = "";
           }
@@ -250,13 +250,13 @@ const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
           let nextSibl = imageWrapper.nextSibling;
           if (nextSibl.nodeName === "P") {
             nextSibl.style.paddingRight = sizeControlOptions.find(
-              o => o.value === props.attributes.size
+              (o) => o.value === props.attributes.size
             ).widthPx;
             nextSibl.style.paddingLeft = "";
           }
           if (nextSibl.nodeName === "DIV") {
             nextSibl.style.marginRight = sizeControlOptions.find(
-              o => o.value === props.attributes.size
+              (o) => o.value === props.attributes.size
             ).widthPx;
             nextSibl.style.marginLeft = "";
           }
@@ -287,21 +287,11 @@ const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
     }, 500);
 
     const updateImageProps = (image, crop) => {
-      // disabledElements.forEach(el => {
-      //   const temp = document.querySelectorAll(el.selector);
-      //   console.log('temp1 - ', temp);
-      //   temp.forEach(node => {
-      //     if (el.text === node.innerText && !node.parentNode.parentNode.className.includes('custom-hidden')) {
-      //       node.parentNode.parentNode.className += ' custom-hidden';
-      //     }
-      //   });
-      // });
-
       if (typeof props.attributes.caption === "object") {
         props.setAttributes({
           caption: props.attributes.caption.raw
             ? props.attributes.caption.raw
-            : undefined
+            : undefined,
         });
       }
 
@@ -313,7 +303,9 @@ const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
 
         console.log("CROP - ", crop);
 
-        console.log("undef crop - ", props.attributes.crop);
+        console.log("props.attributes.crop - ", props.attributes.crop);
+
+        console.log("crop.cdn_url - ", crop ? crop.cdn_url : "of null");
 
         let propsToUpdate = {
           id: image.id,
@@ -329,19 +321,19 @@ const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
             : get(image, "media_fields.field_media_image.value.alt"),
           copyright: get(image, "media_fields.field_copyright.value.value"),
           size: !props.attributes.size
-            ? sizeControlOptions.find(o => o.default).value
+            ? sizeControlOptions.find((o) => o.default).value
             : props.attributes.size,
           className: !props.attributes.size
-            ? `custom-size-${sizeControlOptions.find(o => o.default).value}`
+            ? `custom-size-${sizeControlOptions.find((o) => o.default).value}`
             : props.attributes.className,
           crop:
-            crop && props.attributes.selectedCrop
+            crop && props.attributes.selectedCrop // or here
               ? {
                   name: crop.name,
                   width: crop.width,
                   height: crop.height,
                   x: crop.x,
-                  y: crop.y
+                  y: crop.y,
                 }
               : props.attributes.crop,
           aspectRatio: {
@@ -352,22 +344,22 @@ const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
             height:
               crop && crop.aspect_ratio
                 ? crop.aspect_ratio.height
-                : get(image, "media_details.height")
+                : get(image, "media_details.height"),
           },
           zoomImage: {
             url: get(image, "media_details.cdn_url"),
             aspectRatio: {
               width: get(image, "media_details.width"),
-              height: get(image, "media_details.height")
-            }
-          }
+              height: get(image, "media_details.height"),
+            },
+          },
         };
 
         console.log("URL - ", propsToUpdate);
 
         let reducedPropsToUpdate = reduce(
           propsToUpdate,
-          function(result, value, key) {
+          function (result, value, key) {
             isEqual(value, props.attributes[key]) && !!value
               ? false
               : result[key] || (result[key] = value);
@@ -385,7 +377,7 @@ const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
     };
 
     const image = useSelect(
-      select => {
+      (select) => {
         const { getMedia } = select("core");
         return props.attributes.id && props.isSelected
           ? getMedia(props.attributes.id)
@@ -401,7 +393,7 @@ const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
     const removeMedia = () => {
       props.setAttributes({
         id: 0,
-        url: ""
+        url: "",
       });
     };
 
@@ -409,7 +401,7 @@ const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
       backgroundImage:
         props.attributes.mediaUrl != ""
           ? 'url("' + props.attributes.mediaUrl + '")'
-          : "none"
+          : "none",
     };
 
     return (
@@ -421,12 +413,12 @@ const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
               label={__("Sizing")}
               value={props.attributes.size}
               options={sizeControlOptions}
-              onChange={selectedsizeOption => {
+              onChange={(selectedsizeOption) => {
                 props.setAttributes({
-                  size: selectedsizeOption
+                  size: selectedsizeOption,
                 });
                 props.setAttributes({
-                  className: `custom-size-${selectedsizeOption}`
+                  className: `custom-size-${selectedsizeOption}`,
                 });
               }}
             />
@@ -436,9 +428,9 @@ const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
                 props.attributes.crop ? props.attributes.crop.name : undefined
               }
               options={getCropOptions(image)}
-              onChange={selectedCrop => {
+              onChange={(selectedCrop) => {
                 props.setAttributes({
-                  selectedCrop
+                  selectedCrop,
                 });
               }}
             />
@@ -447,11 +439,11 @@ const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
               value={props.attributes.magnification}
               options={[
                 { label: __("DISABLED"), value: false },
-                { label: __("ENABLED"), value: true }
+                { label: __("ENABLED"), value: true },
               ]}
-              onChange={magnification => {
+              onChange={(magnification) => {
                 props.setAttributes({
-                  magnification: magnification === "true" ? true : false
+                  magnification: magnification === "true" ? true : false,
                 });
               }}
             />
