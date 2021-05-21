@@ -152,8 +152,6 @@ const addSrcControlAttribute = (settings, name) => {
     },
   });
 
-  console.log("SETTINGS - ", settings);
-
   return settings;
 };
 
@@ -209,16 +207,6 @@ const withSrcAttribute = createHigherOrderComponent((BlockEdit) => {
     }
 
     setTimeout(function () {
-      // disabledElements.forEach(el => {
-      //   const temp = document.querySelectorAll(el.selector);
-      //   console.log('temp2 - ', temp);
-      //   temp.forEach(node => {
-      //     if (el.text === node.innerText && !node.parentNode.parentNode.className.includes('custom-hidden')) {
-      //       node.parentNode.parentNode.className += ' custom-hidden';
-      //     }
-      //   });
-      // });
-
       let imagesInGroup = document.querySelectorAll(".wp-block-image");
 
       imagesInGroup.forEach((image) => {
@@ -303,12 +291,6 @@ const withSrcAttribute = createHigherOrderComponent((BlockEdit) => {
           crop = getCrop(image, props.attributes.crop.name);
         }
 
-        console.log("CROP - ", crop);
-
-        console.log("props.attributes.crop - ", props.attributes.crop);
-
-        console.log("crop.cdn_url - ", crop ? crop.cdn_url : "of null");
-
         let propsToUpdate = {
           id: image.id,
           url: crop
@@ -329,7 +311,7 @@ const withSrcAttribute = createHigherOrderComponent((BlockEdit) => {
             ? `custom-size-${sizeControlOptions.find((o) => o.default).value}`
             : props.attributes.className,
           crop:
-            crop && props.attributes.selectedCrop // or here
+            crop && props.attributes.selectedCrop
               ? {
                   name: crop.name,
                   width: crop.width,
@@ -357,8 +339,6 @@ const withSrcAttribute = createHigherOrderComponent((BlockEdit) => {
           },
         };
 
-        console.log("URL - ", propsToUpdate);
-
         let reducedPropsToUpdate = reduce(
           propsToUpdate,
           function (result, value, key) {
@@ -371,8 +351,6 @@ const withSrcAttribute = createHigherOrderComponent((BlockEdit) => {
         );
 
         if (Object.keys(reducedPropsToUpdate).length) {
-          console.log("SET ATTR CORE/IMG");
-          console.log(Object.keys(reducedPropsToUpdate));
           props.setAttributes(reducedPropsToUpdate);
         }
       }
@@ -387,8 +365,6 @@ const withSrcAttribute = createHigherOrderComponent((BlockEdit) => {
       },
       [props.attributes.id, props.isSelected]
     );
-
-    console.log("Image useSelect - ", image);
 
     updateImageProps(image);
 
