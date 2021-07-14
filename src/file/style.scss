@@ -1,0 +1,45 @@
+@import "../common/colors.css";
+
+.wp-block-file {
+  background-color: var(--green-base);
+  border: 1px solid var(--green-base);
+  border-radius: 4px;
+  color: var(--white-base);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.125rem;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+  outline: 0;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: text;
+
+  &:active,
+  &:hover {
+    background-color: var(--green-darken-10);
+    border: 1px solid var(--black-lighten-20);
+    color: var(--white-base);
+    text-decoration: none;
+  }
+
+  &.is-style-link {
+    background: none;
+    border: none;
+    color: var(--green-base);
+
+    &:active,
+    &:hover {
+      background: none;
+      border: none;
+      color: var(--green-darken-10);
+    }
+  }
+
+  .wp-block-file__copy-url-button,
+  .wp-block-file__button-richtext-wrapper {
+    display: none;
+  }
+}
