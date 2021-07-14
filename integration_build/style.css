@@ -172,9 +172,8 @@ article .wp-block-coliquio-branding-box {
     border: 1px solid var(--black-lighten-20);
     color: var(--black-lighten-20); }
     .wp-block-coliquio-cta--link:active, .wp-block-coliquio-cta--link:hover {
-      background: none;
-      border: none;
-      color: var(--green-darken-10); }
+      background: var(--black-lighten-70);
+      color: var(--black-lighten-20); }
 
 .components-panel__body .components-base-control__field .components-radio-control__option {
   display: flex; }
@@ -532,12 +531,11 @@ article .wp-block-image .alignleft {
     text-decoration: none; }
   .wp-block-file.is-style-link {
     background: none;
-    border: none;
-    color: var(--green-base); }
+    border: 1px solid var(--black-lighten-20);
+    color: var(--black-lighten-20); }
     .wp-block-file.is-style-link:active, .wp-block-file.is-style-link:hover {
-      background: none;
-      border: none;
-      color: var(--green-darken-10); }
+      background: var(--black-lighten-70);
+      color: var(--black-lighten-20); }
   .wp-block-file .wp-block-file__copy-url-button,
   .wp-block-file .wp-block-file__button-richtext-wrapper {
     display: none; }

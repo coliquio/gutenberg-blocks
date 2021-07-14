@@ -82,6 +82,7 @@ export const settings = {
   },
 
   save ({ attributes, className }) {
+    console.log(renderClassName(className, attributes))
     return (
       <RichText.Content
         tagName="a"
