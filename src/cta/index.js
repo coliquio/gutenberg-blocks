@@ -12,7 +12,7 @@ export const name = 'cta';
 
 function renderClassName (attributes) {
   let className = 'wp-block-coliquio-cta';
-  if (attributes.style !== 'button' && className) {
+  if (attributes.style && attributes.style !== 'button') {
     className = `${className} ${className}--${attributes.style}`;
   }
   return className;
