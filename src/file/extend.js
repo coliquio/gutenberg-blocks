@@ -66,7 +66,6 @@ const addExtraPropsStyle = ( saveElementProps, blockType, attributes ) => {
     name: 'button',
     label: 'Button'
   });
-  saveElementProps.textLinkTarget = attributes.textLinkTarget;
 
   return saveElementProps;
 };
