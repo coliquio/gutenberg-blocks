@@ -169,8 +169,8 @@ article .wp-block-coliquio-branding-box {
     text-decoration: none; }
   .wp-block-coliquio-cta--link {
     background: none;
-    border: none;
-    color: var(--green-base); }
+    border: 1px solid var(--black-lighten-20);
+    color: var(--black-lighten-20); }
     .wp-block-coliquio-cta--link:active, .wp-block-coliquio-cta--link:hover {
       background: none;
       border: none;
