@@ -10,8 +10,8 @@ const { RichText, InspectorControls } = blockEditor;
 
 export const name = 'cta';
 
-function renderClassName (defaultClassName, attributes) {
-  let className = defaultClassName;
+function renderClassName (attributes) {
+  let className = 'wp-block-coliquio-cta';
   if (attributes.style !== 'button' && className) {
     className = `${className} ${className}--${attributes.style}`;
   }
@@ -40,7 +40,7 @@ export const settings = {
     },
   },
 
-  edit ({ attributes, className, setAttributes }) {
+  edit ({ attributes, setAttributes }) {
     return (
       <Fragment>
         <InspectorControls>
@@ -70,7 +70,7 @@ export const settings = {
         </InspectorControls>
 
         <RichText
-          className={renderClassName(className, attributes)}
+          className={renderClassName(attributes)}
           tagName="a"
           value={attributes.text}
           placeholder={__('Button Text')}
@@ -81,12 +81,11 @@ export const settings = {
     );
   },
 
-  save ({ attributes, className }) {
-    console.log(renderClassName(className, attributes))
+  save ({ attributes }) {
     return (
       <RichText.Content
         tagName="a"
-        className={renderClassName(className, attributes)}
+        className={renderClassName(attributes)}
         href={attributes.url}
         value={attributes.text}
         target={attributes.targetNewWindow ? '_blank' : '_self'}
