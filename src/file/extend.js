@@ -16,6 +16,36 @@ const enableOnBlocks = [
 ];
 
 /**
+ * Add extra attributes to block.
+ *
+ * @param {object} settings Current block settings.
+ * @param {string} name Name of block.
+ *
+ * @returns {object} Modified block settings.
+ */
+const addExtraAttributes = (settings, name) => {
+  // Do nothing if it's another block than our defined ones.
+  if (!enableOnBlocks.includes(name)) {
+    return settings;
+  }
+
+  settings.attributes = assign(settings.attributes, {
+    textLinkTarget: {
+      type: "string",
+      default: "",
+    }
+  });
+
+  return settings;
+};
+
+addFilter(
+  "blocks.registerBlockType",
+  "extend-block-file/attribute/extra-attributes",
+  addExtraAttributes
+);
+
+/**
  * Add margin style attribute to save element of block.
  *
  * @param {object} saveElementProps Props of save element.
