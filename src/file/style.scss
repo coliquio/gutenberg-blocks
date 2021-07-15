@@ -27,14 +27,13 @@
 
   &.is-style-link {
     background: none;
-    border: none;
-    color: var(--green-base);
+    border: 1px solid var(--black-lighten-20);
+    color: var(--black-lighten-20);
 
     &:active,
     &:hover {
-      background: none;
-      border: none;
-      color: var(--green-darken-10);
+      background: var(--black-lighten-70);
+      color: var(--black-lighten-20);
     }
   }
 

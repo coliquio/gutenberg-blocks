@@ -41,7 +41,7 @@ export const settings = {
     },
   },
 
-  edit ({ attributes, className, setAttributes }) {
+  edit ({ attributes, setAttributes, className }) {
     return (
       <Fragment>
         <InspectorControls>
