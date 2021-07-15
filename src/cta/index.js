@@ -10,9 +10,9 @@ const { RichText, InspectorControls } = blockEditor;
 
 export const name = 'cta';
 
-function renderClassName (attributes) {
-  let className = 'wp-block-coliquio-cta';
-  if (attributes.style && attributes.style !== 'button') {
+function renderClassName (defaultClassName, attributes) {
+  let className = defaultClassName;
+  if (attributes.style !== 'button' && className) {
     className = `${className} ${className}--${attributes.style}`;
   }
   return className;
@@ -37,10 +37,11 @@ export const settings = {
     },
     style: {
       type: 'string',
+      default: 'button',
     },
   },
 
-  edit ({ attributes, setAttributes }) {
+  edit ({ attributes, setAttributes, className }) {
     return (
       <Fragment>
         <InspectorControls>
@@ -52,7 +53,7 @@ export const settings = {
             />
             <RadioControl
               label="Display Style"
-              selected={attributes.style || 'button'}
+              selected={attributes.style}
               options={[
                 { label: 'Button', value: 'button' },
                 { label: 'Link', value: 'link' },
@@ -70,7 +71,7 @@ export const settings = {
         </InspectorControls>
 
         <RichText
-          className={renderClassName(attributes)}
+          className={renderClassName(className, attributes)}
           tagName="a"
           value={attributes.text}
           placeholder={__('Button Text')}
@@ -81,11 +82,11 @@ export const settings = {
     );
   },
 
-  save ({ attributes }) {
+  save ({ attributes, className = 'wp-block-coliquio-cta' }) {
     return (
       <RichText.Content
         tagName="a"
-        className={renderClassName(attributes)}
+        className={renderClassName(className, attributes)}
         href={attributes.url}
         value={attributes.text}
         target={attributes.targetNewWindow ? '_blank' : '_self'}
