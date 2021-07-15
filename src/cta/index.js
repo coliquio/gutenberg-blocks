@@ -37,6 +37,7 @@ export const settings = {
     },
     style: {
       type: 'string',
+      default: 'button',
     },
   },
 
@@ -52,7 +53,7 @@ export const settings = {
             />
             <RadioControl
               label="Display Style"
-              selected={attributes.style || 'button'}
+              selected={attributes.style}
               options={[
                 { label: 'Button', value: 'button' },
                 { label: 'Link', value: 'link' },
@@ -81,7 +82,7 @@ export const settings = {
     );
   },
 
-  save ({ attributes, className }) {
+  save ({ attributes, className = 'wp-block-coliquio-cta' }) {
     return (
       <RichText.Content
         tagName="a"
