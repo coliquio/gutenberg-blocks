@@ -1,1 +1,5 @@
 @import "./mediaq";
+
+.is-fullscreen-mode .ui-autocomplete {
+  z-index: 1000;
+}

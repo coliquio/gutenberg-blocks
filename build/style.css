@@ -349,11 +349,6 @@ article h1.wp-block-coliquio-header {
   .wp-block-file .wp-block-file__copy-url-button,
   .wp-block-file .wp-block-file__button-richtext-wrapper {
     display: none; }
-/**
-  Use this for hover states
- */
-.block-editor-block-list__block.wp-block[data-type="core/gallery"] {
-  clear: both; }
 .block-editor-block-list__layout .wp-block-coliquio-image {
   margin: 15px 0; }
   .block-editor-block-list__layout .wp-block-coliquio-image.align-left {
@@ -502,6 +497,11 @@ article .wp-block-image .alignright {
 article .wp-block-image .alignleft {
   display: block;
   float: left; }
+/**
+  Use this for hover states
+ */
+.block-editor-block-list__block.wp-block[data-type="core/gallery"] {
+  clear: both; }
 .block-editor-block-list__layout ol,
 .block-editor-block-list__layout ul {
   padding: 5px 0 0 40px; }
@@ -544,3 +544,5 @@ article .wp-block-image .alignleft {
     height: 16px;
     padding-right: 0.6em;
     width: 18px; }
+.is-fullscreen-mode .ui-autocomplete {
+  z-index: 1000; }
