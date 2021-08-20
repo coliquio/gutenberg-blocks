@@ -48,7 +48,8 @@ export const settings = {
           <PanelBody title={__('CTA settings')}>
             <TextControl
               label={__('Link to Content')}
-              value={attributes.url || '/my-path'}
+              value={attributes.url || ''}
+              placeholder={'/my-path'}
               onChange={val => setAttributes({ url: val })}
             />
             <RadioControl
