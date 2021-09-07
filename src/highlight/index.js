@@ -15,6 +15,7 @@ export const name = 'highlight';
 const styleType = {
   GREY_BOX: 'card card--primary',
   BLUE_BORDER: 'card card--secondary',
+  PERSON_BOX: 'card card--primary person',
 };
 
 export const settings = {
@@ -57,6 +58,7 @@ export const settings = {
                   value: styleType.BLUE_BORDER,
                 },
                 { label: __('Soft Grey Box'), value: styleType.GREY_BOX },
+                { label: __('Person Box'), value: styleType.PERSON_BOX },
               ]}
               onChange={style => setAttributes({ style })}
             />
