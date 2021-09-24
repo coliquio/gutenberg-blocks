@@ -207,6 +207,18 @@ const withSrcAttribute = createHigherOrderComponent((BlockEdit) => {
     }
 
     setTimeout(function () {
+      disabledElements.forEach((el) => {
+        const temp = document.querySelectorAll(el.selector);
+        temp.forEach((node) => {
+          if (
+            el.text === node.innerText &&
+            !node.parentNode.className.includes("custom-hidden")
+          ) {
+            node.parentNode.className += " custom-hidden";
+          }
+        });
+      });
+
       let imagesInGroup = document.querySelectorAll(".wp-block-image");
 
       imagesInGroup.forEach((image) => {

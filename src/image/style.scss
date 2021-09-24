@@ -77,11 +77,6 @@ $image-x-large-width: 100% !important;
     }
   }
 
-  // there is js logic adding this class based on innerHtml of the buttons(text)
-  .custom-hidden {
-    display: none;
-  }
-
   // hide upload button from popup menu
   .components-form-file-upload {
     display: none;
@@ -128,6 +123,15 @@ $image-x-large-width: 100% !important;
     .layout-column-right-small {
       margin-left: 0;
       margin-right: 196px;
+    }
+  }
+}
+
+// there is js logic adding this class based on innerHtml of the buttons(text)
+.components-panel__body {
+  & .components-base-control {
+    & .custom-hidden {
+      display: none !important;
     }
   }
 }
