@@ -508,30 +508,7 @@ const withSrcAttribute = createHigherOrderComponent((BlockEdit) => {
 addFilter(
   "editor.BlockEdit",
   "extend-block-image/with-src-attribute",
-  withSrcAttribute
-);
-
-/**
- * Add margin style attribute to save element of block.
- *
- * @param {object} saveElementProps Props of save element.
- * @param {Object} blockType Block type information.
- * @param {Object} attributes Attributes of block.
- *
- * @returns {object} Modified props of save element.
- */
-const addExtraProps = (saveElementProps, blockType, attributes) => {
-  if (!enableOnBlocks.includes(blockType.name)) {
-    return saveElementProps;
-  }
-  wp.blocks.unregisterBlockStyle("core/image", "rounded");
-  wp.blocks.unregisterBlockStyle("core/image", "default");
-
-  return saveElementProps;
-};
-
-addFilter(
+  withSrcAttribute,
   "blocks.getSaveContent.extraProps",
-  "extend-block-image/get-save-content/extra-props",
-  addExtraProps
+  "extend-block-image/get-save-content/extra-props"
 );

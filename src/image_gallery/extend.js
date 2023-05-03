@@ -36,8 +36,6 @@ const addSrcControlAttribute = (settings, name) => {
     return settings;
   }
 
-  console.log("blocks.registerBlockType");
-
   // Use Lodash's assign to gracefully handle if attributes are undefined
   settings.attributes = assign(settings.attributes, {
     caption: {
@@ -70,11 +68,8 @@ const withCustomFeatures = createHigherOrderComponent((BlockEdit) => {
     }
 
     setTimeout(function () {
-      console.log("disable");
       disabledElements.forEach((el) => {
-        console.log(el.selector);
         const temp = document.querySelectorAll(el.selector);
-        console.log(temp);
         temp.forEach((node) => {
           if (
             el.text === node.innerText &&
@@ -173,32 +168,7 @@ const withCustomFeatures = createHigherOrderComponent((BlockEdit) => {
 addFilter(
   "editor.BlockEdit",
   "extend-block-gallery/with-custom-features",
-  withCustomFeatures
-);
-
-/**
- * Add margin style attribute to save element of block.
- *
- * @param {object} saveElementProps Props of save element.
- * @param {Object} blockType Block type information.
- * @param {Object} attributes Attributes of block.
- *
- * @returns {object} Modified props of save element.
- */
-const addExtraProps = (saveElementProps, blockType, attributes) => {
-  if (!enableOnBlocks.includes(blockType.name)) {
-    return saveElementProps;
-  }
-  wp.blocks.unregisterBlockStyle("core/image", "rounded");
-  wp.blocks.unregisterBlockStyle("core/image", "default");
-
-  // saveElementProps.className += attributes.classNameZoom ? attributes.classNameZoom : '';
-
-  return saveElementProps;
-};
-
-addFilter(
+  withCustomFeatures,
   "blocks.getSaveContent.extraProps",
-  "extend-block-image/get-save-content/extra-props",
-  addExtraProps
+  "extend-block-image/get-save-content/extra-props"
 );
