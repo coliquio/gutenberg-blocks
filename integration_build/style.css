@@ -319,6 +319,37 @@ article h1.wp-block-coliquio-header {
     margin-bottom: 0.25rem; }
   article h1.wp-block-coliquio-header span.headline {
     margin-bottom: 0; }
+.wp-block-file {
+  background-color: var(--green-base);
+  border: 1px solid var(--green-base);
+  border-radius: 4px;
+  color: var(--white-base);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.125rem;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+  outline: 0;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: text; }
+  .wp-block-file:active, .wp-block-file:hover {
+    background-color: var(--green-darken-10);
+    border: 1px solid var(--black-lighten-20);
+    color: var(--white-base);
+    text-decoration: none; }
+  .wp-block-file.is-style-link {
+    background: none;
+    border: 1px solid var(--black-lighten-20);
+    color: var(--black-lighten-20); }
+    .wp-block-file.is-style-link:active, .wp-block-file.is-style-link:hover {
+      background: var(--black-lighten-70);
+      color: var(--black-lighten-20); }
+  .wp-block-file .wp-block-file__copy-url-button,
+  .wp-block-file .wp-block-file__button-richtext-wrapper {
+    display: none; }
 .block-editor-block-list__layout .wp-block-coliquio-image {
   margin: 15px 0; }
   .block-editor-block-list__layout .wp-block-coliquio-image.align-left {
@@ -467,37 +498,6 @@ article .wp-block-image .alignright {
 article .wp-block-image .alignleft {
   display: block;
   float: left; }
-.wp-block-file {
-  background-color: var(--green-base);
-  border: 1px solid var(--green-base);
-  border-radius: 4px;
-  color: var(--white-base);
-  cursor: pointer;
-  display: inline-block;
-  font-size: 1.125rem;
-  font-weight: 400;
-  margin-bottom: 0.25rem;
-  outline: 0;
-  padding: 0.5rem 1rem;
-  text-align: center;
-  text-decoration: none;
-  vertical-align: middle;
-  cursor: text; }
-  .wp-block-file:active, .wp-block-file:hover {
-    background-color: var(--green-darken-10);
-    border: 1px solid var(--black-lighten-20);
-    color: var(--white-base);
-    text-decoration: none; }
-  .wp-block-file.is-style-link {
-    background: none;
-    border: 1px solid var(--black-lighten-20);
-    color: var(--black-lighten-20); }
-    .wp-block-file.is-style-link:active, .wp-block-file.is-style-link:hover {
-      background: var(--black-lighten-70);
-      color: var(--black-lighten-20); }
-  .wp-block-file .wp-block-file__copy-url-button,
-  .wp-block-file .wp-block-file__button-richtext-wrapper {
-    display: none; }
 .block-editor-block-list__layout ol,
 .block-editor-block-list__layout ul {
   padding: 5px 0 0 40px; }
