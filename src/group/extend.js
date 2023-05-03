@@ -2,7 +2,6 @@ import React from 'react';
 import assign from 'lodash.assign';
 import { blockEditor, components, compose, element, hooks, i18n } from 'wp';
 
-
 const { createHigherOrderComponent } = compose;
 const { Fragment } = element;
 const { addFilter } = hooks;
@@ -11,10 +10,7 @@ const { InspectorControls } = blockEditor;
 const { PanelBody, CheckboxControl } = components;
 
 // Enable properties on the following blocks
-const enableOnBlocks = [
-  'core/group',
-];
-
+const enableOnBlocks = ['core/group'];
 
 /**
  * Add src attribute to block.
@@ -25,9 +21,8 @@ const enableOnBlocks = [
  * @returns {object} Modified block settings.
  */
 const addSrcControlAttribute = (settings, name) => {
-
   // Do nothing if it's another block than our defined ones.
-  if (! enableOnBlocks.includes(name)) {
+  if (!enableOnBlocks.includes(name)) {
     return settings;
   }
 
@@ -50,7 +45,11 @@ const addSrcControlAttribute = (settings, name) => {
   return settings;
 };
 
-addFilter('blocks.registerBlockType', 'extend-block-group/attribute/column-layout', addSrcControlAttribute);
+addFilter(
+  'blocks.registerBlockType',
+  'extend-block-group/attribute/column-layout',
+  addSrcControlAttribute
+);
 
 /**
  * Create HOC to add src attribute to block.
@@ -58,33 +57,25 @@ addFilter('blocks.registerBlockType', 'extend-block-group/attribute/column-layou
 const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
   return props => {
     // Do nothing if it's another block than our defined ones.
-    if (! enableOnBlocks.includes(props.name)) {
-      return (
-        <BlockEdit { ...props } />
-      );
+    if (!enableOnBlocks.includes(props.name)) {
+      return <BlockEdit {...props} />;
     }
 
-    console.log(props.attributes);
     const { isChecked } = props.attributes;
 
     return (
       <Fragment>
-        <BlockEdit { ...props } />
+        <BlockEdit {...props} />
         <InspectorControls>
-          <PanelBody
-            title={ __('Sizing Control') }
-            initialOpen={ true }
-          >
+          <PanelBody title={__('Sizing Control')} initialOpen={true}>
             <CheckboxControl
               heading="Column layout"
               label="Column layout for text in the group"
               help="Enable/disable elements to be shown in column layout"
-              checked={ isChecked }
-              onChange={isChecked, test => {
-                console.log(isChecked, test);
+              checked={isChecked}
+              onChange={isChecked => {
                 props.setAttributes({ isChecked: !isChecked });
-              }
-              }
+              }}
             />
           </PanelBody>
         </InspectorControls>
@@ -93,8 +84,11 @@ const withSrcAttribute = createHigherOrderComponent(BlockEdit => {
   };
 }, 'withSrcAttribute');
 
-addFilter('editor.BlockEdit', 'extend-block-group/with-column-layout', withSrcAttribute);
-
+addFilter(
+  'editor.BlockEdit',
+  'extend-block-group/with-column-layout',
+  withSrcAttribute
+);
 
 /**
  * Add margin style attribute to save element of block.
@@ -107,7 +101,7 @@ addFilter('editor.BlockEdit', 'extend-block-group/with-column-layout', withSrcAt
  */
 const addSizeExtraProps = (saveElementProps, blockType, attributes) => {
   // Do nothing if it's another block than our defined ones.
-  if (! enableOnBlocks.includes(blockType.name)) {
+  if (!enableOnBlocks.includes(blockType.name)) {
     return saveElementProps;
   }
 
@@ -118,4 +112,8 @@ const addSizeExtraProps = (saveElementProps, blockType, attributes) => {
   return saveElementProps;
 };
 
-addFilter('blocks.getSaveContent.extraProps', 'extend-block-group/get-save-content/extra-props', addSizeExtraProps);
+addFilter(
+  'blocks.getSaveContent.extraProps',
+  'extend-block-group/get-save-content/extra-props',
+  addSizeExtraProps
+);

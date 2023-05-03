@@ -17,8 +17,7 @@ export const settings = {
   icon: 'excerpt-view',
 
   edit () {
-    const
-      allowedBlocks = [
+    const allowedBlocks = [
         'core/paragraph',
         'core/heading',
         'core/column',
@@ -26,29 +25,20 @@ export const settings = {
         'core/group',
       ],
       template = [
-        [ 'core/image', {}, [] ],
-        [ 'core/paragraph', {}, [] ],
+        ['core/image', {}, []],
+        ['core/paragraph', {}, []],
       ];
 
-    console.log('edit');
-
     return (
-      <section
-        className={'wp-block--coliquio media-rich-text'}
-      >
-        <InnerBlocks
-          allowedBlocks={ allowedBlocks }
-          template={ template }
-        />
+      <section className={'wp-block--coliquio media-rich-text'}>
+        <InnerBlocks allowedBlocks={allowedBlocks} template={template} />
       </section>
     );
   },
 
   save () {
     return (
-      <section
-        className={'wp-block--coliquio media-rich-text'}
-      >
+      <section className={'wp-block--coliquio media-rich-text'}>
         <InnerBlocks.Content />
       </section>
     );
