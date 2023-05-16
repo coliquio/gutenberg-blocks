@@ -1,8 +1,9 @@
 import assign from 'lodash.assign';
-import { hooks } from 'wp';
+import { blockEditor, hooks } from 'wp';
 import './style.scss';
 
 const { addFilter } = hooks;
+const { wp } = blockEditor;
 
 // Enable properties on the following blocks
 const enableOnBlocks = ['core/file'];
@@ -35,6 +36,34 @@ addFilter(
   'blocks.registerBlockType',
   'extend-block-file/attribute/extra-attributes',
   addExtraAttributes,
+);
+
+/**
+ * Add margin style attribute to save element of block.
+ *
+ * @param {object} saveElementProps Props of save element.
+ * @param {Object} blockType Block type information.
+ *
+ * @returns {object} Modified props of save element.
+ */
+const addExtraPropsStyle = (saveElementProps, blockType) => {
+  if (!enableOnBlocks.includes(blockType.name)) {
+    return saveElementProps;
+  }
+  wp.blocks.registerBlockStyle('core/file', {
+    name: 'link',
+    label: 'Link',
+  });
+  wp.blocks.registerBlockStyle('core/file', {
+    name: 'button',
+    label: 'Button',
+  });
+
+  return saveElementProps;
+};
+
+addFilter(
   'blocks.getSaveContent.extraProps',
   'extend-block-image/get-save-content/extra-props-styles',
+  addExtraPropsStyle,
 );

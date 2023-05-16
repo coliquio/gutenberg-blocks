@@ -1,8 +1,8 @@
-import React from "react";
-import assign from "lodash.assign";
-import get from "lodash.get";
-import assignWith from "lodash.assignwith";
-import "./style.scss";
+import assign from 'lodash.assign';
+import assignWith from 'lodash.assignwith';
+import get from 'lodash.get';
+import React from 'react';
+import './style.scss';
 
 const { createHigherOrderComponent } = wp.compose;
 const { InspectorControls } = wp.blockEditor;
@@ -13,12 +13,12 @@ const { useSelect } = wp.data;
 const { __ } = wp.i18n;
 
 // Enable properties on the following blocks
-const enableOnBlocks = ["core/gallery"];
+const enableOnBlocks = ['core/gallery'];
 
 const disabledElements = [
   {
-    text: "Images size",
-    selector: ".components-base-control__label",
+    text: 'Images size',
+    selector: '.components-base-control__label',
   },
 ];
 
@@ -39,11 +39,11 @@ const addSrcControlAttribute = (settings, name) => {
   // Use Lodash's assign to gracefully handle if attributes are undefined
   settings.attributes = assign(settings.attributes, {
     caption: {
-      type: "string",
-      default: "",
+      type: 'string',
+      default: '',
     },
     images: {
-      type: "array",
+      type: 'array',
       default: [],
     },
   });
@@ -52,9 +52,9 @@ const addSrcControlAttribute = (settings, name) => {
 };
 
 addFilter(
-  "blocks.registerBlockType",
-  "extend-block-group/attribute/column-layout",
-  addSrcControlAttribute
+  'blocks.registerBlockType',
+  'extend-block-group/attribute/column-layout',
+  addSrcControlAttribute,
 );
 
 /**
@@ -68,14 +68,17 @@ const withCustomFeatures = createHigherOrderComponent((BlockEdit) => {
     }
 
     setTimeout(function () {
+      console.log('disable');
       disabledElements.forEach((el) => {
+        console.log(el.selector);
         const temp = document.querySelectorAll(el.selector);
+        console.log(temp);
         temp.forEach((node) => {
           if (
             el.text === node.innerText &&
-            !node.parentNode.parentNode.className.includes("custom-hidden")
+            !node.parentNode.parentNode.className.includes('custom-hidden')
           ) {
-            node.parentNode.parentNode.className += " custom-hidden";
+            node.parentNode.parentNode.className += ' custom-hidden';
           }
         });
       });
@@ -84,46 +87,40 @@ const withCustomFeatures = createHigherOrderComponent((BlockEdit) => {
     if (props.attributes.images && props.attributes.images.length) {
       let images = useSelect(
         (select) => {
-          const { getMedia } = select("core");
+          const { getMedia } = select('core');
           return props.attributes.images
             ? props.attributes.images.map((i) => getMedia(i.id))
             : null;
         },
-        [props.attributes.images, props.attributes.images.map((i) => i.id)]
+        [props.attributes.images, props.attributes.images.map((i) => i.id)],
       );
 
       let imagesReal = images.map((image, i) => {
         let storage = {};
 
         if (image) {
-          if (typeof image.caption === "object") {
+          if (typeof image.caption === 'object') {
             storage.caption = image.caption.raw ? image.caption.raw : undefined;
           }
 
           storage.copyright = get(
             images,
-            "[" + i + "].media_fields.field_copyright.value.value",
-            ""
+            '[' + i + '].media_fields.field_copyright.value.value',
+            '',
           );
 
-          const mediaDetails = get(images, "[" + i + "].media_details");
+          const mediaDetails = get(images, '[' + i + '].media_details');
 
           if (mediaDetails) {
-            storage.url = get(mediaDetails, "crops.teaser.cdn_url");
-            storage.alt = get(
-              image,
-              "media_fields.field_media_image.value.alt"
-            );
+            storage.url = get(mediaDetails, 'crops.teaser.cdn_url');
+            storage.alt = get(image, 'media_fields.field_media_image.value.alt');
             storage.cdnFileId = mediaDetails.cdn_file_id;
             storage.width = undefined;
             storage.height = undefined;
             storage.sizeSlug = undefined;
             storage.crop = null;
             storage.link = undefined;
-            storage.aspectRatio = get(
-              mediaDetails,
-              "crops.teaser.aspect_ratio"
-            );
+            storage.aspectRatio = get(mediaDetails, 'crops.teaser.aspect_ratio');
             storage.zoomImage = {
               url: mediaDetails.cdn_url,
               aspectRatio: {
@@ -147,13 +144,13 @@ const withCustomFeatures = createHigherOrderComponent((BlockEdit) => {
         <BlockEdit {...props} />
 
         <InspectorControls>
-          <PanelBody title={__("Copyright Info")} initialOpen={true}>
+          <PanelBody title={__('Copyright Info')} initialOpen={true}>
             {props.attributes.images.map((item, index) => (
               <Disabled>
                 <TextControl
                   key={index}
-                  label={__("Copyright id" + item ? item.id : "")}
-                  help={__("can be changed in media library")}
+                  label={__('Copyright id' + item ? item.id : '')}
+                  help={__('can be changed in media library')}
                   value={item.copyright}
                 />
               </Disabled>
@@ -163,12 +160,33 @@ const withCustomFeatures = createHigherOrderComponent((BlockEdit) => {
       </Fragment>
     );
   };
-}, "withCustomFeatures");
+}, 'withCustomFeatures');
+
+addFilter('editor.BlockEdit', 'extend-block-gallery/with-custom-features', withCustomFeatures);
+
+/**
+ * Add margin style attribute to save element of block.
+ *
+ * @param {object} saveElementProps Props of save element.
+ * @param {Object} blockType Block type information.
+ * @param {Object} attributes Attributes of block.
+ *
+ * @returns {object} Modified props of save element.
+ */
+const addExtraProps = (saveElementProps, blockType, attributes) => {
+  if (!enableOnBlocks.includes(blockType.name)) {
+    return saveElementProps;
+  }
+  wp.blocks.unregisterBlockStyle('core/image', 'rounded');
+  wp.blocks.unregisterBlockStyle('core/image', 'default');
+
+  // saveElementProps.className += attributes.classNameZoom ? attributes.classNameZoom : '';
+
+  return saveElementProps;
+};
 
 addFilter(
-  "editor.BlockEdit",
-  "extend-block-gallery/with-custom-features",
-  withCustomFeatures,
-  "blocks.getSaveContent.extraProps",
-  "extend-block-image/get-save-content/extra-props"
+  'blocks.getSaveContent.extraProps',
+  'extend-block-image/get-save-content/extra-props',
+  addExtraProps,
 );
