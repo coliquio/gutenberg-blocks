@@ -14,6 +14,7 @@ import './group/extend';
 import './image_gallery/extend';
 import './list/extend';
 import './common/extend/disableDefaultStylePicker';
+import './common/extend/disableDefaultFontSizePicker';
 
 import './common/common.scss';
 
