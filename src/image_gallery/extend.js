@@ -8,7 +8,7 @@ const { createHigherOrderComponent } = wp.compose;
 const { InspectorControls } = wp.blockEditor;
 const { Fragment } = wp.element;
 const { addFilter } = wp.hooks;
-const { PanelBody, TextControl, Disabled } = wp.components;
+const { PanelBody, TextControl, Disabled, ToggleControl } = wp.components;
 const { useSelect } = wp.data;
 const { __ } = wp.i18n;
 
@@ -109,6 +109,11 @@ const withCustomFeatures = createHigherOrderComponent((BlockEdit) => {
             '',
           );
 
+          storage.displayCopyright =
+            get(images, '[' + i + '].media_fields.field_copyright_enable.value.value', '') === 'on'
+              ? true
+              : false;
+
           const mediaDetails = get(images, '[' + i + '].media_details');
 
           if (mediaDetails) {
@@ -146,12 +151,16 @@ const withCustomFeatures = createHigherOrderComponent((BlockEdit) => {
         <InspectorControls>
           <PanelBody title={__('Copyright Info')} initialOpen={true}>
             {props.attributes.images.map((item, index) => (
-              <Disabled>
+              <Disabled key={index}>
                 <TextControl
-                  key={index}
                   label={__('Copyright id' + item ? item.id : '')}
                   help={__('can be changed in media library')}
                   value={item.copyright}
+                />
+                <ToggleControl
+                  label={__('Display Copyright id' + item ? item.id : '')}
+                  help={__('can be changed in media library')}
+                  checked={item.displayCopyright}
                 />
               </Disabled>
             ))}
