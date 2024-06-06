@@ -17,7 +17,6 @@ const {
   Disabled,
   Button,
   ResponsiveWrapper,
-  ToggleControl,
 } = wp.components;
 const { useSelect } = wp.data;
 
@@ -180,10 +179,6 @@ function getCopyright(image) {
   return image && image.media_fields ? get(image, 'media_fields.field_copyright.value.value') : '';
 }
 
-function getDisplayCopyright(image) {
-  return get(image, 'media_fields.field_copyright_enable.value.value') === 'on' ? true : false;
-}
-
 function getCrop(image, cropName) {
   if (!image) return;
   const key = Object.keys(image.media_details.crops).find((key) => {
@@ -303,7 +298,6 @@ const withSrcAttribute = createHigherOrderComponent((BlockEdit) => {
             ? props.attributes.alt
             : get(image, 'media_fields.field_media_image.value.alt'),
           copyright: get(image, 'media_fields.field_copyright.value.value'),
-          displayCopyright: getDisplayCopyright(image),
           size: !props.attributes.size
             ? sizeControlOptions.find((o) => o.default).value
             : props.attributes.size,
@@ -477,12 +471,6 @@ const withSrcAttribute = createHigherOrderComponent((BlockEdit) => {
                 label={__('Copyright')}
                 help={__('Could be changed in gallery')}
                 value={getCopyright(image)}
-              />
-
-              <ToggleControl
-                label={__('Display copyright')}
-                help={__('Could be changed in gallery')}
-                checked={getDisplayCopyright(image)}
               />
             </Disabled>
           </PanelBody>
